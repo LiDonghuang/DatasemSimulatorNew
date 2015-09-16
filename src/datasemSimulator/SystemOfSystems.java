@@ -25,9 +25,9 @@ public class SystemOfSystems {
 		//System.out.println("\n ============== TIME NOW: "+timeNow+" ============== ");
 		if (this.waitingList.size()==0){
 			RunEnvironment.getInstance().endRun();
+			System.out.println("SIMULATION ENDED");
 		}
 	}
-	
 	
 	
 	public void getSoSInformation() {

@@ -15,6 +15,7 @@ import repast.simphony.util.ContextUtils;
 import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ISchedule;
+import xtext.objectsModel.GovernanceStrategy;
 import xtext.objectsModel.ServiceProvider;
 import xtext.objectsModel.Skill;
 import xtext.objectsModel.impl.ServiceProviderImpl;
@@ -28,9 +29,8 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		protected LinkedList<ResourceEntity> myResourceEntities = new LinkedList<ResourceEntity>();
 		protected LinkedList<ServiceProviderAgent> assignWITo = new LinkedList<ServiceProviderAgent>();
 		protected LinkedList<ServiceProviderAgent> borrowResourceFrom = new LinkedList<ServiceProviderAgent>();
-		protected int backlogQLimit = Integer.MAX_VALUE;
-		protected int readyQLimit = Integer.MAX_VALUE;
-		protected int activeQLimit = Integer.MAX_VALUE;
+		public int WIPLimit = Integer.MAX_VALUE;
+		public int BacklogLimit = Integer.MAX_VALUE;
 		// Dynamic Attributes
 		protected double totalWorkload;
 		protected double activeWorkload;
@@ -38,7 +38,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		protected LinkedList<WorkItemEntity> requestedQ = new LinkedList<WorkItemEntity>();
 		protected LinkedList<WorkItemEntity> assignmentQ = new LinkedList<WorkItemEntity>();	
 		protected LinkedList<WorkItemEntity> backlogQ = new LinkedList<WorkItemEntity>();
-		protected LinkedList<WorkItemEntity> readyQ = new LinkedList<WorkItemEntity>();	
 		protected LinkedList<WorkItemEntity> activeQ = new LinkedList<WorkItemEntity>();
 		protected LinkedList<WorkItemEntity> complexQ = new LinkedList<WorkItemEntity>();
 		protected LinkedList<WorkItemEntity> completeQ = new LinkedList<WorkItemEntity>();
@@ -46,7 +45,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			
 		private static final int BASE_PRIORITY_1 = 200;
 		private static final int SEQUENCE_CheckRequestedQ = 10;
-		private static final int SEQUENCE_CheckBacklogQ = 20;
+		private static final int SEQUENCE_MakeAssignments = 20;
 		private static final int SEQUENCE_SelectWIsToStart = 30;
 		private static final int SEQUENCE_AdvanceWIsProgress = 40;
 		private static final int SEQUENCE_TriggerWIsChanges = 50;
@@ -59,95 +58,94 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			this.myServiceProvider = ServiceProvider;
 			this.name = ServiceProvider.getName();
 			this.id = ServiceProvider.getId();
+			new AgentStrategy().implementAgentStrategy(this, ServiceProvider.getGovernanceStrategy());			
 		}
-		@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_CheckRequestedQ,shuffle=false)
+		@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_CheckRequestedQ)
 		public void CheckRequestedQ() {
-			//System.out.println("\nAgent "+this.name+" checkRequestedQ");
-			//this.requestedQ = this.myStrategy.workPrioritization(this, this.requestedQ);	
+			requestedQ = this.myStrategy.applyWorkPrioritization(requestedQ);
 			//for (WorkItemEntity requestedWI:this.requestedQ) {
 				//myValueManagement.manageValue(this, requestedWI);
 			//}
 			// ------------ 1. Select WIs to Accept
-			while (!this.requestedQ.isEmpty()) {
+			while (!requestedQ.isEmpty()) {
 				// =========== Apply WI Acceptance Rule ====================
-				WorkItemEntity requestedWI = this.requestedQ.get(RandomHelper.nextIntFromTo(0, requestedQ.size()-1));			
+				WorkItemEntity requestedWI = requestedQ.getFirst();			
 				// =========== Service Efficiency Algorithm ==============
-				double eEfficiency = requestedWI.calculateServiceEfficiency(this);	
-				if (eEfficiency==0) {
-					ArrayList<ServiceProviderAgent>serviceProviderCandidates = this.findServiceProviders(requestedWI);
-					if	(serviceProviderCandidates.size()!=0) {
-						// Apply WI Assignment Rule
-						ServiceProviderAgent selectedSP = serviceProviderCandidates.get(RandomHelper.nextIntFromTo(0, serviceProviderCandidates.size()-1));
-						// Assign WI to other SP							
-						this.requestService(requestedWI, selectedSP);
-						this.requestedQ.remove(requestedWI);
-						//selectedSP.checkRequestedQ();
-					}
-					else {
-						System.out.println("Failed to Assign"+requestedWI.fullName); 
-						System.out.println("ERROR!");
-						System.exit(0);
-					}
+				if (!this.acceptanceDecision(requestedWI)){
+					assignmentQ.add(requestedWI);
+					requestedQ.remove(requestedWI);					
 				}
 				else {	
 					this.acceptWI(requestedWI);
 				}
 			}
 		}
-		@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_CheckBacklogQ)
-		public void CheckBacklogQ() {
-			//System.out.println("Agent "+this.name+" checkBacklogQ");
-			for (int i=0;i<this.backlogQ.size();i++) {
-				WorkItemEntity wi = this.backlogQ.get(i);
-				if (wi.precedencyCleared()) {					
-					this.readyQ.add(wi);					
-					this.backlogQ.remove(wi);
+		@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_MakeAssignments)
+		public void MakeAssignments() {
+			assignmentQ = this.myStrategy.applyWorkPrioritization(assignmentQ);
+			for (int i=0;i<assignmentQ.size();i++) {
+				WorkItemEntity wi = assignmentQ.get(i);
+				LinkedList<ServiceProviderAgent>serviceProviderCandidates = this.findServiceProviders(wi);				
+				if	(serviceProviderCandidates.size()!=0) {
+					// Apply WI Assignment Rule
+					serviceProviderCandidates = this.myStrategy.applyContractorSelection(serviceProviderCandidates);
+					ServiceProviderAgent selectedSP = serviceProviderCandidates.getFirst();
+					// Assign WI to other SP
+					this.requestService(wi, selectedSP);
+					this.assignmentQ.remove(wi);
 					i--;
+					//selectedSP.checkRequestedQ();
 				}
+//				else {
+//					System.out.println("Failed to Assign"+wi.fullName); 
+//					System.out.println("ERROR!");
+//					System.exit(0);
+//				}
 			}
 		}
 		@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_SelectWIsToStart)
 		public void SelectWIsToStart() {
-			//System.out.println("Agent "+this.name+" selectWIsToStart");
-			//for (int i=0;i<this.readyQ.size();i++) {
-				//WorkItemEntity readyWI = this.readyQ.get(i);
-				//myValueManagement.manageValue(this, readyWI);
-			//}
-			//this.readyQ = this.myStrategy.workPrioritization(this, readyQ);
-			for (int w=0;w<this.readyQ.size();w++) {			
+			LinkedList<WorkItemEntity> readyQ = new LinkedList<WorkItemEntity>();		
+			readyQ = this.myStrategy.applyWorkPrioritization(backlogQ);
+			for (int i=0;i<readyQ.size();i++) {			
 				// =========== Apply WI Selection Rule ====================
-				WorkItemEntity startedWI = this.readyQ.get(RandomHelper.nextIntFromTo(0, readyQ.size()-1));				
-				// ========================================================
-				ArrayList<ResourceEntity> serviceResourceCandidates = this.findResourceEntities(startedWI);
-				// =========== Apply Resource Allocation Rule =============
-				ArrayList<ResourceEntity> idleResources = new ArrayList<ResourceEntity>();
-				for (int r=0;r<serviceResourceCandidates.size();r++) {
-					ResourceEntity candidateSR = serviceResourceCandidates.get(r);
-					// only look at Idle Candidate Resources;
-					if (!candidateSR.isBusy()) {
-						idleResources.add(candidateSR);
+				WorkItemEntity wi = readyQ.get(i);		
+				//if (wi.precedencyCleared()) {
+				if (true) {
+					// ========================================================
+					ArrayList<ResourceEntity> serviceResourceCandidates = this.findResourceEntities(wi);
+					// =========== Apply Resource Allocation Rule =============
+					ArrayList<ResourceEntity> idleResources = new ArrayList<ResourceEntity>();
+					for (int r=0;r<serviceResourceCandidates.size();r++) {
+						ResourceEntity candidateSR = serviceResourceCandidates.get(r);
+						// only look at Idle Candidate Resources;
+						if (!candidateSR.isBusy()) {
+							idleResources.add(candidateSR);
+						}
 					}
+					if (!idleResources.isEmpty()) {
+						ResourceEntity selectedSR = idleResources.get(RandomHelper.nextIntFromTo(0, idleResources.size()-1));
+						selectedSR.allocateTo(wi);				
+					// ========================================================
+						wi.setStarted();					
+						double rEfficiency = wi.calculateResourceEfficiency();	
+						wi.serviceEfficiency = rEfficiency;
+					// =========== Estimate Completion ====================				
+						double eEfforts = wi.getEfforts()/rEfficiency;
+						wi.estimatedEfforts = eEfforts;
+						double eCompletion= eEfforts + this.SoS.timeNow;
+						wi.estimatedCompletionTime = eCompletion;
+						// ====================================================
+						this.activeQ.add(wi);
+						backlogQ.remove(wi);
+					}
+//					else {
+//						System.out.println("No Resources available for "+startedWI.getPatternType().getName()+": "+startedWI.getName()+" now!");				
+//					}
 				}
-				if (!idleResources.isEmpty()) {
-					ResourceEntity selectedSR = idleResources.get(RandomHelper.nextIntFromTo(0, idleResources.size()-1));
-					selectedSR.allocateTo(startedWI);				
-				// ========================================================
-					startedWI.setStarted();					
-					double rEfficiency = startedWI.calculateResourceEfficiency();	
-					startedWI.serviceEfficiency = rEfficiency;
-				// =========== Estimate Completion ====================				
-					double eEfforts = startedWI.getEfforts()/rEfficiency;
-					startedWI.estimatedEfforts = eEfforts;
-					double eCompletion= eEfforts + this.SoS.timeNow;
-					startedWI.estimatedCompletionTime = eCompletion;
-					// ====================================================
-					this.activeQ.add(startedWI);
-					this.readyQ.remove(startedWI);				
-					w--;
-				}
-				else {
-					//System.out.println("No Resources available for "+startedWI.getPatternType().getName()+": "+startedWI.getName()+" now!");				
-				}
+//				else {
+//					System.out.println("Decide Not to Start"+wi.fullName+"due to Precedency");
+//				}
 			}
 		}
 		@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_AdvanceWIsProgress)	
@@ -209,20 +207,42 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 					completeQ.remove(completedWI);					
 					i--;			
 				}
-			}		
+			}
+			this.statusSummary();
 		}
 		public void createAnalysisTask(WorkItemEntity aggrNode) {
 			WorkItemEntity analysisTask = new WorkItemEntity(aggrNode);
-			this.backlogQ.add(analysisTask);
+			//this.backlogQ.add(analysisTask);
+			this.activeQ.add(analysisTask);
+			analysisTask.progress=1;
+			analysisTask.AnalysisObject.setStarted();
 			//System.out.println("\nANALYSIS AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" start analyzing"+aggrNode.fullName);
-		}
+		}	
+		public boolean acceptanceDecision(WorkItemEntity requestedWI) {
+			boolean accept = true;			
+			if (backlogQ.size()>=BacklogLimit) {
+				if (requestedWI.requester.id == this.id) {
+					accept = true;
+				}
+				else {
+					accept = false;
+					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to BacklogLimit");
+				}				
+			}
+			double eEfficiency = requestedWI.calculateServiceEfficiency(this);	
+			if (eEfficiency==0) {
+				accept = false;
+				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
+			}
+			return accept;
+		}	
 		public void requestService(WorkItemEntity newWI, ServiceProviderAgent requestToSP) {
 			requestToSP.requestedQ.add(newWI);		
 			newWI.requester = this;
 			//newWI.triggerCausalities();
-			//System.out.println(this.name+" Requested "+requestToSP.name+" to serve"+newWI.fullName);
+			System.out.println("\nREQUEST SERVICE @TIME:"+SoS.timeNow+" Agent "+this.name+" Requested "+requestToSP.name+" to serve"+newWI.fullName);
 			//myValueManagement.manageValue(this, newWI);
-		}	
+		}		
 		public void acceptWI(WorkItemEntity requestedWI) {
 			if (!requestedWI.isIsAggregationNode()) {
 				requestedWI.setAssigned(); 
@@ -240,15 +260,21 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			}
 		}
 		public void releaseSubtasks (WorkItemEntity wi) {
-			for (WorkItemEntity subtask: wi.subtasks) {
-				//-
-				@SuppressWarnings("unchecked")
-				Context<Object> context = ContextUtils.getContext(this);	
-				//-
+			//-
+			@SuppressWarnings("unchecked")
+			Context<Object> context = ContextUtils.getContext(this);	
+			//-
+			for (WorkItemEntity subtask: wi.subtasks) {				
 				if (!subtask.isActivated) {
-					subtask.setActivated();
+					subtask.setActivated();				
+//					for (WorkItemEntity predecessor : wi.predecessors){
+//						for (WorkItemEntity predecessorSub : predecessor.subtasks) {
+//							subtask.addPredecessorTask(predecessorSub);
+//						}
+//					}					
 					context.add(subtask);
-					this.requestedQ.add(subtask);  
+					subtask.requester = this;										
+					this.requestedQ.add(subtask);
 					//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");			
 				}
 				else {
@@ -257,16 +283,18 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			}
 		}
 		
-		public ArrayList<ServiceProviderAgent> findServiceProviders(WorkItemEntity wItem) {
+		public LinkedList<ServiceProviderAgent> findServiceProviders(WorkItemEntity wItem) {
 			int wItem_reqService_id = wItem.getRequiredServices().get(0).getId();
-			ArrayList<ServiceProviderAgent> serviceProviderCandidates = new ArrayList<ServiceProviderAgent>(0);
+			LinkedList<ServiceProviderAgent> serviceProviderCandidates = new LinkedList<ServiceProviderAgent>();
 			for (ServiceProviderAgent tAgent: this.assignWITo) {
 				for (ResourceEntity sResource: tAgent.myResourceEntities) {
 					for (Skill sResourceSkill: sResource.getSkillSet()) {
 						int sResource_Service_id = sResourceSkill.getService().getId();
 						if (sResource_Service_id==wItem_reqService_id) {
-							serviceProviderCandidates.add(tAgent);
-							//System.out.println(" candidate for "+this.name+" to Assign "+wItem.getName()+" :"+tAgent.name);
+							if (!serviceProviderCandidates.contains(tAgent)) {
+								serviceProviderCandidates.add(tAgent);
+								//System.out.println(" candidate for "+this.name+" to Assign "+wItem.getName()+" :"+tAgent.name);								
+							}
 							break;
 						}
 					}
@@ -318,10 +346,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 				WorkItemEntity workItem = this.backlogQ.get(i);
 				this.totalWorkload += workItem.getEfforts()*(1-workItem.progress);
 			}
-			for (int i=0;i<this.readyQ.size();i++) {
-				WorkItemEntity workItem = this.readyQ.get(i);
-				this.totalWorkload += workItem.getEfforts()*(1-workItem.progress);
-			}
 			for (int i=0;i<this.activeQ.size();i++) {
 				WorkItemEntity workItem = this.activeQ.get(i);
 				this.totalWorkload += workItem.getEfforts()*(1-workItem.progress);
@@ -338,7 +362,23 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			}
 			this.resourceUtilization = (double)numActiveResources/(double)numResources;	
 		}
-		
-
-		
+		public LinkedList<WorkItemEntity> getRequestedQ()	{
+			return this.requestedQ;
+		}
+		public LinkedList<WorkItemEntity> getBacklogQ()	{
+			return this.backlogQ;
+		}
+		public int getTotalWICount() {
+			int load = this.requestedQ.size()+this.activeQ.size()+this.backlogQ.size();
+			return load;
+		}		
+		public double getActiveWorkload() {
+			return this.activeWorkload;
+		}
+		public double getTotalWorkload() {
+			return this.totalWorkload;
+		}
+		public double getResourceUtilization() {
+			return this.resourceUtilization;
+		}
 }

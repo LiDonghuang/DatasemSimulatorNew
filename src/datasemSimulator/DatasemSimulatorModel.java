@@ -15,7 +15,8 @@ public class DatasemSimulatorModel implements ContextBuilder<Object>{
 		Parameters p = RunEnvironment.getInstance().getParameters();
 		
 		SimulationContextBuilder cb = new SimulationContextBuilder();
-		File scenarioXmlFile = new File("SimulationScenarios/Scenario1.xml");
+		File scenarioXmlFile = new File("/Users/dzl0023/Desktop/DatasemFiles/DemoModel_ExperimentModel.xml");
+		//File scenarioXmlFile = new File("SimulationScenarios/Scenario1.xml");
 		cb.ReadXMLFile(scenarioXmlFile);	
 		cb.ContextImplementation(context);
 		return context;

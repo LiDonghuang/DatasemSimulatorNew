@@ -11,6 +11,9 @@ import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.parameter.Parameters;
 import repast.simphony.space.grid.Grid;
 import xtext.objectsModel.Asset;
+import xtext.objectsModel.GovernanceStrategy;
+import xtext.objectsModel.Mechanism;
+import xtext.objectsModel.MechanismAttribute;
 import xtext.objectsModel.ObjectsModelFactory;
 import xtext.objectsModel.Service;
 import xtext.objectsModel.ServiceProvider;
@@ -115,9 +118,11 @@ public class SimulationContextBuilder {
 			if (wi.getType().getId()==1 | wi.getType().getId()==2) {
 				context.add(wi);
 				wi.SoS.waitingList.put(wi.getId(), wi);
-				wi.setActivated();
+				wi.isActivated = true;
+				wi.activatedTime = 1;
 				myServiceProviderAgents.get(1).requestedQ.add(wi);
-				wi.assignedAgent=myServiceProviderAgents.get(1);
+				wi.requester = myServiceProviderAgents.get(1);
+				wi.assignedAgent = myServiceProviderAgents.get(1);
 			}
 		}
 	}
@@ -133,26 +138,57 @@ public class SimulationContextBuilder {
 	public void xmlCreateWorkItemType(Element e) {
 		int id = Integer.parseInt(e.getAttribute("wiTypeId"));
 		String name = e.getAttribute("name");
+		int hierarchy = Integer.parseInt(e.getAttribute("hierarchy"));
 		WorkItemType myWorkItemType = ObjectsModelFactory.eINSTANCE.createWorkItemType();
 		myWorkItemType.setId(id);
 		myWorkItemType.setName(name);
+		myWorkItemType.setHierarchy(hierarchy);
 		myWorkItemTypes.put(id, myWorkItemType); 
 	}
 	public void xmlCreateServiceProviderAgent(Element e) {
-		int id = Integer.parseInt(e.getAttribute("serviceProviderId"));
-		String name = e.getAttribute("name");	
 		ServiceProvider myServiceProvider = ObjectsModelFactory.eINSTANCE.createServiceProvider();
+		int id = Integer.parseInt(e.getAttribute("serviceProviderId"));
+		String name = e.getAttribute("name");			
 		myServiceProvider.setId(id);
 		myServiceProvider.setName(name);								
+		// GovernanceStrategy
+		GovernanceStrategy myGovernanceStrategy = ObjectsModelFactory.eINSTANCE.createGovernanceStrategy(); 
+		Node mechanisms_node = e.getElementsByTagName("Mechanisms").item(0);
+		Element mechanisms_element = (Element)mechanisms_node;
+		NodeList mechanism_nodeList = mechanisms_element.getElementsByTagName("Mechanism");
+		for (int i=0;i<mechanism_nodeList.getLength();i++) {
+			// Mechanism
+			Mechanism myMechanism = ObjectsModelFactory.eINSTANCE.createMechanism();
+			Node mechanism_node = mechanism_nodeList.item(i);
+			Element mechanism_element = (Element)mechanism_node;
+			String mechanism_name = mechanism_element.getAttribute("name");
+			String mechanism_value = mechanism_element.getAttribute("value");	
+			myMechanism.setName(mechanism_name);
+			myMechanism.setValue(mechanism_value);
+			NodeList attribute_nodeList = mechanism_element.getElementsByTagName("Attribute");
+			for (int i1=0;i1<attribute_nodeList.getLength();i1++) {
+				// Mechanism Attribute
+				MechanismAttribute myAttribute = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
+				Node attribute_node = attribute_nodeList.item(i1);
+				Element attribute_element = (Element)attribute_node;
+				String attribute_name = attribute_element.getAttribute("name");
+				String attribute_value = attribute_element.getAttribute("value");
+				myAttribute.setAttribute(attribute_name);
+				myAttribute.setValue(attribute_value);
+				myMechanism.getAttributes().add(myAttribute);
+			}
+			myGovernanceStrategy.getMechanisms().add(myMechanism);
+		}
+		myServiceProvider.setGovernanceStrategy(myGovernanceStrategy);
 		// Create Runtime Extend
 		ServiceProviderAgent myServiceProviderAgent = new ServiceProviderAgent(myServiceProvider);
 		myServiceProviderAgents.put(id, myServiceProviderAgent);
 		// Resources
 		Node resources_node = e.getElementsByTagName("Resources").item(0);
 		Element resources_element = (Element)resources_node;
-		NodeList resources_nodeList = resources_element.getElementsByTagName("Resource");
-		for (int i1=0;i1<resources_nodeList.getLength();i1++) {
-			Node resource_node = resources_nodeList.item(i1);
+		NodeList resource_nodeList = resources_element.getElementsByTagName("Resource");
+		for (int i1=0;i1<resource_nodeList.getLength();i1++) {
+			Node resource_node = resource_nodeList.item(i1);
 			Element resource_element= (Element)resource_node;
 			int resource_id = Integer.parseInt(resource_element.getAttribute("resourceId")); 
 			String resource_name = resource_element.getAttribute("name");
@@ -178,9 +214,6 @@ public class SimulationContextBuilder {
 			myResourceEntities.put(resource_id, myResourceEntity);	
 			myServiceProviderAgent.myResourceEntities.add(myResourceEntity);
 		}
-	}
-	public void xmlCreateGovernanceStrategy(Element e) {
-		
 	}
 	public void xmlCreateWorkItemEntity(Element e) {
 		int id = Integer.parseInt(e.getAttribute("wiId"));
