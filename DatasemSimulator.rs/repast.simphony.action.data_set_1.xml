@@ -1,35 +1,67 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>WI Data Set</name>
+  <name>SP Data Set</name>
   <type>NON_AGGREGATE</type>
-  <sourceType>datasemSimulator.WorkItemEntity</sourceType>
+  <sourceType>datasemSimulator.ServiceProviderAgent</sourceType>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
   <inclRandomSeed>false</inclRandomSeed>
   <scheduleParams>
     <start>1.0</start>
-    <interval>0.0</interval>
+    <interval>1.0</interval>
     <priority>-Infinity</priority>
     <pType>LAST</pType>
     <duration>-1.0</duration>
-    <frequency>ONE_TIME</frequency>
-    <hashCode>957810958</hashCode>
+    <frequency>REPEAT</frequency>
+    <hashCode>298265056</hashCode>
   </scheduleParams>
-  <atEnd>true</atEnd>
+  <atEnd>false</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
       <string>Id</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
         <id>Id</id>
-        <className>datasemSimulator.WorkItemEntity</className>
+        <className>datasemSimulator.ServiceProviderAgent</className>
         <methodName>getId</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>CycleTime</string>
+      <string>Name</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>CycleTime</id>
-        <className>datasemSimulator.WorkItemEntity</className>
-        <methodName>getCycleTime</methodName>
+        <id>Name</id>
+        <className>datasemSimulator.ServiceProviderAgent</className>
+        <methodName>getName</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>TotalWICount</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>TotalWICount</id>
+        <className>datasemSimulator.ServiceProviderAgent</className>
+        <methodName>getTotalWICount</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>TotalWorkload</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>TotalWorkload</id>
+        <className>datasemSimulator.ServiceProviderAgent</className>
+        <methodName>getTotalWorkload</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>ActiveWorkload</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>ActiveWorkload</id>
+        <className>datasemSimulator.ServiceProviderAgent</className>
+        <methodName>getActiveWorkload</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>ResourceUtilization</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>ResourceUtilization</id>
+        <className>datasemSimulator.ServiceProviderAgent</className>
+        <methodName>getResourceUtilization</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
   </methodDataSources>

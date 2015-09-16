@@ -11,7 +11,7 @@ public class DatasemSimulatorModel implements ContextBuilder<Object>{
 
 	public Context<Object> build(Context<Object> context) {
 
-		context.setId("DefaultContext");
+		context.setId("DatasemSimulator");
 		Parameters p = RunEnvironment.getInstance().getParameters();
 		
 		SimulationContextBuilder cb = new SimulationContextBuilder();

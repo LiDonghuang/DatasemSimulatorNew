@@ -240,7 +240,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			requestToSP.requestedQ.add(newWI);		
 			newWI.requester = this;
 			//newWI.triggerCausalities();
-			System.out.println("\nREQUEST SERVICE @TIME:"+SoS.timeNow+" Agent "+this.name+" Requested "+requestToSP.name+" to serve"+newWI.fullName);
+			//System.out.println("\nREQUEST SERVICE @TIME:"+SoS.timeNow+" Agent "+this.name+" Requested "+requestToSP.name+" to serve"+newWI.fullName);
 			//myValueManagement.manageValue(this, newWI);
 		}		
 		public void acceptWI(WorkItemEntity requestedWI) {

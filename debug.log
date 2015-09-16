@@ -1,1051 +1,638 @@
-FATAL [Thread-6] 2015-09-15 16:18:25,383 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Unknown Source)
-Caused by: java.lang.reflect.InvocationTargetException
-	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at datasemSimulator.WorkItemEntity.setActivated(WorkItemEntity.java:315)
-	at datasemSimulator.WorkItemEntity.<init>(WorkItemEntity.java:79)
-	at datasemSimulator.ServiceProviderAgent.createAnalysisTask(ServiceProviderAgent.java:216)
-	at datasemSimulator.ServiceProviderAgent.acceptWI(ServiceProviderAgent.java:256)
-	at datasemSimulator.ServiceProviderAgent.CheckRequestedQ(ServiceProviderAgent.java:80)
-	... 10 more
-FATAL [Thread-6] 2015-09-15 16:18:47,897 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (5.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Unknown Source)
-Caused by: java.lang.reflect.InvocationTargetException
-	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at datasemSimulator.WorkItemEntity.removeFromContext(WorkItemEntity.java:160)
-	at datasemSimulator.WorkItemEntity.setEnded(WorkItemEntity.java:343)
-	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:209)
-	... 10 more
-FATAL [Thread-6] 2015-09-15 16:20:24,686 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (5.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Unknown Source)
-Caused by: java.lang.reflect.InvocationTargetException
-	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at datasemSimulator.WorkItemEntity.removeFromContext(WorkItemEntity.java:169)
-	at datasemSimulator.WorkItemEntity.setEnded(WorkItemEntity.java:352)
-	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:209)
-	... 10 more
-FATAL [Thread-12] 2015-09-15 19:08:51,531 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (367.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Unknown Source)
-Caused by: java.lang.reflect.InvocationTargetException
-	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.IllegalArgumentException: Comparison method violates its general contract!
-	at java.util.TimSort.mergeHi(Unknown Source)
-	at java.util.TimSort.mergeAt(Unknown Source)
-	at java.util.TimSort.mergeForceCollapse(Unknown Source)
-	at java.util.TimSort.sort(Unknown Source)
-	at java.util.TimSort.sort(Unknown Source)
-	at java.util.Arrays.sort(Unknown Source)
-	at java.util.Collections.sort(Unknown Source)
-	at governanceModels.WISelectionRule.applyRule(WISelectionRule.java:43)
-	at governanceModels.AgentStrategy.applyWorkPrioritization(AgentStrategy.java:48)
-	at datasemSimulator.ServiceProviderAgent.SelectWIsToStart(ServiceProviderAgent.java:109)
-	... 10 more
-FATAL [Thread-21] 2015-09-15 19:10:11,461 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (702.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Unknown Source)
-Caused by: java.lang.reflect.InvocationTargetException
-	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.IllegalArgumentException: Comparison method violates its general contract!
-	at java.util.TimSort.mergeHi(Unknown Source)
-	at java.util.TimSort.mergeAt(Unknown Source)
-	at java.util.TimSort.mergeForceCollapse(Unknown Source)
-	at java.util.TimSort.sort(Unknown Source)
-	at java.util.TimSort.sort(Unknown Source)
-	at java.util.Arrays.sort(Unknown Source)
-	at java.util.Collections.sort(Unknown Source)
-	at governanceModels.WISelectionRule.applyRule(WISelectionRule.java:43)
-	at governanceModels.AgentStrategy.applyWorkPrioritization(AgentStrategy.java:48)
-	at datasemSimulator.ServiceProviderAgent.SelectWIsToStart(ServiceProviderAgent.java:109)
-	... 10 more
-ERROR [AWT-EventQueue-0] 2015-09-15 21:26:32,865 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$200(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 21:27:34,336 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$200(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 21:30:29,289 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$200(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 21:42:33,507 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$200(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 21:47:48,609 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$200(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 21:49:54,042 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$200(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 21:56:56,048 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$200(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 21:57:23,861 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$200(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 22:30:51,060 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 22:32:30,370 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 22:33:40,428 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 22:43:36,944 repast.simphony.ui.RSApplication - Scenario Load Error
-repast.simphony.scenario.ScenarioLoadException: C:\Users\Donbghuang Li\git\DatasemSimulatorNew\DatasemSimulator.rs\user_path.xml (系统找不到指定的文件。)
-	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:220)
-	at repast.simphony.ui.RSApplication.open(RSApplication.java:353)
-	at repast.simphony.ui.RSAppConfigurator.postWindowOpen(RSAppConfigurator.java:39)
-	at saf.core.ui.GUICreatorDelegate.runDisplay(GUICreatorDelegate.java:188)
-	at saf.core.ui.GUICreator$1.run(GUICreator.java:18)
-	at simphony.util.ThreadUtilities$Runner.run(ThreadUtilities.java:33)
-	at simphony.util.ThreadUtilities.runInEventThread(ThreadUtilities.java:47)
-	at saf.core.ui.GUICreator.runDisplay(GUICreator.java:16)
-	at repast.simphony.ui.RSUIPlugin$1.run(RSUIPlugin.java:104)
-	at java.awt.event.InvocationEvent.dispatch(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-Caused by: java.io.FileNotFoundException: C:\Users\Donbghuang Li\git\DatasemSimulatorNew\DatasemSimulator.rs\user_path.xml (系统找不到指定的文件。)
-	at java.io.FileInputStream.open(Native Method)
-	at java.io.FileInputStream.<init>(Unknown Source)
-	at java.io.FileReader.<init>(Unknown Source)
-	at repast.simphony.scenario.data.UserPathFileReader.read(UserPathFileReader.java:43)
-	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:109)
-	... 22 more
-ERROR [AWT-EventQueue-0] 2015-09-15 22:44:34,829 repast.simphony.ui.RSApplication - Scenario Load Error
-repast.simphony.scenario.ScenarioLoadException: C:\Users\Donbghuang Li\git\DatasemSimulatorNew\DatasemSimulator.rs\user_path.xml (系统找不到指定的文件。)
-	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:220)
-	at repast.simphony.ui.RSApplication.open(RSApplication.java:353)
-	at repast.simphony.ui.RSApplication.open(RSApplication.java:339)
-	at repast.simphony.ui.action.OpenScenario.actionPerformed(OpenScenario.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-Caused by: java.io.FileNotFoundException: C:\Users\Donbghuang Li\git\DatasemSimulatorNew\DatasemSimulator.rs\user_path.xml (系统找不到指定的文件。)
-	at java.io.FileInputStream.open(Native Method)
-	at java.io.FileInputStream.<init>(Unknown Source)
-	at java.io.FileReader.<init>(Unknown Source)
-	at repast.simphony.scenario.data.UserPathFileReader.read(UserPathFileReader.java:43)
-	at repast.simphony.scenario.ScenarioLoader.load(ScenarioLoader.java:109)
-	... 40 more
-ERROR [AWT-EventQueue-0] 2015-09-15 22:47:37,808 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 22:50:54,283 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 22:52:15,823 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 22:57:09,270 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-15 23:02:33,707 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.NullPointerException
-	at repast.simphony.data2.AbstractDataSetManager$ObjList.init(AbstractDataSetManager.java:47)
-	at repast.simphony.data2.AbstractDataSetManager.runStarted(AbstractDataSetManager.java:222)
-	at repast.simphony.data2.SingleRunDataSetManager.runStarted(SingleRunDataSetManager.java:67)
-	at repast.simphony.data2.engine.DataInitActionCreator$1.runInitialize(DataInitActionCreator.java:61)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2668 name: E03 type:Requirement_E
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 6 name: SysEng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2669 name: E03_1 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2641 name: SD1 type:Capability_SD
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 5 name: SoSEng
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2640 name: I02_5 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2643 name: I01_1 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2642 name: I01 type:Requirement_I
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 8 name: SysEng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2645 name: I01_3 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2644 name: I01_2 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2647 name: I01_5 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2646 name: I01_4 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2649 name: E03_1 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2648 name: E03 type:Requirement_E
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 6 name: SysEng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2651 name: E03_3 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2650 name: E03_2 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2653 name: E03_5 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2652 name: E03_4 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2655 name: I02 type:Requirement_I
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 8 name: SysEng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2654 name: SD2 type:Capability_SD
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 5 name: SoSEng
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2624 name: I01_2 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2625 name: I01_3 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2626 name: I01_4 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2627 name: I01_5 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2628 name: E03 type:Requirement_E
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 6 name: SysEng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2629 name: E03_1 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2630 name: E03_2 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2631 name: E03_3 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2632 name: E03_4 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2633 name: E03_5 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 9 name: Eng_Elec
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2634 name: SD2 type:Capability_SD
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 5 name: SoSEng
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2635 name: I02 type:Requirement_I
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 8 name: SysEng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2636 name: I02_1 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2637 name: I02_2 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2638 name: I02_3 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - WorkItemEntity: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - wiId: 2639 name: I02_4 type:Task
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  Required Services:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  serviceId: 11 name: Eng_IT
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 1 name: SysEng_Team
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 1 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 2 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 3 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 4 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 5 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 6 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 7 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 8 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 9 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 10 name: SoS_SysEngineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 5 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 2 name: Elec_Team_1
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 11 name: Senior_Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 6 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 12 name: Senior_Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 6 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 13 name: Senior_Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 6 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 14 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 15 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 16 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 17 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 18 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 19 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 20 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 21 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 22 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 23 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 3 name: Elec_Team_2
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 24 name: Senior_Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 6 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 25 name: Senior_Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 6 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 26 name: Senior_Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 6 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 27 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 28 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 29 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 30 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 31 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 32 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 33 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 34 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 35 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 36 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 4 name: Elec_Team_3
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 37 name: Senior_Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 6 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 38 name: Senior_Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 6 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 39 name: Senior_Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 6 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 40 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 41 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 42 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 43 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 44 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 45 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 46 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 47 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 48 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 49 name: Elec_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 9 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 5 name: Mech_Team_1
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 50 name: Senior_Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 7 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 51 name: Senior_Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 7 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 52 name: Senior_Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 7 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 53 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 54 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 55 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 56 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 57 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 58 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 59 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 60 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 61 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 62 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 6 name: Mech_Team_2
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 63 name: Senior_Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 7 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 64 name: Senior_Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 7 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 65 name: Senior_Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 7 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 66 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 67 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 68 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 69 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 70 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 71 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 72 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 73 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 74 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 75 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 7 name: Mech_Team_3
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 76 name: Senior_Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 7 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 77 name: Senior_Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 7 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -  resourceId: 78 name: Senior_Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 7 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,871 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 79 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 80 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 81 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 82 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 83 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 84 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 85 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 86 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 87 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 88 name: Mech_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 10 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 8 name: IT_Team_1
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 89 name: Senior_IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 8 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 90 name: Senior_IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 8 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 91 name: Senior_IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 8 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 92 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 93 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 94 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 95 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 96 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 97 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 98 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 99 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 100 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 101 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 9 name: IT_Team_2
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 102 name: Senior_IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 8 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 103 name: Senior_IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 8 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 104 name: Senior_IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 8 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 105 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 106 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,887 repast.simphony.batch.ssh.LocalSession -  resourceId: 107 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 108 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 109 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 110 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 111 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 112 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 113 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 114 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession - ServiceProviderAgent: 
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession - serviceProviderId: 10 name: IT_Team_3
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  ResourceEntities:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 115 name: Senior_IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 8 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 116 name: Senior_IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 8 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 117 name: Senior_IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 8 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 118 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 119 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 120 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 121 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 122 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 123 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 124 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 125 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 126 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -  resourceId: 127 name: IT_Engineer
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   SkillSet:
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession -   serviceId: 11 efficiency: 1.0
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:42,965 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - EndTime:487
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2647.0
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2604761904761899
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.812628339667395
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:364.0
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17333333333333317
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7639154258363443
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7479736949193356
+INFO  [Thread-3] 2015-09-16 03:33:43,308 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9737969356969837
+INFO  [pool-2-thread-1] 2015-09-16 03:34:00,845 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442392255416 for DONE:  yes
+INFO  [SwingWorker-pool-1-thread-1] 2015-09-16 03:34:00,845 repast.simphony.batch.ssh.SessionsDriver - Run Time: 3.0208
+INFO  [SwingWorker-pool-1-thread-1] 2015-09-16 03:34:01,142 repast.simphony.batch.ssh.LocalSession - Finding output on localhost in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442392255416
+WARN  [SwingWorker-pool-1-thread-1] 2015-09-16 03:34:01,220 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SOS_data*.batch_param_map.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442392255416\instance_1
+WARN  [SwingWorker-pool-1-thread-1] 2015-09-16 03:34:01,220 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SP_data*.batch_param_map.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442392255416\instance_1
+WARN  [SwingWorker-pool-1-thread-1] 2015-09-16 03:34:01,220 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SOS_data*.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442392255416\instance_1
+WARN  [SwingWorker-pool-1-thread-1] 2015-09-16 03:34:01,220 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SP_data*.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442392255416\instance_1
+INFO  [SwingWorker-pool-1-thread-1] 2015-09-16 03:34:01,220 repast.simphony.batch.ssh.SessionsDriver - Aggregating output into C:/Users/Donbghuang Li/git/DatasemSimulatorNew/output

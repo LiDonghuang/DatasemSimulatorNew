@@ -28,7 +28,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	protected LinkedList<WorkItemEntity> uppertasks = new LinkedList<WorkItemEntity>();
 	public int maxMaturityLevels = 3;
 	public double uncertainty = 0.2;
-	public double propagation_uncertainty = 0.5;
+	public double propagation_uncertainty = 0.25;
 	public double risk = 1;
 	// Dynamic Attributes
 	public boolean isActivated=false;
@@ -39,14 +39,14 @@ public class WorkItemEntity extends WorkItemImpl {
 	
 	public double estimatedEfforts=Double.MAX_VALUE;
 	public double estimatedCompletionTime=Double.MAX_VALUE;
-	public double activatedTime=Double.MAX_VALUE;
-	public double startTime=Double.MAX_VALUE;
-	public double assignedTime=Double.MAX_VALUE;
-	public double completionTime=Double.MAX_VALUE;
-	public double endTime=Double.MAX_VALUE;
-	public double leadTime=Double.MAX_VALUE;
-	public double cycleTime=Double.MAX_VALUE;
-	public double dueDate=Double.MAX_VALUE;
+	public int activatedTime=Integer.MAX_VALUE;
+	public int startTime=Integer.MAX_VALUE;
+	public int assignedTime=Integer.MAX_VALUE;
+	public int completionTime=Integer.MAX_VALUE;
+	public int endTime=Integer.MAX_VALUE;
+	public int leadTime=Integer.MAX_VALUE;
+	public int cycleTime=Integer.MAX_VALUE;
+	public int dueDate=Integer.MAX_VALUE;
 	
 	protected ServiceProviderAgent requester;
 	protected ServiceProviderAgent assignedAgent;
@@ -63,6 +63,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	protected int ChangePropagationByCount = 0;
 	private double previousReworkTime = 0;
 	private int previousMaturityLevel = 0;
+	protected double CycleTimeToEffortsRatio = 0;
 	
 	public WorkItemEntity (WorkItem WorkItem) {
 		this.myWorkItem = WorkItem;
@@ -194,9 +195,9 @@ public class WorkItemEntity extends WorkItemImpl {
 			this.ReworkCount++;
 			this.uncertainty *= 1;
 			this.progress = Math.max((this.progress-this.risk), 0);					
-			this.completionTime=Double.MAX_VALUE;
-			this.endTime=Double.MAX_VALUE;
-			this.cycleTime=Double.MAX_VALUE;	
+			this.completionTime=Integer.MAX_VALUE;
+			this.endTime=Integer.MAX_VALUE;
+			this.cycleTime=Integer.MAX_VALUE;	
 			//System.out.println("\nREWORK @TIME:"+this.SoS.timeNow+this.fullName+"reworks from "+previousProgress+" to "+this.progress+" (rework count:"+this.reworkCount+")");
 			if (this.isCompleted) {
 				this.isCompleted = false;
@@ -364,11 +365,12 @@ public class WorkItemEntity extends WorkItemImpl {
 	public void setEnded() {
 		this.isEnded=true;
 		this.endTime = this.SoS.timeNow;
-		this.leadTime = this.endTime - this.activatedTime + 1;					
+		this.leadTime = this.endTime - this.activatedTime + 1;	
+		this.CycleTimeToEffortsRatio = this.cycleTime / this.efforts;
 		if (this.type.getId()==1 | this.type.getId()==2) {
 			this.SoS.waitingList.remove(this.getId());
-			System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
-			System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.getValue()+" stakeholder value");
+			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
+			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.getValue()+" stakeholder value");
 		}
 //		if (this.type.getId()==7) {
 //			this.removeFromContext();
@@ -424,7 +426,10 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.perceivedValue = v;
 	}
 	public int getTypeId() {
-		return this.getTypeId();
+		return this.getType().getId();
+	}
+	public int getHierarchy() {
+		return this.hierarchy;
 	}
 	public double getActivatedTime() {
 		return this.activatedTime;
