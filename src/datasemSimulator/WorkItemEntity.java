@@ -26,10 +26,11 @@ public class WorkItemEntity extends WorkItemImpl {
 	protected LinkedList<WorkItemEntity> successors = new LinkedList<WorkItemEntity>();
 	protected LinkedList<WorkItemEntity> subtasks = new LinkedList<WorkItemEntity>();
 	protected LinkedList<WorkItemEntity> uppertasks = new LinkedList<WorkItemEntity>();
-	public int maxMaturityLevels = 3;
-	public double uncertainty = 0.2;
-	public double propagation_uncertainty = 0.25;
-	public double risk = 1;
+	public int maxMaturityLevels = 1;
+	public double uncertainty = 0;
+	public double propagation_uncertainty = 0;
+	public double risk = 0;
+	public double propagation_risk = 0;
 	// Dynamic Attributes
 	public boolean isActivated=false;
 	public boolean isAssigned=false;
@@ -121,7 +122,7 @@ public class WorkItemEntity extends WorkItemImpl {
 			//if (incMaturityLevels>0) {System.out.println(this.fullName+"increased Maturity Level by "+incMaturityLevels+" to "+currentMaturityLevel);}
 			for (int i=0; i< incMaturityLevels; i++) {				
 				if (Math.random()<=this.uncertainty) {
-					this.rework();						
+					this.rework(this.risk);						
 				}
 				this.changePropagation();
 			}
@@ -180,21 +181,21 @@ public class WorkItemEntity extends WorkItemImpl {
 			if (Math.random()<this.propagation_uncertainty) {
 				if (!affectedWI.isAggregationNode && affectedWI.isStarted && !affectedWI.isEnded) {	
 					//System.out.println("\nCHANGE PROPAGATION @TIME:"+this.SoS.timeNow+this.fullName+"propagates rework to"+affectedWI.fullName);								
-					affectedWI.rework();	
+					affectedWI.rework(this.propagation_risk);	
 					this.ChangePropagationToCount ++;
 					affectedWI.ChangePropagationByCount ++;
 				}	
 			}
 		}
 	}
-	public void rework() {
+	public void rework(double progressReduction) {
 		if (this.previousReworkTime<this.SoS.timeNow && this.progress>0) {
 			//System.out.println(previousReworkTime+" "+SoS.timeNow);
 			this.previousReworkTime = this.SoS.timeNow;
 			double previousProgress = this.progress;		
 			this.ReworkCount++;
 			this.uncertainty *= 1;
-			this.progress = Math.max((this.progress-this.risk), 0);					
+			this.progress = Math.max((this.progress-progressReduction), 0);					
 			this.completionTime=Integer.MAX_VALUE;
 			this.endTime=Integer.MAX_VALUE;
 			this.cycleTime=Integer.MAX_VALUE;	

@@ -13,9 +13,9 @@ import xtext.objectsModel.Skill;
 import xtext.objectsModel.WorkItemType;
 
 public class SystemOfSystems {
-	protected HashMap<Integer, ServiceProviderAgent> myServiceProviderAgents;
-	public HashMap<Integer, WorkItemEntity> myWorkItemEntities;
-	public HashMap<Integer, ResourceEntity> myResourceEntities;
+	protected HashMap<Integer, ServiceProviderAgent> myServiceProviderAgents = new HashMap<Integer, ServiceProviderAgent>();
+	public HashMap<Integer, WorkItemEntity> myWorkItemEntities = new HashMap<Integer, WorkItemEntity>();
+	public HashMap<Integer, ResourceEntity> myResourceEntities = new HashMap<Integer, ResourceEntity>();
 	public HashMap<Integer, WorkItemType> myWorkItemTypes;
 	public HashMap<Integer, Service> myServices;
 	public HashMap<Integer, WorkItemEntity> waitingList = new HashMap<Integer, WorkItemEntity>();

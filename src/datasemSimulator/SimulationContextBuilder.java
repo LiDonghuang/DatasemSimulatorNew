@@ -1,7 +1,11 @@
 package datasemSimulator;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.Console;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -31,15 +35,40 @@ import org.w3c.dom.NodeList;
 
 
 public class SimulationContextBuilder {
-	public HashMap<Integer, ServiceProviderAgent> myServiceProviderAgents = new HashMap<Integer, ServiceProviderAgent>();
-	public HashMap<Integer, WorkItemEntity> myWorkItemEntities = new HashMap<Integer, WorkItemEntity>();
-	public HashMap<Integer, ResourceEntity> myResourceEntities = new HashMap<Integer, ResourceEntity>();
-	
+	public HashMap<Integer, ServiceProvider> myServiceProviders = new HashMap<Integer, ServiceProvider>();
+	public HashMap<Integer, WorkItem> myWorkItems = new HashMap<Integer, WorkItem>();
+	public HashMap<Integer, Asset> myResources = new HashMap<Integer, Asset>();	
 	public HashMap<Integer, WorkItemType> myWorkItemTypes = new HashMap<Integer, WorkItemType>();
 	public HashMap<Integer, Service> myServices = new HashMap<Integer, Service>();
-
 	
-
+	public SimulationContextBuilder(File scenarioXmlFile) {
+		this.ReadXMLFile(scenarioXmlFile);		
+		System.out.println(this.myWorkItems.size()+" WIs");
+		System.out.println(this.myServiceProviders.size()+" SPs");
+		System.out.println(this.myResources.size()+" Resources");
+	}
+	public void ContextImplementation(Context<Object> context) {
+		SystemOfSystems mySoS = BuildSoS();		
+		context.setId("DatasemSimulator");		
+		context.add(mySoS);
+		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
+			sp.SoS = mySoS;
+			context.add(sp);
+		}
+		context.addAll(mySoS.myWorkItemEntities.values());
+		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
+			wi.SoS = mySoS;
+			if (wi.getType().getId()==1 | wi.getType().getId()==2) {
+				context.add(wi);
+				wi.SoS.waitingList.put(wi.getId(), wi);
+				wi.isActivated = true;
+				wi.activatedTime = 1;
+				mySoS.myServiceProviderAgents.get(1).requestedQ.add(wi);
+				wi.requester = mySoS.myServiceProviderAgents.get(1);
+				wi.assignedAgent = mySoS.myServiceProviderAgents.get(1);
+			}
+		}
+	}
 	public void ReadXMLFile(File scenarioXmlFile) {
 		System.out.println("\nstart parsing scenario.xml...\n");
 		try {
@@ -73,7 +102,7 @@ public class SimulationContextBuilder {
 			for (int i=0;i<serviceProviderList.getLength();i++) {
 				Node n = serviceProviderList.item(i);
 				Element e = (Element)n;
-				xmlCreateServiceProviderAgent(e);
+				xmlCreateServiceProvider(e);
 			}
 			//
 			Node workItemsNode = scenario.getElementsByTagName("WorkItems").item(0);
@@ -82,51 +111,27 @@ public class SimulationContextBuilder {
 			for (int i=0;i<workItemList.getLength();i++) {				
 				Node n = workItemList.item(i);
 				Element e = (Element)n;
-				xmlCreateWorkItemEntity(e);				
+				xmlCreateWorkItem(e);				
 			}
 			// ------------------------------------------------
 			for (int i=0;i<serviceProviderList.getLength();i++) {
 				Node node = serviceProviderList.item(i);
 				Element e = (Element)node;
-				xmlBuildServiceProviderAgentTopology(e);
+				xmlBuildServiceProviderTopology(e);
 			}
 			//
 			for (int i=0;i<workItemList.getLength();i++) {
 				Node node = workItemList.item(i);
 				Element e = (Element)node;
-				xmlBuildWorkItemEntityTopology(e);	
+				xmlBuildWorkItemTopology(e);	
 			}
 			// -------------------------------------------------
 			}		
 			catch (Exception e) {
 				e.printStackTrace();
 			}
-		System.out.println("\nscenario parsing completed");
-	}
-	
-	public void ContextImplementation(Context<Object> context) {
-		SystemOfSystems mySoS = BuildSoS();
-		mySoS.getSoSInformation();
-		context.add(mySoS);
-		for (ServiceProviderAgent sp: myServiceProviderAgents.values()) {
-			sp.SoS = mySoS;
-			context.add(sp);
-		}
-		context.addAll(myWorkItemEntities.values());
-		for (WorkItemEntity wi:myWorkItemEntities.values()) {
-			wi.SoS = mySoS;
-			if (wi.getType().getId()==1 | wi.getType().getId()==2) {
-				context.add(wi);
-				wi.SoS.waitingList.put(wi.getId(), wi);
-				wi.isActivated = true;
-				wi.activatedTime = 1;
-				myServiceProviderAgents.get(1).requestedQ.add(wi);
-				wi.requester = myServiceProviderAgents.get(1);
-				wi.assignedAgent = myServiceProviderAgents.get(1);
-			}
-		}
-	}
-	
+		System.out.println("\nscenario parsing completed\n");
+	}	
 	public void xmlCreateService(Element e) {
 		int id = Integer.parseInt(e.getAttribute("serviceId"));
 		String name = e.getAttribute("name");
@@ -145,7 +150,7 @@ public class SimulationContextBuilder {
 		myWorkItemType.setHierarchy(hierarchy);
 		myWorkItemTypes.put(id, myWorkItemType); 
 	}
-	public void xmlCreateServiceProviderAgent(Element e) {
+	public void xmlCreateServiceProvider(Element e) {
 		ServiceProvider myServiceProvider = ObjectsModelFactory.eINSTANCE.createServiceProvider();
 		int id = Integer.parseInt(e.getAttribute("serviceProviderId"));
 		String name = e.getAttribute("name");			
@@ -181,8 +186,8 @@ public class SimulationContextBuilder {
 		}
 		myServiceProvider.setGovernanceStrategy(myGovernanceStrategy);
 		// Create Runtime Extend
-		ServiceProviderAgent myServiceProviderAgent = new ServiceProviderAgent(myServiceProvider);
-		myServiceProviderAgents.put(id, myServiceProviderAgent);
+		//ServiceProviderAgent myServiceProviderAgent = new ServiceProviderAgent(myServiceProvider);
+		myServiceProviders.put(id, myServiceProvider);
 		// Resources
 		Node resources_node = e.getElementsByTagName("Resources").item(0);
 		Element resources_element = (Element)resources_node;
@@ -209,13 +214,14 @@ public class SimulationContextBuilder {
 				mySkill.setEfficiency(skill_efficiency);
 				myResource.getSkillSet().add(mySkill);
 			}
+			myServiceProvider.getResources().add(myResource);
 			// Create Runtime Extend
-			ResourceEntity myResourceEntity = new ResourceEntity(myResource);
-			myResourceEntities.put(resource_id, myResourceEntity);	
-			myServiceProviderAgent.myResourceEntities.add(myResourceEntity);
+			//ResourceEntity myResourceEntity = new ResourceEntity(myResource);
+			myResources.put(resource_id, myResource);	
+			myServiceProvider.getResources().add(myResource);
 		}
 	}
-	public void xmlCreateWorkItemEntity(Element e) {
+	public void xmlCreateWorkItem(Element e) {
 		int id = Integer.parseInt(e.getAttribute("wiId"));
 		String name = e.getAttribute("name");
 		double efforts = Double.parseDouble(e.getAttribute("efforts"));
@@ -237,14 +243,12 @@ public class SimulationContextBuilder {
 			int service_id = Integer.parseInt(e1.getTextContent()); 
 			myWorkItem.getRequiredServices().add(myServices.get(service_id));
 		}
-		// Create Runtime Extend
-		WorkItemEntity myWorkItemEntity = new WorkItemEntity(myWorkItem);
-		myWorkItemEntities.put(id, myWorkItemEntity);
+		myWorkItems.put(id, myWorkItem);
 	}
-	public void xmlBuildServiceProviderAgentTopology(Element e) {
+	public void xmlBuildServiceProviderTopology(Element e) {
 		// ID reference
 		int id = Integer.parseInt(e.getAttribute("serviceProviderId"));
-		ServiceProviderAgent myServiceProviderAgent = this.myServiceProviderAgents.get(id); //System.out.println("\n"+myServiceProviderAgent.getName());
+		ServiceProvider myServiceProvider = this.myServiceProviders.get(id); //System.out.println("\n"+myServiceProviderAgent.getName());
 		// AssignWITO
 		Node AssignWITo_node = e.getElementsByTagName("AssignWITo").item(0);
 		Element AssignWITo_element = (Element)AssignWITo_node;
@@ -253,7 +257,8 @@ public class SimulationContextBuilder {
 			Node node1 = AssignWITo_nodeList.item(i);
 			Element e1= (Element)node1;
 			int AssignWITo_id = Integer.parseInt(e1.getTextContent());
-			myServiceProviderAgent.assignWITo.add(myServiceProviderAgents.get(AssignWITo_id)); //System.out.println("AssignTo "+myServiceProviderAgents.get(AssignWITo_id).getName()+" spId: "+myServiceProviderAgents.get(AssignWITo_id).getId());
+			myServiceProvider.getAssignTo().add(myServiceProviders.get(AssignWITo_id));
+			//myServiceProviderAgent.assignWITo.add(myServiceProviderAgents.get(AssignWITo_id)); //System.out.println("AssignTo "+myServiceProviderAgents.get(AssignWITo_id).getName()+" spId: "+myServiceProviderAgents.get(AssignWITo_id).getId());
 		}	
 		// BorrowResourceFrom
 		Node BorrowResourceFrom_node = e.getElementsByTagName("BorrowResourceFrom").item(0);
@@ -263,17 +268,18 @@ public class SimulationContextBuilder {
 			Node node1 = BorrowResourceFrom_nodeList.item(i);
 			Element e1 = (Element)node1;
 			int BorrowResourceFrom_id = Integer.parseInt(e1.getTextContent());
-			myServiceProviderAgent.borrowResourceFrom.add(myServiceProviderAgents.get(BorrowResourceFrom_id)); //System.out.println("OutsourceFrom "+myServiceProviderAgents.get(BorrowResourceFrom_id).getName()+" spId: "+myServiceProviderAgents.get(BorrowResourceFrom_id).getId());
+			myServiceProvider.getOutsourceFrom().add(myServiceProviders.get(BorrowResourceFrom_id));
+			//myServiceProviderAgent.borrowResourceFrom.add(myServiceProviderAgents.get(BorrowResourceFrom_id)); //System.out.println("OutsourceFrom "+myServiceProviderAgents.get(BorrowResourceFrom_id).getName()+" spId: "+myServiceProviderAgents.get(BorrowResourceFrom_id).getId());
 		}
 		
 	}
-	public void xmlBuildWorkItemEntityTopology(Element e) {
+	public void xmlBuildWorkItemTopology(Element e) {
 		int id = Integer.parseInt(e.getAttribute("wiId"));
-		WorkItemEntity myWorkItemEntity = this.myWorkItemEntities.get(id);
+		WorkItem myWorkItem = this.myWorkItems.get(id);
 		// Hierarchy
 		boolean isAggregationNode = Boolean.parseBoolean(e.getAttribute("isAggregationNode")); 
-		myWorkItemEntity.setIsAggregationNode(isAggregationNode); //System.out.println("\n"+myWorkItemEntity.getName()+" (id: "+id+")"+" Type: "+myWorkItemEntity.getType().getName());
-		if (myWorkItemEntity.isIsAggregationNode()) {
+		myWorkItem.setIsAggregationNode(isAggregationNode); //System.out.println("\n"+myWorkItemEntity.getName()+" (id: "+id+")"+" Type: "+myWorkItemEntity.getType().getName());
+		if (myWorkItem.isIsAggregationNode()) {
 			Node Subtasks_node = e.getElementsByTagName("Subtasks").item(0);
 			Element Subtasks_element = (Element)Subtasks_node;
 			NodeList Subtasks_nodeList = Subtasks_element.getElementsByTagName("workItemId");
@@ -281,14 +287,15 @@ public class SimulationContextBuilder {
 				Node node1 = Subtasks_nodeList.item(i);
 				Element e1= (Element)node1;
 				int Subtask_id = Integer.parseInt(e1.getTextContent());
-				myWorkItemEntity.subtasks.add(myWorkItemEntities.get(Subtask_id)); //System.out.println("Subtask "+myWorkItemEntities.get(Subtask_id).getName()+" wiId: "+myWorkItemEntities.get(Subtask_id).getId());
-				myWorkItemEntities.get(Subtask_id).uppertasks.add(myWorkItemEntity);
+				myWorkItem.getSTasks().add(myWorkItems.get(Subtask_id));
+				//myWorkItemEntity.subtasks.add(myWorkItemEntities.get(Subtask_id)); //System.out.println("Subtask "+myWorkItemEntities.get(Subtask_id).getName()+" wiId: "+myWorkItemEntities.get(Subtask_id).getId());
+				//myWorkItemEntities.get(Subtask_id).uppertasks.add(myWorkItemEntity);
 			}
 		}
 		// Precedency
 		boolean hasPredecessors = Boolean.parseBoolean(e.getAttribute("hasPredecessors"));
-		myWorkItemEntity.setHasPredecessors(hasPredecessors);
-		if (myWorkItemEntity.isHasPredecessors()) {
+		myWorkItem.setHasPredecessors(hasPredecessors);
+		if (myWorkItem.isHasPredecessors()) {
 			Node Predecessor_node = e.getElementsByTagName("Predecessors").item(0);
 			Element Predecessor_element = (Element)Predecessor_node;
 			NodeList Predecessor_nodeList = Predecessor_element.getElementsByTagName("workItemId");
@@ -296,18 +303,74 @@ public class SimulationContextBuilder {
 				Node node1 = Predecessor_nodeList.item(i);
 				Element e1= (Element)node1;
 				int Predecessor_id = Integer.parseInt(e1.getTextContent());
-				myWorkItemEntity.predecessors.add(myWorkItemEntities.get(Predecessor_id)); //System.out.println("Predecessor "+myWorkItemEntities.get(Predecessor_id).getName()+" wiId: "+Predecessor_id);
-				myWorkItemEntities.get(Predecessor_id).successors.add(myWorkItemEntity);
+				myWorkItem.getPTasks().add(myWorkItems.get(Predecessor_id));
+				//myWorkItemEntity.predecessors.add(myWorkItemEntities.get(Predecessor_id)); //System.out.println("Predecessor "+myWorkItemEntities.get(Predecessor_id).getName()+" wiId: "+Predecessor_id);
+				//myWorkItemEntities.get(Predecessor_id).successors.add(myWorkItemEntity);
 			}
 		}
 	}
 	public SystemOfSystems BuildSoS() {
+		Parameters p = RunEnvironment.getInstance().getParameters();
+		int TaskMaturityLevels = (Integer)p.getValue("TaskMaturityLevels");
+		double TaskUncertainty = (Double)p.getValue("TaskUncertainty");
+		double TaskRisk = (Double)p.getValue("TaskRisk");
+		double TaskChangePropagationUncertainty = (Double)p.getValue("TaskChangePropagationUncertainty");
+		double TaskChangePropagationRisk = (Double)p.getValue("TaskChangePropagationRisk");
+		
 		SystemOfSystems mySoS = new SystemOfSystems();
-		mySoS.myServiceProviderAgents = myServiceProviderAgents;
-		mySoS.myWorkItemEntities = myWorkItemEntities;
-		mySoS.myResourceEntities = myResourceEntities;
+		
 		mySoS.myServices = myServices;
 		mySoS.myWorkItemTypes = myWorkItemTypes;
+				
+		for (Asset r: myResources.values()) {
+			int id = r.getId();
+			ResourceEntity res = new ResourceEntity(r);
+			mySoS.myResourceEntities.put(id, res);
+		}		
+		for (ServiceProvider sp: myServiceProviders.values()) {
+			int id = sp.getId();
+			ServiceProviderAgent agent = new ServiceProviderAgent(sp);		
+			mySoS.myServiceProviderAgents.put(id, agent);
+		}
+		for (ServiceProviderAgent agent: mySoS.myServiceProviderAgents.values()) {
+			int id = agent.getId();
+			ServiceProvider sp = myServiceProviders.get(id);
+			for (Asset r: sp.getResources()) {
+				agent.myResourceEntities.add(mySoS.myResourceEntities.get(r.getId()));
+			}
+			for (ServiceProvider sp1: sp.getAssignTo()) {
+				agent.assignWITo.add(mySoS.myServiceProviderAgents.get(sp1.getId()));
+			}
+			for (ServiceProvider sp2: sp.getOutsourceFrom()) {
+				agent.borrowResourceFrom.add(mySoS.myServiceProviderAgents.get(sp2.getId()));
+			}
+		}				
+		for (WorkItem wi: myWorkItems.values()) {
+			int id = wi.getId();
+			WorkItemEntity entity = new WorkItemEntity(wi);
+			entity.maxMaturityLevels = TaskMaturityLevels;
+			entity.uncertainty = TaskUncertainty;
+			entity.risk = TaskRisk;
+			entity.propagation_uncertainty = TaskChangePropagationUncertainty;
+			entity.propagation_risk = TaskChangePropagationRisk;
+			mySoS.myWorkItemEntities.put(id, entity);
+		}
+		for (WorkItemEntity entity: mySoS.myWorkItemEntities.values()) {
+			int id = entity.getId();
+			WorkItem wi = myWorkItems.get(id);
+			for (WorkItem st: wi.getSTasks()) {
+				int st_id = st.getId();
+				entity.subtasks.add(mySoS.myWorkItemEntities.get(st.getId()));
+				mySoS.myWorkItemEntities.get(st_id).uppertasks.add(entity);
+			}
+			for (WorkItem pt: wi.getPTasks()) {
+				int pt_id = pt.getId();
+				entity.predecessors.add(mySoS.myWorkItemEntities.get(pt_id));
+				mySoS.myWorkItemEntities.get(pt_id).successors.add(entity);
+			}
+		}
+		
+		//mySoS.getSoSInformation();
 		return mySoS;
 	}
 }
