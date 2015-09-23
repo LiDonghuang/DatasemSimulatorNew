@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import xtext.objectsModel.Asset;
 import xtext.objectsModel.GovernanceStrategy;
+import xtext.objectsModel.Impact;
 import xtext.objectsModel.Mechanism;
 import xtext.objectsModel.MechanismAttribute;
 import xtext.objectsModel.ObjectsModel;
@@ -99,6 +100,13 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * @generated
    */
   private EClass workItemEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass impactEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -688,9 +696,29 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getWorkItem_HasImpacts()
+  {
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWorkItem_Impacts()
+  {
+    return (EReference)workItemEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getWorkItem_RequiredServices()
   {
-    return (EReference)workItemEClass.getEStructuralFeatures().get(8);
+    return (EReference)workItemEClass.getEStructuralFeatures().get(10);
   }
 
   /**
@@ -700,7 +728,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    */
   public EAttribute getWorkItem_Efforts()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(9);
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(11);
   }
 
   /**
@@ -710,7 +738,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    */
   public EAttribute getWorkItem_Value()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(10);
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(12);
   }
 
   /**
@@ -720,7 +748,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    */
   public EAttribute getWorkItem_ArrivalTime()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(11);
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(13);
   }
 
   /**
@@ -730,7 +758,47 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    */
   public EAttribute getWorkItem_DueDate()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(12);
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(14);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getImpact()
+  {
+    return impactEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getImpact_ImpactWI()
+  {
+    return (EReference)impactEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getImpact_Likelihood()
+  {
+    return (EAttribute)impactEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getImpact_Impact()
+  {
+    return (EAttribute)impactEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -824,11 +892,18 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     createEReference(workItemEClass, WORK_ITEM__PTASKS);
     createEAttribute(workItemEClass, WORK_ITEM__IS_AGGREGATION_NODE);
     createEReference(workItemEClass, WORK_ITEM__STASKS);
+    createEAttribute(workItemEClass, WORK_ITEM__HAS_IMPACTS);
+    createEReference(workItemEClass, WORK_ITEM__IMPACTS);
     createEReference(workItemEClass, WORK_ITEM__REQUIRED_SERVICES);
     createEAttribute(workItemEClass, WORK_ITEM__EFFORTS);
     createEAttribute(workItemEClass, WORK_ITEM__VALUE);
     createEAttribute(workItemEClass, WORK_ITEM__ARRIVAL_TIME);
     createEAttribute(workItemEClass, WORK_ITEM__DUE_DATE);
+
+    impactEClass = createEClass(IMPACT);
+    createEReference(impactEClass, IMPACT__IMPACT_WI);
+    createEAttribute(impactEClass, IMPACT__LIKELIHOOD);
+    createEAttribute(impactEClass, IMPACT__IMPACT);
   }
 
   /**
@@ -923,11 +998,18 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     initEReference(getWorkItem_PTasks(), this.getWorkItem(), null, "pTasks", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_IsAggregationNode(), ecorePackage.getEBoolean(), "isAggregationNode", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWorkItem_STasks(), this.getWorkItem(), null, "sTasks", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getWorkItem_HasImpacts(), ecorePackage.getEBoolean(), "hasImpacts", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWorkItem_Impacts(), this.getImpact(), null, "impacts", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWorkItem_RequiredServices(), this.getService(), null, "requiredServices", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_Efforts(), ecorePackage.getEDouble(), "efforts", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_ArrivalTime(), ecorePackage.getEInt(), "arrivalTime", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_DueDate(), ecorePackage.getEInt(), "dueDate", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(impactEClass, Impact.class, "Impact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getImpact_ImpactWI(), this.getWorkItem(), null, "impactWI", null, 0, 1, Impact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getImpact_Likelihood(), ecorePackage.getEDouble(), "likelihood", null, 0, 1, Impact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getImpact_Impact(), ecorePackage.getEDouble(), "impact", null, 0, 1, Impact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

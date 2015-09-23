@@ -16,6 +16,7 @@ import repast.simphony.parameter.Parameters;
 import repast.simphony.space.grid.Grid;
 import xtext.objectsModel.Asset;
 import xtext.objectsModel.GovernanceStrategy;
+import xtext.objectsModel.Impact;
 import xtext.objectsModel.Mechanism;
 import xtext.objectsModel.MechanismAttribute;
 import xtext.objectsModel.ObjectsModelFactory;
@@ -225,13 +226,13 @@ public class SimulationContextBuilder {
 		int id = Integer.parseInt(e.getAttribute("wiId"));
 		String name = e.getAttribute("name");
 		double efforts = Double.parseDouble(e.getAttribute("efforts"));
-		double value = Double.parseDouble(e.getAttribute("value"));
+		//double value = Double.parseDouble(e.getAttribute("value"));
 		int typeId = Integer.parseInt(e.getAttribute("typeId")); 				
 		WorkItem myWorkItem = ObjectsModelFactory.eINSTANCE.createWorkItem();
 		myWorkItem.setId(id);
 		myWorkItem.setName(name);
 		myWorkItem.setEfforts(efforts);
-		myWorkItem.setValue(value);
+		//myWorkItem.setValue(value);
 		myWorkItem.setType(myWorkItemTypes.get(typeId));
 		// RequiredServices
 		Node requiredServices_node = e.getElementsByTagName("RequiredServices").item(0);
@@ -296,9 +297,9 @@ public class SimulationContextBuilder {
 		boolean hasPredecessors = Boolean.parseBoolean(e.getAttribute("hasPredecessors"));
 		myWorkItem.setHasPredecessors(hasPredecessors);
 		if (myWorkItem.isHasPredecessors()) {
-			Node Predecessor_node = e.getElementsByTagName("Predecessors").item(0);
-			Element Predecessor_element = (Element)Predecessor_node;
-			NodeList Predecessor_nodeList = Predecessor_element.getElementsByTagName("workItemId");
+			Node Predecessors_node = e.getElementsByTagName("Predecessors").item(0);
+			Element Predecessors_element = (Element)Predecessors_node;
+			NodeList Predecessor_nodeList = Predecessors_element.getElementsByTagName("workItemId");
 			for (int i=0;i<Predecessor_nodeList.getLength();i++) {
 				Node node1 = Predecessor_nodeList.item(i);
 				Element e1= (Element)node1;
@@ -306,6 +307,26 @@ public class SimulationContextBuilder {
 				myWorkItem.getPTasks().add(myWorkItems.get(Predecessor_id));
 				//myWorkItemEntity.predecessors.add(myWorkItemEntities.get(Predecessor_id)); //System.out.println("Predecessor "+myWorkItemEntities.get(Predecessor_id).getName()+" wiId: "+Predecessor_id);
 				//myWorkItemEntities.get(Predecessor_id).successors.add(myWorkItemEntity);
+			}
+		}
+		// Impacts
+		boolean hasImpacts = Boolean.parseBoolean(e.getAttribute("hasImpacts"));
+		myWorkItem.setHasImpacts(hasImpacts);
+		if (myWorkItem.isHasImpacts()) {
+			Node Impacts_node = e.getElementsByTagName("Impacts").item(0);
+			Element Impacts_element = (Element)Impacts_node;
+			NodeList Impact_nodeList = Impacts_element.getElementsByTagName("Impact");			
+			for (int i=0;i<Impact_nodeList.getLength();i++) {
+				Node node1 = Impact_nodeList.item(i);
+				Element e1= (Element)node1;
+				int impactWI_id = Integer.parseInt(e1.getAttribute("workItemId"));
+				double likelihood = Double.parseDouble(e1.getAttribute("likelihood"));
+				double impact = Double.parseDouble(e1.getAttribute("impact"));
+				Impact myImpact = ObjectsModelFactory.eINSTANCE.createImpact();
+				myImpact.setImpactWI(myWorkItems.get(impactWI_id));
+				myImpact.setLikelihood(likelihood);
+				myImpact.setImpact(impact);
+				myWorkItem.getImpacts().add(myImpact);
 			}
 		}
 	}
@@ -367,6 +388,15 @@ public class SimulationContextBuilder {
 				int pt_id = pt.getId();
 				entity.predecessors.add(mySoS.myWorkItemEntities.get(pt_id));
 				mySoS.myWorkItemEntities.get(pt_id).successors.add(entity);
+			}
+			for (Impact myImpact: wi.getImpacts()) {
+				int impactWI_id = myImpact.getImpactWI().getId();
+				double likelihood = myImpact.getLikelihood();
+				double impact = myImpact.getImpact();
+				WorkItemEntity impactEntity = mySoS.myWorkItemEntities.get(impactWI_id);
+				entity.impactsWIs.add(impactEntity);
+				entity.impactsValue.put(impactEntity, impact);
+				entity.impactsLikelihood.put(impactEntity, likelihood);
 			}
 		}
 		

@@ -3,10 +3,14 @@ package datasemSimulator;
 import governanceModels.AgentStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.HashMap;
+
+import org.apache.commons.math3.stat.StatUtils;
+import org.apache.commons.math3.util.FastMath;
 
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ScheduledMethod;
@@ -32,9 +36,23 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		public int WIPLimit = Integer.MAX_VALUE;
 		public int BacklogLimit = Integer.MAX_VALUE;
 		// Dynamic Attributes
-		protected double totalWorkload;
-		protected double activeWorkload;
-		protected double resourceUtilization;
+		protected double TotalWorkload;
+		protected double ActiveWorkload;
+		protected double ResourceUtilization;
+		protected int isBottleNeck;		
+		protected int BottleNeckCount;
+		// Time Series Records
+		private List<Double> recordTotalWorkload = new ArrayList<Double>();
+		private List<Double> recordActiveWorkload = new ArrayList<Double>();
+		private List<Double> recordResourceUtilization = new ArrayList<Double>();
+		// End Run Statistics
+		private double TotalWorkLoad_mean;
+		private double TotalWorkLoad_stdev;
+		private double ActiveWorkload_mean;
+		private double ActiveWorkload_stdev;
+		private double ResourceUtilization_mean;
+		private double ResourceUtilization_stdev;
+		
 		protected LinkedList<WorkItemEntity> requestedQ = new LinkedList<WorkItemEntity>();
 		protected LinkedList<WorkItemEntity> assignmentQ = new LinkedList<WorkItemEntity>();	
 		protected LinkedList<WorkItemEntity> backlogQ = new LinkedList<WorkItemEntity>();
@@ -110,8 +128,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			for (int i=0;i<readyQ.size();i++) {			
 				// =========== Apply WI Selection Rule ====================
 				WorkItemEntity wi = readyQ.get(i);		
-				//if (wi.precedencyCleared()) {
-				if (true) {
+				if (wi.precedencyCleared()) {
 					// ========================================================
 					ArrayList<ResourceEntity> serviceResourceCandidates = this.findResourceEntities(wi);
 					// =========== Apply Resource Allocation Rule =============
@@ -330,6 +347,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		public void statusSummary() {
 			this.calculateWorkload();
 			this.calculateResourceUtilization();
+			this.countBottleNeck();
 //			if (this.activeQ.size()>0) {
 //				this.state=1;
 //				if (this.resourceUtilization==1.00) {
@@ -340,17 +358,19 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 //			}		
 		}
 		public void calculateWorkload() {
-			this.totalWorkload = 0;
-			this.activeWorkload = 0;
+			this.TotalWorkload = 0;
+			this.ActiveWorkload = 0;
 			for (int i=0;i<this.backlogQ.size();i++) {
 				WorkItemEntity workItem = this.backlogQ.get(i);
-				this.totalWorkload += workItem.getEfforts()*(1-workItem.progress);
+				this.TotalWorkload += workItem.getEfforts()*(1-workItem.progress);
 			}
 			for (int i=0;i<this.activeQ.size();i++) {
 				WorkItemEntity workItem = this.activeQ.get(i);
-				this.totalWorkload += workItem.getEfforts()*(1-workItem.progress);
-				this.activeWorkload += workItem.getEfforts()*(1-workItem.progress);
+				this.TotalWorkload += workItem.getEfforts()*(1-workItem.progress);
+				this.ActiveWorkload += workItem.getEfforts()*(1-workItem.progress);
 			}
+			this.recordTotalWorkload.add(this.TotalWorkload);
+			this.recordActiveWorkload.add(this.ActiveWorkload);
 		}
 		public void calculateResourceUtilization() {
 			int numResources = this.myResourceEntities.size();
@@ -360,7 +380,8 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 					numActiveResources += 1;
 				}
 			}
-			this.resourceUtilization = (double)numActiveResources/(double)numResources;	
+			this.ResourceUtilization = (double)numActiveResources/(double)numResources;	
+			this.recordResourceUtilization.add(this.ResourceUtilization);
 		}
 		public LinkedList<WorkItemEntity> getRequestedQ()	{
 			return this.requestedQ;
@@ -373,12 +394,76 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			return load;
 		}		
 		public double getActiveWorkload() {
-			return this.activeWorkload;
+			return this.ActiveWorkload;
 		}
 		public double getTotalWorkload() {
-			return this.totalWorkload;
+			return this.TotalWorkload;
 		}
 		public double getResourceUtilization() {
-			return this.resourceUtilization;
+			return this.ResourceUtilization;
+		}
+		public int checkBottleNeck() {
+			int a = this.isBottleNeck;
+			this.isBottleNeck = 0;
+			return a;
+		}		
+		public void countBottleNeck() {
+			if (this.backlogQ.size()>0 && this.ResourceUtilization<1) {
+				for (WorkItemEntity wi : this.backlogQ) {
+					if (!wi.precedencyCleared() && this.findResourceEntities(wi).size()>0) {
+						this.isBottleNeck = 1;
+						this.BottleNeckCount ++;
+						//System.out.println(this.name+" is BottleNecked!! (for the "+this.BottleNeckCount+" th time)");						
+						break;
+					}
+				}
+			}
+		}				
+		public void EndRunStatistics() {
+			this.TotalWorkLoad_mean = StatMean(recordTotalWorkload);
+			this.TotalWorkLoad_stdev = StatStdev(recordTotalWorkload);
+			this.ActiveWorkload_mean = StatMean(recordActiveWorkload);
+			this.ActiveWorkload_stdev = StatStdev(recordActiveWorkload);
+			this.ResourceUtilization_mean = StatMean(recordResourceUtilization);
+			this.ResourceUtilization_stdev = StatStdev(recordResourceUtilization);
+		}
+		public int getBottleNectCount() {
+			return this.BottleNeckCount;
+		}
+		public double getTotalWorkLoad_mean() {
+			return this.TotalWorkLoad_mean;
+		}
+		public double getTotalWorkLoad_stdev() {
+			return this.TotalWorkLoad_stdev;
+		}
+		public double getActiveWorkload_mean() {
+			return this.ActiveWorkload_mean;
+		}
+		public double getActiveWorkload_stdev() {
+			return this.ActiveWorkload_stdev;
+		}
+		public double getResourceUtilization_mean() {
+			return this.ResourceUtilization_mean;
+		}
+		public double getResourceUtilization_stdev() {
+			return this.ResourceUtilization_stdev;
+		}
+		private double StatMean(List<Double> list) {
+			double[] numbers = new double[list.size()];
+			double value = 0;
+			for (int i=0;i<list.size();i++) {
+				numbers[i] = list.get(i);
+			}
+			value = StatUtils.mean(numbers);
+			return value;
+		}
+		private double StatStdev(List<Double> list) {
+			double[] numbers = new double[list.size()];
+			double value = 0;
+			for (int i=0;i<list.size();i++) {
+				numbers[i] = list.get(i);
+			}
+			value = FastMath.sqrt(StatUtils.variance(numbers));
+			return value;
 		}
 }

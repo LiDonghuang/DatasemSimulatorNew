@@ -1,6 +1,8 @@
 package datasemSimulator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
@@ -20,7 +22,9 @@ public class SystemOfSystems {
 	public HashMap<Integer, Service> myServices;
 	public HashMap<Integer, WorkItemEntity> waitingList = new HashMap<Integer, WorkItemEntity>();
 	public int timeNow;
-	
+	// Time Series Records
+	private List<Double> recordAgentsResourceUtilization_cov = new ArrayList<Double>();	
+	// End Run Statistics
 	private int EndTime;
 	private int CountTasks;
 	private double TaskReworkCount_total;
@@ -31,17 +35,44 @@ public class SystemOfSystems {
 	private double ChangePropagationCount_stdev;
 	private double CycleTimeToEffortsRatio_mean;
 	private double CycleTimeToEffortsRatio_stdev;
+	private double AgentsBottleNeckCount_total;
+	private double AgentsBottleNeckCount_mean;
+	private double AgentsBottleNeckCount_stdev;
+	private double AgentsWorkloadInbalance;
+	
+	
+	
 	
 	@ScheduledMethod(start=1,interval=1,priority=1000)
-	public void step() {
+	public void EndRunCondition() {
 		ISchedule schedule = RunEnvironment.getInstance().getCurrentSchedule();
 		timeNow = (int)schedule.getTickCount();
 		//System.out.println("\n ============== TIME NOW: "+timeNow+" ============== ");
 		if (this.waitingList.size()==0){
 			RunEnvironment.getInstance().endRun();
-			System.out.println("SIMULATION ENDED");
+			System.out.println("\nSIMULATION ENDED: All WIs Completed\n");
 			this.EndRunIndicators();
+			this.EndRunAgentsStatistics();
+			System.out.println("\n----------------------------------------------------");
 		}
+	}
+	@ScheduledMethod(start=1,interval=1,priority=0)
+	public void RecordData() {
+		double[] AgentsResourceUtilization = new double[this.myServiceProviderAgents.size()];
+		double AgentsResourceUtilization_mean = 0;
+		double AgentsResourceUtilization_stdev = 0;
+		double AgentsResourceUtilization_cov = 0;
+		for (int i=0; i< this.myServiceProviderAgents.size(); i++) {
+			ServiceProviderAgent sp = this.myServiceProviderAgents.get(i+1);
+			AgentsResourceUtilization[i] = sp.getResourceUtilization();
+		}
+		AgentsResourceUtilization_mean = StatUtils.mean(AgentsResourceUtilization);
+		AgentsResourceUtilization_stdev	= FastMath.sqrt(StatUtils.variance(AgentsResourceUtilization));
+		if (AgentsResourceUtilization_stdev!=0) {
+			AgentsResourceUtilization_cov = AgentsResourceUtilization_stdev/AgentsResourceUtilization_mean;
+		}		
+		recordAgentsResourceUtilization_cov.add(AgentsResourceUtilization_cov);
+		//System.out.println("AgentsResourceUtilization:\n mean="+AgentsResourceUtilization_mean+" stdev="+AgentsResourceUtilization_stdev+" cov="+AgentsResourceUtilization_cov);
 	}
 	
 	public int getEndTime() {
@@ -74,7 +105,6 @@ public class SystemOfSystems {
 	public double getCycleTimeToEffortsRatio_stdev() {
 		return CycleTimeToEffortsRatio_stdev;
 	};
-	
 	public void EndRunIndicators() {
 		this.EndTime = this.timeNow-1;
 		int wi_count = 0;
@@ -87,12 +117,14 @@ public class SystemOfSystems {
 		double[] TaskReworkCount = new double[wi_count];		
 		double[] ChangePropagationCount = new double[wi_count];
 		double[] CycleTimeToEffortsRatio = new double[wi_count];
+		double[] AgentsBottleNeckCount = new double[wi_count];
 		int i = 0;
 		for (WorkItemEntity wi : myWorkItemEntities.values()) {
 			if (wi.getType().getId()==6) {
 				TaskReworkCount[i] = wi.ReworkCount;
 				ChangePropagationCount[i] = wi.ChangePropagationByCount;
 				CycleTimeToEffortsRatio[i] = wi.CycleTimeToEffortsRatio;
+				AgentsBottleNeckCount[i] = 
 				i++;
 			}
 		}
@@ -104,16 +136,35 @@ public class SystemOfSystems {
 		ChangePropagationCount_stdev = FastMath.sqrt(StatUtils.variance(ChangePropagationCount));
 		CycleTimeToEffortsRatio_mean = StatUtils.mean(CycleTimeToEffortsRatio);
 		CycleTimeToEffortsRatio_stdev = FastMath.sqrt(StatUtils.variance(CycleTimeToEffortsRatio));
+		AgentsBottleNeckCount_total = StatUtils.sum(AgentsBottleNeckCount);
+		AgentsBottleNeckCount_mean = StatUtils.mean(AgentsBottleNeckCount);
+		AgentsBottleNeckCount_stdev = FastMath.sqrt(StatUtils.variance(AgentsBottleNeckCount));
+		AgentsWorkloadInbalance = StatMean(recordAgentsResourceUtilization_cov);
+		
 		System.out.println("EndTime:"+EndTime);
 		System.out.println("CountTasks:"+CountTasks);
-		System.out.println("TaskReworkCount_total:"+TaskReworkCount_total);
-		System.out.println("TaskReworkCount_mean:"+TaskReworkCount_mean);
-		System.out.println("TaskReworkCount_stdev:"+TaskReworkCount_stdev);
-		System.out.println("ChangePropagationCount_total:"+ChangePropagationCount_total);
-		System.out.println("ChangePropagationCount_mean:"+ChangePropagationCount_mean);
-		System.out.println("ChangePropagationCount_stdev:"+ChangePropagationCount_stdev);
-		System.out.println("CycleTimeToEffortsRatio_mean:"+CycleTimeToEffortsRatio_mean);
-		System.out.println("CycleTimeToEffortsRatio_stdev:"+CycleTimeToEffortsRatio_stdev);
+		System.out.println("TaskReworkCount:\n total: "+TaskReworkCount_total+" mean: "+TaskReworkCount_mean+" stdev: "+TaskReworkCount_stdev);
+		System.out.println("ChangePropagationCount:\n total: "+ChangePropagationCount_total+" mean: "+ChangePropagationCount_mean+" stdev: "+ChangePropagationCount_stdev);
+		System.out.println("CycleTimeToEffortsRatio:\n mean: "+CycleTimeToEffortsRatio_mean+" stdev: "+CycleTimeToEffortsRatio_stdev);
+		System.out.println("AgentsBottleNeckCount:\n total: "+AgentsBottleNeckCount_total+" mean: "+AgentsBottleNeckCount_mean+" stdev: "+AgentsBottleNeckCount_stdev);
+		System.out.println("AgentsWorkloadInbalance: "+AgentsWorkloadInbalance);
+		System.out.println("\n");
+	}
+	
+	public void EndRunAgentsStatistics() {
+		System.out.println("\nAgents Statistics:");
+		for (int i=0; i< this.myServiceProviderAgents.size(); i++) {
+			ServiceProviderAgent sp = this.myServiceProviderAgents.get(i+1);
+			sp.EndRunStatistics();			
+			System.out.println("\n-- ServiceProviderAgent id:"+sp.getId()+" name:"+sp.getName());
+			System.out.println("TotalWorkLoad_mean: "+sp.getTotalWorkLoad_mean());
+			System.out.println("TotalWorkLoad_stdev: "+sp.getTotalWorkLoad_stdev());
+			System.out.println("ActiveWorkload_mean: "+sp.getActiveWorkload_mean());
+			System.out.println("ActiveWorkload_stdev: "+sp.getActiveWorkload_stdev());
+			System.out.println("ResourceUtilization_mean: "+sp.getResourceUtilization_mean());
+			System.out.println("ResourceUtilization_stdev: "+sp.getResourceUtilization_stdev());
+			System.out.println("BottleNeckCount: "+sp.getBottleNectCount());
+		}
 	}
 	
 	public void getSoSInformation() {
@@ -139,5 +190,25 @@ public class SystemOfSystems {
 			}
 		}
 		System.out.println("\n\n");
+	}
+	
+	
+	private double StatMean(List<Double> list) {
+		double[] numbers = new double[list.size()];
+		double value = 0;
+		for (int i=0;i<list.size();i++) {
+			numbers[i] = list.get(i);
+		}
+		value = StatUtils.mean(numbers);
+		return value;
+	}
+	private double StatStdev(List<Double> list) {
+		double[] numbers = new double[list.size()];
+		double value = 0;
+		for (int i=0;i<list.size();i++) {
+			numbers[i] = list.get(i);
+		}
+		value = FastMath.sqrt(StatUtils.variance(numbers));
+		return value;
 	}
 }

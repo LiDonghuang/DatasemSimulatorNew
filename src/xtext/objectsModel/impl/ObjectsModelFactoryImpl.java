@@ -74,6 +74,7 @@ public class ObjectsModelFactoryImpl extends EFactoryImpl implements ObjectsMode
       case ObjectsModelPackage.SKILL: return createSkill();
       case ObjectsModelPackage.WORK_ITEM_TYPE: return createWorkItemType();
       case ObjectsModelPackage.WORK_ITEM: return createWorkItem();
+      case ObjectsModelPackage.IMPACT: return createImpact();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -187,6 +188,17 @@ public class ObjectsModelFactoryImpl extends EFactoryImpl implements ObjectsMode
   {
     WorkItemImpl workItem = new WorkItemImpl();
     return workItem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Impact createImpact()
+  {
+    ImpactImpl impact = new ImpactImpl();
+    return impact;
   }
 
   /**

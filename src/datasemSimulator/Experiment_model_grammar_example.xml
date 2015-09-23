@@ -1,0 +1,101 @@
+<ExperimentModel experimentModelId="1" name="Grammar test EM" description="some description">
+	<Indicators>
+		<Indicator name="Value over time"></Indicator>
+		<Indicator name="Workload over time"></Indicator>
+	</Indicators>
+	<Services>
+		<Service serviceId="1" name="SE service" description="..."></Service>
+		<Service serviceId="2" name="Developmemt service" description="..."></Service>
+	</Services>
+	<ClassesOfService>
+		<ClassOfService cosId="1" name="Standard" isDistruptive="false"></ClassOfService>
+		<ClassOfService cosId="2" name="Expedited" isDistruptive="true"></ClassOfService>
+	</ClassesOfService>
+	<WorkItemTypes>
+		<WorkItemType wiTypeId="1" name="Capability"></WorkItemType>
+		<WorkItemType wiTypeId="2" name="Task"></WorkItemType>
+	</WorkItemTypes>	
+	<Runs>
+		<Run numberOfReplications="10" numberOfSteps="100">
+			<OrganizationalModel>
+				<ServiceProviders>
+					<ServiceProvider serviceProviderId="1" name="team 1" description="some team" type="SE team">
+						<AssigneWITo>
+							<ServiceProviderId>2</ServiceProviderId>
+							<ServiceProviderId>3</ServiceProviderId>
+						</AssigneWITo>	
+						<BorrowResourceFrom>
+							<ServiceProviderId>2</ServiceProviderId>
+							<ServiceProviderId>3</ServiceProviderId>
+						</BorrowResourceFrom>
+						<TeamService serviceId="1"></TeamService>
+						
+						<Resources>
+							<Resource resourceId="1" name="sysEng01">
+								<SkillSet>
+									<Skill serviceId="1" efficiency="1.2"></Skill>
+									<Skill serviceId="2" efficiency="0.8"></Skill>					
+								</SkillSet>
+							</Resource>
+							<Resource resourceId="2" name="sysEng02">
+								<SkillSet>
+									<Skill serviceId="1" efficiency="1.2"></Skill>
+									<Skill serviceId="2" efficiency="0.8"></Skill>					
+								</SkillSet>
+							</Resource>
+						</Resources>
+					</ServiceProvider>
+				</ServiceProviders>
+				<GovernanceStrategy>
+					<Mechanism name="Acceptance" value="FIFO">
+						<MechanismAttribute name="attr1">102</MechanismAttribute>
+						<MechanismAttribute name="attr2">some string property</MechanismAttribute>
+					</Mechanism>				
+					<Mechanism name="ProcessModel" value="FIFO">
+					</Mechanism>				
+				</GovernanceStrategy>				
+			</OrganizationalModel>	
+			<WorkItemNetworkModel>
+				<WorkItems>				
+					<WorkItem wiId="12" typeId="1" efforts="10.0" isAggregationalWI="true" hasPredecessor="true" >
+						<GovernanceAttributes>
+							<GovernanceAttribute name="value">10.0</GovernanceAttribute>
+							<GovernanceAttribute name="cos">1</GovernanceAttribute>
+							<GovernanceAttribute name="dueDate">156</GovernanceAttribute>
+							<GovernanceAttribute name="estimatedEffort">10.0</GovernanceAttribute>							
+						</GovernanceAttributes>
+						<RequiredServices>
+							<ServiceId>12</ServiceId>
+							<ServiceId>13</ServiceId>
+						</RequiredServices>
+						<Predecessors>
+							<WorkItemId>1</WorkItemId>
+						</Predecessors>
+						<Subtasks>
+							<WorkItemId>1</WorkItemId>
+						</Subtasks>
+					</WorkItem>
+				</WorkItems>
+				<Events>
+					<Event id="1">
+						<Conditions> <!--and-->
+							<Condition conditionType="timeStep">
+								100
+							</Condition>
+							<Condition conditionType="wiProgress">
+								<WorkItemId>1</WorkItemId>
+								<Progress>1.0</Progress>
+							</Condition> 
+						</Conditons>
+						<Actions>
+							<Action actionType="activateWI">
+								<WorkItemId>2</WorkItemId>							
+							</Action>
+						</Actions>
+					</Event>
+				</Events>				
+			</WorkItemNetworkModel>
+		</Run>
+
+	</Runs>
+</ExperimentModel>

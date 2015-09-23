@@ -5,6 +5,7 @@ package xtext.objectsModel.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -14,8 +15,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
+import xtext.objectsModel.Impact;
 import xtext.objectsModel.ObjectsModelPackage;
 import xtext.objectsModel.Service;
 import xtext.objectsModel.WorkItem;
@@ -36,6 +40,8 @@ import xtext.objectsModel.WorkItemType;
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getPTasks <em>PTasks</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#isIsAggregationNode <em>Is Aggregation Node</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getSTasks <em>STasks</em>}</li>
+ *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#isHasImpacts <em>Has Impacts</em>}</li>
+ *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getImpacts <em>Impacts</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getRequiredServices <em>Required Services</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getEfforts <em>Efforts</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getValue <em>Value</em>}</li>
@@ -177,6 +183,36 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
    * @ordered
    */
   protected EList<WorkItem> sTasks;
+
+  /**
+   * The default value of the '{@link #isHasImpacts() <em>Has Impacts</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isHasImpacts()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean HAS_IMPACTS_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isHasImpacts() <em>Has Impacts</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isHasImpacts()
+   * @generated
+   * @ordered
+   */
+  protected boolean hasImpacts = HAS_IMPACTS_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getImpacts() <em>Impacts</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getImpacts()
+   * @generated
+   * @ordered
+   */
+  protected EList<Impact> impacts;
 
   /**
    * The cached value of the '{@link #getRequiredServices() <em>Required Services</em>}' reference list.
@@ -480,6 +516,43 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isHasImpacts()
+  {
+    return hasImpacts;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setHasImpacts(boolean newHasImpacts)
+  {
+    boolean oldHasImpacts = hasImpacts;
+    hasImpacts = newHasImpacts;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.WORK_ITEM__HAS_IMPACTS, oldHasImpacts, hasImpacts));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Impact> getImpacts()
+  {
+    if (impacts == null)
+    {
+      impacts = new EObjectContainmentEList<Impact>(Impact.class, this, ObjectsModelPackage.WORK_ITEM__IMPACTS);
+    }
+    return impacts;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Service> getRequiredServices()
   {
     if (requiredServices == null)
@@ -587,6 +660,22 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
    * @generated
    */
   @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case ObjectsModelPackage.WORK_ITEM__IMPACTS:
+        return ((InternalEList<?>)getImpacts()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -608,6 +697,10 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
         return isIsAggregationNode();
       case ObjectsModelPackage.WORK_ITEM__STASKS:
         return getSTasks();
+      case ObjectsModelPackage.WORK_ITEM__HAS_IMPACTS:
+        return isHasImpacts();
+      case ObjectsModelPackage.WORK_ITEM__IMPACTS:
+        return getImpacts();
       case ObjectsModelPackage.WORK_ITEM__REQUIRED_SERVICES:
         return getRequiredServices();
       case ObjectsModelPackage.WORK_ITEM__EFFORTS:
@@ -658,6 +751,13 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
       case ObjectsModelPackage.WORK_ITEM__STASKS:
         getSTasks().clear();
         getSTasks().addAll((Collection<? extends WorkItem>)newValue);
+        return;
+      case ObjectsModelPackage.WORK_ITEM__HAS_IMPACTS:
+        setHasImpacts((Boolean)newValue);
+        return;
+      case ObjectsModelPackage.WORK_ITEM__IMPACTS:
+        getImpacts().clear();
+        getImpacts().addAll((Collection<? extends Impact>)newValue);
         return;
       case ObjectsModelPackage.WORK_ITEM__REQUIRED_SERVICES:
         getRequiredServices().clear();
@@ -713,6 +813,12 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
       case ObjectsModelPackage.WORK_ITEM__STASKS:
         getSTasks().clear();
         return;
+      case ObjectsModelPackage.WORK_ITEM__HAS_IMPACTS:
+        setHasImpacts(HAS_IMPACTS_EDEFAULT);
+        return;
+      case ObjectsModelPackage.WORK_ITEM__IMPACTS:
+        getImpacts().clear();
+        return;
       case ObjectsModelPackage.WORK_ITEM__REQUIRED_SERVICES:
         getRequiredServices().clear();
         return;
@@ -758,6 +864,10 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
         return isAggregationNode != IS_AGGREGATION_NODE_EDEFAULT;
       case ObjectsModelPackage.WORK_ITEM__STASKS:
         return sTasks != null && !sTasks.isEmpty();
+      case ObjectsModelPackage.WORK_ITEM__HAS_IMPACTS:
+        return hasImpacts != HAS_IMPACTS_EDEFAULT;
+      case ObjectsModelPackage.WORK_ITEM__IMPACTS:
+        return impacts != null && !impacts.isEmpty();
       case ObjectsModelPackage.WORK_ITEM__REQUIRED_SERVICES:
         return requiredServices != null && !requiredServices.isEmpty();
       case ObjectsModelPackage.WORK_ITEM__EFFORTS:
@@ -793,6 +903,8 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
     result.append(hasPredecessors);
     result.append(", isAggregationNode: ");
     result.append(isAggregationNode);
+    result.append(", hasImpacts: ");
+    result.append(hasImpacts);
     result.append(", efforts: ");
     result.append(efforts);
     result.append(", value: ");

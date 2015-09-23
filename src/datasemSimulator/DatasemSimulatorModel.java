@@ -9,7 +9,7 @@ import repast.simphony.parameter.Parameters;
 
 public class DatasemSimulatorModel implements ContextBuilder<Object>{
 	
-	private File scenarioXmlFile = new File("/Users/Donbghuang Li/Desktop/DatasemFiles/DemoModel_ExperimentModel.xml");
+	private File scenarioXmlFile = new File("/Users/dzl0023/Desktop/DatasemFiles/DemoModel_ExperimentModel.xml");
 	private SimulationContextBuilder cb = new SimulationContextBuilder(scenarioXmlFile);
 	
 	public Context<Object> build(Context<Object> context) {		

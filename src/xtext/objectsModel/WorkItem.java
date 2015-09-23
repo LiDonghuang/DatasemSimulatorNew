@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link xtext.objectsModel.WorkItem#getPTasks <em>PTasks</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#isIsAggregationNode <em>Is Aggregation Node</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getSTasks <em>STasks</em>}</li>
+ *   <li>{@link xtext.objectsModel.WorkItem#isHasImpacts <em>Has Impacts</em>}</li>
+ *   <li>{@link xtext.objectsModel.WorkItem#getImpacts <em>Impacts</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getRequiredServices <em>Required Services</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getEfforts <em>Efforts</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getValue <em>Value</em>}</li>
@@ -223,6 +225,48 @@ public interface WorkItem extends EObject
    * @generated
    */
   EList<WorkItem> getSTasks();
+
+  /**
+   * Returns the value of the '<em><b>Has Impacts</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Has Impacts</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Has Impacts</em>' attribute.
+   * @see #setHasImpacts(boolean)
+   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_HasImpacts()
+   * @model
+   * @generated
+   */
+  boolean isHasImpacts();
+
+  /**
+   * Sets the value of the '{@link xtext.objectsModel.WorkItem#isHasImpacts <em>Has Impacts</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Has Impacts</em>' attribute.
+   * @see #isHasImpacts()
+   * @generated
+   */
+  void setHasImpacts(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Impacts</b></em>' containment reference list.
+   * The list contents are of type {@link xtext.objectsModel.Impact}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Impacts</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Impacts</em>' containment reference list.
+   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_Impacts()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Impact> getImpacts();
 
   /**
    * Returns the value of the '<em><b>Required Services</b></em>' reference list.

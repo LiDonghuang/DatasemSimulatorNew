@@ -1,796 +1,227 @@
-INFO  [Thread-3] 2015-09-17 23:17:11,615 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.730266912780896
-INFO  [Thread-3] 2015-09-17 23:17:11,615 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:341.0
-INFO  [Thread-3] 2015-09-17 23:17:11,615 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16238095238095263
-INFO  [Thread-3] 2015-09-17 23:17:11,616 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.6921695339747135
-INFO  [Thread-3] 2015-09-17 23:17:11,616 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.6993625842828728
-INFO  [Thread-3] 2015-09-17 23:17:11,616 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9635951286234855
-INFO  [Thread-3] 2015-09-17 23:17:11,616 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:11,616 repast.simphony.batch.ssh.LocalSession - REPLICATION #65
-INFO  [Thread-3] 2015-09-17 23:17:11,616 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:11,673 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:11,674 repast.simphony.batch.ssh.LocalSession - EndTime:454
-INFO  [Thread-3] 2015-09-17 23:17:11,674 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:11,674 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2563.0
-INFO  [Thread-3] 2015-09-17 23:17:11,674 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.22047619047619
-INFO  [Thread-3] 2015-09-17 23:17:11,674 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8465320396667082
-INFO  [Thread-3] 2015-09-17 23:17:11,674 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:344.0
-INFO  [Thread-3] 2015-09-17 23:17:11,675 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16380952380952365
-INFO  [Thread-3] 2015-09-17 23:17:11,675 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7407197881642894
-INFO  [Thread-3] 2015-09-17 23:17:11,675 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7420566438129013
-INFO  [Thread-3] 2015-09-17 23:17:11,675 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.0537419114572308
-INFO  [Thread-3] 2015-09-17 23:17:11,677 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:11,677 repast.simphony.batch.ssh.LocalSession - REPLICATION #68
-INFO  [Thread-3] 2015-09-17 23:17:11,677 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:12,032 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - EndTime:490
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2572.0
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2247619047619045
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8518127015278543
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:354.0
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16857142857142857
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7357752890535022
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7194435880724528
-INFO  [Thread-3] 2015-09-17 23:17:12,033 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9589429960708732
-INFO  [Thread-3] 2015-09-17 23:17:12,036 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:12,036 repast.simphony.batch.ssh.LocalSession - REPLICATION #67
-INFO  [Thread-3] 2015-09-17 23:17:12,036 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:12,155 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:12,155 repast.simphony.batch.ssh.LocalSession - EndTime:455
-INFO  [Thread-3] 2015-09-17 23:17:12,155 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:12,155 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2642.0
-INFO  [Thread-3] 2015-09-17 23:17:12,156 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2580952380952388
-INFO  [Thread-3] 2015-09-17 23:17:12,156 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8801782401787186
-INFO  [Thread-3] 2015-09-17 23:17:12,156 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:364.0
-INFO  [Thread-3] 2015-09-17 23:17:12,156 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17333333333333337
-INFO  [Thread-3] 2015-09-17 23:17:12,156 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.787257579062696
-INFO  [Thread-3] 2015-09-17 23:17:12,156 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7475609130134215
-INFO  [Thread-3] 2015-09-17 23:17:12,156 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.0200873306967437
-INFO  [Thread-3] 2015-09-17 23:17:12,158 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:12,158 repast.simphony.batch.ssh.LocalSession - REPLICATION #70
-INFO  [Thread-3] 2015-09-17 23:17:12,159 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:12,542 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:12,542 repast.simphony.batch.ssh.LocalSession - EndTime:532
-INFO  [Thread-3] 2015-09-17 23:17:12,542 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:12,543 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2596.0
-INFO  [Thread-3] 2015-09-17 23:17:12,543 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.236190476190476
-INFO  [Thread-3] 2015-09-17 23:17:12,543 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.82889432878048
-INFO  [Thread-3] 2015-09-17 23:17:12,543 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:351.0
-INFO  [Thread-3] 2015-09-17 23:17:12,543 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16714285714285712
-INFO  [Thread-3] 2015-09-17 23:17:12,543 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7422243769875712
-INFO  [Thread-3] 2015-09-17 23:17:12,543 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.736394149789603
-INFO  [Thread-3] 2015-09-17 23:17:12,543 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.0070181239093965
-INFO  [Thread-3] 2015-09-17 23:17:12,546 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:12,546 repast.simphony.batch.ssh.LocalSession - REPLICATION #69
-INFO  [Thread-3] 2015-09-17 23:17:12,546 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:12,644 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:12,644 repast.simphony.batch.ssh.LocalSession - EndTime:445
-INFO  [Thread-3] 2015-09-17 23:17:12,644 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:12,645 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2499.0
-INFO  [Thread-3] 2015-09-17 23:17:12,645 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.1900000000000004
-INFO  [Thread-3] 2015-09-17 23:17:12,645 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8171788887899312
-INFO  [Thread-3] 2015-09-17 23:17:12,645 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:338.0
-INFO  [Thread-3] 2015-09-17 23:17:12,645 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16095238095238112
-INFO  [Thread-3] 2015-09-17 23:17:12,645 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7118402749597859
-INFO  [Thread-3] 2015-09-17 23:17:12,645 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7052199053558468
-INFO  [Thread-3] 2015-09-17 23:17:12,645 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9636029138730836
-INFO  [Thread-3] 2015-09-17 23:17:12,647 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:12,648 repast.simphony.batch.ssh.LocalSession - REPLICATION #72
-INFO  [Thread-3] 2015-09-17 23:17:12,648 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:13,054 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:13,055 repast.simphony.batch.ssh.LocalSession - EndTime:460
-INFO  [Thread-3] 2015-09-17 23:17:13,055 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:13,055 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2477.0
-INFO  [Thread-3] 2015-09-17 23:17:13,055 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.1795238095238099
-INFO  [Thread-3] 2015-09-17 23:17:13,055 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8008678660289088
-INFO  [Thread-3] 2015-09-17 23:17:13,056 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:289.0
-INFO  [Thread-3] 2015-09-17 23:17:13,056 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.13761904761904775
-INFO  [Thread-3] 2015-09-17 23:17:13,056 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.6472090170768987
-INFO  [Thread-3] 2015-09-17 23:17:13,056 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.714661452725952
-INFO  [Thread-3] 2015-09-17 23:17:13,056 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.018647666158146
-INFO  [Thread-3] 2015-09-17 23:17:13,060 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:13,060 repast.simphony.batch.ssh.LocalSession - REPLICATION #71
-INFO  [Thread-3] 2015-09-17 23:17:13,060 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:13,120 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:13,120 repast.simphony.batch.ssh.LocalSession - EndTime:445
-INFO  [Thread-3] 2015-09-17 23:17:13,120 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:13,120 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2499.0
-INFO  [Thread-3] 2015-09-17 23:17:13,121 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.1899999999999997
-INFO  [Thread-3] 2015-09-17 23:17:13,121 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7859744178594168
-INFO  [Thread-3] 2015-09-17 23:17:13,121 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:333.0
-INFO  [Thread-3] 2015-09-17 23:17:13,121 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.15857142857142853
-INFO  [Thread-3] 2015-09-17 23:17:13,121 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.714044674500369
-INFO  [Thread-3] 2015-09-17 23:17:13,121 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7106365825114305
-INFO  [Thread-3] 2015-09-17 23:17:13,121 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9833650868032535
-INFO  [Thread-3] 2015-09-17 23:17:13,123 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:13,123 repast.simphony.batch.ssh.LocalSession - REPLICATION #74
-INFO  [Thread-3] 2015-09-17 23:17:13,123 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:13,555 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:13,555 repast.simphony.batch.ssh.LocalSession - EndTime:462
-INFO  [Thread-3] 2015-09-17 23:17:13,555 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:13,555 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2575.0
-INFO  [Thread-3] 2015-09-17 23:17:13,555 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.226190476190477
-INFO  [Thread-3] 2015-09-17 23:17:13,555 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7586049957606997
-INFO  [Thread-3] 2015-09-17 23:17:13,555 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:312.0
-INFO  [Thread-3] 2015-09-17 23:17:13,556 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.14857142857142827
-INFO  [Thread-3] 2015-09-17 23:17:13,556 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.6747489834768783
-INFO  [Thread-3] 2015-09-17 23:17:13,556 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7442143969456576
-INFO  [Thread-3] 2015-09-17 23:17:13,556 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.0134079207031772
-INFO  [Thread-3] 2015-09-17 23:17:13,558 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:13,558 repast.simphony.batch.ssh.LocalSession - REPLICATION #73
-INFO  [Thread-3] 2015-09-17 23:17:13,558 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:13,596 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:13,596 repast.simphony.batch.ssh.LocalSession - EndTime:441
-INFO  [Thread-3] 2015-09-17 23:17:13,596 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:13,597 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2535.0
-INFO  [Thread-3] 2015-09-17 23:17:13,597 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.207142857142858
-INFO  [Thread-3] 2015-09-17 23:17:13,597 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7883340206423208
-INFO  [Thread-3] 2015-09-17 23:17:13,597 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:346.0
-INFO  [Thread-3] 2015-09-17 23:17:13,597 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.1647619047619051
-INFO  [Thread-3] 2015-09-17 23:17:13,597 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7327473740157123
-INFO  [Thread-3] 2015-09-17 23:17:13,597 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7210056219027565
-INFO  [Thread-3] 2015-09-17 23:17:13,597 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9892074319523059
-INFO  [Thread-3] 2015-09-17 23:17:13,600 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:13,600 repast.simphony.batch.ssh.LocalSession - REPLICATION #76
-INFO  [Thread-3] 2015-09-17 23:17:13,600 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:14,053 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:14,053 repast.simphony.batch.ssh.LocalSession - EndTime:472
-INFO  [Thread-3] 2015-09-17 23:17:14,053 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:14,053 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2586.0
-INFO  [Thread-3] 2015-09-17 23:17:14,053 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2314285714285709
-INFO  [Thread-3] 2015-09-17 23:17:14,053 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8172228960618266
-INFO  [Thread-3] 2015-09-17 23:17:14,054 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:366.0
-INFO  [Thread-3] 2015-09-17 23:17:14,054 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.1742857142857142
-INFO  [Thread-3] 2015-09-17 23:17:14,054 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7699116190689825
-INFO  [Thread-3] 2015-09-17 23:17:14,054 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7378666192554661
-INFO  [Thread-3] 2015-09-17 23:17:14,054 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9883255570570225
-INFO  [Thread-3] 2015-09-17 23:17:14,056 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:14,057 repast.simphony.batch.ssh.LocalSession - REPLICATION #75
-INFO  [Thread-3] 2015-09-17 23:17:14,057 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:14,073 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:14,073 repast.simphony.batch.ssh.LocalSession - EndTime:461
-INFO  [Thread-3] 2015-09-17 23:17:14,073 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:14,073 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2415.0
-INFO  [Thread-3] 2015-09-17 23:17:14,073 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.1500000000000006
-INFO  [Thread-3] 2015-09-17 23:17:14,074 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7892471688276506
-INFO  [Thread-3] 2015-09-17 23:17:14,074 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:361.0
-INFO  [Thread-3] 2015-09-17 23:17:14,074 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17190476190476198
-INFO  [Thread-3] 2015-09-17 23:17:14,074 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7595485171820673
-INFO  [Thread-3] 2015-09-17 23:17:14,074 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.68270011254389
-INFO  [Thread-3] 2015-09-17 23:17:14,074 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9349286275470805
-INFO  [Thread-3] 2015-09-17 23:17:14,076 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:14,076 repast.simphony.batch.ssh.LocalSession - REPLICATION #78
-INFO  [Thread-3] 2015-09-17 23:17:14,076 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:14,538 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - EndTime:472
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2573.0
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.225238095238095
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.873877288893691
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:369.0
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17571428571428604
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7966585255744105
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7240323042554047
-INFO  [Thread-3] 2015-09-17 23:17:14,539 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9944280237667185
-INFO  [Thread-3] 2015-09-17 23:17:14,542 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:14,542 repast.simphony.batch.ssh.LocalSession - REPLICATION #77
-INFO  [Thread-3] 2015-09-17 23:17:14,542 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:14,553 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:14,554 repast.simphony.batch.ssh.LocalSession - EndTime:472
-INFO  [Thread-3] 2015-09-17 23:17:14,554 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:14,554 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2595.0
-INFO  [Thread-3] 2015-09-17 23:17:14,554 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2357142857142847
-INFO  [Thread-3] 2015-09-17 23:17:14,554 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8254358441847944
-INFO  [Thread-3] 2015-09-17 23:17:14,554 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:356.0
-INFO  [Thread-3] 2015-09-17 23:17:14,554 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16952380952380944
-INFO  [Thread-3] 2015-09-17 23:17:14,555 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.780188688471336
-INFO  [Thread-3] 2015-09-17 23:17:14,555 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7453938260261666
-INFO  [Thread-3] 2015-09-17 23:17:14,555 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.0416289099074103
-INFO  [Thread-3] 2015-09-17 23:17:14,558 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:14,558 repast.simphony.batch.ssh.LocalSession - REPLICATION #80
-INFO  [Thread-3] 2015-09-17 23:17:14,558 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,018 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:15,019 repast.simphony.batch.ssh.LocalSession - EndTime:471
-INFO  [Thread-3] 2015-09-17 23:17:15,019 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:15,019 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2612.0
-INFO  [Thread-3] 2015-09-17 23:17:15,019 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2438095238095235
-INFO  [Thread-3] 2015-09-17 23:17:15,019 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8470802221932419
-INFO  [Thread-3] 2015-09-17 23:17:15,019 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:330.0
-INFO  [Thread-3] 2015-09-17 23:17:15,019 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.1571428571428573
-INFO  [Thread-3] 2015-09-17 23:17:15,019 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.721329187429615
-INFO  [Thread-3] 2015-09-17 23:17:15,020 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7419248468033461
-INFO  [Thread-3] 2015-09-17 23:17:15,020 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.001225333673148
-INFO  [Thread-3] 2015-09-17 23:17:15,022 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,022 repast.simphony.batch.ssh.LocalSession - REPLICATION #79
-INFO  [Thread-3] 2015-09-17 23:17:15,022 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,033 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:15,033 repast.simphony.batch.ssh.LocalSession - EndTime:502
-INFO  [Thread-3] 2015-09-17 23:17:15,033 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:15,033 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2599.0
-INFO  [Thread-3] 2015-09-17 23:17:15,033 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2376190476190467
-INFO  [Thread-3] 2015-09-17 23:17:15,033 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.9176008433447456
-INFO  [Thread-3] 2015-09-17 23:17:15,033 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:363.0
-INFO  [Thread-3] 2015-09-17 23:17:15,033 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17285714285714257
-INFO  [Thread-3] 2015-09-17 23:17:15,034 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7972836378670646
-INFO  [Thread-3] 2015-09-17 23:17:15,034 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7261848105686832
-INFO  [Thread-3] 2015-09-17 23:17:15,034 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9793860910606944
-INFO  [Thread-3] 2015-09-17 23:17:15,036 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,036 repast.simphony.batch.ssh.LocalSession - REPLICATION #82
-INFO  [Thread-3] 2015-09-17 23:17:15,036 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,502 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:15,502 repast.simphony.batch.ssh.LocalSession - EndTime:464
-INFO  [Thread-3] 2015-09-17 23:17:15,503 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:15,503 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2654.0
-INFO  [Thread-3] 2015-09-17 23:17:15,503 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2638095238095224
-INFO  [Thread-3] 2015-09-17 23:17:15,503 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.831627481235965
-INFO  [Thread-3] 2015-09-17 23:17:15,503 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:365.0
-INFO  [Thread-3] 2015-09-17 23:17:15,503 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17380952380952364
-INFO  [Thread-3] 2015-09-17 23:17:15,504 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7603688593018844
-INFO  [Thread-3] 2015-09-17 23:17:15,504 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7343959784294065
-INFO  [Thread-3] 2015-09-17 23:17:15,504 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9612739167707848
-INFO  [Thread-3] 2015-09-17 23:17:15,506 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,506 repast.simphony.batch.ssh.LocalSession - REPLICATION #84
-INFO  [Thread-3] 2015-09-17 23:17:15,506 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,507 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:15,507 repast.simphony.batch.ssh.LocalSession - EndTime:460
-INFO  [Thread-3] 2015-09-17 23:17:15,508 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:15,508 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2457.0
-INFO  [Thread-3] 2015-09-17 23:17:15,508 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.1699999999999993
-INFO  [Thread-3] 2015-09-17 23:17:15,508 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.694413936971933
-INFO  [Thread-3] 2015-09-17 23:17:15,508 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:330.0
-INFO  [Thread-3] 2015-09-17 23:17:15,508 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.1571428571428571
-INFO  [Thread-3] 2015-09-17 23:17:15,508 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.6742182165280604
-INFO  [Thread-3] 2015-09-17 23:17:15,508 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.6984173245188
-INFO  [Thread-3] 2015-09-17 23:17:15,508 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9553375671776133
-INFO  [Thread-3] 2015-09-17 23:17:15,511 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,511 repast.simphony.batch.ssh.LocalSession - REPLICATION #81
-INFO  [Thread-3] 2015-09-17 23:17:15,511 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,977 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:15,978 repast.simphony.batch.ssh.LocalSession - EndTime:456
-INFO  [Thread-3] 2015-09-17 23:17:15,978 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:15,978 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2561.0
-INFO  [Thread-3] 2015-09-17 23:17:15,978 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2195238095238097
-INFO  [Thread-3] 2015-09-17 23:17:15,978 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8535982189304825
-INFO  [Thread-3] 2015-09-17 23:17:15,978 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:368.0
-INFO  [Thread-3] 2015-09-17 23:17:15,978 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.1752380952380951
-INFO  [Thread-3] 2015-09-17 23:17:15,978 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.8095171102942678
-INFO  [Thread-3] 2015-09-17 23:17:15,979 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7146450671909015
-INFO  [Thread-3] 2015-09-17 23:17:15,979 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9656271548751384
-INFO  [Thread-3] 2015-09-17 23:17:15,982 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:15,982 repast.simphony.batch.ssh.LocalSession - REPLICATION #86
-INFO  [Thread-3] 2015-09-17 23:17:15,982 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:16,002 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - EndTime:472
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2495.0
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.188095238095238
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7484359553942967
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:344.0
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16380952380952393
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7490344821565418
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7139666145596761
-INFO  [Thread-3] 2015-09-17 23:17:16,003 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9515947182753777
-INFO  [Thread-3] 2015-09-17 23:17:16,006 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:16,006 repast.simphony.batch.ssh.LocalSession - REPLICATION #83
-INFO  [Thread-3] 2015-09-17 23:17:16,006 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:16,512 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:16,512 repast.simphony.batch.ssh.LocalSession - EndTime:485
-INFO  [Thread-3] 2015-09-17 23:17:16,512 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:16,512 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2696.0
-INFO  [Thread-3] 2015-09-17 23:17:16,512 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.283809523809524
-INFO  [Thread-3] 2015-09-17 23:17:16,512 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8759592780409118
-INFO  [Thread-3] 2015-09-17 23:17:16,512 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:365.0
-INFO  [Thread-3] 2015-09-17 23:17:16,512 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17380952380952375
-INFO  [Thread-3] 2015-09-17 23:17:16,513 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7647422081841213
-INFO  [Thread-3] 2015-09-17 23:17:16,513 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.773733433997229
-INFO  [Thread-3] 2015-09-17 23:17:16,513 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.015798135266027
-INFO  [Thread-3] 2015-09-17 23:17:16,517 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:16,517 repast.simphony.batch.ssh.LocalSession - REPLICATION #88
-INFO  [Thread-3] 2015-09-17 23:17:16,517 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:16,528 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:16,528 repast.simphony.batch.ssh.LocalSession - EndTime:449
-INFO  [Thread-3] 2015-09-17 23:17:16,528 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:16,529 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2446.0
-INFO  [Thread-3] 2015-09-17 23:17:16,529 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.164761904761905
-INFO  [Thread-3] 2015-09-17 23:17:16,529 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.6891595037010234
-INFO  [Thread-3] 2015-09-17 23:17:16,529 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:323.0
-INFO  [Thread-3] 2015-09-17 23:17:16,529 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.1538095238095236
-INFO  [Thread-3] 2015-09-17 23:17:16,529 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.6823576550596788
-INFO  [Thread-3] 2015-09-17 23:17:16,529 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.6925758579658112
-INFO  [Thread-3] 2015-09-17 23:17:16,529 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9676427666827468
-INFO  [Thread-3] 2015-09-17 23:17:16,532 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:16,533 repast.simphony.batch.ssh.LocalSession - REPLICATION #85
-INFO  [Thread-3] 2015-09-17 23:17:16,533 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,011 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - EndTime:461
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2624.0
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2495238095238108
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8250349346065435
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:342.0
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16285714285714278
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7040016488970469
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7437030451022235
-INFO  [Thread-3] 2015-09-17 23:17:17,012 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9855555998250491
-INFO  [Thread-3] 2015-09-17 23:17:17,015 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,015 repast.simphony.batch.ssh.LocalSession - REPLICATION #90
-INFO  [Thread-3] 2015-09-17 23:17:17,015 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,016 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:17,016 repast.simphony.batch.ssh.LocalSession - EndTime:438
-INFO  [Thread-3] 2015-09-17 23:17:17,016 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:17,017 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2492.0
-INFO  [Thread-3] 2015-09-17 23:17:17,017 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.1866666666666663
-INFO  [Thread-3] 2015-09-17 23:17:17,017 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7220962146173755
-INFO  [Thread-3] 2015-09-17 23:17:17,017 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:321.0
-INFO  [Thread-3] 2015-09-17 23:17:17,017 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.1528571428571429
-INFO  [Thread-3] 2015-09-17 23:17:17,017 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.6677534303228017
-INFO  [Thread-3] 2015-09-17 23:17:17,017 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7010730728128474
-INFO  [Thread-3] 2015-09-17 23:17:17,017 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9350110416852632
-INFO  [Thread-3] 2015-09-17 23:17:17,020 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,020 repast.simphony.batch.ssh.LocalSession - REPLICATION #87
-INFO  [Thread-3] 2015-09-17 23:17:17,020 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - EndTime:474
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2474.0
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.1780952380952379
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.6934411463431291
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:311.0
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.14809523809523828
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.6602230053871992
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7126846952149803
-INFO  [Thread-3] 2015-09-17 23:17:17,478 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9480876357106567
-INFO  [Thread-3] 2015-09-17 23:17:17,482 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,483 repast.simphony.batch.ssh.LocalSession - REPLICATION #92
-INFO  [Thread-3] 2015-09-17 23:17:17,483 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,567 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:17,567 repast.simphony.batch.ssh.LocalSession - EndTime:495
-INFO  [Thread-3] 2015-09-17 23:17:17,568 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:17,568 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2605.0
-INFO  [Thread-3] 2015-09-17 23:17:17,568 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2404761904761916
-INFO  [Thread-3] 2015-09-17 23:17:17,568 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8722363496451353
-INFO  [Thread-3] 2015-09-17 23:17:17,568 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:393.0
-INFO  [Thread-3] 2015-09-17 23:17:17,568 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.18714285714285708
-INFO  [Thread-3] 2015-09-17 23:17:17,568 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.8200247666877809
-INFO  [Thread-3] 2015-09-17 23:17:17,568 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7251085230372658
-INFO  [Thread-3] 2015-09-17 23:17:17,568 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9972552876809059
-INFO  [Thread-3] 2015-09-17 23:17:17,571 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,571 repast.simphony.batch.ssh.LocalSession - REPLICATION #89
-INFO  [Thread-3] 2015-09-17 23:17:17,571 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,992 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:17,993 repast.simphony.batch.ssh.LocalSession - EndTime:475
-INFO  [Thread-3] 2015-09-17 23:17:17,993 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:17,993 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2547.0
-INFO  [Thread-3] 2015-09-17 23:17:17,993 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2128571428571406
-INFO  [Thread-3] 2015-09-17 23:17:17,993 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8204089998403723
-INFO  [Thread-3] 2015-09-17 23:17:17,993 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:345.0
-INFO  [Thread-3] 2015-09-17 23:17:17,993 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16428571428571404
-INFO  [Thread-3] 2015-09-17 23:17:17,993 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7180784760367104
-INFO  [Thread-3] 2015-09-17 23:17:17,993 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7189970972803919
-INFO  [Thread-3] 2015-09-17 23:17:17,994 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9732598180368754
-INFO  [Thread-3] 2015-09-17 23:17:17,996 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:17,996 repast.simphony.batch.ssh.LocalSession - REPLICATION #94
-INFO  [Thread-3] 2015-09-17 23:17:17,996 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:18,117 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - EndTime:482
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2616.0
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.245714285714286
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7685532436950542
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:360.0
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17142857142857149
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7599696949543638
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7398010865824152
-INFO  [Thread-3] 2015-09-17 23:17:18,118 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9562548233104825
-INFO  [Thread-3] 2015-09-17 23:17:18,120 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:18,121 repast.simphony.batch.ssh.LocalSession - REPLICATION #91
-INFO  [Thread-3] 2015-09-17 23:17:18,121 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:18,463 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:18,464 repast.simphony.batch.ssh.LocalSession - EndTime:475
-INFO  [Thread-3] 2015-09-17 23:17:18,464 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:18,464 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2567.0
-INFO  [Thread-3] 2015-09-17 23:17:18,464 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2223809523809517
-INFO  [Thread-3] 2015-09-17 23:17:18,464 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8622331713784392
-INFO  [Thread-3] 2015-09-17 23:17:18,464 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:367.0
-INFO  [Thread-3] 2015-09-17 23:17:18,464 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17476190476190484
-INFO  [Thread-3] 2015-09-17 23:17:18,464 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7756607108323258
-INFO  [Thread-3] 2015-09-17 23:17:18,465 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7324438463647844
-INFO  [Thread-3] 2015-09-17 23:17:18,465 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.0334731646585615
-INFO  [Thread-3] 2015-09-17 23:17:18,467 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:18,467 repast.simphony.batch.ssh.LocalSession - REPLICATION #96
-INFO  [Thread-3] 2015-09-17 23:17:18,467 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:18,592 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:18,592 repast.simphony.batch.ssh.LocalSession - EndTime:454
-INFO  [Thread-3] 2015-09-17 23:17:18,592 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:18,593 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2511.0
-INFO  [Thread-3] 2015-09-17 23:17:18,593 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.1957142857142857
-INFO  [Thread-3] 2015-09-17 23:17:18,593 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.757927857412886
-INFO  [Thread-3] 2015-09-17 23:17:18,593 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:342.0
-INFO  [Thread-3] 2015-09-17 23:17:18,593 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16285714285714278
-INFO  [Thread-3] 2015-09-17 23:17:18,593 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.6972015309922458
-INFO  [Thread-3] 2015-09-17 23:17:18,593 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7125586513219158
-INFO  [Thread-3] 2015-09-17 23:17:18,593 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.001425716111389
-INFO  [Thread-3] 2015-09-17 23:17:18,595 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:18,596 repast.simphony.batch.ssh.LocalSession - REPLICATION #93
-INFO  [Thread-3] 2015-09-17 23:17:18,596 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:18,937 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:18,937 repast.simphony.batch.ssh.LocalSession - EndTime:475
-INFO  [Thread-3] 2015-09-17 23:17:18,938 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:18,938 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2696.0
-INFO  [Thread-3] 2015-09-17 23:17:18,938 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.283809523809524
-INFO  [Thread-3] 2015-09-17 23:17:18,938 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.8883622831288824
-INFO  [Thread-3] 2015-09-17 23:17:18,938 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:363.0
-INFO  [Thread-3] 2015-09-17 23:17:18,938 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17285714285714268
-INFO  [Thread-3] 2015-09-17 23:17:18,938 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7668242726018848
-INFO  [Thread-3] 2015-09-17 23:17:18,938 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7690663963669846
-INFO  [Thread-3] 2015-09-17 23:17:18,938 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.0528163151630543
-INFO  [Thread-3] 2015-09-17 23:17:18,940 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:18,940 repast.simphony.batch.ssh.LocalSession - REPLICATION #98
-INFO  [Thread-3] 2015-09-17 23:17:18,941 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:19,080 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:19,080 repast.simphony.batch.ssh.LocalSession - EndTime:465
-INFO  [Thread-3] 2015-09-17 23:17:19,080 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:19,080 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2581.0
-INFO  [Thread-3] 2015-09-17 23:17:19,080 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2290476190476185
-INFO  [Thread-3] 2015-09-17 23:17:19,080 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.830193549960843
-INFO  [Thread-3] 2015-09-17 23:17:19,081 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:347.0
-INFO  [Thread-3] 2015-09-17 23:17:19,081 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.1652380952380953
-INFO  [Thread-3] 2015-09-17 23:17:19,081 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7432921825747169
-INFO  [Thread-3] 2015-09-17 23:17:19,081 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7345494927771952
-INFO  [Thread-3] 2015-09-17 23:17:19,081 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9803766837017951
-INFO  [Thread-3] 2015-09-17 23:17:19,083 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:19,083 repast.simphony.batch.ssh.LocalSession - REPLICATION #95
-INFO  [Thread-3] 2015-09-17 23:17:19,083 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:19,412 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:19,412 repast.simphony.batch.ssh.LocalSession - EndTime:480
-INFO  [Thread-3] 2015-09-17 23:17:19,413 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:19,413 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2656.0
-INFO  [Thread-3] 2015-09-17 23:17:19,413 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.264761904761905
-INFO  [Thread-3] 2015-09-17 23:17:19,413 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.9091804962338756
-INFO  [Thread-3] 2015-09-17 23:17:19,413 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:366.0
-INFO  [Thread-3] 2015-09-17 23:17:19,413 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.17428571428571427
-INFO  [Thread-3] 2015-09-17 23:17:19,413 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.8079557452100439
-INFO  [Thread-3] 2015-09-17 23:17:19,413 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.734510956657975
-INFO  [Thread-3] 2015-09-17 23:17:19,413 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.0101485320478012
-INFO  [Thread-3] 2015-09-17 23:17:19,415 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:19,415 repast.simphony.batch.ssh.LocalSession - REPLICATION #100
-INFO  [Thread-3] 2015-09-17 23:17:19,416 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:19,570 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - EndTime:483
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2586.0
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2314285714285715
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7979827924924698
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:351.0
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.1671428571428577
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7114167524630073
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7404980299755466
-INFO  [Thread-3] 2015-09-17 23:17:19,571 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:1.0042357086460572
-INFO  [Thread-3] 2015-09-17 23:17:19,574 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:19,574 repast.simphony.batch.ssh.LocalSession - REPLICATION #97
-INFO  [Thread-3] 2015-09-17 23:17:19,574 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:19,910 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:19,911 repast.simphony.batch.ssh.LocalSession - EndTime:452
-INFO  [Thread-3] 2015-09-17 23:17:19,911 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:19,911 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2532.0
-INFO  [Thread-3] 2015-09-17 23:17:19,911 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2057142857142853
-INFO  [Thread-3] 2015-09-17 23:17:19,911 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7771418548497429
-INFO  [Thread-3] 2015-09-17 23:17:19,911 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:346.0
-INFO  [Thread-3] 2015-09-17 23:17:19,911 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16476190476190467
-INFO  [Thread-3] 2015-09-17 23:17:19,911 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.719626306122329
-INFO  [Thread-3] 2015-09-17 23:17:19,911 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7206921855558275
-INFO  [Thread-3] 2015-09-17 23:17:19,912 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9619297125915499
-INFO  [Thread-3] 2015-09-17 23:17:20,060 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - EndTime:493
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2557.0
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2176190476190476
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.763202845947961
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:346.0
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.16476190476190467
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.7288358567111147
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7385187378272406
-INFO  [Thread-3] 2015-09-17 23:17:20,061 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9992077310938365
-INFO  [Thread-3] 2015-09-17 23:17:20,064 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:20,064 repast.simphony.batch.ssh.LocalSession - REPLICATION #99
-INFO  [Thread-3] 2015-09-17 23:17:20,064 repast.simphony.batch.ssh.LocalSession - 
-INFO  [Thread-3] 2015-09-17 23:17:20,542 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED
-INFO  [Thread-3] 2015-09-17 23:17:20,542 repast.simphony.batch.ssh.LocalSession - EndTime:463
-INFO  [Thread-3] 2015-09-17 23:17:20,542 repast.simphony.batch.ssh.LocalSession - CountTasks:2100
-INFO  [Thread-3] 2015-09-17 23:17:20,542 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_total:2572.0
-INFO  [Thread-3] 2015-09-17 23:17:20,543 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_mean:1.2247619047619043
-INFO  [Thread-3] 2015-09-17 23:17:20,543 repast.simphony.batch.ssh.LocalSession - TaskReworkCount_stdev:1.7879369728386363
-INFO  [Thread-3] 2015-09-17 23:17:20,543 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_total:331.0
-INFO  [Thread-3] 2015-09-17 23:17:20,543 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_mean:0.15761904761904755
-INFO  [Thread-3] 2015-09-17 23:17:20,543 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount_stdev:0.6987459314524531
-INFO  [Thread-3] 2015-09-17 23:17:20,543 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_mean:1.7327873128923044
-INFO  [Thread-3] 2015-09-17 23:17:20,543 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio_stdev:0.9861961609456883
-INFO  [pool-2-thread-1] 2015-09-17 23:17:28,592 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443 for DONE:  yes
-INFO  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,594 repast.simphony.batch.ssh.SessionsDriver - Run Time: 1.0125
-INFO  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,811 repast.simphony.batch.ssh.LocalSession - Finding output on localhost in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443
-WARN  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,857 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SOS_data*.batch_param_map.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443\instance_1
-WARN  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,858 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SP_data*.batch_param_map.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443\instance_1
-WARN  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,858 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SOS_data*.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443\instance_1
-WARN  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,858 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SP_data*.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443\instance_1
-WARN  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,859 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SOS_data*.batch_param_map.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443\instance_2
-WARN  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,859 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SP_data*.batch_param_map.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443\instance_2
-WARN  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,859 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SOS_data*.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443\instance_2
-WARN  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,859 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\Donbghuang Li\\Desktop\\DatasemFiles\\SimulationOutput\\SP_data*.txt in C:\Users\DONBGH~1\AppData\Local\Temp\simphony_model_1442549784443\instance_2
-INFO  [SwingWorker-pool-1-thread-1] 2015-09-17 23:17:28,859 repast.simphony.batch.ssh.SessionsDriver - Aggregating output into C:/Users/Donbghuang Li/git/DatasemSimulatorNew/output
-ERROR [AWT-EventQueue-0] 2015-09-18 13:15:40,810 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.ClassCastException: java.lang.Double cannot be cast to java.lang.Integer
-	at datasemSimulator.SimulationContextBuilder.BuildSoS(SimulationContextBuilder.java:315)
-	at datasemSimulator.SimulationContextBuilder.ContextImplementation(SimulationContextBuilder.java:51)
-	at datasemSimulator.DatasemSimulatorModel.build(DatasemSimulatorModel.java:17)
-	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
-	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-18 13:18:54,519 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.ClassCastException: java.lang.Double cannot be cast to java.lang.Integer
-	at datasemSimulator.SimulationContextBuilder.BuildSoS(SimulationContextBuilder.java:315)
-	at datasemSimulator.SimulationContextBuilder.ContextImplementation(SimulationContextBuilder.java:51)
-	at datasemSimulator.DatasemSimulatorModel.build(DatasemSimulatorModel.java:17)
-	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
-	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-18 13:21:53,303 repast.simphony.ui.RSApplication - Error while initializing simulation
-repast.simphony.parameter.IllegalParameterException: Parameter 'TaskChangePropagationUncertaintyRisk' not found in the schema.
-	at repast.simphony.parameter.DefaultParameters.getValue(DefaultParameters.java:213)
-	at datasemSimulator.SimulationContextBuilder.BuildSoS(SimulationContextBuilder.java:318)
-	at datasemSimulator.SimulationContextBuilder.ContextImplementation(SimulationContextBuilder.java:51)
-	at datasemSimulator.DatasemSimulatorModel.build(DatasemSimulatorModel.java:17)
-	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
-	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-18 13:23:00,931 repast.simphony.ui.RSApplication - Error while initializing simulation
-repast.simphony.parameter.IllegalParameterException: Parameter 'TaskChangePropagationRisk' not found in the schema.
-	at repast.simphony.parameter.DefaultParameters.getValue(DefaultParameters.java:213)
-	at datasemSimulator.SimulationContextBuilder.BuildSoS(SimulationContextBuilder.java:318)
-	at datasemSimulator.SimulationContextBuilder.ContextImplementation(SimulationContextBuilder.java:51)
-	at datasemSimulator.DatasemSimulatorModel.build(DatasemSimulatorModel.java:17)
-	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
-	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:192)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
-ERROR [AWT-EventQueue-0] 2015-09-18 13:26:59,544 repast.simphony.ui.RSApplication - Error while initializing simulation
-repast.simphony.parameter.IllegalParameterException: Parameter 'TaskChangePropagationUncertainty' not found in the schema.
-	at repast.simphony.parameter.DefaultParameters.getValue(DefaultParameters.java:213)
-	at datasemSimulator.SimulationContextBuilder.BuildSoS(SimulationContextBuilder.java:317)
-	at datasemSimulator.SimulationContextBuilder.ContextImplementation(SimulationContextBuilder.java:51)
-	at datasemSimulator.DatasemSimulatorModel.build(DatasemSimulatorModel.java:17)
-	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
-	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:287)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:290)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:283)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:160)
-	at repast.simphony.ui.action.InitRun.actionPerformed(InitRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
-	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
-	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
-	at java.awt.AWTEventMulticaster.mouseReleased(Unknown Source)
-	at java.awt.Component.processMouseEvent(Unknown Source)
-	at javax.swing.JComponent.processMouseEvent(Unknown Source)
-	at java.awt.Component.processEvent(Unknown Source)
-	at java.awt.Container.processEvent(Unknown Source)
-	at java.awt.Component.dispatchEventImpl(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
-	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
-	at java.awt.Container.dispatchEventImpl(Unknown Source)
-	at java.awt.Window.dispatchEventImpl(Unknown Source)
-	at java.awt.Component.dispatchEvent(Unknown Source)
-	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
-	at java.awt.EventQueue.access$300(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.awt.EventQueue$3.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.awt.EventQueue$4.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
-	at java.awt.EventQueue.dispatchEvent(Unknown Source)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
-	at java.awt.EventDispatchThread.run(Unknown Source)
+FATAL [Thread-12] 2015-09-21 23:08:18,236 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.NullPointerException
+	at repast.simphony.data2.FileDataSink.rowEnded(FileDataSink.java:137)
+	at repast.simphony.data2.NonAggregateDataSet.record(NonAggregateDataSet.java:85)
+	at repast.simphony.data2.AbstractDataSetManager$ScheduledDataSet.execute(AbstractDataSetManager.java:119)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:238)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+FATAL [Thread-6] 2015-09-22 20:03:29,084 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (56.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.SystemOfSystems$$FastClassByCGLIB$$50004f63.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.NullPointerException
+	at datasemSimulator.SystemOfSystems.AgentsStatistics(SystemOfSystems.java:126)
+	at datasemSimulator.SystemOfSystems.step(SystemOfSystems.java:44)
+	... 10 more
+FATAL [Thread-6] 2015-09-22 20:22:37,047 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.NullPointerException
+	at datasemSimulator.ServiceProviderAgent.calculateWorkload(ServiceProviderAgent.java:361)
+	at datasemSimulator.ServiceProviderAgent.statusSummary(ServiceProviderAgent.java:337)
+	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:217)
+	... 10 more
+FATAL [Thread-6] 2015-09-22 20:26:52,225 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.UnsupportedOperationException
+	at java.util.AbstractList.add(Unknown Source)
+	at java.util.AbstractList.add(Unknown Source)
+	at datasemSimulator.ServiceProviderAgent.calculateWorkload(ServiceProviderAgent.java:362)
+	at datasemSimulator.ServiceProviderAgent.statusSummary(ServiceProviderAgent.java:338)
+	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:218)
+	... 10 more
+FATAL [Thread-6] 2015-09-22 20:29:25,212 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.UnsupportedOperationException
+	at java.util.AbstractList.add(Unknown Source)
+	at java.util.AbstractList.add(Unknown Source)
+	at datasemSimulator.ServiceProviderAgent.calculateWorkload(ServiceProviderAgent.java:362)
+	at datasemSimulator.ServiceProviderAgent.statusSummary(ServiceProviderAgent.java:338)
+	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:218)
+	... 10 more
+FATAL [Thread-6] 2015-09-22 20:31:17,707 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.UnsupportedOperationException
+	at java.util.AbstractList.add(Unknown Source)
+	at java.util.AbstractList.add(Unknown Source)
+	at datasemSimulator.ServiceProviderAgent.calculateWorkload(ServiceProviderAgent.java:363)
+	at datasemSimulator.ServiceProviderAgent.statusSummary(ServiceProviderAgent.java:338)
+	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:218)
+	... 10 more
+FATAL [Thread-6] 2015-09-22 20:45:34,097 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.NullPointerException
+	at datasemSimulator.ServiceProviderAgent.calculateWorkload(ServiceProviderAgent.java:371)
+	at datasemSimulator.ServiceProviderAgent.statusSummary(ServiceProviderAgent.java:347)
+	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:227)
+	... 10 more
+FATAL [Thread-6] 2015-09-22 20:46:01,448 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.NullPointerException
+	at datasemSimulator.ServiceProviderAgent.calculateWorkload(ServiceProviderAgent.java:371)
+	at datasemSimulator.ServiceProviderAgent.statusSummary(ServiceProviderAgent.java:347)
+	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:227)
+	... 10 more
+FATAL [Thread-6] 2015-09-22 20:47:35,383 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.NullPointerException
+	at datasemSimulator.ServiceProviderAgent.calculateWorkload(ServiceProviderAgent.java:371)
+	at datasemSimulator.ServiceProviderAgent.statusSummary(ServiceProviderAgent.java:347)
+	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:227)
+	... 10 more
+FATAL [Thread-6] 2015-09-22 20:48:19,713 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: -1
+	at datasemSimulator.ServiceProviderAgent.calculateWorkload(ServiceProviderAgent.java:372)
+	at datasemSimulator.ServiceProviderAgent.statusSummary(ServiceProviderAgent.java:347)
+	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:227)
+	... 10 more
+FATAL [Thread-6] 2015-09-22 20:48:38,207 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at datasemSimulator.ServiceProviderAgent$$FastClassByCGLIB$$6f392f7a.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+	at datasemSimulator.ServiceProviderAgent.calculateWorkload(ServiceProviderAgent.java:372)
+	at datasemSimulator.ServiceProviderAgent.statusSummary(ServiceProviderAgent.java:347)
+	at datasemSimulator.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:227)
+	... 10 more

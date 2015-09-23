@@ -1,5 +1,6 @@
 package datasemSimulator;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import bsh.This;
@@ -26,6 +27,11 @@ public class WorkItemEntity extends WorkItemImpl {
 	protected LinkedList<WorkItemEntity> successors = new LinkedList<WorkItemEntity>();
 	protected LinkedList<WorkItemEntity> subtasks = new LinkedList<WorkItemEntity>();
 	protected LinkedList<WorkItemEntity> uppertasks = new LinkedList<WorkItemEntity>();
+	
+	protected LinkedList<WorkItemEntity> impactsWIs = new LinkedList<WorkItemEntity>();
+	protected HashMap<WorkItemEntity,Double> impactsLikelihood = new HashMap<WorkItemEntity,Double>();
+	protected HashMap<WorkItemEntity,Double> impactsValue = new HashMap<WorkItemEntity,Double>();
+	
 	public int maxMaturityLevels = 1;
 	public double uncertainty = 0;
 	public double propagation_uncertainty = 0;
@@ -177,11 +183,13 @@ public class WorkItemEntity extends WorkItemImpl {
 	}
 	*/
 	public void changePropagation() {
-		for (WorkItemEntity affectedWI : this.successors) {	
-			if (Math.random()<this.propagation_uncertainty) {
+		for (WorkItemEntity affectedWI : this.impactsWIs) {	
+			double likelihood = this.impactsLikelihood.get(affectedWI);			
+			if (Math.random()<likelihood) {
+				double impact = this.impactsValue.get(affectedWI);
 				if (!affectedWI.isAggregationNode && affectedWI.isStarted && !affectedWI.isEnded) {	
-					//System.out.println("\nCHANGE PROPAGATION @TIME:"+this.SoS.timeNow+this.fullName+"propagates rework to"+affectedWI.fullName);								
-					affectedWI.rework(this.propagation_risk);	
+					System.out.println("\nCHANGE PROPAGATION @TIME:"+this.SoS.timeNow+this.fullName+"propagates rework to"+affectedWI.fullName);								
+					affectedWI.rework(impact);	
 					this.ChangePropagationToCount ++;
 					affectedWI.ChangePropagationByCount ++;
 				}	
@@ -284,8 +292,8 @@ public class WorkItemEntity extends WorkItemImpl {
 		for (int i=0;i<this.predecessors.size();i++) {
 			WorkItemEntity pTask = this.predecessors.get(i);
 			if (pTask.isCompleted) {
-				this.predecessors.remove(pTask);
-				i--;
+//				this.predecessors.remove(pTask);
+//				i--;
 			}
 			else {
 				cleared = false;

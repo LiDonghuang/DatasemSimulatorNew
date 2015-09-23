@@ -616,13 +616,31 @@ public interface ObjectsModelPackage extends EPackage
   int WORK_ITEM__STASKS = 7;
 
   /**
+   * The feature id for the '<em><b>Has Impacts</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORK_ITEM__HAS_IMPACTS = 8;
+
+  /**
+   * The feature id for the '<em><b>Impacts</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORK_ITEM__IMPACTS = 9;
+
+  /**
    * The feature id for the '<em><b>Required Services</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WORK_ITEM__REQUIRED_SERVICES = 8;
+  int WORK_ITEM__REQUIRED_SERVICES = 10;
 
   /**
    * The feature id for the '<em><b>Efforts</b></em>' attribute.
@@ -631,7 +649,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__EFFORTS = 9;
+  int WORK_ITEM__EFFORTS = 11;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -640,7 +658,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__VALUE = 10;
+  int WORK_ITEM__VALUE = 12;
 
   /**
    * The feature id for the '<em><b>Arrival Time</b></em>' attribute.
@@ -649,7 +667,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__ARRIVAL_TIME = 11;
+  int WORK_ITEM__ARRIVAL_TIME = 13;
 
   /**
    * The feature id for the '<em><b>Due Date</b></em>' attribute.
@@ -658,7 +676,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__DUE_DATE = 12;
+  int WORK_ITEM__DUE_DATE = 14;
 
   /**
    * The number of structural features of the '<em>Work Item</em>' class.
@@ -667,7 +685,53 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM_FEATURE_COUNT = 13;
+  int WORK_ITEM_FEATURE_COUNT = 15;
+
+  /**
+   * The meta object id for the '{@link xtext.objectsModel.impl.ImpactImpl <em>Impact</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xtext.objectsModel.impl.ImpactImpl
+   * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getImpact()
+   * @generated
+   */
+  int IMPACT = 10;
+
+  /**
+   * The feature id for the '<em><b>Impact WI</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPACT__IMPACT_WI = 0;
+
+  /**
+   * The feature id for the '<em><b>Likelihood</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPACT__LIKELIHOOD = 1;
+
+  /**
+   * The feature id for the '<em><b>Impact</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPACT__IMPACT = 2;
+
+  /**
+   * The number of structural features of the '<em>Impact</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPACT_FEATURE_COUNT = 3;
 
 
   /**
@@ -1233,6 +1297,28 @@ public interface ObjectsModelPackage extends EPackage
   EReference getWorkItem_STasks();
 
   /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItem#isHasImpacts <em>Has Impacts</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Has Impacts</em>'.
+   * @see xtext.objectsModel.WorkItem#isHasImpacts()
+   * @see #getWorkItem()
+   * @generated
+   */
+  EAttribute getWorkItem_HasImpacts();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link xtext.objectsModel.WorkItem#getImpacts <em>Impacts</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Impacts</em>'.
+   * @see xtext.objectsModel.WorkItem#getImpacts()
+   * @see #getWorkItem()
+   * @generated
+   */
+  EReference getWorkItem_Impacts();
+
+  /**
    * Returns the meta object for the reference list '{@link xtext.objectsModel.WorkItem#getRequiredServices <em>Required Services</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1286,6 +1372,49 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    */
   EAttribute getWorkItem_DueDate();
+
+  /**
+   * Returns the meta object for class '{@link xtext.objectsModel.Impact <em>Impact</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Impact</em>'.
+   * @see xtext.objectsModel.Impact
+   * @generated
+   */
+  EClass getImpact();
+
+  /**
+   * Returns the meta object for the reference '{@link xtext.objectsModel.Impact#getImpactWI <em>Impact WI</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Impact WI</em>'.
+   * @see xtext.objectsModel.Impact#getImpactWI()
+   * @see #getImpact()
+   * @generated
+   */
+  EReference getImpact_ImpactWI();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.Impact#getLikelihood <em>Likelihood</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Likelihood</em>'.
+   * @see xtext.objectsModel.Impact#getLikelihood()
+   * @see #getImpact()
+   * @generated
+   */
+  EAttribute getImpact_Likelihood();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.Impact#getImpact <em>Impact</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Impact</em>'.
+   * @see xtext.objectsModel.Impact#getImpact()
+   * @see #getImpact()
+   * @generated
+   */
+  EAttribute getImpact_Impact();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1747,6 +1876,22 @@ public interface ObjectsModelPackage extends EPackage
     EReference WORK_ITEM__STASKS = eINSTANCE.getWorkItem_STasks();
 
     /**
+     * The meta object literal for the '<em><b>Has Impacts</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute WORK_ITEM__HAS_IMPACTS = eINSTANCE.getWorkItem_HasImpacts();
+
+    /**
+     * The meta object literal for the '<em><b>Impacts</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WORK_ITEM__IMPACTS = eINSTANCE.getWorkItem_Impacts();
+
+    /**
      * The meta object literal for the '<em><b>Required Services</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1785,6 +1930,40 @@ public interface ObjectsModelPackage extends EPackage
      * @generated
      */
     EAttribute WORK_ITEM__DUE_DATE = eINSTANCE.getWorkItem_DueDate();
+
+    /**
+     * The meta object literal for the '{@link xtext.objectsModel.impl.ImpactImpl <em>Impact</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xtext.objectsModel.impl.ImpactImpl
+     * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getImpact()
+     * @generated
+     */
+    EClass IMPACT = eINSTANCE.getImpact();
+
+    /**
+     * The meta object literal for the '<em><b>Impact WI</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IMPACT__IMPACT_WI = eINSTANCE.getImpact_ImpactWI();
+
+    /**
+     * The meta object literal for the '<em><b>Likelihood</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IMPACT__LIKELIHOOD = eINSTANCE.getImpact_Likelihood();
+
+    /**
+     * The meta object literal for the '<em><b>Impact</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IMPACT__IMPACT = eINSTANCE.getImpact_Impact();
 
   }
 
