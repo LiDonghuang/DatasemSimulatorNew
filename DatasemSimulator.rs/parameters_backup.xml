@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <parameters>
 					<parameter name="TaskRisk" displayName="Task Risk" type="double" 
-						defaultValue="0.0" 
+						defaultValue="0.2" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
@@ -12,8 +12,14 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
+				<parameter name="TaskChangePropagationUncertainty" displayName="Task Change Propagation Uncertainty" type="double" 
+						defaultValue="1.0" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+									
+		/>
 				<parameter name="TaskChangePropagationRisk" displayName="Task Change Propagation Risk" type="double" 
-						defaultValue="0.0" 
+						defaultValue="1.0" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
@@ -25,13 +31,13 @@
 									
 		/>
 				<parameter name="TaskUncertainty" displayName="Task Uncertainty" type="double" 
-						defaultValue="0.0" 
+						defaultValue="0.2" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
 				<parameter name="TaskMaturityLevels" displayName="Task Maturity Levels" type="int" 
-						defaultValue="1" 
+						defaultValue="5" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									

@@ -11,6 +11,8 @@ import java.util.LinkedList;
 
 import repast.simphony.random.RandomHelper;
 import repast.simphony.util.SimUtilities;
+import serviceProviders.ServiceProviderAgent;
+import workItems.WorkItemEntity;
 
 public class WIAcceptanceRule {
 	private int id;

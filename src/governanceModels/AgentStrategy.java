@@ -2,11 +2,12 @@ package governanceModels;
 
 import java.util.LinkedList;
 
+import serviceProviders.ServiceProviderAgent;
+import workItems.Task;
+import workItems.WorkItemEntity;
 import xtext.objectsModel.GovernanceStrategy;
 import xtext.objectsModel.Mechanism;
 import xtext.objectsModel.impl.GovernanceStrategyImpl;
-import datasemSimulator.ServiceProviderAgent;
-import datasemSimulator.WorkItemEntity;
 
 public class AgentStrategy extends GovernanceStrategyImpl {
 	public ServiceProviderAgent myServiceProviderAgent;
@@ -44,7 +45,7 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 			System.out.println("Invalid Mechanism Name!");
 		}		
 	}
-	public LinkedList<WorkItemEntity> applyWorkPrioritization(LinkedList<WorkItemEntity> queue) {		
+	public LinkedList<Task> applyWorkPrioritization(LinkedList<Task> queue) {		
 		return this.mySelectionRule.applyRule(this.myServiceProviderAgent, queue);		
 	}
 	public LinkedList<ServiceProviderAgent> applyContractorSelection(LinkedList<ServiceProviderAgent> candidates) {

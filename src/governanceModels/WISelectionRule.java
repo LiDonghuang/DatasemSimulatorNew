@@ -11,7 +11,11 @@ import java.util.LinkedList;
 
 import repast.simphony.random.RandomHelper;
 import repast.simphony.util.SimUtilities;
+import serviceProviders.ServiceProviderAgent;
+import workItems.Task;
+import workItems.WorkItemEntity;
 import xtext.objectsModel.Mechanism;
+import xtext.objectsModel.WorkItem;
 
 public class WISelectionRule {
 	
@@ -21,10 +25,10 @@ public class WISelectionRule {
 		this.ruleValue = m.getValue();
 	}
 	
-	public LinkedList<WorkItemEntity> applyRule(ServiceProviderAgent SP, LinkedList<WorkItemEntity> oldqueue) {
+	public LinkedList<Task> applyRule(ServiceProviderAgent SP, LinkedList<Task> requestedQ) {
 		//
-		if (!oldqueue.isEmpty()) {
-			LinkedList<WorkItemEntity> queue = oldqueue;
+		if (!requestedQ.isEmpty()) {
+			LinkedList<Task> queue = requestedQ;
 			SimUtilities.shuffle(queue, RandomHelper.getUniform()); 
 			//System.out.println("\n"+SP.getName()+" Applies "+this.ruleValue+" Prioritization Rule on "+queue.size()+" WIs");
 			//
@@ -81,7 +85,7 @@ public class WISelectionRule {
 			//
 			return queue;}
 		//
-		else {return oldqueue;}
+		else {return requestedQ;}
 	}
 	/*
 	public WorkItemEntity applyRule2(ServiceProviderAgent SP, LinkedList<WorkItemEntity> queue) {

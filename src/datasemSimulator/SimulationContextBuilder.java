@@ -14,6 +14,12 @@ import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.parameter.Parameters;
 import repast.simphony.space.grid.Grid;
+import serviceProviders.ResourceEntity;
+import serviceProviders.ServiceProviderAgent;
+import workItems.AggregationNode;
+import workItems.DevTask;
+import workItems.Task;
+import workItems.WorkItemEntity;
 import xtext.objectsModel.Asset;
 import xtext.objectsModel.GovernanceStrategy;
 import xtext.objectsModel.Impact;
@@ -59,14 +65,14 @@ public class SimulationContextBuilder {
 		context.addAll(mySoS.myWorkItemEntities.values());
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
 			wi.SoS = mySoS;
-			if (wi.getType().getId()==1 | wi.getType().getId()==2) {
+			if (wi.hierarchy==0) {
 				context.add(wi);
 				wi.SoS.waitingList.put(wi.getId(), wi);
 				wi.isActivated = true;
 				wi.activatedTime = 1;
 				mySoS.myServiceProviderAgents.get(1).requestedQ.add(wi);
-				wi.requester = mySoS.myServiceProviderAgents.get(1);
-				wi.assignedAgent = mySoS.myServiceProviderAgents.get(1);
+				wi.setRequester(mySoS.myServiceProviderAgents.get(1));
+				wi.setAssignedAgent(mySoS.myServiceProviderAgents.get(1));
 			}
 		}
 	}
@@ -226,13 +232,11 @@ public class SimulationContextBuilder {
 		int id = Integer.parseInt(e.getAttribute("wiId"));
 		String name = e.getAttribute("name");
 		double efforts = Double.parseDouble(e.getAttribute("efforts"));
-		//double value = Double.parseDouble(e.getAttribute("value"));
 		int typeId = Integer.parseInt(e.getAttribute("typeId")); 				
 		WorkItem myWorkItem = ObjectsModelFactory.eINSTANCE.createWorkItem();
 		myWorkItem.setId(id);
 		myWorkItem.setName(name);
 		myWorkItem.setEfforts(efforts);
-		//myWorkItem.setValue(value);
 		myWorkItem.setType(myWorkItemTypes.get(typeId));
 		// RequiredServices
 		Node requiredServices_node = e.getElementsByTagName("RequiredServices").item(0);
@@ -244,12 +248,25 @@ public class SimulationContextBuilder {
 			int service_id = Integer.parseInt(e1.getTextContent()); 
 			myWorkItem.getRequiredServices().add(myServices.get(service_id));
 		}
+		// GovernanceAttributes
+		Node governanceAttributes_node = e.getElementsByTagName("GovernanceAttributes").item(0);
+		Element governanceAttributes_element = (Element)governanceAttributes_node;
+		NodeList governanceAttribute_nodeList = governanceAttributes_element.getElementsByTagName("GovernanceAttribute");
+		for (int i1=0;i1<governanceAttribute_nodeList.getLength();i1++) {
+			Node node1 = governanceAttribute_nodeList.item(i1);
+			Element e1= (Element)node1;
+			String att_name = e1.getAttribute("name");
+			if (att_name.matches("Value")) {				
+				double att_value = Double.parseDouble(e1.getAttribute("value")); 
+				myWorkItem.setValue(att_value);
+			}
+		}
 		myWorkItems.put(id, myWorkItem);
 	}
 	public void xmlBuildServiceProviderTopology(Element e) {
 		// ID reference
 		int id = Integer.parseInt(e.getAttribute("serviceProviderId"));
-		ServiceProvider myServiceProvider = this.myServiceProviders.get(id); //System.out.println("\n"+myServiceProviderAgent.getName());
+		ServiceProvider myServiceProvider = this.myServiceProviders.get(id); 
 		// AssignWITO
 		Node AssignWITo_node = e.getElementsByTagName("AssignWITo").item(0);
 		Element AssignWITo_element = (Element)AssignWITo_node;
@@ -259,7 +276,6 @@ public class SimulationContextBuilder {
 			Element e1= (Element)node1;
 			int AssignWITo_id = Integer.parseInt(e1.getTextContent());
 			myServiceProvider.getAssignTo().add(myServiceProviders.get(AssignWITo_id));
-			//myServiceProviderAgent.assignWITo.add(myServiceProviderAgents.get(AssignWITo_id)); //System.out.println("AssignTo "+myServiceProviderAgents.get(AssignWITo_id).getName()+" spId: "+myServiceProviderAgents.get(AssignWITo_id).getId());
 		}	
 		// BorrowResourceFrom
 		Node BorrowResourceFrom_node = e.getElementsByTagName("BorrowResourceFrom").item(0);
@@ -270,7 +286,6 @@ public class SimulationContextBuilder {
 			Element e1 = (Element)node1;
 			int BorrowResourceFrom_id = Integer.parseInt(e1.getTextContent());
 			myServiceProvider.getOutsourceFrom().add(myServiceProviders.get(BorrowResourceFrom_id));
-			//myServiceProviderAgent.borrowResourceFrom.add(myServiceProviderAgents.get(BorrowResourceFrom_id)); //System.out.println("OutsourceFrom "+myServiceProviderAgents.get(BorrowResourceFrom_id).getName()+" spId: "+myServiceProviderAgents.get(BorrowResourceFrom_id).getId());
 		}
 		
 	}
@@ -289,8 +304,6 @@ public class SimulationContextBuilder {
 				Element e1= (Element)node1;
 				int Subtask_id = Integer.parseInt(e1.getTextContent());
 				myWorkItem.getSTasks().add(myWorkItems.get(Subtask_id));
-				//myWorkItemEntity.subtasks.add(myWorkItemEntities.get(Subtask_id)); //System.out.println("Subtask "+myWorkItemEntities.get(Subtask_id).getName()+" wiId: "+myWorkItemEntities.get(Subtask_id).getId());
-				//myWorkItemEntities.get(Subtask_id).uppertasks.add(myWorkItemEntity);
 			}
 		}
 		// Precedency
@@ -305,8 +318,6 @@ public class SimulationContextBuilder {
 				Element e1= (Element)node1;
 				int Predecessor_id = Integer.parseInt(e1.getTextContent());
 				myWorkItem.getPTasks().add(myWorkItems.get(Predecessor_id));
-				//myWorkItemEntity.predecessors.add(myWorkItemEntities.get(Predecessor_id)); //System.out.println("Predecessor "+myWorkItemEntities.get(Predecessor_id).getName()+" wiId: "+Predecessor_id);
-				//myWorkItemEntities.get(Predecessor_id).successors.add(myWorkItemEntity);
 			}
 		}
 		// Impacts
@@ -357,7 +368,7 @@ public class SimulationContextBuilder {
 			int id = agent.getId();
 			ServiceProvider sp = myServiceProviders.get(id);
 			for (Asset r: sp.getResources()) {
-				agent.myResourceEntities.add(mySoS.myResourceEntities.get(r.getId()));
+				agent.getMyResourceEntities().add(mySoS.myResourceEntities.get(r.getId()));
 			}
 			for (ServiceProvider sp1: sp.getAssignTo()) {
 				agent.assignWITo.add(mySoS.myServiceProviderAgents.get(sp1.getId()));
@@ -368,35 +379,40 @@ public class SimulationContextBuilder {
 		}				
 		for (WorkItem wi: myWorkItems.values()) {
 			int id = wi.getId();
-			WorkItemEntity entity = new WorkItemEntity(wi);
+			WorkItemEntity entity;
+			if (wi.isIsAggregationNode()) {
+				entity = new AggregationNode(wi);
+			}
+			else {
+				entity = new DevTask(wi);
+			}
 			entity.maxMaturityLevels = TaskMaturityLevels;
-			entity.uncertainty = TaskUncertainty;
-			entity.risk = TaskRisk;
-			entity.propagation_uncertainty = TaskChangePropagationUncertainty;
-			entity.propagation_risk = TaskChangePropagationRisk;
+			entity.uncertainty = TaskUncertainty*TaskChangePropagationUncertainty;
+			entity.risk = TaskRisk*TaskChangePropagationRisk;
 			mySoS.myWorkItemEntities.put(id, entity);
+			mySoS.increaseWICount();
 		}
 		for (WorkItemEntity entity: mySoS.myWorkItemEntities.values()) {
 			int id = entity.getId();
 			WorkItem wi = myWorkItems.get(id);
 			for (WorkItem st: wi.getSTasks()) {
 				int st_id = st.getId();
-				entity.subtasks.add(mySoS.myWorkItemEntities.get(st.getId()));
-				mySoS.myWorkItemEntities.get(st_id).uppertasks.add(entity);
+				((AggregationNode)entity).getSubtasks().add(mySoS.myWorkItemEntities.get(st.getId()));
+				mySoS.myWorkItemEntities.get(st_id).getUppertasks().add((AggregationNode)entity);
 			}
 			for (WorkItem pt: wi.getPTasks()) {
 				int pt_id = pt.getId();
-				entity.predecessors.add(mySoS.myWorkItemEntities.get(pt_id));
-				mySoS.myWorkItemEntities.get(pt_id).successors.add(entity);
+				entity.getPredecessors().add(mySoS.myWorkItemEntities.get(pt_id));
+				mySoS.myWorkItemEntities.get(pt_id).getSuccessors().add(entity);
 			}
 			for (Impact myImpact: wi.getImpacts()) {
 				int impactWI_id = myImpact.getImpactWI().getId();
 				double likelihood = myImpact.getLikelihood();
 				double impact = myImpact.getImpact();
 				WorkItemEntity impactEntity = mySoS.myWorkItemEntities.get(impactWI_id);
-				entity.impactsWIs.add(impactEntity);
-				entity.impactsValue.put(impactEntity, impact);
-				entity.impactsLikelihood.put(impactEntity, likelihood);
+				entity.getImpactsWIs().add(impactEntity);
+				entity.getImpactsValue().put(impactEntity, impact*TaskChangePropagationRisk);
+				entity.getImpactsLikelihood().put(impactEntity, likelihood*TaskChangePropagationUncertainty);
 			}
 		}
 		

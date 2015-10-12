@@ -1,0 +1,470 @@
+package workItems;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+
+import datasemSimulator.SystemOfSystems;
+import bsh.This;
+import repast.simphony.context.Context;
+import repast.simphony.engine.environment.RunEnvironment;
+import repast.simphony.engine.schedule.ISchedule;
+import repast.simphony.engine.schedule.ScheduledMethod;
+import repast.simphony.random.RandomHelper;
+import repast.simphony.util.ContextUtils;
+import serviceProviders.ResourceEntity;
+import serviceProviders.ServiceProviderAgent;
+import xtext.objectsModel.Service;
+import xtext.objectsModel.Skill;
+import xtext.objectsModel.WorkItem;
+import xtext.objectsModel.impl.WorkItemImpl;
+
+
+public class WorkItemEntity extends WorkItemImpl {
+	public SystemOfSystems SoS;
+	// Static Attributes
+	public WorkItem myWorkItem;
+	public String fullName;
+	public int hierarchy = 0;
+	public boolean isAnalysisTask = false;
+	public boolean isAssistanceTask = false;
+	public LinkedList<Service> services = new LinkedList<Service>();
+	private LinkedList<WorkItemEntity> predecessors = new LinkedList<WorkItemEntity>();
+	private LinkedList<WorkItemEntity> successors = new LinkedList<WorkItemEntity>();
+	
+	private LinkedList<AggregationNode> uppertasks = new LinkedList<AggregationNode>();
+	
+	private LinkedList<WorkItemEntity> impactsWIs = new LinkedList<WorkItemEntity>();
+	private HashMap<WorkItemEntity,Double> impactsLikelihood = new HashMap<WorkItemEntity,Double>();
+	private HashMap<WorkItemEntity,Double> impactsValue = new HashMap<WorkItemEntity,Double>();
+	
+	public int maxMaturityLevels = 1;
+	public double uncertainty = 0;
+	public double risk = 0;
+	// Dynamic Attributes
+	public boolean isActivated=false;
+	public boolean isAssigned=false;
+	public boolean isStarted=false;
+	public boolean isSuspended=false;
+	public boolean isReactivated=false;
+	public boolean isCompleted=false;
+	public boolean isEnded=false;
+	
+	public double estimatedEfforts=Double.MAX_VALUE;
+	public double estimatedCompletionTime=Double.MAX_VALUE;
+	public int activatedTime=Integer.MAX_VALUE;	
+	public int startTime=Integer.MAX_VALUE;
+	public int assignedTime=Integer.MAX_VALUE;
+	public int suspendedTime=Integer.MAX_VALUE;
+	public int restartedTime=Integer.MAX_VALUE;
+	public int completionTime=Integer.MAX_VALUE;
+	public int endTime=Integer.MAX_VALUE;
+	public int leadTime=Integer.MAX_VALUE;
+	public int cycleTime=Integer.MAX_VALUE;
+	public int dueDate=Integer.MAX_VALUE;
+		
+	private ServiceProviderAgent requester;
+	private ServiceProviderAgent assignedAgent;
+	private LinkedList<ResourceEntity> allocatedResources = new LinkedList<ResourceEntity>();
+	
+	private double serviceEfficiency = 0;
+	private double progress= 0;
+	protected double progressRate= 0;
+	protected double perceivedValue= 0;
+	
+	private int currentMaturityLevel = 0;
+	private int ReworkCount = 0;
+	private int ChangePropagationToCount = 0;
+	private int ChangePropagationByCount = 0;
+	private double previousReworkTime = 0;
+	private int previousMaturityLevel = 0;
+	private double CycleTimeToEffortsRatio = 0;
+
+	
+	public WorkItemEntity (WorkItem WorkItem) {
+		this.myWorkItem = WorkItem;
+		this.id = WorkItem.getId();
+		this.name = WorkItem.getName();
+		this.isAggregationNode = WorkItem.isIsAggregationNode();
+		this.hasPredecessors = WorkItem.isHasPredecessors();
+		this.efforts = WorkItem.getEfforts();
+		this.value = WorkItem.getValue();
+		this.type = WorkItem.getType();
+		this.services.addAll(WorkItem.getRequiredServices());
+		this.hierarchy = this.type.getHierarchy();
+		this.fullName = this.fullName();
+	}
+	public WorkItemEntity (WorkItemEntity WorkItemEntity) {
+		
+	}
+	public LinkedList<Service> getServices() {
+		return this.services;
+	}
+	public void addToContext() {
+		if (this.isActivated) {
+			//-
+			@SuppressWarnings("unchecked")
+			Context<Object> context = ContextUtils.getContext(this);	
+			//-
+			context.add(this);
+		}
+	}
+	public void removeFromContext() {
+		if (this.isEnded) {
+			//-
+			@SuppressWarnings("unchecked")
+			Context<Object> context = ContextUtils.getContext(this);	
+			//-
+			context.remove(this);
+		}
+	}
+	
+	public void updateUpperTasksCompletion() {
+		if (this.isCompleted) {
+			for (AggregationNode upperTask:this.getUppertasks()) {
+				if (upperTask.isActivated && !upperTask.isCompleted) {
+					upperTask.checkSubTasksCompletion();
+				}
+			}
+		}	
+	}	
+	public void addUpperTask(AggregationNode upperTask) {
+		if (!this.getUppertasks().contains(upperTask)){
+			this.getUppertasks().add(upperTask);
+			upperTask.addSubTask(this);
+		}
+	}
+	
+	public void removeUpperTask(AggregationNode upperTask) {
+		if (this.getUppertasks().contains(upperTask)) {
+			this.getUppertasks().remove(upperTask);
+			upperTask.removeSubTask(this);
+		}
+	}	
+	public int countIncompletedPredecessors() {
+		int count = 0;
+		for (WorkItemEntity predecessor:this.getPredecessors()) {
+			if (!predecessor.isCompleted) {
+				count ++;
+			}
+		}
+		return count;
+	}	
+	public void addPredecessorTask(WorkItemEntity predecessor) {
+		if (!this.getPredecessors().contains(predecessor)) {
+			this.getPredecessors().add(predecessor);
+			this.getSuccessors().add(this);
+		}
+	}
+	public void addSuccessorTask(WorkItemEntity successor) {
+		if (!this.getSuccessors().contains(successor)) {
+			this.getSuccessors().add(successor);
+			this.getPredecessors().add(this);
+		}
+	}
+	public boolean uppertasksCleared() {
+		boolean cleared = true;
+		for (WorkItemEntity upperTask:this.getUppertasks()) {
+			if (upperTask.isActivated && !upperTask.isCompleted) {
+				cleared = false;
+				//System.out.println(this.fullName+"uppertask"+upperTask.fullName+"not cleared");
+				break;
+			}
+		}	
+		return cleared;
+	}
+
+	public double calculateRPW() {
+		double rpw = 0;
+		double suc = this.getSuccessors().size();
+		double obj = 0;
+		double imp = 0;
+		double deco = 0;
+		double susp = 0;
+
+		for (WorkItemEntity impactsTarget: this.getImpactsWIs()) {
+			double likelihood = this.getImpactsLikelihood().get(impactsTarget);
+			double risk = this.getImpactsValue().get(impactsTarget);
+			imp += likelihood*risk*5;
+		}
+		if (this.isAnalysisTask) {
+			AggregationNode AnalysisObject = (AggregationNode) ((AnalysisActivity)this).AnalysisObject;
+			deco = (AnalysisObject.calculateRPW()+AnalysisObject.hierarchy) * (3-AnalysisObject.hierarchy);
+		}
+		if (this.isAssistanceTask) {
+			susp = ((AssistanceActivity)this).AssistanceObject.calculateRPW();
+		}
+		rpw = suc + obj + imp + deco + susp;
+		return rpw;
+	}
+	public boolean precedencyCleared() {
+		boolean cleared = true;
+		for (int i=0;i<this.getPredecessors().size();i++) {
+			WorkItemEntity pTask = this.getPredecessors().get(i);
+			if (pTask.isCompleted) {
+//				this.predecessors.remove(pTask);
+//				i--;
+			}
+			else {
+				cleared = false;
+				//System.out.println(this.fullName+"predecessor"+pTask.fullName+"not cleared");
+				break;
+			}
+		}
+		return cleared;				
+	}	
+	
+	public void removeFromSuccessorTasks() {
+		for (WorkItemEntity sTask:this.getSuccessors()) {
+			sTask.getPredecessors().remove(this);
+		}
+	}	
+	/*
+	public void triggerCausalities() {
+		if (this.isAssigned&&this.precedencyCleared()){
+			if (this.isAggregationNode) {
+				for (WorkItemEntity subtask:subtasks) {
+					subtask.assignedAgent = this.assignedAgent;
+				}
+			}
+//			for (int c=0;c<this.getKSSTriggers().size();c++) {
+//				KSSTrigger trigger = this.getKSSTriggers().get(c);
+//				if ((this.isCompleted())||(this.progress >= trigger.getAtProgress())) {
+//					double rand = Math.random();
+//					if (trigger.getOnProbability() >= rand) {
+//						for (int t=0;t<trigger.getTriggered().size();t++) {
+//							KSSTask triggeredWI = trigger.getTriggered().get(t);
+//							if (!trigger.isRepetitive() && !triggeredWI.isCreated()){
+//								context.add(triggeredWI);
+//								if (triggeredWI.getCOS().matches("Important")) {
+//									this.getUpperTasks().get(0).addSubTask(triggeredWI);
+//								}	
+//								//
+//								this.SoS.getArrivedList().add(triggeredWI);
+//								triggeredWI.setCreated();
+//								triggeredWI.setArrivalTime(this.SoS.timeNow);
+//								// Put triggered WI to requestedQ of main WI's SP								
+//								this.getAssignedTo().assignWI(triggeredWI);										
+//							}
+//						}
+//					}
+//					if (!trigger.isRepetitive()) {
+//						this.getKSSTriggers().remove(trigger);
+//					}
+//				}
+//			}
+		}
+	}
+	*/
+	public String fullName(){
+		String full_name = " "+this.getType().getName()+"[Hierarchy:"+this.hierarchy+"]"+this.getName()+"(id:"+this.getId()+") ";
+		return full_name;
+	}
+	public void setSuspended() {
+		this.isSuspended = true;				
+	}
+	public void setActivated() {
+		this.isActivated= true;
+		if (this.activatedTime>=Integer.MAX_VALUE-1) {
+			this.activatedTime = this.SoS.timeNow;
+		}
+		else {
+			this.activatedTime = Math.max(this.SoS.timeNow, this.activatedTime);
+		}
+		//System.out.println("WorkItem "+this.getName()+"(id:"+this.getId()+")"+" is activated");
+	}
+	public void setStarted() {
+		this.isStarted= true;
+		if (this.isReactivated) {
+			this.restartedTime = this.SoS.timeNow;
+		}
+		else {
+			this.startTime = this.SoS.timeNow;
+			//System.out.println("\nSTART @TIME:"+this.SoS.timeNow+this.fullName+"is started from progress:"+this.progress);
+		}
+		if (this.isAnalysisTask) {
+			((AnalysisActivity)this).AnalysisObject.setStarted();
+		}
+	}
+	public void setCompleted() {
+		this.isCompleted=true;		
+		this.completionTime=this.SoS.timeNow;
+		if (!this.isReactivated) {
+			this.cycleTime = this.completionTime - this.startTime + 1;
+		}
+		else {
+			this.cycleTime += (this.completionTime - this.restartedTime);
+		}
+		this.updateUpperTasksCompletion();
+		this.removeFromSuccessorTasks();
+		//System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is completed"+" (rework count:"+this.reworkCount+")");
+	}
+	public void setEnded() {
+		this.isEnded=true;
+		this.endTime = this.SoS.timeNow;
+		this.leadTime = this.endTime - this.activatedTime + 1;	
+		
+		if (this.isAggregationNode) {
+			if (this.hierarchy==0) {
+				this.SoS.waitingList.remove(this.getId());
+				this.SoS.deliverValue(this.getValue());
+				//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
+				//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.getValue()+" stakeholder value");
+			}
+		}
+		else if (this.isAssistanceTask | this.isAnalysisTask) {
+			this.removeFromContext();
+		}
+		else {
+			this.CycleTimeToEffortsRatio = this.efforts/this.cycleTime;			
+		}
+		//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.reworkCount);
+	}
+	public void setAssigned() {
+		this.isAssigned=true;		
+		this.assignedTime = this.SoS.timeNow;
+	}
+	public void setCreated() {
+		this.isActivated=true;
+		this.activatedTime=this.SoS.timeNow;
+		//System.out.println(this.getName()+"(id:"+this.getId()+") is Created");
+	}
+
+	public double getPerceivedValue() {
+		return this.perceivedValue;
+	}
+	public void setPerceivedValue(double v) {
+		this.perceivedValue = v;
+	}
+	public int getTypeId() {
+		return this.getType().getId();
+	}
+	public int getHierarchy() {
+		return this.hierarchy;
+	}
+	public double getActivatedTime() {
+		return this.activatedTime;
+	}
+	public double getStartTime() {
+		return this.startTime;
+	}
+	public double getAssignedTime() {
+		return this.assignedTime;
+	}
+	public double getCompletionTime() {
+		return this.completionTime;
+	}
+	public double getEndTime() {
+		return this.endTime;
+	}
+	public double getLeadTime() {
+		return this.leadTime;
+	}
+	public double getCycleTime() {
+		return this.cycleTime;
+	}
+	public int getReworkCount() {
+		return this.ReworkCount;
+	}
+	public int getChangePropagationByCount() {
+		return this.ChangePropagationByCount;
+	}
+	public int getChangePropagationToCount() {
+		return this.ChangePropagationToCount;
+	}
+	public double getCycleTimeToEffortsRatio() {
+		return this.CycleTimeToEffortsRatio;
+	}
+	public double getServiceEfficiency() {
+		return serviceEfficiency;
+	}
+	public void setServiceEfficiency(double serviceEfficiency) {
+		this.serviceEfficiency = serviceEfficiency;
+	}
+	public double getProgress() {
+		return progress;
+	}
+	public void setProgress(double progress) {
+		this.progress = progress;
+	}
+	public LinkedList<ResourceEntity> getAllocatedResources() {
+		return allocatedResources;
+	}
+	public void setAllocatedResources(LinkedList<ResourceEntity> allocatedResources) {
+		this.allocatedResources = allocatedResources;
+	}
+	public ServiceProviderAgent getRequester() {
+		return requester;
+	}
+	public void setRequester(ServiceProviderAgent requester) {
+		this.requester = requester;
+	}
+	public ServiceProviderAgent getAssignedAgent() {
+		return assignedAgent;
+	}
+	public void setAssignedAgent(ServiceProviderAgent assignedAgent) {
+		this.assignedAgent = assignedAgent;
+	}
+	public LinkedList<AggregationNode> getUppertasks() {
+		return uppertasks;
+	}
+	public void setUppertasks(LinkedList<AggregationNode> uppertasks) {
+		this.uppertasks = uppertasks;
+	}
+	public LinkedList<WorkItemEntity> getSuccessors() {
+		return successors;
+	}
+	public void setSuccessors(LinkedList<WorkItemEntity> successors) {
+		this.successors = successors;
+	}
+	public LinkedList<WorkItemEntity> getPredecessors() {
+		return predecessors;
+	}
+	public void setPredecessors(LinkedList<WorkItemEntity> predecessors) {
+		this.predecessors = predecessors;
+	}
+	public LinkedList<WorkItemEntity> getImpactsWIs() {
+		return impactsWIs;
+	}
+	public void setImpactsWIs(LinkedList<WorkItemEntity> impactsWIs) {
+		this.impactsWIs = impactsWIs;
+	}
+	public HashMap<WorkItemEntity,Double> getImpactsValue() {
+		return impactsValue;
+	}
+	public void setImpactsValue(HashMap<WorkItemEntity,Double> impactsValue) {
+		this.impactsValue = impactsValue;
+	}
+	public HashMap<WorkItemEntity,Double> getImpactsLikelihood() {
+		return impactsLikelihood;
+	}
+	public void setImpactsLikelihood(HashMap<WorkItemEntity,Double> impactsLikelihood) {
+		this.impactsLikelihood = impactsLikelihood;
+	}
+	public void setReworkCount(int reworkCount) {
+		ReworkCount = reworkCount;
+	}
+	public void setChangePropagationByCount(int changePropagationByCount) {
+		ChangePropagationByCount = changePropagationByCount;
+	}
+	public int getCurrentMaturityLevel() {
+		return currentMaturityLevel;
+	}
+	public void setCurrentMaturityLevel(int currentMaturityLevel) {
+		this.currentMaturityLevel = currentMaturityLevel;
+	}
+	public int getPreviousMaturityLevel() {
+		return previousMaturityLevel;
+	}
+	public void setPreviousMaturityLevel(int previousMaturityLevel) {
+		this.previousMaturityLevel = previousMaturityLevel;
+	}
+	public void setChangePropagationToCount(int changePropagationToCount) {
+		ChangePropagationToCount = changePropagationToCount;
+	}
+	public double getPreviousReworkTime() {
+		return previousReworkTime;
+	}
+	public void setPreviousReworkTime(double previousReworkTime) {
+		this.previousReworkTime = previousReworkTime;
+	}
+}

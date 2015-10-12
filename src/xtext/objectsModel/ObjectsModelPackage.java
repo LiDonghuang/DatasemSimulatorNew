@@ -1323,7 +1323,7 @@ public interface ObjectsModelPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference list '<em>Required Services</em>'.
-   * @see xtext.objectsModel.WorkItem#getRequiredServices()
+   * @see xtext.objectsModel.WorkItem#getServices()
    * @see #getWorkItem()
    * @generated
    */

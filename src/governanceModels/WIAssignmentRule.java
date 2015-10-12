@@ -12,6 +12,7 @@ import java.util.LinkedList;
 
 import repast.simphony.random.RandomHelper;
 import repast.simphony.util.SimUtilities;
+import serviceProviders.ServiceProviderAgent;
 import xtext.objectsModel.Mechanism;
 
 public class WIAssignmentRule {
