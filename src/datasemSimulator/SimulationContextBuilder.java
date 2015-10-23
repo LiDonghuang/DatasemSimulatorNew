@@ -55,7 +55,7 @@ public class SimulationContextBuilder {
 		System.out.println(this.myResources.size()+" Resources");
 	}
 	public void ContextImplementation(Context<Object> context) {
-		SystemOfSystems mySoS = BuildSoS();		
+		SystemOfSystems mySoS = BuildSoS();			
 		context.setId("DatasemSimulator");		
 		context.add(mySoS);
 		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
@@ -65,7 +65,7 @@ public class SimulationContextBuilder {
 		context.addAll(mySoS.myWorkItemEntities.values());
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
 			wi.SoS = mySoS;
-			if (wi.hierarchy==0) {
+			if ((wi.hierarchy==0 )) {
 				context.add(wi);
 				wi.SoS.waitingList.put(wi.getId(), wi);
 				wi.isActivated = true;
@@ -75,6 +75,10 @@ public class SimulationContextBuilder {
 				wi.setAssignedAgent(mySoS.myServiceProviderAgents.get(1));
 			}
 		}
+	}
+	public void VisualizationImplementation(Context<Object> context) {
+		Visualization myVisualization = BuildVisualization();
+		context.add(myVisualization);
 	}
 	public void ReadXMLFile(File scenarioXmlFile) {
 		System.out.println("\nstart parsing scenario.xml...\n");
@@ -418,5 +422,9 @@ public class SimulationContextBuilder {
 		
 		//mySoS.getSoSInformation();
 		return mySoS;
+	}
+	public Visualization BuildVisualization() {
+		Visualization myVisualization = new Visualization();
+		return myVisualization;
 	}
 }

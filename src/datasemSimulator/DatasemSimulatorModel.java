@@ -11,6 +11,7 @@ public class DatasemSimulatorModel implements ContextBuilder<Object>{
 	
 	private File scenarioXmlFile = new File("/Users/dzl0023/Desktop/DatasemFiles/DemoModel_ExperimentModel.xml");
 	private SimulationContextBuilder cb = new SimulationContextBuilder(scenarioXmlFile);
+	public boolean VisualizationOn = true;
 	
 	public Context<Object> build(Context<Object> context) {		
 		//context.setId("DatasemSimulator");
@@ -18,6 +19,9 @@ public class DatasemSimulatorModel implements ContextBuilder<Object>{
 		Parameters p = RunEnvironment.getInstance().getParameters();
 		int numReplications = (Integer)p.getValue("NumReplications");	
 		System.out.println("\nREPLICATION #"+numReplications+"\n");
+		if (VisualizationOn && (numReplications==1)) {
+			cb.VisualizationImplementation(context);
+		}
 		return context;
 	}
 }

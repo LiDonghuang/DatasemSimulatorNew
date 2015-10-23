@@ -25,6 +25,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	public WorkItem myWorkItem;
 	public String fullName;
 	public int hierarchy = 0;
+	public boolean isDevTask = false;
 	public boolean isAnalysisTask = false;
 	public boolean isAssistanceTask = false;
 	public LinkedList<Service> services = new LinkedList<Service>();
@@ -303,13 +304,11 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.endTime = this.SoS.timeNow;
 		this.leadTime = this.endTime - this.activatedTime + 1;	
 		
-		if (this.isAggregationNode) {
-			if (this.hierarchy==0) {
-				this.SoS.waitingList.remove(this.getId());
-				this.SoS.deliverValue(this.getValue());
-				//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
-				//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.getValue()+" stakeholder value");
-			}
+		if (this.hierarchy==0 ) {
+			this.SoS.waitingList.remove(this.getId());
+			this.SoS.deliverValue(this.getValue());
+			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
+			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.getValue()+" stakeholder value");
 		}
 		else if (this.isAssistanceTask | this.isAnalysisTask) {
 			this.removeFromContext();

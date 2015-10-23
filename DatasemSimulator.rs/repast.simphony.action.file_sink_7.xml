@@ -1,0 +1,17 @@
+<repast.simphony.data2.engine.FileSinkDescriptor>
+  <name>SP File Sink</name>
+  <dataSet>SP Data Set</dataSet>
+  <delimiter>,</delimiter>
+  <format>TABULAR</format>
+  <sourceIds class="linked-hash-set">
+    <string>tick</string>
+    <string>Id</string>
+    <string>Name</string>
+    <string>TotalWICount</string>
+    <string>TotalWorkload</string>
+    <string>ActiveWorkload</string>
+    <string>ResourceUtilization</string>
+  </sourceIds>
+  <fileName>C:\Users\dzl0023\Desktop\DatasemFiles\SimulationOutput\SP_data.txt</fileName>
+  <addTimeStamp>false</addTimeStamp>
+</repast.simphony.data2.engine.FileSinkDescriptor>

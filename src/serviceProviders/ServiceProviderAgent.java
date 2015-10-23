@@ -12,6 +12,7 @@ import java.util.HashMap;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
 
+import contractNetProtocol.AbstractAgentBehavior;
 import datasemSimulator.SystemOfSystems;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ScheduledMethod;
@@ -23,6 +24,7 @@ import repast.simphony.engine.schedule.ISchedule;
 import workItems.AggregationNode;
 import workItems.AnalysisActivity;
 import workItems.AssistanceActivity;
+import workItems.DevTask;
 import workItems.Task;
 import workItems.WorkItemEntity;
 import xtext.objectsModel.ServiceProvider;
@@ -31,33 +33,21 @@ import xtext.objectsModel.impl.ServiceProviderImpl;
 
 
 public class ServiceProviderAgent extends ServiceProviderImpl {
+		interface Mediator {
+			
+		}
 		public SystemOfSystems SoS;
 		// Static Attributes
 		public ServiceProvider myServiceProvider;
+		//***
+		public AbstractAgentBehavior myBehavior;
+		//***
 		public AgentStrategy myStrategy;
 		private LinkedList<ResourceEntity> myResourceEntities = new LinkedList<ResourceEntity>();
 		public LinkedList<ServiceProviderAgent> assignWITo = new LinkedList<ServiceProviderAgent>();
 		public LinkedList<ServiceProviderAgent> borrowResourceFrom = new LinkedList<ServiceProviderAgent>();
 		public int WIPLimit = Integer.MAX_VALUE;
-		public int BacklogLimit = Integer.MAX_VALUE;
-		// Dynamic Attributes
-		private double TotalWorkload;
-		private double ActiveWorkload;
-		private double ResourceUtilization;
-		private int isBottleNeck;		
-		private int BottleNeckCount;
-		// Time Series Records
-		private List<Double> recordTotalWorkload = new ArrayList<Double>();
-		private List<Double> recordActiveWorkload = new ArrayList<Double>();
-		private List<Double> recordResourceUtilization = new ArrayList<Double>();
-		// End Run Statistics
-		private double TotalWorkLoad_mean;
-		private double TotalWorkLoad_stdev;
-		private double ActiveWorkload_mean;
-		private double ActiveWorkload_stdev;
-		private double ResourceUtilization_mean;
-		private double ResourceUtilization_stdev;
-				
+		public int BacklogLimit = Integer.MAX_VALUE;		
 		public LinkedList<WorkItemEntity> requestedQ = new LinkedList<WorkItemEntity>();
 		public LinkedList<WorkItemEntity> assignmentQ = new LinkedList<WorkItemEntity>();	
 		public LinkedList<Task> backlogQ = new LinkedList<Task>();
@@ -76,12 +66,35 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		private static final int SEQUENCE_CheckAggregationNodesCompletion = 70;
 		private static final int SEQUENCE_DisburseWIs = 80;
 		
-		
+		// Dynamic Attributes
+		private double TotalWorkload;
+		private double ActiveWorkload;
+		private double ResourceUtilization;
+		private int isBottleNeck;		
+		private int BottleNeckCount;
+		// Time Series Records
+		private List<Double> recordTotalWorkload = new ArrayList<Double>();
+		private List<Double> recordActiveWorkload = new ArrayList<Double>();
+		private List<Double> recordResourceUtilization = new ArrayList<Double>();
+		// End Run Statistics
+		private double TotalWorkLoad_mean;
+		private double TotalWorkLoad_stdev;
+		private double ActiveWorkload_mean;
+		private double ActiveWorkload_stdev;
+		private double ResourceUtilization_mean;
+		private double ResourceUtilization_stdev;
+				
 		public ServiceProviderAgent(ServiceProvider ServiceProvider) {
 			this.myServiceProvider = ServiceProvider;
 			this.name = ServiceProvider.getName();
 			this.id = ServiceProvider.getId();
 			new AgentStrategy().implementAgentStrategy(this, ServiceProvider.getGovernanceStrategy());			
+		}
+		public void ManagerBehavior() {
+			
+		}
+		public void ContractorBehavior() {
+			
 		}
 		@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_CheckRequestedQ)
 		public void CheckRequestedQ() {
@@ -183,7 +196,9 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			//System.out.println("Agent "+this.name+" checkWIsCompletion");
 			for(int i=0;i<activeQ.size();i++) {
 				Task WI = activeQ.get(i);
-				WI.triggerChanges();
+				if (WI.isDevTask) {
+					((DevTask)WI).triggerChanges();
+				}
 			}
 		}
 		@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_CheckWIsCompletion)	
@@ -245,6 +260,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			context.add(analysisActivity);
 			//
 			this.backlogQ.add(analysisActivity);
+			analysisActivity.setAssigned();
 			//System.out.println("\nANALYSIS AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" start analyzing"+aggrNode.fullName);
 		}	
 		public void requestAssistance(Task task) {
