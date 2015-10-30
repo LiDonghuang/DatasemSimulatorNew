@@ -113,6 +113,15 @@ public interface ObjectsModelFactory extends EFactory
   WorkItem createWorkItem();
 
   /**
+   * Returns a new object of class '<em>Required Service</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Required Service</em>'.
+   * @generated
+   */
+  RequiredService createRequiredService();
+
+  /**
    * Returns a new object of class '<em>Impact</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

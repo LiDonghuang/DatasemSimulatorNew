@@ -8,12 +8,18 @@ import xtext.objectsModel.Skill;
 import xtext.objectsModel.WorkItem;
 
 public class AggregationNode extends WorkItemEntity{
-	protected boolean isAggregationNode = true;
 	private LinkedList<WorkItemEntity> subtasks = new LinkedList<WorkItemEntity>();
 	
-	public AggregationNode(WorkItem WorkItem) {
-		super(WorkItem);
-		// TODO Auto-generated constructor stub
+	public AggregationNode(WorkItem wi) {
+		super(wi);
+		this.isAggregationNode = true;
+		this.typeId = wi.getType().getId();
+		if (wi.getRequiredServices().isEmpty()) {
+			this.serviceId = 1;
+		}
+		else {
+			this.serviceId = wi.getRequiredServices().get(0).getServiceType().getId();
+		}
 	}
 	
 //	public void advanceProgress() {
@@ -63,7 +69,7 @@ public class AggregationNode extends WorkItemEntity{
 		for (ResourceEntity r: sp.getMyResourceEntities()) {
 			for (Skill sk: r.getSkillSet()){
 				int service_id = sk.getService().getId();
-				if (service_id == this.getServices().get(0).getId()){
+				if (service_id == this.serviceId){
 					sEfficiency = sk.getEfficiency();				
 					break;
 				}		

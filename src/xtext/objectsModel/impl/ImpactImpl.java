@@ -23,7 +23,7 @@ import xtext.objectsModel.WorkItem;
  * <ul>
  *   <li>{@link xtext.objectsModel.impl.ImpactImpl#getImpactWI <em>Impact WI</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ImpactImpl#getLikelihood <em>Likelihood</em>}</li>
- *   <li>{@link xtext.objectsModel.impl.ImpactImpl#getImpact <em>Impact</em>}</li>
+ *   <li>{@link xtext.objectsModel.impl.ImpactImpl#getRisk <em>Risk</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,24 +62,24 @@ public class ImpactImpl extends MinimalEObjectImpl.Container implements Impact
   protected double likelihood = LIKELIHOOD_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getImpact() <em>Impact</em>}' attribute.
+   * The default value of the '{@link #getRisk() <em>Risk</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImpact()
+   * @see #getRisk()
    * @generated
    * @ordered
    */
-  protected static final double IMPACT_EDEFAULT = 0.0;
+  protected static final double RISK_EDEFAULT = 0.0;
 
   /**
-   * The cached value of the '{@link #getImpact() <em>Impact</em>}' attribute.
+   * The cached value of the '{@link #getRisk() <em>Risk</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImpact()
+   * @see #getRisk()
    * @generated
    * @ordered
    */
-  protected double impact = IMPACT_EDEFAULT;
+  protected double risk = RISK_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -173,9 +173,9 @@ public class ImpactImpl extends MinimalEObjectImpl.Container implements Impact
    * <!-- end-user-doc -->
    * @generated
    */
-  public double getImpact()
+  public double getRisk()
   {
-    return impact;
+    return risk;
   }
 
   /**
@@ -183,12 +183,12 @@ public class ImpactImpl extends MinimalEObjectImpl.Container implements Impact
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setImpact(double newImpact)
+  public void setRisk(double newRisk)
   {
-    double oldImpact = impact;
-    impact = newImpact;
+    double oldRisk = risk;
+    risk = newRisk;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.IMPACT__IMPACT, oldImpact, impact));
+      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.IMPACT__RISK, oldRisk, risk));
   }
 
   /**
@@ -206,8 +206,8 @@ public class ImpactImpl extends MinimalEObjectImpl.Container implements Impact
         return basicGetImpactWI();
       case ObjectsModelPackage.IMPACT__LIKELIHOOD:
         return getLikelihood();
-      case ObjectsModelPackage.IMPACT__IMPACT:
-        return getImpact();
+      case ObjectsModelPackage.IMPACT__RISK:
+        return getRisk();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -228,8 +228,8 @@ public class ImpactImpl extends MinimalEObjectImpl.Container implements Impact
       case ObjectsModelPackage.IMPACT__LIKELIHOOD:
         setLikelihood((Double)newValue);
         return;
-      case ObjectsModelPackage.IMPACT__IMPACT:
-        setImpact((Double)newValue);
+      case ObjectsModelPackage.IMPACT__RISK:
+        setRisk((Double)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -251,8 +251,8 @@ public class ImpactImpl extends MinimalEObjectImpl.Container implements Impact
       case ObjectsModelPackage.IMPACT__LIKELIHOOD:
         setLikelihood(LIKELIHOOD_EDEFAULT);
         return;
-      case ObjectsModelPackage.IMPACT__IMPACT:
-        setImpact(IMPACT_EDEFAULT);
+      case ObjectsModelPackage.IMPACT__RISK:
+        setRisk(RISK_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -272,8 +272,8 @@ public class ImpactImpl extends MinimalEObjectImpl.Container implements Impact
         return impactWI != null;
       case ObjectsModelPackage.IMPACT__LIKELIHOOD:
         return likelihood != LIKELIHOOD_EDEFAULT;
-      case ObjectsModelPackage.IMPACT__IMPACT:
-        return impact != IMPACT_EDEFAULT;
+      case ObjectsModelPackage.IMPACT__RISK:
+        return risk != RISK_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -291,8 +291,8 @@ public class ImpactImpl extends MinimalEObjectImpl.Container implements Impact
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (likelihood: ");
     result.append(likelihood);
-    result.append(", impact: ");
-    result.append(impact);
+    result.append(", risk: ");
+    result.append(risk);
     result.append(')');
     return result.toString();
   }

@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import xtext.objectsModel.Asset;
 import xtext.objectsModel.GovernanceStrategy;
 import xtext.objectsModel.ObjectsModelPackage;
-import xtext.objectsModel.Service;
 import xtext.objectsModel.ServiceProvider;
 
 /**
@@ -37,7 +36,6 @@ import xtext.objectsModel.ServiceProvider;
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getAssignTo <em>Assign To</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getOutsourceFrom <em>Outsource From</em>}</li>
- *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getTeamService <em>Team Service</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getGovernanceStrategy <em>Governance Strategy</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getResources <em>Resources</em>}</li>
  * </ul>
@@ -126,16 +124,6 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
    * @ordered
    */
   protected EList<ServiceProvider> outsourceFrom;
-
-  /**
-   * The cached value of the '{@link #getTeamService() <em>Team Service</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTeamService()
-   * @generated
-   * @ordered
-   */
-  protected Service teamService;
 
   /**
    * The cached value of the '{@link #getGovernanceStrategy() <em>Governance Strategy</em>}' reference.
@@ -280,49 +268,6 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public Service getTeamService()
-  {
-    if (teamService != null && teamService.eIsProxy())
-    {
-      InternalEObject oldTeamService = (InternalEObject)teamService;
-      teamService = (Service)eResolveProxy(oldTeamService);
-      if (teamService != oldTeamService)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObjectsModelPackage.SERVICE_PROVIDER__TEAM_SERVICE, oldTeamService, teamService));
-      }
-    }
-    return teamService;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Service basicGetTeamService()
-  {
-    return teamService;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTeamService(Service newTeamService)
-  {
-    Service oldTeamService = teamService;
-    teamService = newTeamService;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.SERVICE_PROVIDER__TEAM_SERVICE, oldTeamService, teamService));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public GovernanceStrategy getGovernanceStrategy()
   {
     if (governanceStrategy != null && governanceStrategy.eIsProxy())
@@ -411,9 +356,6 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
         return getAssignTo();
       case ObjectsModelPackage.SERVICE_PROVIDER__OUTSOURCE_FROM:
         return getOutsourceFrom();
-      case ObjectsModelPackage.SERVICE_PROVIDER__TEAM_SERVICE:
-        if (resolve) return getTeamService();
-        return basicGetTeamService();
       case ObjectsModelPackage.SERVICE_PROVIDER__GOVERNANCE_STRATEGY:
         if (resolve) return getGovernanceStrategy();
         return basicGetGovernanceStrategy();
@@ -451,9 +393,6 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
         getOutsourceFrom().clear();
         getOutsourceFrom().addAll((Collection<? extends ServiceProvider>)newValue);
         return;
-      case ObjectsModelPackage.SERVICE_PROVIDER__TEAM_SERVICE:
-        setTeamService((Service)newValue);
-        return;
       case ObjectsModelPackage.SERVICE_PROVIDER__GOVERNANCE_STRATEGY:
         setGovernanceStrategy((GovernanceStrategy)newValue);
         return;
@@ -490,9 +429,6 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
       case ObjectsModelPackage.SERVICE_PROVIDER__OUTSOURCE_FROM:
         getOutsourceFrom().clear();
         return;
-      case ObjectsModelPackage.SERVICE_PROVIDER__TEAM_SERVICE:
-        setTeamService((Service)null);
-        return;
       case ObjectsModelPackage.SERVICE_PROVIDER__GOVERNANCE_STRATEGY:
         setGovernanceStrategy((GovernanceStrategy)null);
         return;
@@ -523,8 +459,6 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
         return assignTo != null && !assignTo.isEmpty();
       case ObjectsModelPackage.SERVICE_PROVIDER__OUTSOURCE_FROM:
         return outsourceFrom != null && !outsourceFrom.isEmpty();
-      case ObjectsModelPackage.SERVICE_PROVIDER__TEAM_SERVICE:
-        return teamService != null;
       case ObjectsModelPackage.SERVICE_PROVIDER__GOVERNANCE_STRATEGY:
         return governanceStrategy != null;
       case ObjectsModelPackage.SERVICE_PROVIDER__RESOURCES:

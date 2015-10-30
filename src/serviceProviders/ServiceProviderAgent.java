@@ -14,13 +14,10 @@ import org.apache.commons.math3.util.FastMath;
 
 import contractNetProtocol.AbstractAgentBehavior;
 import datasemSimulator.SystemOfSystems;
-import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.util.ContextUtils;
 import repast.simphony.context.Context;
-import repast.simphony.engine.environment.RunEnvironment;
-import repast.simphony.engine.schedule.ISchedule;
 import workItems.AggregationNode;
 import workItems.AnalysisActivity;
 import workItems.AssistanceActivity;
@@ -48,13 +45,13 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		public LinkedList<ServiceProviderAgent> borrowResourceFrom = new LinkedList<ServiceProviderAgent>();
 		public int WIPLimit = Integer.MAX_VALUE;
 		public int BacklogLimit = Integer.MAX_VALUE;		
-		public LinkedList<WorkItemEntity> requestedQ = new LinkedList<WorkItemEntity>();
-		public LinkedList<WorkItemEntity> assignmentQ = new LinkedList<WorkItemEntity>();	
-		public LinkedList<Task> backlogQ = new LinkedList<Task>();
-		public LinkedList<Task> activeQ = new LinkedList<Task>();
-		public LinkedList<AggregationNode> complexQ = new LinkedList<AggregationNode>();
-		public LinkedList<WorkItemEntity> completeQ = new LinkedList<WorkItemEntity>();
-		public LinkedList<WorkItemEntity> coordinateQ = new LinkedList<WorkItemEntity>();
+		private LinkedList<WorkItemEntity> requestedQ = new LinkedList<WorkItemEntity>();
+		private LinkedList<WorkItemEntity> assignmentQ = new LinkedList<WorkItemEntity>();	
+		private LinkedList<Task> backlogQ = new LinkedList<Task>();
+		private LinkedList<Task> activeQ = new LinkedList<Task>();
+		private LinkedList<AggregationNode> complexQ = new LinkedList<AggregationNode>();
+		private LinkedList<WorkItemEntity> completeQ = new LinkedList<WorkItemEntity>();
+		private LinkedList<WorkItemEntity> coordinateQ = new LinkedList<WorkItemEntity>();
 		
 		private static final int BASE_PRIORITY_1 = 200;
 		private static final int SEQUENCE_CheckRequestedQ = 10;
@@ -66,6 +63,9 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		private static final int SEQUENCE_CheckAggregationNodesCompletion = 70;
 		private static final int SEQUENCE_DisburseWIs = 80;
 		
+		
+		// Visualization
+		public int[] location = new int[2];
 		// Dynamic Attributes
 		private double TotalWorkload;
 		private double ActiveWorkload;
@@ -166,7 +166,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 						double rEfficiency = wi.calculateResourceEfficiency();	
 						wi.setServiceEfficiency(rEfficiency);
 					// =========== Estimate Completion ====================				
-						double eEfforts = wi.getEfforts()/rEfficiency;
+						double eEfforts = wi.efforts/rEfficiency;
 						wi.estimatedEfforts = eEfforts;
 						double eCompletion= eEfforts + this.SoS.timeNow;
 						wi.estimatedCompletionTime = eCompletion;
@@ -263,17 +263,17 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			analysisActivity.setAssigned();
 			//System.out.println("\nANALYSIS AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" start analyzing"+aggrNode.fullName);
 		}	
-		public void requestAssistance(Task task) {
-			AssistanceActivity assistanceActivity = new AssistanceActivity(task);
-			task.addPredecessorTask(assistanceActivity);
+		public void requestAssistance(DevTask devTask) {
+			AssistanceActivity assistanceActivity = new AssistanceActivity(devTask);
+			devTask.addPredecessorTask(assistanceActivity);
 			//
 			@SuppressWarnings("unchecked")
 			Context<Object> context = ContextUtils.getContext(this);	
 			context.add(assistanceActivity);
 			//
-			this.activeQ.remove(task);
-			task.withdrawAllResources();
-			this.backlogQ.add(task);	
+			this.activeQ.remove(devTask);
+			devTask.withdrawAllResources();
+			this.backlogQ.add(devTask);	
 			this.requestedQ.add(assistanceActivity);
 
 		}
@@ -288,7 +288,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to BacklogLimit");
 				}				
 			}
-			if (requestedWI.isIsAggregationNode()) {
+			if (requestedWI.isAggregationNode) {
 				double eEfficiency = ((AggregationNode)requestedWI).calculateServiceEfficiency(this);	
 				if (eEfficiency==0) {
 					accept = false;
@@ -312,11 +312,11 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			//myValueManagement.manageValue(this, newWI);
 		}		
 		public void acceptWI(WorkItemEntity requestedWI) {
-			if (!requestedWI.isIsAggregationNode()) {
+			if (!requestedWI.isAggregationNode) {
 				requestedWI.setAssigned(); 
 				requestedWI.setAssignedAgent(this);
 				//System.out.println("\nACCEPTED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Accepted WI:"+requestedWI.fullName);
-				this.backlogQ.add((Task)requestedWI);								
+				this.backlogQ.add((Task)requestedWI);		
 				this.requestedQ.remove(requestedWI);
 			}
 			else {
@@ -341,6 +341,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 //						}
 //					}					
 					context.add(subtask);
+					SoS.arrivedList.put(subtask.getId(), subtask);
 					subtask.setRequester(this);										
 					this.requestedQ.add(subtask);
 					//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");			
@@ -352,7 +353,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		}
 		
 		public LinkedList<ServiceProviderAgent> findServiceProviders(WorkItemEntity wItem) {
-			int wItem_reqService_id = wItem.getServices().get(0).getId();
+			int wItem_reqService_id = wItem.serviceId;
 			LinkedList<ServiceProviderAgent> serviceProviderCandidates = new LinkedList<ServiceProviderAgent>();
 			for (ServiceProviderAgent tAgent: this.assignWITo) {
 				for (ResourceEntity sResource: tAgent.getMyResourceEntities()) {
@@ -371,7 +372,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			return serviceProviderCandidates;
 		}
 		public ArrayList<ResourceEntity> findResourceEntities(WorkItemEntity wItem) {
-			int wItem_reqService_id = wItem.getServices().get(0).getId();
+			int wItem_reqService_id = wItem.serviceId;
 			ArrayList<ResourceEntity> serviceResourceCandidates = new ArrayList<ResourceEntity>(0);
 			for (ResourceEntity sResource: this.getMyResourceEntities()) {
 				for (Skill sResourceSkill: sResource.getSkillSet()) {
@@ -413,12 +414,12 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			this.ActiveWorkload = 0;
 			for (int i=0;i<this.backlogQ.size();i++) {
 				WorkItemEntity workItem = this.backlogQ.get(i);
-				this.TotalWorkload += workItem.getEfforts()*(1-workItem.getProgress());
+				this.TotalWorkload += workItem.efforts*(1-workItem.getProgress());
 			}
 			for (int i=0;i<this.activeQ.size();i++) {
 				WorkItemEntity workItem = this.activeQ.get(i);
-				this.TotalWorkload += workItem.getEfforts()*(1-workItem.getProgress());
-				this.ActiveWorkload += workItem.getEfforts()*(1-workItem.getProgress());
+				this.TotalWorkload += workItem.efforts*(1-workItem.getProgress());
+				this.ActiveWorkload += workItem.efforts*(1-workItem.getProgress());
 			}
 			this.recordTotalWorkload.add(this.TotalWorkload);
 			this.recordActiveWorkload.add(this.ActiveWorkload);
@@ -439,6 +440,15 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		}
 		public LinkedList<Task> getBacklogQ()	{
 			return this.backlogQ;
+		}
+		public LinkedList<Task> getActiveQ()	{
+			return this.activeQ;
+		}
+		public LinkedList<WorkItemEntity> getCompleteQ()	{
+			return this.completeQ;
+		}
+		public LinkedList<AggregationNode> getComplexQ()	{
+			return this.complexQ;
 		}
 		public int getTotalWICount() {
 			int load = this.requestedQ.size()+this.activeQ.size()+this.backlogQ.size();
@@ -479,7 +489,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			this.ResourceUtilization_stdev = StatStdev(recordResourceUtilization);
 		}
 		public int getBottleneckCount() {
-			return this.getBottleNeckCount();
+			return this.BottleNeckCount;
 		}
 		public double getTotalWorkLoad_mean() {
 			return this.TotalWorkLoad_mean;

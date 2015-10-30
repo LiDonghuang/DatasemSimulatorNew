@@ -287,13 +287,22 @@ public interface ObjectsModelPackage extends EPackage
   int SERVICE__DESCRIPTION = 2;
 
   /**
+   * The feature id for the '<em><b>Hierarchy</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE__HIERARCHY = 3;
+
+  /**
    * The number of structural features of the '<em>Service</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SERVICE_FEATURE_COUNT = 3;
+  int SERVICE_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link xtext.objectsModel.impl.ServiceProviderImpl <em>Service Provider</em>}' class.
@@ -351,22 +360,13 @@ public interface ObjectsModelPackage extends EPackage
   int SERVICE_PROVIDER__OUTSOURCE_FROM = 4;
 
   /**
-   * The feature id for the '<em><b>Team Service</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SERVICE_PROVIDER__TEAM_SERVICE = 5;
-
-  /**
    * The feature id for the '<em><b>Governance Strategy</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SERVICE_PROVIDER__GOVERNANCE_STRATEGY = 6;
+  int SERVICE_PROVIDER__GOVERNANCE_STRATEGY = 5;
 
   /**
    * The feature id for the '<em><b>Resources</b></em>' containment reference list.
@@ -375,7 +375,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SERVICE_PROVIDER__RESOURCES = 7;
+  int SERVICE_PROVIDER__RESOURCES = 6;
 
   /**
    * The number of structural features of the '<em>Service Provider</em>' class.
@@ -384,7 +384,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SERVICE_PROVIDER_FEATURE_COUNT = 8;
+  int SERVICE_PROVIDER_FEATURE_COUNT = 7;
 
   /**
    * The meta object id for the '{@link xtext.objectsModel.impl.AssetImpl <em>Asset</em>}' class.
@@ -397,22 +397,22 @@ public interface ObjectsModelPackage extends EPackage
   int ASSET = 6;
 
   /**
-   * The feature id for the '<em><b>Id</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSET__ID = 0;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSET__NAME = 1;
+  int ASSET__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSET__ID = 1;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -489,22 +489,22 @@ public interface ObjectsModelPackage extends EPackage
   int WORK_ITEM_TYPE = 8;
 
   /**
-   * The feature id for the '<em><b>Id</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int WORK_ITEM_TYPE__ID = 0;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WORK_ITEM_TYPE__NAME = 1;
+  int WORK_ITEM_TYPE__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORK_ITEM_TYPE__ID = 1;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -544,22 +544,22 @@ public interface ObjectsModelPackage extends EPackage
   int WORK_ITEM = 9;
 
   /**
-   * The feature id for the '<em><b>Id</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int WORK_ITEM__ID = 0;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WORK_ITEM__NAME = 1;
+  int WORK_ITEM__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORK_ITEM__ID = 1;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -589,13 +589,22 @@ public interface ObjectsModelPackage extends EPackage
   int WORK_ITEM__HAS_PREDECESSORS = 4;
 
   /**
-   * The feature id for the '<em><b>PTasks</b></em>' reference list.
+   * The feature id for the '<em><b>Pd Tasks</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WORK_ITEM__PTASKS = 5;
+  int WORK_ITEM__PD_TASKS = 5;
+
+  /**
+   * The feature id for the '<em><b>Sc Tasks</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORK_ITEM__SC_TASKS = 6;
 
   /**
    * The feature id for the '<em><b>Is Aggregation Node</b></em>' attribute.
@@ -604,16 +613,25 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__IS_AGGREGATION_NODE = 6;
+  int WORK_ITEM__IS_AGGREGATION_NODE = 7;
 
   /**
-   * The feature id for the '<em><b>STasks</b></em>' reference list.
+   * The feature id for the '<em><b>Sb Tasks</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WORK_ITEM__STASKS = 7;
+  int WORK_ITEM__SB_TASKS = 8;
+
+  /**
+   * The feature id for the '<em><b>Up Tasks</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORK_ITEM__UP_TASKS = 9;
 
   /**
    * The feature id for the '<em><b>Has Impacts</b></em>' attribute.
@@ -622,7 +640,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__HAS_IMPACTS = 8;
+  int WORK_ITEM__HAS_IMPACTS = 10;
 
   /**
    * The feature id for the '<em><b>Impacts</b></em>' containment reference list.
@@ -631,7 +649,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__IMPACTS = 9;
+  int WORK_ITEM__IMPACTS = 11;
 
   /**
    * The feature id for the '<em><b>Required Services</b></em>' reference list.
@@ -640,16 +658,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__REQUIRED_SERVICES = 10;
-
-  /**
-   * The feature id for the '<em><b>Efforts</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int WORK_ITEM__EFFORTS = 11;
+  int WORK_ITEM__REQUIRED_SERVICES = 12;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -658,7 +667,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__VALUE = 12;
+  int WORK_ITEM__VALUE = 13;
 
   /**
    * The feature id for the '<em><b>Arrival Time</b></em>' attribute.
@@ -667,7 +676,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__ARRIVAL_TIME = 13;
+  int WORK_ITEM__ARRIVAL_TIME = 14;
 
   /**
    * The feature id for the '<em><b>Due Date</b></em>' attribute.
@@ -676,7 +685,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__DUE_DATE = 14;
+  int WORK_ITEM__DUE_DATE = 15;
 
   /**
    * The number of structural features of the '<em>Work Item</em>' class.
@@ -685,7 +694,44 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM_FEATURE_COUNT = 15;
+  int WORK_ITEM_FEATURE_COUNT = 16;
+
+  /**
+   * The meta object id for the '{@link xtext.objectsModel.impl.RequiredServiceImpl <em>Required Service</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xtext.objectsModel.impl.RequiredServiceImpl
+   * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getRequiredService()
+   * @generated
+   */
+  int REQUIRED_SERVICE = 10;
+
+  /**
+   * The feature id for the '<em><b>Service Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REQUIRED_SERVICE__SERVICE_TYPE = 0;
+
+  /**
+   * The feature id for the '<em><b>Efforts</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REQUIRED_SERVICE__EFFORTS = 1;
+
+  /**
+   * The number of structural features of the '<em>Required Service</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REQUIRED_SERVICE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link xtext.objectsModel.impl.ImpactImpl <em>Impact</em>}' class.
@@ -695,7 +741,7 @@ public interface ObjectsModelPackage extends EPackage
    * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getImpact()
    * @generated
    */
-  int IMPACT = 10;
+  int IMPACT = 11;
 
   /**
    * The feature id for the '<em><b>Impact WI</b></em>' reference.
@@ -716,13 +762,13 @@ public interface ObjectsModelPackage extends EPackage
   int IMPACT__LIKELIHOOD = 1;
 
   /**
-   * The feature id for the '<em><b>Impact</b></em>' attribute.
+   * The feature id for the '<em><b>Risk</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPACT__IMPACT = 2;
+  int IMPACT__RISK = 2;
 
   /**
    * The number of structural features of the '<em>Impact</em>' class.
@@ -961,6 +1007,17 @@ public interface ObjectsModelPackage extends EPackage
   EAttribute getService_Description();
 
   /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.Service#getHierarchy <em>Hierarchy</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Hierarchy</em>'.
+   * @see xtext.objectsModel.Service#getHierarchy()
+   * @see #getService()
+   * @generated
+   */
+  EAttribute getService_Hierarchy();
+
+  /**
    * Returns the meta object for class '{@link xtext.objectsModel.ServiceProvider <em>Service Provider</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1026,17 +1083,6 @@ public interface ObjectsModelPackage extends EPackage
   EReference getServiceProvider_OutsourceFrom();
 
   /**
-   * Returns the meta object for the reference '{@link xtext.objectsModel.ServiceProvider#getTeamService <em>Team Service</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Team Service</em>'.
-   * @see xtext.objectsModel.ServiceProvider#getTeamService()
-   * @see #getServiceProvider()
-   * @generated
-   */
-  EReference getServiceProvider_TeamService();
-
-  /**
    * Returns the meta object for the reference '{@link xtext.objectsModel.ServiceProvider#getGovernanceStrategy <em>Governance Strategy</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1069,17 +1115,6 @@ public interface ObjectsModelPackage extends EPackage
   EClass getAsset();
 
   /**
-   * Returns the meta object for the attribute '{@link xtext.objectsModel.Asset#getId <em>Id</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Id</em>'.
-   * @see xtext.objectsModel.Asset#getId()
-   * @see #getAsset()
-   * @generated
-   */
-  EAttribute getAsset_Id();
-
-  /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.Asset#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1089,6 +1124,17 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    */
   EAttribute getAsset_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.Asset#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Id</em>'.
+   * @see xtext.objectsModel.Asset#getId()
+   * @see #getAsset()
+   * @generated
+   */
+  EAttribute getAsset_Id();
 
   /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.Asset#getDescription <em>Description</em>}'.
@@ -1155,17 +1201,6 @@ public interface ObjectsModelPackage extends EPackage
   EClass getWorkItemType();
 
   /**
-   * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItemType#getId <em>Id</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Id</em>'.
-   * @see xtext.objectsModel.WorkItemType#getId()
-   * @see #getWorkItemType()
-   * @generated
-   */
-  EAttribute getWorkItemType_Id();
-
-  /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItemType#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1175,6 +1210,17 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    */
   EAttribute getWorkItemType_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItemType#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Id</em>'.
+   * @see xtext.objectsModel.WorkItemType#getId()
+   * @see #getWorkItemType()
+   * @generated
+   */
+  EAttribute getWorkItemType_Id();
 
   /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItemType#getDescription <em>Description</em>}'.
@@ -1209,17 +1255,6 @@ public interface ObjectsModelPackage extends EPackage
   EClass getWorkItem();
 
   /**
-   * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItem#getId <em>Id</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Id</em>'.
-   * @see xtext.objectsModel.WorkItem#getId()
-   * @see #getWorkItem()
-   * @generated
-   */
-  EAttribute getWorkItem_Id();
-
-  /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItem#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1229,6 +1264,17 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    */
   EAttribute getWorkItem_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItem#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Id</em>'.
+   * @see xtext.objectsModel.WorkItem#getId()
+   * @see #getWorkItem()
+   * @generated
+   */
+  EAttribute getWorkItem_Id();
 
   /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItem#getDescription <em>Description</em>}'.
@@ -1264,15 +1310,26 @@ public interface ObjectsModelPackage extends EPackage
   EAttribute getWorkItem_HasPredecessors();
 
   /**
-   * Returns the meta object for the reference list '{@link xtext.objectsModel.WorkItem#getPTasks <em>PTasks</em>}'.
+   * Returns the meta object for the reference list '{@link xtext.objectsModel.WorkItem#getPdTasks <em>Pd Tasks</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>PTasks</em>'.
-   * @see xtext.objectsModel.WorkItem#getPTasks()
+   * @return the meta object for the reference list '<em>Pd Tasks</em>'.
+   * @see xtext.objectsModel.WorkItem#getPdTasks()
    * @see #getWorkItem()
    * @generated
    */
-  EReference getWorkItem_PTasks();
+  EReference getWorkItem_PdTasks();
+
+  /**
+   * Returns the meta object for the reference list '{@link xtext.objectsModel.WorkItem#getScTasks <em>Sc Tasks</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Sc Tasks</em>'.
+   * @see xtext.objectsModel.WorkItem#getScTasks()
+   * @see #getWorkItem()
+   * @generated
+   */
+  EReference getWorkItem_ScTasks();
 
   /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItem#isIsAggregationNode <em>Is Aggregation Node</em>}'.
@@ -1286,15 +1343,26 @@ public interface ObjectsModelPackage extends EPackage
   EAttribute getWorkItem_IsAggregationNode();
 
   /**
-   * Returns the meta object for the reference list '{@link xtext.objectsModel.WorkItem#getSTasks <em>STasks</em>}'.
+   * Returns the meta object for the reference list '{@link xtext.objectsModel.WorkItem#getSbTasks <em>Sb Tasks</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>STasks</em>'.
-   * @see xtext.objectsModel.WorkItem#getSTasks()
+   * @return the meta object for the reference list '<em>Sb Tasks</em>'.
+   * @see xtext.objectsModel.WorkItem#getSbTasks()
    * @see #getWorkItem()
    * @generated
    */
-  EReference getWorkItem_STasks();
+  EReference getWorkItem_SbTasks();
+
+  /**
+   * Returns the meta object for the reference list '{@link xtext.objectsModel.WorkItem#getUpTasks <em>Up Tasks</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Up Tasks</em>'.
+   * @see xtext.objectsModel.WorkItem#getUpTasks()
+   * @see #getWorkItem()
+   * @generated
+   */
+  EReference getWorkItem_UpTasks();
 
   /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItem#isHasImpacts <em>Has Impacts</em>}'.
@@ -1323,22 +1391,11 @@ public interface ObjectsModelPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference list '<em>Required Services</em>'.
-   * @see xtext.objectsModel.WorkItem#getServices()
+   * @see xtext.objectsModel.WorkItem#getRequiredServices()
    * @see #getWorkItem()
    * @generated
    */
   EReference getWorkItem_RequiredServices();
-
-  /**
-   * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItem#getEfforts <em>Efforts</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Efforts</em>'.
-   * @see xtext.objectsModel.WorkItem#getEfforts()
-   * @see #getWorkItem()
-   * @generated
-   */
-  EAttribute getWorkItem_Efforts();
 
   /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.WorkItem#getValue <em>Value</em>}'.
@@ -1374,6 +1431,38 @@ public interface ObjectsModelPackage extends EPackage
   EAttribute getWorkItem_DueDate();
 
   /**
+   * Returns the meta object for class '{@link xtext.objectsModel.RequiredService <em>Required Service</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Required Service</em>'.
+   * @see xtext.objectsModel.RequiredService
+   * @generated
+   */
+  EClass getRequiredService();
+
+  /**
+   * Returns the meta object for the reference '{@link xtext.objectsModel.RequiredService#getServiceType <em>Service Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Service Type</em>'.
+   * @see xtext.objectsModel.RequiredService#getServiceType()
+   * @see #getRequiredService()
+   * @generated
+   */
+  EReference getRequiredService_ServiceType();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.RequiredService#getEfforts <em>Efforts</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Efforts</em>'.
+   * @see xtext.objectsModel.RequiredService#getEfforts()
+   * @see #getRequiredService()
+   * @generated
+   */
+  EAttribute getRequiredService_Efforts();
+
+  /**
    * Returns the meta object for class '{@link xtext.objectsModel.Impact <em>Impact</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1406,15 +1495,15 @@ public interface ObjectsModelPackage extends EPackage
   EAttribute getImpact_Likelihood();
 
   /**
-   * Returns the meta object for the attribute '{@link xtext.objectsModel.Impact#getImpact <em>Impact</em>}'.
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.Impact#getRisk <em>Risk</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Impact</em>'.
-   * @see xtext.objectsModel.Impact#getImpact()
+   * @return the meta object for the attribute '<em>Risk</em>'.
+   * @see xtext.objectsModel.Impact#getRisk()
    * @see #getImpact()
    * @generated
    */
-  EAttribute getImpact_Impact();
+  EAttribute getImpact_Risk();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1618,6 +1707,14 @@ public interface ObjectsModelPackage extends EPackage
     EAttribute SERVICE__DESCRIPTION = eINSTANCE.getService_Description();
 
     /**
+     * The meta object literal for the '<em><b>Hierarchy</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SERVICE__HIERARCHY = eINSTANCE.getService_Hierarchy();
+
+    /**
      * The meta object literal for the '{@link xtext.objectsModel.impl.ServiceProviderImpl <em>Service Provider</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1668,14 +1765,6 @@ public interface ObjectsModelPackage extends EPackage
     EReference SERVICE_PROVIDER__OUTSOURCE_FROM = eINSTANCE.getServiceProvider_OutsourceFrom();
 
     /**
-     * The meta object literal for the '<em><b>Team Service</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SERVICE_PROVIDER__TEAM_SERVICE = eINSTANCE.getServiceProvider_TeamService();
-
-    /**
      * The meta object literal for the '<em><b>Governance Strategy</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1702,20 +1791,20 @@ public interface ObjectsModelPackage extends EPackage
     EClass ASSET = eINSTANCE.getAsset();
 
     /**
-     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ASSET__ID = eINSTANCE.getAsset_Id();
-
-    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute ASSET__NAME = eINSTANCE.getAsset_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ASSET__ID = eINSTANCE.getAsset_Id();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -1770,20 +1859,20 @@ public interface ObjectsModelPackage extends EPackage
     EClass WORK_ITEM_TYPE = eINSTANCE.getWorkItemType();
 
     /**
-     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute WORK_ITEM_TYPE__ID = eINSTANCE.getWorkItemType_Id();
-
-    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute WORK_ITEM_TYPE__NAME = eINSTANCE.getWorkItemType_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute WORK_ITEM_TYPE__ID = eINSTANCE.getWorkItemType_Id();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -1812,20 +1901,20 @@ public interface ObjectsModelPackage extends EPackage
     EClass WORK_ITEM = eINSTANCE.getWorkItem();
 
     /**
-     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute WORK_ITEM__ID = eINSTANCE.getWorkItem_Id();
-
-    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute WORK_ITEM__NAME = eINSTANCE.getWorkItem_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute WORK_ITEM__ID = eINSTANCE.getWorkItem_Id();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -1852,12 +1941,20 @@ public interface ObjectsModelPackage extends EPackage
     EAttribute WORK_ITEM__HAS_PREDECESSORS = eINSTANCE.getWorkItem_HasPredecessors();
 
     /**
-     * The meta object literal for the '<em><b>PTasks</b></em>' reference list feature.
+     * The meta object literal for the '<em><b>Pd Tasks</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference WORK_ITEM__PTASKS = eINSTANCE.getWorkItem_PTasks();
+    EReference WORK_ITEM__PD_TASKS = eINSTANCE.getWorkItem_PdTasks();
+
+    /**
+     * The meta object literal for the '<em><b>Sc Tasks</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WORK_ITEM__SC_TASKS = eINSTANCE.getWorkItem_ScTasks();
 
     /**
      * The meta object literal for the '<em><b>Is Aggregation Node</b></em>' attribute feature.
@@ -1868,12 +1965,20 @@ public interface ObjectsModelPackage extends EPackage
     EAttribute WORK_ITEM__IS_AGGREGATION_NODE = eINSTANCE.getWorkItem_IsAggregationNode();
 
     /**
-     * The meta object literal for the '<em><b>STasks</b></em>' reference list feature.
+     * The meta object literal for the '<em><b>Sb Tasks</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference WORK_ITEM__STASKS = eINSTANCE.getWorkItem_STasks();
+    EReference WORK_ITEM__SB_TASKS = eINSTANCE.getWorkItem_SbTasks();
+
+    /**
+     * The meta object literal for the '<em><b>Up Tasks</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WORK_ITEM__UP_TASKS = eINSTANCE.getWorkItem_UpTasks();
 
     /**
      * The meta object literal for the '<em><b>Has Impacts</b></em>' attribute feature.
@@ -1900,14 +2005,6 @@ public interface ObjectsModelPackage extends EPackage
     EReference WORK_ITEM__REQUIRED_SERVICES = eINSTANCE.getWorkItem_RequiredServices();
 
     /**
-     * The meta object literal for the '<em><b>Efforts</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute WORK_ITEM__EFFORTS = eINSTANCE.getWorkItem_Efforts();
-
-    /**
      * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1930,6 +2027,32 @@ public interface ObjectsModelPackage extends EPackage
      * @generated
      */
     EAttribute WORK_ITEM__DUE_DATE = eINSTANCE.getWorkItem_DueDate();
+
+    /**
+     * The meta object literal for the '{@link xtext.objectsModel.impl.RequiredServiceImpl <em>Required Service</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xtext.objectsModel.impl.RequiredServiceImpl
+     * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getRequiredService()
+     * @generated
+     */
+    EClass REQUIRED_SERVICE = eINSTANCE.getRequiredService();
+
+    /**
+     * The meta object literal for the '<em><b>Service Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REQUIRED_SERVICE__SERVICE_TYPE = eINSTANCE.getRequiredService_ServiceType();
+
+    /**
+     * The meta object literal for the '<em><b>Efforts</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REQUIRED_SERVICE__EFFORTS = eINSTANCE.getRequiredService_Efforts();
 
     /**
      * The meta object literal for the '{@link xtext.objectsModel.impl.ImpactImpl <em>Impact</em>}' class.
@@ -1958,12 +2081,12 @@ public interface ObjectsModelPackage extends EPackage
     EAttribute IMPACT__LIKELIHOOD = eINSTANCE.getImpact_Likelihood();
 
     /**
-     * The meta object literal for the '<em><b>Impact</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Risk</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute IMPACT__IMPACT = eINSTANCE.getImpact_Impact();
+    EAttribute IMPACT__RISK = eINSTANCE.getImpact_Risk();
 
   }
 

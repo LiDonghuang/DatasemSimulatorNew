@@ -14,18 +14,19 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link xtext.objectsModel.WorkItem#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getName <em>Name</em>}</li>
+ *   <li>{@link xtext.objectsModel.WorkItem#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getDescription <em>Description</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getType <em>Type</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#isHasPredecessors <em>Has Predecessors</em>}</li>
- *   <li>{@link xtext.objectsModel.WorkItem#getPTasks <em>PTasks</em>}</li>
+ *   <li>{@link xtext.objectsModel.WorkItem#getPdTasks <em>Pd Tasks</em>}</li>
+ *   <li>{@link xtext.objectsModel.WorkItem#getScTasks <em>Sc Tasks</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#isIsAggregationNode <em>Is Aggregation Node</em>}</li>
- *   <li>{@link xtext.objectsModel.WorkItem#getSTasks <em>STasks</em>}</li>
+ *   <li>{@link xtext.objectsModel.WorkItem#getSbTasks <em>Sb Tasks</em>}</li>
+ *   <li>{@link xtext.objectsModel.WorkItem#getUpTasks <em>Up Tasks</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#isHasImpacts <em>Has Impacts</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getImpacts <em>Impacts</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getRequiredServices <em>Required Services</em>}</li>
- *   <li>{@link xtext.objectsModel.WorkItem#getEfforts <em>Efforts</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getValue <em>Value</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getArrivalTime <em>Arrival Time</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getDueDate <em>Due Date</em>}</li>
@@ -38,32 +39,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface WorkItem extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Id</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Id</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Id</em>' attribute.
-   * @see #setId(int)
-   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_Id()
-   * @model
-   * @generated
-   */
-  int getId();
-
-  /**
-   * Sets the value of the '{@link xtext.objectsModel.WorkItem#getId <em>Id</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Id</em>' attribute.
-   * @see #getId()
-   * @generated
-   */
-  void setId(int value);
-
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -89,6 +64,32 @@ public interface WorkItem extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Id</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Id</em>' attribute.
+   * @see #setId(int)
+   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_Id()
+   * @model
+   * @generated
+   */
+  int getId();
+
+  /**
+   * Sets the value of the '{@link xtext.objectsModel.WorkItem#getId <em>Id</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Id</em>' attribute.
+   * @see #getId()
+   * @generated
+   */
+  void setId(int value);
 
   /**
    * Returns the value of the '<em><b>Description</b></em>' attribute.
@@ -169,20 +170,36 @@ public interface WorkItem extends EObject
   void setHasPredecessors(boolean value);
 
   /**
-   * Returns the value of the '<em><b>PTasks</b></em>' reference list.
+   * Returns the value of the '<em><b>Pd Tasks</b></em>' reference list.
    * The list contents are of type {@link xtext.objectsModel.WorkItem}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>PTasks</em>' reference list isn't clear,
+   * If the meaning of the '<em>Pd Tasks</em>' reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>PTasks</em>' reference list.
-   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_PTasks()
+   * @return the value of the '<em>Pd Tasks</em>' reference list.
+   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_PdTasks()
    * @model
    * @generated
    */
-  EList<WorkItem> getPTasks();
+  EList<WorkItem> getPdTasks();
+
+  /**
+   * Returns the value of the '<em><b>Sc Tasks</b></em>' reference list.
+   * The list contents are of type {@link xtext.objectsModel.WorkItem}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Sc Tasks</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Sc Tasks</em>' reference list.
+   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_ScTasks()
+   * @model
+   * @generated
+   */
+  EList<WorkItem> getScTasks();
 
   /**
    * Returns the value of the '<em><b>Is Aggregation Node</b></em>' attribute.
@@ -211,20 +228,36 @@ public interface WorkItem extends EObject
   void setIsAggregationNode(boolean value);
 
   /**
-   * Returns the value of the '<em><b>STasks</b></em>' reference list.
+   * Returns the value of the '<em><b>Sb Tasks</b></em>' reference list.
    * The list contents are of type {@link xtext.objectsModel.WorkItem}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>STasks</em>' reference list isn't clear,
+   * If the meaning of the '<em>Sb Tasks</em>' reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>STasks</em>' reference list.
-   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_STasks()
+   * @return the value of the '<em>Sb Tasks</em>' reference list.
+   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_SbTasks()
    * @model
    * @generated
    */
-  EList<WorkItem> getSTasks();
+  EList<WorkItem> getSbTasks();
+
+  /**
+   * Returns the value of the '<em><b>Up Tasks</b></em>' reference list.
+   * The list contents are of type {@link xtext.objectsModel.WorkItem}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Up Tasks</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Up Tasks</em>' reference list.
+   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_UpTasks()
+   * @model
+   * @generated
+   */
+  EList<WorkItem> getUpTasks();
 
   /**
    * Returns the value of the '<em><b>Has Impacts</b></em>' attribute.
@@ -270,7 +303,7 @@ public interface WorkItem extends EObject
 
   /**
    * Returns the value of the '<em><b>Required Services</b></em>' reference list.
-   * The list contents are of type {@link xtext.objectsModel.Service}.
+   * The list contents are of type {@link xtext.objectsModel.RequiredService}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Required Services</em>' reference list isn't clear,
@@ -282,33 +315,7 @@ public interface WorkItem extends EObject
    * @model
    * @generated
    */
-  EList<Service> getRequiredServices();
-
-  /**
-   * Returns the value of the '<em><b>Efforts</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Efforts</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Efforts</em>' attribute.
-   * @see #setEfforts(double)
-   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_Efforts()
-   * @model
-   * @generated
-   */
-  double getEfforts();
-
-  /**
-   * Sets the value of the '{@link xtext.objectsModel.WorkItem#getEfforts <em>Efforts</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Efforts</em>' attribute.
-   * @see #getEfforts()
-   * @generated
-   */
-  void setEfforts(double value);
+  EList<RequiredService> getRequiredServices();
 
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.

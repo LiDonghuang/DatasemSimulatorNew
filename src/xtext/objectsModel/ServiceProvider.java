@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link xtext.objectsModel.ServiceProvider#getDescription <em>Description</em>}</li>
  *   <li>{@link xtext.objectsModel.ServiceProvider#getAssignTo <em>Assign To</em>}</li>
  *   <li>{@link xtext.objectsModel.ServiceProvider#getOutsourceFrom <em>Outsource From</em>}</li>
- *   <li>{@link xtext.objectsModel.ServiceProvider#getTeamService <em>Team Service</em>}</li>
  *   <li>{@link xtext.objectsModel.ServiceProvider#getGovernanceStrategy <em>Governance Strategy</em>}</li>
  *   <li>{@link xtext.objectsModel.ServiceProvider#getResources <em>Resources</em>}</li>
  * </ul>
@@ -140,32 +139,6 @@ public interface ServiceProvider extends EObject
    * @generated
    */
   EList<ServiceProvider> getOutsourceFrom();
-
-  /**
-   * Returns the value of the '<em><b>Team Service</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Team Service</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Team Service</em>' reference.
-   * @see #setTeamService(Service)
-   * @see xtext.objectsModel.ObjectsModelPackage#getServiceProvider_TeamService()
-   * @model
-   * @generated
-   */
-  Service getTeamService();
-
-  /**
-   * Sets the value of the '{@link xtext.objectsModel.ServiceProvider#getTeamService <em>Team Service</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Team Service</em>' reference.
-   * @see #getTeamService()
-   * @generated
-   */
-  void setTeamService(Service value);
 
   /**
    * Returns the value of the '<em><b>Governance Strategy</b></em>' reference.

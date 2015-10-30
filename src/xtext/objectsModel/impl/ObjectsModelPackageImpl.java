@@ -17,6 +17,7 @@ import xtext.objectsModel.MechanismAttribute;
 import xtext.objectsModel.ObjectsModel;
 import xtext.objectsModel.ObjectsModelFactory;
 import xtext.objectsModel.ObjectsModelPackage;
+import xtext.objectsModel.RequiredService;
 import xtext.objectsModel.Service;
 import xtext.objectsModel.ServiceProvider;
 import xtext.objectsModel.Skill;
@@ -100,6 +101,13 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * @generated
    */
   private EClass workItemEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass requiredServiceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -386,6 +394,16 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getService_Hierarchy()
+  {
+    return (EAttribute)serviceEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getServiceProvider()
   {
     return serviceProviderEClass;
@@ -446,7 +464,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getServiceProvider_TeamService()
+  public EReference getServiceProvider_GovernanceStrategy()
   {
     return (EReference)serviceProviderEClass.getEStructuralFeatures().get(5);
   }
@@ -456,19 +474,9 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getServiceProvider_GovernanceStrategy()
-  {
-    return (EReference)serviceProviderEClass.getEStructuralFeatures().get(6);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getServiceProvider_Resources()
   {
-    return (EReference)serviceProviderEClass.getEStructuralFeatures().get(7);
+    return (EReference)serviceProviderEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -486,7 +494,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAsset_Id()
+  public EAttribute getAsset_Name()
   {
     return (EAttribute)assetEClass.getEStructuralFeatures().get(0);
   }
@@ -496,7 +504,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAsset_Name()
+  public EAttribute getAsset_Id()
   {
     return (EAttribute)assetEClass.getEStructuralFeatures().get(1);
   }
@@ -566,7 +574,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkItemType_Id()
+  public EAttribute getWorkItemType_Name()
   {
     return (EAttribute)workItemTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -576,7 +584,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkItemType_Name()
+  public EAttribute getWorkItemType_Id()
   {
     return (EAttribute)workItemTypeEClass.getEStructuralFeatures().get(1);
   }
@@ -616,7 +624,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkItem_Id()
+  public EAttribute getWorkItem_Name()
   {
     return (EAttribute)workItemEClass.getEStructuralFeatures().get(0);
   }
@@ -626,7 +634,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkItem_Name()
+  public EAttribute getWorkItem_Id()
   {
     return (EAttribute)workItemEClass.getEStructuralFeatures().get(1);
   }
@@ -666,7 +674,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWorkItem_PTasks()
+  public EReference getWorkItem_PdTasks()
   {
     return (EReference)workItemEClass.getEStructuralFeatures().get(5);
   }
@@ -676,9 +684,19 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getWorkItem_ScTasks()
+  {
+    return (EReference)workItemEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EAttribute getWorkItem_IsAggregationNode()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(6);
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -686,9 +704,9 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWorkItem_STasks()
+  public EReference getWorkItem_SbTasks()
   {
-    return (EReference)workItemEClass.getEStructuralFeatures().get(7);
+    return (EReference)workItemEClass.getEStructuralFeatures().get(8);
   }
 
   /**
@@ -696,17 +714,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkItem_HasImpacts()
-  {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(8);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getWorkItem_Impacts()
+  public EReference getWorkItem_UpTasks()
   {
     return (EReference)workItemEClass.getEStructuralFeatures().get(9);
   }
@@ -716,9 +724,9 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWorkItem_RequiredServices()
+  public EAttribute getWorkItem_HasImpacts()
   {
-    return (EReference)workItemEClass.getEStructuralFeatures().get(10);
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(10);
   }
 
   /**
@@ -726,9 +734,19 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkItem_Efforts()
+  public EReference getWorkItem_Impacts()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(11);
+    return (EReference)workItemEClass.getEStructuralFeatures().get(11);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWorkItem_RequiredServices()
+  {
+    return (EReference)workItemEClass.getEStructuralFeatures().get(12);
   }
 
   /**
@@ -738,7 +756,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    */
   public EAttribute getWorkItem_Value()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(12);
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(13);
   }
 
   /**
@@ -748,7 +766,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    */
   public EAttribute getWorkItem_ArrivalTime()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(13);
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(14);
   }
 
   /**
@@ -758,7 +776,37 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    */
   public EAttribute getWorkItem_DueDate()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(14);
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(15);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRequiredService()
+  {
+    return requiredServiceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRequiredService_ServiceType()
+  {
+    return (EReference)requiredServiceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRequiredService_Efforts()
+  {
+    return (EAttribute)requiredServiceEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -796,7 +844,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getImpact_Impact()
+  public EAttribute getImpact_Risk()
   {
     return (EAttribute)impactEClass.getEStructuralFeatures().get(2);
   }
@@ -856,6 +904,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     createEAttribute(serviceEClass, SERVICE__ID);
     createEAttribute(serviceEClass, SERVICE__NAME);
     createEAttribute(serviceEClass, SERVICE__DESCRIPTION);
+    createEAttribute(serviceEClass, SERVICE__HIERARCHY);
 
     serviceProviderEClass = createEClass(SERVICE_PROVIDER);
     createEAttribute(serviceProviderEClass, SERVICE_PROVIDER__ID);
@@ -863,13 +912,12 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     createEAttribute(serviceProviderEClass, SERVICE_PROVIDER__DESCRIPTION);
     createEReference(serviceProviderEClass, SERVICE_PROVIDER__ASSIGN_TO);
     createEReference(serviceProviderEClass, SERVICE_PROVIDER__OUTSOURCE_FROM);
-    createEReference(serviceProviderEClass, SERVICE_PROVIDER__TEAM_SERVICE);
     createEReference(serviceProviderEClass, SERVICE_PROVIDER__GOVERNANCE_STRATEGY);
     createEReference(serviceProviderEClass, SERVICE_PROVIDER__RESOURCES);
 
     assetEClass = createEClass(ASSET);
-    createEAttribute(assetEClass, ASSET__ID);
     createEAttribute(assetEClass, ASSET__NAME);
+    createEAttribute(assetEClass, ASSET__ID);
     createEAttribute(assetEClass, ASSET__DESCRIPTION);
     createEReference(assetEClass, ASSET__SKILL_SET);
 
@@ -878,32 +926,37 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     createEAttribute(skillEClass, SKILL__EFFICIENCY);
 
     workItemTypeEClass = createEClass(WORK_ITEM_TYPE);
-    createEAttribute(workItemTypeEClass, WORK_ITEM_TYPE__ID);
     createEAttribute(workItemTypeEClass, WORK_ITEM_TYPE__NAME);
+    createEAttribute(workItemTypeEClass, WORK_ITEM_TYPE__ID);
     createEAttribute(workItemTypeEClass, WORK_ITEM_TYPE__DESCRIPTION);
     createEAttribute(workItemTypeEClass, WORK_ITEM_TYPE__HIERARCHY);
 
     workItemEClass = createEClass(WORK_ITEM);
-    createEAttribute(workItemEClass, WORK_ITEM__ID);
     createEAttribute(workItemEClass, WORK_ITEM__NAME);
+    createEAttribute(workItemEClass, WORK_ITEM__ID);
     createEAttribute(workItemEClass, WORK_ITEM__DESCRIPTION);
     createEReference(workItemEClass, WORK_ITEM__TYPE);
     createEAttribute(workItemEClass, WORK_ITEM__HAS_PREDECESSORS);
-    createEReference(workItemEClass, WORK_ITEM__PTASKS);
+    createEReference(workItemEClass, WORK_ITEM__PD_TASKS);
+    createEReference(workItemEClass, WORK_ITEM__SC_TASKS);
     createEAttribute(workItemEClass, WORK_ITEM__IS_AGGREGATION_NODE);
-    createEReference(workItemEClass, WORK_ITEM__STASKS);
+    createEReference(workItemEClass, WORK_ITEM__SB_TASKS);
+    createEReference(workItemEClass, WORK_ITEM__UP_TASKS);
     createEAttribute(workItemEClass, WORK_ITEM__HAS_IMPACTS);
     createEReference(workItemEClass, WORK_ITEM__IMPACTS);
     createEReference(workItemEClass, WORK_ITEM__REQUIRED_SERVICES);
-    createEAttribute(workItemEClass, WORK_ITEM__EFFORTS);
     createEAttribute(workItemEClass, WORK_ITEM__VALUE);
     createEAttribute(workItemEClass, WORK_ITEM__ARRIVAL_TIME);
     createEAttribute(workItemEClass, WORK_ITEM__DUE_DATE);
 
+    requiredServiceEClass = createEClass(REQUIRED_SERVICE);
+    createEReference(requiredServiceEClass, REQUIRED_SERVICE__SERVICE_TYPE);
+    createEAttribute(requiredServiceEClass, REQUIRED_SERVICE__EFFORTS);
+
     impactEClass = createEClass(IMPACT);
     createEReference(impactEClass, IMPACT__IMPACT_WI);
     createEAttribute(impactEClass, IMPACT__LIKELIHOOD);
-    createEAttribute(impactEClass, IMPACT__IMPACT);
+    createEAttribute(impactEClass, IMPACT__RISK);
   }
 
   /**
@@ -962,6 +1015,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     initEAttribute(getService_Id(), ecorePackage.getEInt(), "id", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getService_Name(), ecorePackage.getEString(), "name", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getService_Description(), ecorePackage.getEString(), "description", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getService_Hierarchy(), ecorePackage.getEInt(), "hierarchy", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(serviceProviderEClass, ServiceProvider.class, "ServiceProvider", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getServiceProvider_Id(), ecorePackage.getEInt(), "id", null, 0, 1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -969,13 +1023,12 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     initEAttribute(getServiceProvider_Description(), ecorePackage.getEString(), "description", null, 0, 1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getServiceProvider_AssignTo(), this.getServiceProvider(), null, "assignTo", null, 0, -1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getServiceProvider_OutsourceFrom(), this.getServiceProvider(), null, "outsourceFrom", null, 0, -1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getServiceProvider_TeamService(), this.getService(), null, "teamService", null, 0, 1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getServiceProvider_GovernanceStrategy(), this.getGovernanceStrategy(), null, "governanceStrategy", null, 0, 1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getServiceProvider_Resources(), this.getAsset(), null, "resources", null, 0, -1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(assetEClass, Asset.class, "Asset", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAsset_Id(), ecorePackage.getEInt(), "id", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAsset_Name(), ecorePackage.getEString(), "name", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAsset_Id(), ecorePackage.getEInt(), "id", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAsset_Description(), ecorePackage.getEString(), "description", null, 0, 1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAsset_SkillSet(), this.getSkill(), null, "skillSet", null, 0, -1, Asset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -984,32 +1037,37 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     initEAttribute(getSkill_Efficiency(), ecorePackage.getEDouble(), "efficiency", null, 0, 1, Skill.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(workItemTypeEClass, WorkItemType.class, "WorkItemType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getWorkItemType_Id(), ecorePackage.getEInt(), "id", null, 0, 1, WorkItemType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItemType_Name(), ecorePackage.getEString(), "name", null, 0, 1, WorkItemType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getWorkItemType_Id(), ecorePackage.getEInt(), "id", null, 0, 1, WorkItemType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItemType_Description(), ecorePackage.getEString(), "description", null, 0, 1, WorkItemType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItemType_Hierarchy(), ecorePackage.getEInt(), "hierarchy", null, 0, 1, WorkItemType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(workItemEClass, WorkItem.class, "WorkItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getWorkItem_Id(), ecorePackage.getEInt(), "id", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getWorkItem_Id(), ecorePackage.getEInt(), "id", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_Description(), ecorePackage.getEString(), "description", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWorkItem_Type(), this.getWorkItemType(), null, "type", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_HasPredecessors(), ecorePackage.getEBoolean(), "hasPredecessors", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getWorkItem_PTasks(), this.getWorkItem(), null, "pTasks", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWorkItem_PdTasks(), this.getWorkItem(), null, "PdTasks", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWorkItem_ScTasks(), this.getWorkItem(), null, "ScTasks", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_IsAggregationNode(), ecorePackage.getEBoolean(), "isAggregationNode", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getWorkItem_STasks(), this.getWorkItem(), null, "sTasks", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWorkItem_SbTasks(), this.getWorkItem(), null, "SbTasks", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWorkItem_UpTasks(), this.getWorkItem(), null, "UpTasks", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_HasImpacts(), ecorePackage.getEBoolean(), "hasImpacts", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWorkItem_Impacts(), this.getImpact(), null, "impacts", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getWorkItem_RequiredServices(), this.getService(), null, "requiredServices", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getWorkItem_Efforts(), ecorePackage.getEDouble(), "efforts", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWorkItem_RequiredServices(), this.getRequiredService(), null, "requiredServices", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_ArrivalTime(), ecorePackage.getEInt(), "arrivalTime", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_DueDate(), ecorePackage.getEInt(), "dueDate", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(requiredServiceEClass, RequiredService.class, "RequiredService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRequiredService_ServiceType(), this.getService(), null, "serviceType", null, 0, 1, RequiredService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRequiredService_Efforts(), ecorePackage.getEDouble(), "efforts", null, 0, 1, RequiredService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(impactEClass, Impact.class, "Impact", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getImpact_ImpactWI(), this.getWorkItem(), null, "impactWI", null, 0, 1, Impact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getImpact_Likelihood(), ecorePackage.getEDouble(), "likelihood", null, 0, 1, Impact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getImpact_Impact(), ecorePackage.getEDouble(), "impact", null, 0, 1, Impact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getImpact_Risk(), ecorePackage.getEDouble(), "risk", null, 0, 1, Impact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

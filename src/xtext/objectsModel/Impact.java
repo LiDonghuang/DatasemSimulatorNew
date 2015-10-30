@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link xtext.objectsModel.Impact#getImpactWI <em>Impact WI</em>}</li>
  *   <li>{@link xtext.objectsModel.Impact#getLikelihood <em>Likelihood</em>}</li>
- *   <li>{@link xtext.objectsModel.Impact#getImpact <em>Impact</em>}</li>
+ *   <li>{@link xtext.objectsModel.Impact#getRisk <em>Risk</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,29 +77,29 @@ public interface Impact extends EObject
   void setLikelihood(double value);
 
   /**
-   * Returns the value of the '<em><b>Impact</b></em>' attribute.
+   * Returns the value of the '<em><b>Risk</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Impact</em>' attribute isn't clear,
+   * If the meaning of the '<em>Risk</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Impact</em>' attribute.
-   * @see #setImpact(double)
-   * @see xtext.objectsModel.ObjectsModelPackage#getImpact_Impact()
+   * @return the value of the '<em>Risk</em>' attribute.
+   * @see #setRisk(double)
+   * @see xtext.objectsModel.ObjectsModelPackage#getImpact_Risk()
    * @model
    * @generated
    */
-  double getImpact();
+  double getRisk();
 
   /**
-   * Sets the value of the '{@link xtext.objectsModel.Impact#getImpact <em>Impact</em>}' attribute.
+   * Sets the value of the '{@link xtext.objectsModel.Impact#getRisk <em>Risk</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Impact</em>' attribute.
-   * @see #getImpact()
+   * @param value the new value of the '<em>Risk</em>' attribute.
+   * @see #getRisk()
    * @generated
    */
-  void setImpact(double value);
+  void setRisk(double value);
 
 } // Impact

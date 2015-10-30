@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <parameters>
-					<parameter name="TaskRisk" displayName="Task Risk" type="double" 
-						defaultValue="0.2" 
-						isReadOnly="false" 
-						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
-									
-		/>
-				<parameter name="randomSeed" displayName="Default Random Seed" type="int" 
+					<parameter name="randomSeed" displayName="Default Random Seed" type="int" 
 						defaultValue="__NULL__"
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
@@ -18,16 +12,10 @@
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
-				<parameter name="TaskChangePropagationRisk" displayName="Task Change Propagation Risk" type="double" 
-						defaultValue="1.0" 
+				<parameter name="TaskRisk" displayName="Task Risk" type="double" 
+						defaultValue="0.2" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
-									
-		/>
-				<parameter name="NumReplications" displayName="NumReplications" type="int" 
-						defaultValue="1" 
-						isReadOnly="true" 
-						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
 				<parameter name="TaskUncertainty" displayName="Task Uncertainty" type="double" 
@@ -36,9 +24,27 @@
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
+				<parameter name="ObserveWIType1" displayName="Observe WI Type 1" type="java.lang.String" 
+						defaultValue="SoSCap" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
+									
+		/>
+				<parameter name="TaskChangePropagationRisk" displayName="Task Change Propagation Risk" type="double" 
+						defaultValue="1.0" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+									
+		/>
 				<parameter name="TaskMaturityLevels" displayName="Task Maturity Levels" type="int" 
 						defaultValue="5" 
 						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+									
+		/>
+				<parameter name="NumReplications" displayName="NumReplications" type="int" 
+						defaultValue="1" 
+						isReadOnly="true" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>

@@ -1,12 +1,26 @@
 package workItems;
 
-import xtext.objectsModel.WorkItem;
-
 public class DevTask extends Task {
 
-	public DevTask(WorkItem WorkItem) {
-		super(WorkItem);
+	public DevTask(WorkItemEntity wi) {
+		super(wi);
 		this.isDevTask = true;
+		this.typeId = wi.getType().getId();
+		this.serviceId = wi.getRequiredServices().get(0).getServiceType().getId();
+		this.efforts = wi.getRequiredServices().get(0).getEfforts();
+	}
+	public DevTask(AggregationNode upperTask, int id, String name, int serviceId, double efforts) {
+		super(upperTask);
+		this.SoS = upperTask.SoS;
+		this.addUpperTask(upperTask);
+		this.id = id;
+		this.name = name;
+		this.typeId = SoS.getWorkItemTypeId("DevTask");
+		this.hierarchy = upperTask.hierarchy+1;		
+		this.serviceId = serviceId;
+		this.efforts = efforts;
+		this.fullName = this.fullName();
+		System.out.println(this.fullName);
 	}
 	
 	public void triggerChanges() {
@@ -60,8 +74,8 @@ public class DevTask extends Task {
 				this.isReactivated = true;	
 				this.completionTime=Integer.MIN_VALUE;
 				this.endTime=Integer.MIN_VALUE; 							
-				this.getAssignedAgent().completeQ.remove(this);
-				this.getAssignedAgent().backlogQ.add(this);
+				this.getAssignedAgent().getCompleteQ().remove(this);
+				this.getAssignedAgent().getBacklogQ().add(this);
 				//System.out.println("Re-Activate"+this.fullName+"at backlog of "+this.assignedAgent.getName());
 			}
 		}

@@ -22,6 +22,7 @@ import xtext.objectsModel.Service;
  *   <li>{@link xtext.objectsModel.impl.ServiceImpl#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceImpl#getName <em>Name</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link xtext.objectsModel.impl.ServiceImpl#getHierarchy <em>Hierarchy</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,6 +89,26 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
    * @ordered
    */
   protected String description = DESCRIPTION_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getHierarchy() <em>Hierarchy</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getHierarchy()
+   * @generated
+   * @ordered
+   */
+  protected static final int HIERARCHY_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getHierarchy() <em>Hierarchy</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getHierarchy()
+   * @generated
+   * @ordered
+   */
+  protected int hierarchy = HIERARCHY_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -184,6 +205,29 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
    * <!-- end-user-doc -->
    * @generated
    */
+  public int getHierarchy()
+  {
+    return hierarchy;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setHierarchy(int newHierarchy)
+  {
+    int oldHierarchy = hierarchy;
+    hierarchy = newHierarchy;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.SERVICE__HIERARCHY, oldHierarchy, hierarchy));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -195,6 +239,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
         return getName();
       case ObjectsModelPackage.SERVICE__DESCRIPTION:
         return getDescription();
+      case ObjectsModelPackage.SERVICE__HIERARCHY:
+        return getHierarchy();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -217,6 +263,9 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
         return;
       case ObjectsModelPackage.SERVICE__DESCRIPTION:
         setDescription((String)newValue);
+        return;
+      case ObjectsModelPackage.SERVICE__HIERARCHY:
+        setHierarchy((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -241,6 +290,9 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
       case ObjectsModelPackage.SERVICE__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
         return;
+      case ObjectsModelPackage.SERVICE__HIERARCHY:
+        setHierarchy(HIERARCHY_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -261,6 +313,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case ObjectsModelPackage.SERVICE__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+      case ObjectsModelPackage.SERVICE__HIERARCHY:
+        return hierarchy != HIERARCHY_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -282,6 +336,8 @@ public class ServiceImpl extends MinimalEObjectImpl.Container implements Service
     result.append(name);
     result.append(", description: ");
     result.append(description);
+    result.append(", hierarchy: ");
+    result.append(hierarchy);
     result.append(')');
     return result.toString();
   }

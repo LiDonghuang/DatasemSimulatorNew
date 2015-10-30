@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link xtext.objectsModel.Service#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.Service#getName <em>Name</em>}</li>
  *   <li>{@link xtext.objectsModel.Service#getDescription <em>Description</em>}</li>
+ *   <li>{@link xtext.objectsModel.Service#getHierarchy <em>Hierarchy</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,5 +102,31 @@ public interface Service extends EObject
    * @generated
    */
   void setDescription(String value);
+
+  /**
+   * Returns the value of the '<em><b>Hierarchy</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Hierarchy</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Hierarchy</em>' attribute.
+   * @see #setHierarchy(int)
+   * @see xtext.objectsModel.ObjectsModelPackage#getService_Hierarchy()
+   * @model
+   * @generated
+   */
+  int getHierarchy();
+
+  /**
+   * Sets the value of the '{@link xtext.objectsModel.Service#getHierarchy <em>Hierarchy</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Hierarchy</em>' attribute.
+   * @see #getHierarchy()
+   * @generated
+   */
+  void setHierarchy(int value);
 
 } // Service

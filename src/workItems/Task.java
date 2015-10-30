@@ -8,11 +8,8 @@ import xtext.objectsModel.WorkItem;
 public class Task extends WorkItemEntity{
 	protected boolean isAggregationNode = false;
 	
-	public Task(WorkItem WorkItem) {
-		super(WorkItem);
-	}
-	public Task(WorkItemEntity WorkItemEntity) {
-		super(WorkItemEntity);
+	public Task(WorkItem wi) {
+		super(wi);
 	}
 	public void allocateResource(ResourceEntity sR) {
 		this.getAllocatedResources().add(sR);
@@ -27,7 +24,7 @@ public class Task extends WorkItemEntity{
 		for (ResourceEntity r: sp.getMyResourceEntities()) {
 			for (Skill sk: r.getSkillSet()){
 				int service_id = sk.getService().getId();
-				if (service_id == this.getServices().get(0).getId()){
+				if (service_id == this.serviceId){
 					sEfficiency = sk.getEfficiency();				
 					break;
 				}		
@@ -40,7 +37,7 @@ public class Task extends WorkItemEntity{
 		double rEfficiency = 0;
 		for (int s=0;s<this.getAllocatedResources().get(0).getSkillSet().size();s++){
 			Skill skill = this.getAllocatedResources().get(0).getSkillSet().get(s);
-			if (skill.getService().getId() == this.services.get(0).getId()){
+			if (skill.getService().getId() == this.serviceId){
 				rEfficiency = skill.getEfficiency();				
 				break;
 			}		

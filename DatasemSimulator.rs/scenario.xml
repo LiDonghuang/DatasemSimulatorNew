@@ -17,4 +17,7 @@
 <repast.simphony.action.time_series_chart context="DatasemSimulator" file="repast.simphony.action.time_series_chart_14.xml" />
 <repast.simphony.action.time_series_chart context="DatasemSimulator" file="repast.simphony.action.time_series_chart_15.xml" />
 <repast.simphony.action.time_series_chart context="DatasemSimulator" file="repast.simphony.action.time_series_chart_16.xml" />
+<repast.simphony.action.display context="DatasemSimulator" file="repast.simphony.action.display_17.xml" />
+<repast.simphony.action.display context="DatasemSimulator" file="repast.simphony.action.display_18.xml" />
+<repast.simphony.action.display context="DatasemSimulator" file="repast.simphony.action.display_19.xml" />
 </Scenario>

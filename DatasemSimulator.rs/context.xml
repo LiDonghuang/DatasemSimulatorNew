@@ -1,3 +1,7 @@
 <context id="DatasemSimulator" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://repast.org/scenario/context">
-  	
+  	<projection id="2DGrid" type="grid" ></projection>
+  	<projection id="WINGrid" type="grid" ></projection>
+  	<projection id="KanbanGrid" type="grid" ></projection>
+  	<projection id="WI_Hierarchy" type="network" ></projection>
+  	<projection id="Allocation" type="network" ></projection>
 </context>

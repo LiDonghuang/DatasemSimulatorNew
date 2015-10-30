@@ -7,6 +7,7 @@ import repast.simphony.dataLoader.ContextBuilder;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.parameter.Parameters;
 
+
 public class DatasemSimulatorModel implements ContextBuilder<Object>{
 	
 	private File scenarioXmlFile = new File("/Users/dzl0023/Desktop/DatasemFiles/DemoModel_ExperimentModel.xml");
@@ -17,11 +18,9 @@ public class DatasemSimulatorModel implements ContextBuilder<Object>{
 		//context.setId("DatasemSimulator");
 		cb.ContextImplementation(context);
 		Parameters p = RunEnvironment.getInstance().getParameters();
-		int numReplications = (Integer)p.getValue("NumReplications");	
+		int numReplications = (Integer)p.getValue("NumReplications");
 		System.out.println("\nREPLICATION #"+numReplications+"\n");
-		if (VisualizationOn && (numReplications==1)) {
-			cb.VisualizationImplementation(context);
-		}
+
 		return context;
 	}
 }

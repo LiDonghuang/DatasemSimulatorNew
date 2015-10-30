@@ -19,8 +19,8 @@ import xtext.objectsModel.WorkItemType;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link xtext.objectsModel.impl.WorkItemTypeImpl#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemTypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link xtext.objectsModel.impl.WorkItemTypeImpl#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemTypeImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemTypeImpl#getHierarchy <em>Hierarchy</em>}</li>
  * </ul>
@@ -30,26 +30,6 @@ import xtext.objectsModel.WorkItemType;
  */
 public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements WorkItemType
 {
-  /**
-   * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getId()
-   * @generated
-   * @ordered
-   */
-  protected static final int ID_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getId()
-   * @generated
-   * @ordered
-   */
-  protected int id = ID_EDEFAULT;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -69,6 +49,26 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getId()
+   * @generated
+   * @ordered
+   */
+  protected static final int ID_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getId()
+   * @generated
+   * @ordered
+   */
+  protected int id = ID_EDEFAULT;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -136,29 +136,6 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getId()
-  {
-    return id;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setId(int newId)
-  {
-    int oldId = id;
-    id = newId;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.WORK_ITEM_TYPE__ID, oldId, id));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public String getName()
   {
     return name;
@@ -175,6 +152,29 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
     name = newName;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.WORK_ITEM_TYPE__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public int getId()
+  {
+    return id;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setId(int newId)
+  {
+    int oldId = id;
+    id = newId;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.WORK_ITEM_TYPE__ID, oldId, id));
   }
 
   /**
@@ -233,10 +233,10 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
   {
     switch (featureID)
     {
-      case ObjectsModelPackage.WORK_ITEM_TYPE__ID:
-        return getId();
       case ObjectsModelPackage.WORK_ITEM_TYPE__NAME:
         return getName();
+      case ObjectsModelPackage.WORK_ITEM_TYPE__ID:
+        return getId();
       case ObjectsModelPackage.WORK_ITEM_TYPE__DESCRIPTION:
         return getDescription();
       case ObjectsModelPackage.WORK_ITEM_TYPE__HIERARCHY:
@@ -255,11 +255,11 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
   {
     switch (featureID)
     {
-      case ObjectsModelPackage.WORK_ITEM_TYPE__ID:
-        setId((Integer)newValue);
-        return;
       case ObjectsModelPackage.WORK_ITEM_TYPE__NAME:
         setName((String)newValue);
+        return;
+      case ObjectsModelPackage.WORK_ITEM_TYPE__ID:
+        setId((Integer)newValue);
         return;
       case ObjectsModelPackage.WORK_ITEM_TYPE__DESCRIPTION:
         setDescription((String)newValue);
@@ -281,11 +281,11 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
   {
     switch (featureID)
     {
-      case ObjectsModelPackage.WORK_ITEM_TYPE__ID:
-        setId(ID_EDEFAULT);
-        return;
       case ObjectsModelPackage.WORK_ITEM_TYPE__NAME:
         setName(NAME_EDEFAULT);
+        return;
+      case ObjectsModelPackage.WORK_ITEM_TYPE__ID:
+        setId(ID_EDEFAULT);
         return;
       case ObjectsModelPackage.WORK_ITEM_TYPE__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
@@ -307,10 +307,10 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
   {
     switch (featureID)
     {
-      case ObjectsModelPackage.WORK_ITEM_TYPE__ID:
-        return id != ID_EDEFAULT;
       case ObjectsModelPackage.WORK_ITEM_TYPE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case ObjectsModelPackage.WORK_ITEM_TYPE__ID:
+        return id != ID_EDEFAULT;
       case ObjectsModelPackage.WORK_ITEM_TYPE__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case ObjectsModelPackage.WORK_ITEM_TYPE__HIERARCHY:
@@ -330,10 +330,10 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (id: ");
-    result.append(id);
-    result.append(", name: ");
+    result.append(" (name: ");
     result.append(name);
+    result.append(", id: ");
+    result.append(id);
     result.append(", description: ");
     result.append(description);
     result.append(", hierarchy: ");

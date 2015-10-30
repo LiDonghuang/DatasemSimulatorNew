@@ -3,6 +3,8 @@ package workItems;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import org.eclipse.emf.common.util.EList;
+
 import datasemSimulator.SystemOfSystems;
 import bsh.This;
 import repast.simphony.context.Context;
@@ -13,9 +15,11 @@ import repast.simphony.random.RandomHelper;
 import repast.simphony.util.ContextUtils;
 import serviceProviders.ResourceEntity;
 import serviceProviders.ServiceProviderAgent;
+import xtext.objectsModel.RequiredService;
 import xtext.objectsModel.Service;
 import xtext.objectsModel.Skill;
 import xtext.objectsModel.WorkItem;
+import xtext.objectsModel.WorkItemType;
 import xtext.objectsModel.impl.WorkItemImpl;
 
 
@@ -25,15 +29,18 @@ public class WorkItemEntity extends WorkItemImpl {
 	public WorkItem myWorkItem;
 	public String fullName;
 	public int hierarchy = 0;
+	//
+	public double efforts = 0;
+	public int serviceId;
+	public int typeId;
+	//
+	public boolean isAggregationNode = false;
 	public boolean isDevTask = false;
 	public boolean isAnalysisTask = false;
 	public boolean isAssistanceTask = false;
-	public LinkedList<Service> services = new LinkedList<Service>();
 	private LinkedList<WorkItemEntity> predecessors = new LinkedList<WorkItemEntity>();
 	private LinkedList<WorkItemEntity> successors = new LinkedList<WorkItemEntity>();
-	
 	private LinkedList<AggregationNode> uppertasks = new LinkedList<AggregationNode>();
-	
 	private LinkedList<WorkItemEntity> impactsWIs = new LinkedList<WorkItemEntity>();
 	private HashMap<WorkItemEntity,Double> impactsLikelihood = new HashMap<WorkItemEntity,Double>();
 	private HashMap<WorkItemEntity,Double> impactsValue = new HashMap<WorkItemEntity,Double>();
@@ -41,6 +48,8 @@ public class WorkItemEntity extends WorkItemImpl {
 	public int maxMaturityLevels = 1;
 	public double uncertainty = 0;
 	public double risk = 0;
+	// Visualization
+	public int[] location = new int[2];
 	// Dynamic Attributes
 	public boolean isActivated=false;
 	public boolean isAssigned=false;
@@ -81,24 +90,19 @@ public class WorkItemEntity extends WorkItemImpl {
 	private double CycleTimeToEffortsRatio = 0;
 
 	
-	public WorkItemEntity (WorkItem WorkItem) {
-		this.myWorkItem = WorkItem;
-		this.id = WorkItem.getId();
-		this.name = WorkItem.getName();
-		this.isAggregationNode = WorkItem.isIsAggregationNode();
-		this.hasPredecessors = WorkItem.isHasPredecessors();
-		this.efforts = WorkItem.getEfforts();
-		this.value = WorkItem.getValue();
-		this.type = WorkItem.getType();
-		this.services.addAll(WorkItem.getRequiredServices());
-		this.hierarchy = this.type.getHierarchy();
+	public WorkItemEntity (WorkItem wi) {
+		this.myWorkItem = wi;
+		this.id = wi.getId();
+		this.name = wi.getName();
+		this.typeId = wi.getType().getId();
+		this.hierarchy = wi.getType().getHierarchy();
+		this.value = wi.getValue();
+		this.isAggregationNode = wi.isIsAggregationNode();
+		this.hasPredecessors = wi.isHasPredecessors();
 		this.fullName = this.fullName();
 	}
 	public WorkItemEntity (WorkItemEntity WorkItemEntity) {
 		
-	}
-	public LinkedList<Service> getServices() {
-		return this.services;
 	}
 	public void addToContext() {
 		if (this.isActivated) {
@@ -303,10 +307,10 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.isEnded=true;
 		this.endTime = this.SoS.timeNow;
 		this.leadTime = this.endTime - this.activatedTime + 1;	
-		
+		this.SoS.deliverValue(this.getValue());
+		this.SoS.arrivedList.remove(this.getId());
 		if (this.hierarchy==0 ) {
-			this.SoS.waitingList.remove(this.getId());
-			this.SoS.deliverValue(this.getValue());
+			this.SoS.waitingList.remove(this.getId());	
 			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
 			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.getValue()+" stakeholder value");
 		}
@@ -314,7 +318,7 @@ public class WorkItemEntity extends WorkItemImpl {
 			this.removeFromContext();
 		}
 		else {
-			this.CycleTimeToEffortsRatio = this.efforts/this.cycleTime;			
+			this.CycleTimeToEffortsRatio = this.efforts/this.cycleTime;
 		}
 		//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.reworkCount);
 	}
@@ -334,11 +338,20 @@ public class WorkItemEntity extends WorkItemImpl {
 	public void setPerceivedValue(double v) {
 		this.perceivedValue = v;
 	}
+	public WorkItemType getType() {
+		return this.myWorkItem.getType();
+	}
+	public EList<RequiredService> getRequiredServices() {
+		return this.myWorkItem.getRequiredServices();
+	}
 	public int getTypeId() {
-		return this.getType().getId();
+		return this.typeId;
 	}
 	public int getHierarchy() {
 		return this.hierarchy;
+	}
+	public double getEfforts() {
+		return this.efforts;
 	}
 	public double getActivatedTime() {
 		return this.activatedTime;
