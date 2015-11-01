@@ -305,6 +305,61 @@ public interface ObjectsModelPackage extends EPackage
   int SERVICE_FEATURE_COUNT = 4;
 
   /**
+   * The meta object id for the '{@link xtext.objectsModel.impl.ServiceProviderTypeImpl <em>Service Provider Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see xtext.objectsModel.impl.ServiceProviderTypeImpl
+   * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getServiceProviderType()
+   * @generated
+   */
+  int SERVICE_PROVIDER_TYPE = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE_PROVIDER_TYPE__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE_PROVIDER_TYPE__ID = 1;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE_PROVIDER_TYPE__DESCRIPTION = 2;
+
+  /**
+   * The feature id for the '<em><b>Hierarchy</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE_PROVIDER_TYPE__HIERARCHY = 3;
+
+  /**
+   * The number of structural features of the '<em>Service Provider Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE_PROVIDER_TYPE_FEATURE_COUNT = 4;
+
+  /**
    * The meta object id for the '{@link xtext.objectsModel.impl.ServiceProviderImpl <em>Service Provider</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -312,7 +367,7 @@ public interface ObjectsModelPackage extends EPackage
    * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getServiceProvider()
    * @generated
    */
-  int SERVICE_PROVIDER = 5;
+  int SERVICE_PROVIDER = 6;
 
   /**
    * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -342,13 +397,22 @@ public interface ObjectsModelPackage extends EPackage
   int SERVICE_PROVIDER__DESCRIPTION = 2;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE_PROVIDER__TYPE = 3;
+
+  /**
    * The feature id for the '<em><b>Assign To</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SERVICE_PROVIDER__ASSIGN_TO = 3;
+  int SERVICE_PROVIDER__ASSIGN_TO = 4;
 
   /**
    * The feature id for the '<em><b>Outsource From</b></em>' reference list.
@@ -357,7 +421,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SERVICE_PROVIDER__OUTSOURCE_FROM = 4;
+  int SERVICE_PROVIDER__OUTSOURCE_FROM = 5;
 
   /**
    * The feature id for the '<em><b>Governance Strategy</b></em>' reference.
@@ -366,7 +430,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SERVICE_PROVIDER__GOVERNANCE_STRATEGY = 5;
+  int SERVICE_PROVIDER__GOVERNANCE_STRATEGY = 6;
 
   /**
    * The feature id for the '<em><b>Resources</b></em>' containment reference list.
@@ -375,7 +439,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SERVICE_PROVIDER__RESOURCES = 6;
+  int SERVICE_PROVIDER__RESOURCES = 7;
 
   /**
    * The number of structural features of the '<em>Service Provider</em>' class.
@@ -384,7 +448,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SERVICE_PROVIDER_FEATURE_COUNT = 7;
+  int SERVICE_PROVIDER_FEATURE_COUNT = 8;
 
   /**
    * The meta object id for the '{@link xtext.objectsModel.impl.AssetImpl <em>Asset</em>}' class.
@@ -394,7 +458,7 @@ public interface ObjectsModelPackage extends EPackage
    * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getAsset()
    * @generated
    */
-  int ASSET = 6;
+  int ASSET = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -449,7 +513,7 @@ public interface ObjectsModelPackage extends EPackage
    * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getSkill()
    * @generated
    */
-  int SKILL = 7;
+  int SKILL = 8;
 
   /**
    * The feature id for the '<em><b>Service</b></em>' reference.
@@ -486,7 +550,7 @@ public interface ObjectsModelPackage extends EPackage
    * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getWorkItemType()
    * @generated
    */
-  int WORK_ITEM_TYPE = 8;
+  int WORK_ITEM_TYPE = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -541,7 +605,7 @@ public interface ObjectsModelPackage extends EPackage
    * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getWorkItem()
    * @generated
    */
-  int WORK_ITEM = 9;
+  int WORK_ITEM = 10;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -704,7 +768,7 @@ public interface ObjectsModelPackage extends EPackage
    * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getRequiredService()
    * @generated
    */
-  int REQUIRED_SERVICE = 10;
+  int REQUIRED_SERVICE = 11;
 
   /**
    * The feature id for the '<em><b>Service Type</b></em>' reference.
@@ -741,7 +805,7 @@ public interface ObjectsModelPackage extends EPackage
    * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getImpact()
    * @generated
    */
-  int IMPACT = 11;
+  int IMPACT = 12;
 
   /**
    * The feature id for the '<em><b>Impact WI</b></em>' reference.
@@ -1018,6 +1082,60 @@ public interface ObjectsModelPackage extends EPackage
   EAttribute getService_Hierarchy();
 
   /**
+   * Returns the meta object for class '{@link xtext.objectsModel.ServiceProviderType <em>Service Provider Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Service Provider Type</em>'.
+   * @see xtext.objectsModel.ServiceProviderType
+   * @generated
+   */
+  EClass getServiceProviderType();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.ServiceProviderType#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see xtext.objectsModel.ServiceProviderType#getName()
+   * @see #getServiceProviderType()
+   * @generated
+   */
+  EAttribute getServiceProviderType_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.ServiceProviderType#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Id</em>'.
+   * @see xtext.objectsModel.ServiceProviderType#getId()
+   * @see #getServiceProviderType()
+   * @generated
+   */
+  EAttribute getServiceProviderType_Id();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.ServiceProviderType#getDescription <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Description</em>'.
+   * @see xtext.objectsModel.ServiceProviderType#getDescription()
+   * @see #getServiceProviderType()
+   * @generated
+   */
+  EAttribute getServiceProviderType_Description();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.ServiceProviderType#getHierarchy <em>Hierarchy</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Hierarchy</em>'.
+   * @see xtext.objectsModel.ServiceProviderType#getHierarchy()
+   * @see #getServiceProviderType()
+   * @generated
+   */
+  EAttribute getServiceProviderType_Hierarchy();
+
+  /**
    * Returns the meta object for class '{@link xtext.objectsModel.ServiceProvider <em>Service Provider</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1059,6 +1177,17 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    */
   EAttribute getServiceProvider_Description();
+
+  /**
+   * Returns the meta object for the reference '{@link xtext.objectsModel.ServiceProvider#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Type</em>'.
+   * @see xtext.objectsModel.ServiceProvider#getType()
+   * @see #getServiceProvider()
+   * @generated
+   */
+  EReference getServiceProvider_Type();
 
   /**
    * Returns the meta object for the reference list '{@link xtext.objectsModel.ServiceProvider#getAssignTo <em>Assign To</em>}'.
@@ -1715,6 +1844,48 @@ public interface ObjectsModelPackage extends EPackage
     EAttribute SERVICE__HIERARCHY = eINSTANCE.getService_Hierarchy();
 
     /**
+     * The meta object literal for the '{@link xtext.objectsModel.impl.ServiceProviderTypeImpl <em>Service Provider Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see xtext.objectsModel.impl.ServiceProviderTypeImpl
+     * @see xtext.objectsModel.impl.ObjectsModelPackageImpl#getServiceProviderType()
+     * @generated
+     */
+    EClass SERVICE_PROVIDER_TYPE = eINSTANCE.getServiceProviderType();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SERVICE_PROVIDER_TYPE__NAME = eINSTANCE.getServiceProviderType_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SERVICE_PROVIDER_TYPE__ID = eINSTANCE.getServiceProviderType_Id();
+
+    /**
+     * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SERVICE_PROVIDER_TYPE__DESCRIPTION = eINSTANCE.getServiceProviderType_Description();
+
+    /**
+     * The meta object literal for the '<em><b>Hierarchy</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SERVICE_PROVIDER_TYPE__HIERARCHY = eINSTANCE.getServiceProviderType_Hierarchy();
+
+    /**
      * The meta object literal for the '{@link xtext.objectsModel.impl.ServiceProviderImpl <em>Service Provider</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1747,6 +1918,14 @@ public interface ObjectsModelPackage extends EPackage
      * @generated
      */
     EAttribute SERVICE_PROVIDER__DESCRIPTION = eINSTANCE.getServiceProvider_Description();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SERVICE_PROVIDER__TYPE = eINSTANCE.getServiceProvider_Type();
 
     /**
      * The meta object literal for the '<em><b>Assign To</b></em>' reference list feature.

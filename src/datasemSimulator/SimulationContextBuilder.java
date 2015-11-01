@@ -22,6 +22,7 @@ import xtext.objectsModel.ObjectsModelFactory;
 import xtext.objectsModel.RequiredService;
 import xtext.objectsModel.Service;
 import xtext.objectsModel.ServiceProvider;
+import xtext.objectsModel.ServiceProviderType;
 import xtext.objectsModel.Skill;
 import xtext.objectsModel.WorkItem;
 import xtext.objectsModel.WorkItemType;
@@ -42,6 +43,7 @@ public class SimulationContextBuilder {
 	public HashMap<Integer, ServiceProvider> myServiceProviders = new HashMap<Integer, ServiceProvider>();
 	public HashMap<Integer, WorkItem> myWorkItems = new HashMap<Integer, WorkItem>();
 	public HashMap<Integer, Asset> myResources = new HashMap<Integer, Asset>();	
+	public HashMap<Integer, ServiceProviderType> myServiceProviderTypes = new HashMap<Integer, ServiceProviderType>();
 	public HashMap<Integer, WorkItemType> myWorkItemTypes = new HashMap<Integer, WorkItemType>();
 	public HashMap<Integer, Service> myServices = new HashMap<Integer, Service>();
 	Parameters parameters;
@@ -89,7 +91,6 @@ public class SimulationContextBuilder {
 					int st_id = currentId+1;
 					mySoS.increaseWICount();
 					DevTask devTask = new DevTask((AggregationNode)wi, st_id, name, serviceId, efforts);
-					System.out.println(devTask);
 				}
 			}
 		}		
@@ -102,9 +103,6 @@ public class SimulationContextBuilder {
 		KanbanBoard myKanbanBoard = new KanbanBoard(mySoS);
 		mySoS.myKanbanBoard = myKanbanBoard;
 		context.add(myKanbanBoard);
-		for (KanbanElement element:myKanbanBoard.KanbanElements) {
-			context.add(element);
-		}
 	}
 
 	public void ReadXMLFile(File scenarioXmlFile) {
@@ -115,6 +113,15 @@ public class SimulationContextBuilder {
 			dbFactory.setIgnoringElementContentWhitespace(true);
 			Document scenario = dBuilder.parse(scenarioXmlFile);
 			scenario.getDocumentElement().normalize();	
+			//
+			Node serviceProviderTypesNode = scenario.getElementsByTagName("ServiceProviderTypes").item(0);
+			Element ServiceProviderTypesElement = (Element)serviceProviderTypesNode;
+			NodeList ServiceProviderTypeList = ServiceProviderTypesElement.getElementsByTagName("ServiceProviderType");
+			for (int i=0;i<ServiceProviderTypeList.getLength();i++) {
+				Node n = ServiceProviderTypeList.item(i);
+				Element e = (Element)n;
+				xmlCreateServiceProviderType(e);
+			}
 			//
 			Node workItemTypesNode = scenario.getElementsByTagName("WorkItemTypes").item(0);
 			Element workItemTypesElement = (Element)workItemTypesNode;
@@ -178,6 +185,16 @@ public class SimulationContextBuilder {
 		myService.setName(name);
 		myServices.put(id, myService); 
 	}	
+	public void xmlCreateServiceProviderType(Element e) {
+		int id = Integer.parseInt(e.getAttribute("spTypeId"));
+		String name = e.getAttribute("name");
+		int hierarchy = Integer.parseInt(e.getAttribute("hierarchy"));
+		ServiceProviderType myServiceProviderType = ObjectsModelFactory.eINSTANCE.createServiceProviderType();
+		myServiceProviderType.setId(id);
+		myServiceProviderType.setName(name);
+		myServiceProviderType.setHierarchy(hierarchy);
+		myServiceProviderTypes.put(id, myServiceProviderType); 
+	}
 	public void xmlCreateWorkItemType(Element e) {
 		int id = Integer.parseInt(e.getAttribute("wiTypeId"));
 		String name = e.getAttribute("name");
@@ -191,9 +208,11 @@ public class SimulationContextBuilder {
 	public void xmlCreateServiceProvider(Element e) {
 		ServiceProvider myServiceProvider = ObjectsModelFactory.eINSTANCE.createServiceProvider();
 		int id = Integer.parseInt(e.getAttribute("serviceProviderId"));
-		String name = e.getAttribute("name");			
+		String name = e.getAttribute("name");	
+		int spId = Integer.parseInt(e.getAttribute("typeId"));
 		myServiceProvider.setId(id);
-		myServiceProvider.setName(name);								
+		myServiceProvider.setName(name);	
+		myServiceProvider.setType(myServiceProviderTypes.get(spId));
 		// GovernanceStrategy
 		GovernanceStrategy myGovernanceStrategy = ObjectsModelFactory.eINSTANCE.createGovernanceStrategy(); 
 		Node mechanisms_node = e.getElementsByTagName("Mechanisms").item(0);
@@ -381,6 +400,7 @@ public class SimulationContextBuilder {
 		SystemOfSystems mySoS = new SystemOfSystems();
 		
 		mySoS.myServices = myServices;
+		mySoS.myServiceProviderTypes = myServiceProviderTypes;
 		mySoS.myWorkItemTypes = myWorkItemTypes;
 				
 		for (Asset r: myResources.values()) {

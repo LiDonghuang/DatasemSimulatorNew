@@ -15,6 +15,7 @@ import repast.simphony.random.RandomHelper;
 import repast.simphony.util.ContextUtils;
 import serviceProviders.ResourceEntity;
 import serviceProviders.ServiceProviderAgent;
+import visualization.Icon;
 import xtext.objectsModel.RequiredService;
 import xtext.objectsModel.Service;
 import xtext.objectsModel.Skill;
@@ -28,16 +29,16 @@ public class WorkItemEntity extends WorkItemImpl {
 	// Static Attributes
 	public WorkItem myWorkItem;
 	public String fullName;
+	public int typeId;
 	public int hierarchy = 0;
 	//
 	public double efforts = 0;
 	public int serviceId;
-	public int typeId;
 	//
 	public boolean isAggregationNode = false;
 	public boolean isDevTask = false;
-	public boolean isAnalysisTask = false;
-	public boolean isAssistanceTask = false;
+	public boolean isAnalysisActivity = false;
+	public boolean isResolutionActivity = false;
 	private LinkedList<WorkItemEntity> predecessors = new LinkedList<WorkItemEntity>();
 	private LinkedList<WorkItemEntity> successors = new LinkedList<WorkItemEntity>();
 	private LinkedList<AggregationNode> uppertasks = new LinkedList<AggregationNode>();
@@ -49,7 +50,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	public double uncertainty = 0;
 	public double risk = 0;
 	// Visualization
-	public int[] location = new int[2];
+	public Icon icon = new Icon();	
 	// Dynamic Attributes
 	public boolean isActivated=false;
 	public boolean isAssigned=false;
@@ -191,12 +192,12 @@ public class WorkItemEntity extends WorkItemImpl {
 			double risk = this.getImpactsValue().get(impactsTarget);
 			imp += likelihood*risk*5;
 		}
-		if (this.isAnalysisTask) {
+		if (this.isAnalysisActivity) {
 			AggregationNode AnalysisObject = (AggregationNode) ((AnalysisActivity)this).AnalysisObject;
 			deco = (AnalysisObject.calculateRPW()+AnalysisObject.hierarchy) * (3-AnalysisObject.hierarchy);
 		}
-		if (this.isAssistanceTask) {
-			susp = ((AssistanceActivity)this).AssistanceObject.calculateRPW();
+		if (this.isResolutionActivity) {
+			susp = ((ResolutionActivity)this).ResolutionObject.calculateRPW();
 		}
 		rpw = suc + obj + imp + deco + susp;
 		return rpw;
@@ -286,7 +287,7 @@ public class WorkItemEntity extends WorkItemImpl {
 			this.startTime = this.SoS.timeNow;
 			//System.out.println("\nSTART @TIME:"+this.SoS.timeNow+this.fullName+"is started from progress:"+this.progress);
 		}
-		if (this.isAnalysisTask) {
+		if (this.isAnalysisActivity) {
 			((AnalysisActivity)this).AnalysisObject.setStarted();
 		}
 	}
@@ -314,7 +315,7 @@ public class WorkItemEntity extends WorkItemImpl {
 			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
 			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.getValue()+" stakeholder value");
 		}
-		else if (this.isAssistanceTask | this.isAnalysisTask) {
+		else if (this.isResolutionActivity | this.isAnalysisActivity) {
 			this.removeFromContext();
 		}
 		else {
@@ -398,6 +399,12 @@ public class WorkItemEntity extends WorkItemImpl {
 	public void setProgress(double progress) {
 		this.progress = progress;
 	}
+	public double getProgressRate() {
+		return progressRate;
+	}
+	public void setProgressRate(double progressRate) {
+		this.progressRate=progressRate;
+	}
 	public LinkedList<ResourceEntity> getAllocatedResources() {
 		return allocatedResources;
 	}
@@ -478,5 +485,18 @@ public class WorkItemEntity extends WorkItemImpl {
 	}
 	public void setPreviousReworkTime(double previousReworkTime) {
 		this.previousReworkTime = previousReworkTime;
+	}
+	
+	public int getColorR() {
+		return icon.color[0];
+	}
+	public int getColorG() {
+		return icon.color[1];
+	}
+	public int getColorB() {
+		return icon.color[2];
+	}
+	public double getIconSize() {
+		return icon.size;
 	}
 }

@@ -1,15 +1,15 @@
 package workItems;
 
-public class AssistanceActivity extends Task{
-	public WorkItemEntity AssistanceObject;
+public class ResolutionActivity extends Task{
+	public WorkItemEntity ResolutionObject;
 	protected boolean isAggregationNode = false;
 	
-	public AssistanceActivity(DevTask devTask) {
+	public ResolutionActivity(DevTask devTask) {
 		super(devTask);
 		this.setIsAggregationNode(false);
-		this.isAssistanceTask = true;
+		this.isResolutionActivity = true;
 		this.SoS = devTask.SoS;
-		this.AssistanceObject = devTask;
+		this.ResolutionObject = devTask;
 		this.typeId = SoS.getWorkItemTypeId("Resolution");
 		this.hierarchy = SoS.myWorkItemTypes.get(this.typeId).getHierarchy();
 			
@@ -21,12 +21,13 @@ public class AssistanceActivity extends Task{
 		this.value = 0;
 		
 		this.serviceId = this.getUppertasks().get(0).serviceId;
-		this.efforts = 10;
+		this.efforts = 100;
 		this.maxMaturityLevels = 1;
 		this.uncertainty = 0;
 		this.risk = 0;		
 		this.setActivated();
 		this.fullName = this.fullName();
+		System.out.println(fullName);
 	}
 
 }

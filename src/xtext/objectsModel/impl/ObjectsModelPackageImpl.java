@@ -20,6 +20,7 @@ import xtext.objectsModel.ObjectsModelPackage;
 import xtext.objectsModel.RequiredService;
 import xtext.objectsModel.Service;
 import xtext.objectsModel.ServiceProvider;
+import xtext.objectsModel.ServiceProviderType;
 import xtext.objectsModel.Skill;
 import xtext.objectsModel.WorkItem;
 import xtext.objectsModel.WorkItemType;
@@ -66,6 +67,13 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * @generated
    */
   private EClass serviceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass serviceProviderTypeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -404,6 +412,56 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getServiceProviderType()
+  {
+    return serviceProviderTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getServiceProviderType_Name()
+  {
+    return (EAttribute)serviceProviderTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getServiceProviderType_Id()
+  {
+    return (EAttribute)serviceProviderTypeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getServiceProviderType_Description()
+  {
+    return (EAttribute)serviceProviderTypeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getServiceProviderType_Hierarchy()
+  {
+    return (EAttribute)serviceProviderTypeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getServiceProvider()
   {
     return serviceProviderEClass;
@@ -444,7 +502,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getServiceProvider_AssignTo()
+  public EReference getServiceProvider_Type()
   {
     return (EReference)serviceProviderEClass.getEStructuralFeatures().get(3);
   }
@@ -454,7 +512,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getServiceProvider_OutsourceFrom()
+  public EReference getServiceProvider_AssignTo()
   {
     return (EReference)serviceProviderEClass.getEStructuralFeatures().get(4);
   }
@@ -464,7 +522,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getServiceProvider_GovernanceStrategy()
+  public EReference getServiceProvider_OutsourceFrom()
   {
     return (EReference)serviceProviderEClass.getEStructuralFeatures().get(5);
   }
@@ -474,9 +532,19 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getServiceProvider_Resources()
+  public EReference getServiceProvider_GovernanceStrategy()
   {
     return (EReference)serviceProviderEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getServiceProvider_Resources()
+  {
+    return (EReference)serviceProviderEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -906,10 +974,17 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     createEAttribute(serviceEClass, SERVICE__DESCRIPTION);
     createEAttribute(serviceEClass, SERVICE__HIERARCHY);
 
+    serviceProviderTypeEClass = createEClass(SERVICE_PROVIDER_TYPE);
+    createEAttribute(serviceProviderTypeEClass, SERVICE_PROVIDER_TYPE__NAME);
+    createEAttribute(serviceProviderTypeEClass, SERVICE_PROVIDER_TYPE__ID);
+    createEAttribute(serviceProviderTypeEClass, SERVICE_PROVIDER_TYPE__DESCRIPTION);
+    createEAttribute(serviceProviderTypeEClass, SERVICE_PROVIDER_TYPE__HIERARCHY);
+
     serviceProviderEClass = createEClass(SERVICE_PROVIDER);
     createEAttribute(serviceProviderEClass, SERVICE_PROVIDER__ID);
     createEAttribute(serviceProviderEClass, SERVICE_PROVIDER__NAME);
     createEAttribute(serviceProviderEClass, SERVICE_PROVIDER__DESCRIPTION);
+    createEReference(serviceProviderEClass, SERVICE_PROVIDER__TYPE);
     createEReference(serviceProviderEClass, SERVICE_PROVIDER__ASSIGN_TO);
     createEReference(serviceProviderEClass, SERVICE_PROVIDER__OUTSOURCE_FROM);
     createEReference(serviceProviderEClass, SERVICE_PROVIDER__GOVERNANCE_STRATEGY);
@@ -1017,10 +1092,17 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     initEAttribute(getService_Description(), ecorePackage.getEString(), "description", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getService_Hierarchy(), ecorePackage.getEInt(), "hierarchy", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(serviceProviderTypeEClass, ServiceProviderType.class, "ServiceProviderType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getServiceProviderType_Name(), ecorePackage.getEString(), "name", null, 0, 1, ServiceProviderType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getServiceProviderType_Id(), ecorePackage.getEInt(), "id", null, 0, 1, ServiceProviderType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getServiceProviderType_Description(), ecorePackage.getEString(), "description", null, 0, 1, ServiceProviderType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getServiceProviderType_Hierarchy(), ecorePackage.getEInt(), "hierarchy", null, 0, 1, ServiceProviderType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(serviceProviderEClass, ServiceProvider.class, "ServiceProvider", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getServiceProvider_Id(), ecorePackage.getEInt(), "id", null, 0, 1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getServiceProvider_Name(), ecorePackage.getEString(), "name", null, 0, 1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getServiceProvider_Description(), ecorePackage.getEString(), "description", null, 0, 1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getServiceProvider_Type(), this.getServiceProviderType(), null, "type", null, 0, 1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getServiceProvider_AssignTo(), this.getServiceProvider(), null, "assignTo", null, 0, -1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getServiceProvider_OutsourceFrom(), this.getServiceProvider(), null, "outsourceFrom", null, 0, -1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getServiceProvider_GovernanceStrategy(), this.getGovernanceStrategy(), null, "governanceStrategy", null, 0, 1, ServiceProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -23,6 +23,7 @@ import xtext.objectsModel.Asset;
 import xtext.objectsModel.GovernanceStrategy;
 import xtext.objectsModel.ObjectsModelPackage;
 import xtext.objectsModel.ServiceProvider;
+import xtext.objectsModel.ServiceProviderType;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +35,7 @@ import xtext.objectsModel.ServiceProvider;
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getName <em>Name</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getType <em>Type</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getAssignTo <em>Assign To</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getOutsourceFrom <em>Outsource From</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.ServiceProviderImpl#getGovernanceStrategy <em>Governance Strategy</em>}</li>
@@ -104,6 +106,16 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
    * @ordered
    */
   protected String description = DESCRIPTION_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected ServiceProviderType type;
 
   /**
    * The cached value of the '{@link #getAssignTo() <em>Assign To</em>}' reference list.
@@ -240,6 +252,49 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public ServiceProviderType getType()
+  {
+    if (type != null && type.eIsProxy())
+    {
+      InternalEObject oldType = (InternalEObject)type;
+      type = (ServiceProviderType)eResolveProxy(oldType);
+      if (type != oldType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObjectsModelPackage.SERVICE_PROVIDER__TYPE, oldType, type));
+      }
+    }
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ServiceProviderType basicGetType()
+  {
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setType(ServiceProviderType newType)
+  {
+    ServiceProviderType oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.SERVICE_PROVIDER__TYPE, oldType, type));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<ServiceProvider> getAssignTo()
   {
     if (assignTo == null)
@@ -352,6 +407,9 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
         return getName();
       case ObjectsModelPackage.SERVICE_PROVIDER__DESCRIPTION:
         return getDescription();
+      case ObjectsModelPackage.SERVICE_PROVIDER__TYPE:
+        if (resolve) return getType();
+        return basicGetType();
       case ObjectsModelPackage.SERVICE_PROVIDER__ASSIGN_TO:
         return getAssignTo();
       case ObjectsModelPackage.SERVICE_PROVIDER__OUTSOURCE_FROM:
@@ -384,6 +442,9 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
         return;
       case ObjectsModelPackage.SERVICE_PROVIDER__DESCRIPTION:
         setDescription((String)newValue);
+        return;
+      case ObjectsModelPackage.SERVICE_PROVIDER__TYPE:
+        setType((ServiceProviderType)newValue);
         return;
       case ObjectsModelPackage.SERVICE_PROVIDER__ASSIGN_TO:
         getAssignTo().clear();
@@ -423,6 +484,9 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
       case ObjectsModelPackage.SERVICE_PROVIDER__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
         return;
+      case ObjectsModelPackage.SERVICE_PROVIDER__TYPE:
+        setType((ServiceProviderType)null);
+        return;
       case ObjectsModelPackage.SERVICE_PROVIDER__ASSIGN_TO:
         getAssignTo().clear();
         return;
@@ -455,6 +519,8 @@ public class ServiceProviderImpl extends MinimalEObjectImpl.Container implements
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case ObjectsModelPackage.SERVICE_PROVIDER__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+      case ObjectsModelPackage.SERVICE_PROVIDER__TYPE:
+        return type != null;
       case ObjectsModelPackage.SERVICE_PROVIDER__ASSIGN_TO:
         return assignTo != null && !assignTo.isEmpty();
       case ObjectsModelPackage.SERVICE_PROVIDER__OUTSOURCE_FROM:

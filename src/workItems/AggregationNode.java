@@ -63,7 +63,24 @@ public class AggregationNode extends WorkItemEntity{
 			subTask.removeUpperTask(this);
 		}
 	}
-	
+	public double getProgress() {
+		double progress = 0;
+		for (WorkItemEntity subtask:this.getSubtasks()) {
+			progress += subtask.getProgress();
+		}
+		progress = progress/this.getSubtasks().size();
+		this.setProgress(progress);
+		return progress;
+	}
+	public double getProgressRate() {
+		double progressRate = 0;
+		for (WorkItemEntity subtask:this.getSubtasks()) {
+			progressRate += subtask.getProgressRate();
+		}
+		progressRate = progressRate/this.getSubtasks().size();
+		this.setProgressRate(progressRate);
+		return progressRate;
+	}
 	public double calculateServiceEfficiency(ServiceProviderAgent sp) {
 		double sEfficiency = 0;
 		for (ResourceEntity r: sp.getMyResourceEntities()) {

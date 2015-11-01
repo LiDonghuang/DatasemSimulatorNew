@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link xtext.objectsModel.ServiceProvider#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.ServiceProvider#getName <em>Name</em>}</li>
  *   <li>{@link xtext.objectsModel.ServiceProvider#getDescription <em>Description</em>}</li>
+ *   <li>{@link xtext.objectsModel.ServiceProvider#getType <em>Type</em>}</li>
  *   <li>{@link xtext.objectsModel.ServiceProvider#getAssignTo <em>Assign To</em>}</li>
  *   <li>{@link xtext.objectsModel.ServiceProvider#getOutsourceFrom <em>Outsource From</em>}</li>
  *   <li>{@link xtext.objectsModel.ServiceProvider#getGovernanceStrategy <em>Governance Strategy</em>}</li>
@@ -107,6 +108,32 @@ public interface ServiceProvider extends EObject
    * @generated
    */
   void setDescription(String value);
+
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' reference.
+   * @see #setType(ServiceProviderType)
+   * @see xtext.objectsModel.ObjectsModelPackage#getServiceProvider_Type()
+   * @model
+   * @generated
+   */
+  ServiceProviderType getType();
+
+  /**
+   * Sets the value of the '{@link xtext.objectsModel.ServiceProvider#getType <em>Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Type</em>' reference.
+   * @see #getType()
+   * @generated
+   */
+  void setType(ServiceProviderType value);
 
   /**
    * Returns the value of the '<em><b>Assign To</b></em>' reference list.

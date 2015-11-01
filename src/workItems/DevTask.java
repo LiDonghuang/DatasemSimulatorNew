@@ -1,7 +1,10 @@
 package workItems;
 
 public class DevTask extends Task {
-
+	public int maxMaturityLevels = 5;
+	public double uncertainty = 0.1;
+	public double risk = 0.1;
+	
 	public DevTask(WorkItemEntity wi) {
 		super(wi);
 		this.isDevTask = true;
@@ -20,31 +23,28 @@ public class DevTask extends Task {
 		this.serviceId = serviceId;
 		this.efforts = efforts;
 		this.fullName = this.fullName();
-		System.out.println(this.fullName);
 	}
 	
 	public void triggerChanges() {
 		int incMaturityLevels = getCurrentMaturityLevel()- getPreviousMaturityLevel();	
 		setPreviousMaturityLevel(getPreviousMaturityLevel() + incMaturityLevels);
-		//if (incMaturityLevels>0) {System.out.println(this.fullName+"increased Maturity Level by "+incMaturityLevels+" to "+currentMaturityLevel);}
+		if (incMaturityLevels>0) {System.out.println(this.fullName+"increased Maturity Level by "+incMaturityLevels+" to "+getCurrentMaturityLevel());}
 		for (int i=0; i< incMaturityLevels; i++) {				
 			if (Math.random()<=this.uncertainty) {
 				this.rework(this.risk);						
 			}
 			this.changePropagation();
-			if (Math.random()<=0.00) {
-				this.suspendForAssistance();
+			if (Math.random()<=0.50) {
+				this.suspendForResolution();
 			}
 		}
 	}
-	public void suspendForAssistance() {
-		if (!this.isAnalysisTask && !this.isAssistanceTask) {
-			this.isSuspended = true;
-			this.suspendedTime = this.SoS.timeNow;
-			this.getAssignedAgent().setBottleNeckCount(this.getAssignedAgent().getBottleNeckCount() + 1);
-			this.getAssignedAgent().requestAssistance(this);
-			//System.out.println("\nSUSPENDED @TIME:"+this.SoS.timeNow+this.fullName);
-		}
+	public void suspendForResolution() {
+		this.isSuspended = true;
+		this.suspendedTime = this.SoS.timeNow;
+		this.getAssignedAgent().setBottleNeckCount(this.getAssignedAgent().getBottleNeckCount() + 1);
+		this.getAssignedAgent().requestAssistance(this);
+		System.out.println("\nSUSPENDED @TIME:"+this.SoS.timeNow+this.fullName);
 	}
 	public void changePropagation() {
 		for (WorkItemEntity affectedWI : this.getImpactsWIs()) {	

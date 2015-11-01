@@ -7,7 +7,7 @@ public class AnalysisActivity extends Task{
 	public AnalysisActivity (AggregationNode aggrNode) {	
 		super(aggrNode);
 		this.setIsAggregationNode(false); 
-		this.isAnalysisTask = true;
+		this.isAnalysisActivity = true;
 		this.SoS = aggrNode.SoS;
 		this.AnalysisObject = aggrNode;
 		this.typeId = SoS.getWorkItemTypeId("Analysis");

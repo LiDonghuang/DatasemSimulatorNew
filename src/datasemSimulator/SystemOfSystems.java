@@ -18,6 +18,7 @@ import workItems.AggregationNode;
 import workItems.WorkItemEntity;
 import xtext.objectsModel.RequiredService;
 import xtext.objectsModel.Service;
+import xtext.objectsModel.ServiceProviderType;
 import xtext.objectsModel.Skill;
 import xtext.objectsModel.WorkItemType;
 
@@ -25,6 +26,7 @@ public class SystemOfSystems {
 	public HashMap<Integer, ServiceProviderAgent> myServiceProviderAgents = new HashMap<Integer, ServiceProviderAgent>();
 	public HashMap<Integer, WorkItemEntity> myWorkItemEntities = new HashMap<Integer, WorkItemEntity>();
 	public HashMap<Integer, ResourceEntity> myResourceEntities = new HashMap<Integer, ResourceEntity>();
+	public HashMap<Integer, ServiceProviderType> myServiceProviderTypes;
 	public HashMap<Integer, WorkItemType> myWorkItemTypes;
 	public HashMap<Integer, Service> myServices;
 	public KanbanBoard myKanbanBoard;
@@ -120,7 +122,7 @@ public class SystemOfSystems {
 		}
 		for (ServiceProviderAgent sp:this.myServiceProviderAgents.values()) {
 			System.out.println("\nServiceProviderAgent: ");
-			System.out.println("serviceProviderId: "+sp.getId()+" name: "+sp.getName());
+			System.out.println("serviceProviderId: "+sp.getId()+" name: "+sp.getName()+" type:"+this.myServiceProviderTypes.get(sp.typeId));
 			System.out.println(" ResourceEntities:");
 			for (ResourceEntity r:sp.getMyResourceEntities()) {
 				System.out.println(" resourceId: "+r.getId()+" name: "+r.getName());

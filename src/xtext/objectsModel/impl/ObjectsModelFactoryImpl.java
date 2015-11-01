@@ -69,6 +69,7 @@ public class ObjectsModelFactoryImpl extends EFactoryImpl implements ObjectsMode
       case ObjectsModelPackage.MECHANISM: return createMechanism();
       case ObjectsModelPackage.MECHANISM_ATTRIBUTE: return createMechanismAttribute();
       case ObjectsModelPackage.SERVICE: return createService();
+      case ObjectsModelPackage.SERVICE_PROVIDER_TYPE: return createServiceProviderType();
       case ObjectsModelPackage.SERVICE_PROVIDER: return createServiceProvider();
       case ObjectsModelPackage.ASSET: return createAsset();
       case ObjectsModelPackage.SKILL: return createSkill();
@@ -134,6 +135,17 @@ public class ObjectsModelFactoryImpl extends EFactoryImpl implements ObjectsMode
   {
     ServiceImpl service = new ServiceImpl();
     return service;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ServiceProviderType createServiceProviderType()
+  {
+    ServiceProviderTypeImpl serviceProviderType = new ServiceProviderTypeImpl();
+    return serviceProviderType;
   }
 
   /**

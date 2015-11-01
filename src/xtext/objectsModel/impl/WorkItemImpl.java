@@ -123,7 +123,7 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
    * @generated
    * @ordered
    */
-  protected WorkItemType typeId;
+  protected WorkItemType type;
 
   /**
    * The default value of the '{@link #isHasPredecessors() <em>Has Predecessors</em>}' attribute.
@@ -402,17 +402,17 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
    */
   public WorkItemType getType()
   {
-    if (typeId != null && typeId.eIsProxy())
+    if (type != null && type.eIsProxy())
     {
-      InternalEObject oldType = (InternalEObject)typeId;
-      typeId = (WorkItemType)eResolveProxy(oldType);
-      if (typeId != oldType)
+      InternalEObject oldType = (InternalEObject)type;
+      type = (WorkItemType)eResolveProxy(oldType);
+      if (type != oldType)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObjectsModelPackage.WORK_ITEM__TYPE, oldType, typeId));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObjectsModelPackage.WORK_ITEM__TYPE, oldType, type));
       }
     }
-    return typeId;
+    return type;
   }
 
   /**
@@ -422,7 +422,7 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
    */
   public WorkItemType basicGetType()
   {
-    return typeId;
+    return type;
   }
 
   /**
@@ -432,10 +432,10 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
    */
   public void setType(WorkItemType newType)
   {
-    WorkItemType oldType = typeId;
-    typeId = newType;
+    WorkItemType oldType = type;
+    type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.WORK_ITEM__TYPE, oldType, typeId));
+      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.WORK_ITEM__TYPE, oldType, type));
   }
 
   /**
@@ -871,7 +871,7 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
       case ObjectsModelPackage.WORK_ITEM__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case ObjectsModelPackage.WORK_ITEM__TYPE:
-        return typeId != null;
+        return type != null;
       case ObjectsModelPackage.WORK_ITEM__HAS_PREDECESSORS:
         return hasPredecessors != HAS_PREDECESSORS_EDEFAULT;
       case ObjectsModelPackage.WORK_ITEM__PD_TASKS:

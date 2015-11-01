@@ -68,6 +68,15 @@ public interface ObjectsModelFactory extends EFactory
   Service createService();
 
   /**
+   * Returns a new object of class '<em>Service Provider Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Service Provider Type</em>'.
+   * @generated
+   */
+  ServiceProviderType createServiceProviderType();
+
+  /**
    * Returns a new object of class '<em>Service Provider</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
