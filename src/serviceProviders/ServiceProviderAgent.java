@@ -284,7 +284,9 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 
 	}
 	public boolean acceptanceDecision(WorkItemEntity requestedWI) {
-		boolean accept = true;			
+		boolean accept = true;		
+		System.out.println(requestedWI.fullName);
+		System.out.println(requestedWI.isAggregationNode);
 		if (backlogQ.size()>=BacklogLimit) {
 			if (requestedWI.getRequester().id == this.id) {
 				accept = true;
@@ -334,6 +336,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		}
 	}
 	public void releaseSubtasks (AggregationNode wi) {
+		SoS.myValueFunction.developValue(wi);
 		//-
 		@SuppressWarnings("unchecked")
 		Context<Object> context = ContextUtils.getContext(this);	

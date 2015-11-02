@@ -775,3 +775,179 @@ java.lang.NullPointerException
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+FATAL [Thread-8] 2015-11-01 18:53:45,167 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (60.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+	at java.util.LinkedList.checkElementIndex(LinkedList.java:555)
+	at java.util.LinkedList.get(LinkedList.java:476)
+	at workItems.ResolutionActivity.<init>(ResolutionActivity.java:23)
+	at serviceProviders.ServiceProviderAgent.requestAssistance(ServiceProviderAgent.java:272)
+	at workItems.DevTask.suspendForResolution(DevTask.java:47)
+	at workItems.DevTask.triggerChanges(DevTask.java:39)
+	at serviceProviders.ServiceProviderAgent.TriggerWIsChanges(ServiceProviderAgent.java:204)
+	... 10 more
+FATAL [Thread-8] 2015-11-01 18:57:27,010 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (51.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+	at java.util.LinkedList.checkElementIndex(LinkedList.java:555)
+	at java.util.LinkedList.get(LinkedList.java:476)
+	at workItems.ResolutionActivity.<init>(ResolutionActivity.java:23)
+	at serviceProviders.ServiceProviderAgent.requestAssistance(ServiceProviderAgent.java:272)
+	at workItems.DevTask.suspendForResolution(DevTask.java:47)
+	at workItems.DevTask.triggerChanges(DevTask.java:39)
+	at serviceProviders.ServiceProviderAgent.TriggerWIsChanges(ServiceProviderAgent.java:204)
+	... 10 more
+FATAL [Thread-8] 2015-11-01 23:29:45,826 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (30.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ClassCastException: workItems.DevTask cannot be cast to workItems.AggregationNode
+	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:298)
+	at serviceProviders.ServiceProviderAgent.CheckRequestedQ(ServiceProviderAgent.java:114)
+	at serviceProviders.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:255)
+	... 10 more
+FATAL [Thread-8] 2015-11-01 23:31:18,009 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (29.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ClassCastException: workItems.DevTask cannot be cast to workItems.AggregationNode
+	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:298)
+	at serviceProviders.ServiceProviderAgent.CheckRequestedQ(ServiceProviderAgent.java:114)
+	at serviceProviders.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:255)
+	... 10 more
+FATAL [Thread-8] 2015-11-01 23:32:35,136 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (29.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ClassCastException: workItems.DevTask cannot be cast to workItems.AggregationNode
+	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:299)
+	at serviceProviders.ServiceProviderAgent.CheckRequestedQ(ServiceProviderAgent.java:114)
+	at serviceProviders.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:255)
+	... 10 more
+FATAL [Thread-8] 2015-11-01 23:35:04,619 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (29.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ClassCastException: workItems.DevTask cannot be cast to workItems.AggregationNode
+	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:299)
+	at serviceProviders.ServiceProviderAgent.CheckRequestedQ(ServiceProviderAgent.java:114)
+	at serviceProviders.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:255)
+	... 10 more
+FATAL [Thread-8] 2015-11-01 23:40:06,146 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (29.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ClassCastException: workItems.DevTask cannot be cast to workItems.AggregationNode
+	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:299)
+	at serviceProviders.ServiceProviderAgent.CheckRequestedQ(ServiceProviderAgent.java:114)
+	at serviceProviders.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:255)
+	... 10 more
+FATAL [Thread-8] 2015-11-01 23:42:06,832 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (29.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ClassCastException: workItems.DevTask cannot be cast to workItems.AggregationNode
+	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:300)
+	at serviceProviders.ServiceProviderAgent.CheckRequestedQ(ServiceProviderAgent.java:114)
+	at serviceProviders.ServiceProviderAgent.DisburseWIs(ServiceProviderAgent.java:255)
+	... 10 more

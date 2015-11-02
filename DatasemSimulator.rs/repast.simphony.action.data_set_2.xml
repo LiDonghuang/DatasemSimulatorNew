@@ -1,45 +1,99 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>SOS Data Set</name>
-  <type>AGGREGATE</type>
+  <name>EndRum Data Set</name>
+  <type>NON_AGGREGATE</type>
+  <sourceType>datasemSimulator.SystemOfSystems</sourceType>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
   <inclRandomSeed>false</inclRandomSeed>
   <scheduleParams>
-    <start>1.0</start>
-    <interval>1.0</interval>
+    <start>9.99999999E8</start>
+    <interval>0.0</interval>
     <priority>-Infinity</priority>
     <pType>LAST</pType>
     <duration>-1.0</duration>
-    <frequency>REPEAT</frequency>
-    <hashCode>1254935644</hashCode>
+    <frequency>ONE_TIME</frequency>
+    <hashCode>1314005598</hashCode>
   </scheduleParams>
-  <atEnd>false</atEnd>
+  <atEnd>true</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
-      <string>ValueDelivered</string>
+      <string>EndTime</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>ValueDelivered</id>
+        <id>EndTime</id>
         <className>datasemSimulator.SystemOfSystems</className>
-        <methodName>getValueDelivered</methodName>
-        <aggType>MEAN</aggType>
+        <methodName>getEndTime</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>AgentsResourceUtilization_cov</string>
+      <string>CountTasks</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>AgentsResourceUtilization_cov</id>
+        <id>CountTasks</id>
         <className>datasemSimulator.SystemOfSystems</className>
-        <methodName>getAgentsResourceUtilization_cov</methodName>
-        <aggType>MEAN</aggType>
+        <methodName>getCountTasks</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>AgentsResourceUtilization_mean</string>
+      <string>TaskReworkCount_total</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>AgentsResourceUtilization_mean</id>
+        <id>TaskReworkCount_total</id>
         <className>datasemSimulator.SystemOfSystems</className>
-        <methodName>getAgentsResourceUtilization_mean</methodName>
-        <aggType>MEAN</aggType>
+        <methodName>getTaskReworkCount_total</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>TaskReworkCount_mean</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>TaskReworkCount_mean</id>
+        <className>datasemSimulator.SystemOfSystems</className>
+        <methodName>getTaskReworkCount_mean</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>TaskReworkCount_stdev</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>TaskReworkCount_stdev</id>
+        <className>datasemSimulator.SystemOfSystems</className>
+        <methodName>getTaskReworkCount_stdev</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>ChangePropagationCount_total</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>ChangePropagationCount_total</id>
+        <className>datasemSimulator.SystemOfSystems</className>
+        <methodName>getChangePropagationCount_total</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>ChangePropagationCount_mean</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>ChangePropagationCount_mean</id>
+        <className>datasemSimulator.SystemOfSystems</className>
+        <methodName>getChangePropagationCount_mean</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>ChangePropagationCount_stdev</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>ChangePropagationCount_stdev</id>
+        <className>datasemSimulator.SystemOfSystems</className>
+        <methodName>getChangePropagationCount_stdev</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>CycleTimeToEffortsRatio_mean</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>CycleTimeToEffortsRatio_mean</id>
+        <className>datasemSimulator.SystemOfSystems</className>
+        <methodName>getCycleTimeToEffortsRatio_mean</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>CycleTimeToEffortsRatio_stdev</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>CycleTimeToEffortsRatio_stdev</id>
+        <className>datasemSimulator.SystemOfSystems</className>
+        <methodName>getCycleTimeToEffortsRatio_stdev</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
   </methodDataSources>

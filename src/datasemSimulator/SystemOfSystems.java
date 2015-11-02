@@ -9,6 +9,7 @@ import kanbanBoard.KanbanBoard;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
 
+import contractNetProtocol.ValueFunction;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ISchedule;
 import repast.simphony.engine.schedule.ScheduledMethod;
@@ -30,11 +31,13 @@ public class SystemOfSystems {
 	public HashMap<Integer, WorkItemType> myWorkItemTypes;
 	public HashMap<Integer, Service> myServices;
 	public KanbanBoard myKanbanBoard;
+	public ValueFunction myValueFunction;
 	
 	public int OrgLevels = 4;
 	public int OrgSize = 10;
 	public int WINLevels = 4;
-	public int WINSize = 10;
+	public int WINComplexity = 5;
+	public int WINSize = 2;
 	
 	public HashMap<Integer, WorkItemEntity> waitingList = new HashMap<Integer, WorkItemEntity>();
 	public HashMap<Integer, WorkItemEntity> arrivedList = new HashMap<Integer, WorkItemEntity>();
@@ -47,6 +50,8 @@ public class SystemOfSystems {
 	private int EndTime;	
 	private int CountTasks;
 	private double ValueDelivered;
+	private double NPV;
+	private double ROR=0.12;
 	private double TaskReworkCount_total;
 	private double TaskReworkCount_mean;
 	private double TaskReworkCount_stdev;
@@ -122,7 +127,7 @@ public class SystemOfSystems {
 		}
 		for (ServiceProviderAgent sp:this.myServiceProviderAgents.values()) {
 			System.out.println("\nServiceProviderAgent: ");
-			System.out.println("serviceProviderId: "+sp.getId()+" name: "+sp.getName()+" type:"+this.myServiceProviderTypes.get(sp.typeId));
+			System.out.println("serviceProviderId: "+sp.getId()+" name: "+sp.getName()+" type:"+this.myServiceProviderTypes.get(sp.typeId).getName());
 			System.out.println(" ResourceEntities:");
 			for (ResourceEntity r:sp.getMyResourceEntities()) {
 				System.out.println(" resourceId: "+r.getId()+" name: "+r.getName());
@@ -198,8 +203,10 @@ public class SystemOfSystems {
 		AgentsBottleNeckCount_mean = StatUtils.mean(AgentsBottleNeckCount);
 		AgentsBottleNeckCount_stdev = FastMath.sqrt(StatUtils.variance(AgentsBottleNeckCount));
 		
-		System.out.println("EndTime:"+EndTime);
-		System.out.println("CountTasks:"+CountTasks);
+		System.out.println("EndTime: "+EndTime);
+		System.out.println("Value Delivered: "+this.ValueDelivered);
+		System.out.println("NPV: "+this.NPV);
+		System.out.println("\nCountTasks: "+CountTasks);
 		System.out.println("TaskReworkCount:\n total: "+TaskReworkCount_total+" mean: "+TaskReworkCount_mean+" stdev: "+TaskReworkCount_stdev);
 		System.out.println("ChangePropagationCount:\n total: "+ChangePropagationCount_total+" mean: "+ChangePropagationCount_mean+" stdev: "+ChangePropagationCount_stdev);
 		System.out.println("CycleTimeToEffortsRatio:\n mean: "+CycleTimeToEffortsRatio_mean+" stdev: "+CycleTimeToEffortsRatio_stdev);
@@ -232,8 +239,12 @@ public class SystemOfSystems {
 	public double getValueDelivered() {
 		return this.ValueDelivered;
 	}
+	public double getNPV() {
+		return this.NPV;
+	}
 	public void deliverValue(double addValue) {
 		this.ValueDelivered+=addValue;
+		this.NPV+=addValue/Math.pow(1+ROR/360, timeNow);
 	}
 	public double getAgentsResourceUtilization_mean() {
 		return this.AgentsResourceUtilization_mean;

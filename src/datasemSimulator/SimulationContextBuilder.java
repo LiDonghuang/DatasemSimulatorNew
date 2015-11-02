@@ -38,6 +38,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import contractNetProtocol.ValueFunction;
+
 
 public class SimulationContextBuilder {
 	public HashMap<Integer, ServiceProvider> myServiceProviders = new HashMap<Integer, ServiceProvider>();
@@ -66,6 +68,18 @@ public class SimulationContextBuilder {
 				context.add(r);
 			}
 		}
+		
+		// ValueFunction
+		Mechanism valueMechanism = ObjectsModelFactory.eINSTANCE.createMechanism();
+		valueMechanism.setName("ValueFunction");valueMechanism.setValue("Derived");
+		MechanismAttribute att1 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
+		att1.setAttribute("HierarchyFactor");att1.setValue("0.5");
+		MechanismAttribute att2 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
+		att2.setAttribute("PrecedencyFactor");att2.setValue("0.5");
+		valueMechanism.getAttributes().add(att1);valueMechanism.getAttributes().add(att2);
+		//valueMechanism.setName("ValueFunction");valueMechanism.setValue("Fiat");
+		mySoS.myValueFunction = new ValueFunction(valueMechanism);
+		// Initial Assignment
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
 			if ((wi.hierarchy==0 )) {	
 				wi.SoS.waitingList.put(wi.getId(), wi);
@@ -79,7 +93,9 @@ public class SimulationContextBuilder {
 				wi.setAssignedAgent(mySoS.myServiceProviderAgents.get(1));
 				//
 			}
+			// Process Model
 			else if (wi.getType().getName().matches("SubSysReq")) {
+				wi.isAggregationNode = true;
 				wi = (AggregationNode)wi;
 				int c = 0;
 				for (RequiredService reqSev : wi.getRequiredServices()) {
@@ -90,7 +106,7 @@ public class SimulationContextBuilder {
 					int currentId = mySoS.getWICount();
 					int st_id = currentId+1;
 					mySoS.increaseWICount();
-					DevTask devTask = new DevTask((AggregationNode)wi, st_id, name, serviceId, efforts);
+					new DevTask((AggregationNode)wi, st_id, name, serviceId, efforts);
 				}
 			}
 		}		

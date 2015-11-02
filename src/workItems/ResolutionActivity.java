@@ -11,7 +11,8 @@ public class ResolutionActivity extends Task{
 		this.SoS = devTask.SoS;
 		this.ResolutionObject = devTask;
 		this.typeId = SoS.getWorkItemTypeId("Resolution");
-		this.hierarchy = SoS.myWorkItemTypes.get(this.typeId).getHierarchy();
+		this.setType(SoS.myWorkItemTypes.get(this.typeId));
+		this.hierarchy = this.getType().getHierarchy();
 			
 		int currentId = this.SoS.getWICount();
 		this.id = currentId+1;
@@ -19,15 +20,16 @@ public class ResolutionActivity extends Task{
 		this.name = "Res."+devTask.getName();
 		this.hasPredecessors = false;
 		this.value = 0;
+		this.initialValue = 0;
+		this.currentValue =0;
 		
-		this.serviceId = this.getUppertasks().get(0).serviceId;
-		this.efforts = 100;
+		this.serviceId = ResolutionObject.getUppertasks().get(0).serviceId;
+		this.efforts = 10;
 		this.maxMaturityLevels = 1;
 		this.uncertainty = 0;
 		this.risk = 0;		
 		this.setActivated();
 		this.fullName = this.fullName();
-		System.out.println(fullName);
 	}
 
 }
