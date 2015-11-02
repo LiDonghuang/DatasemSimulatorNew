@@ -445,15 +445,15 @@ public class SimulationContextBuilder {
 		}				
 		for (WorkItem wi: myWorkItems.values()) {
 			int id = wi.getId();
-			WorkItemEntity entity;
+			WorkItemEntity entity = new WorkItemEntity(wi,mySoS);
 			if (wi.isIsAggregationNode()) {
-				entity = new AggregationNode(wi);
+				entity = new AggregationNode(entity);
 			}
 			else if (wi.getType().getName().matches("SubSysReq")) {
-				entity = new AggregationNode(wi);
+				entity = new AggregationNode(entity);
 			}
 			else {
-				entity = new Task(wi);
+				entity = new Task(entity);
 				entity = new DevTask(entity);
 			}
 			entity.SoS = mySoS;
@@ -466,24 +466,30 @@ public class SimulationContextBuilder {
 		for (WorkItemEntity entity: mySoS.myWorkItemEntities.values()) {
 			int id = entity.getId();
 			WorkItem wi = myWorkItems.get(id);
-			for (WorkItem st: wi.getSbTasks()) {
-				int st_id = st.getId();
-				((AggregationNode)entity).getSubtasks().add(mySoS.myWorkItemEntities.get(st.getId()));
-				mySoS.myWorkItemEntities.get(st_id).getUppertasks().add((AggregationNode)entity);
+			if (wi.isIsAggregationNode()) {
+				for (WorkItem st: wi.getSbTasks()) {
+					int st_id = st.getId();
+					((AggregationNode)entity).getSubtasks().add(mySoS.myWorkItemEntities.get(st.getId()));
+					mySoS.myWorkItemEntities.get(st_id).getUppertasks().add((AggregationNode)entity);
+				}
 			}
-			for (WorkItem pt: wi.getPdTasks()) {
-				int pt_id = pt.getId();
-				entity.getPredecessors().add(mySoS.myWorkItemEntities.get(pt_id));
-				mySoS.myWorkItemEntities.get(pt_id).getSuccessors().add(entity);
+			if (wi.isHasPredecessors()) {
+				for (WorkItem pt: wi.getPdTasks()) {
+					int pt_id = pt.getId();
+					entity.getPredecessors().add(mySoS.myWorkItemEntities.get(pt_id));
+					mySoS.myWorkItemEntities.get(pt_id).getSuccessors().add(entity);
+				}
 			}
-			for (Impact myImpact: wi.getImpacts()) {
-				int impactWI_id = myImpact.getImpactWI().getId();
-				double likelihood = myImpact.getLikelihood();
-				double risk = myImpact.getRisk();
-				WorkItemEntity impactEntity = mySoS.myWorkItemEntities.get(impactWI_id);
-				entity.getImpactsWIs().add(impactEntity);
-				entity.getImpactsValue().put(impactEntity, risk*TaskChangePropagationRisk);
-				entity.getImpactsLikelihood().put(impactEntity, likelihood*TaskChangePropagationUncertainty);
+			if (wi.isHasImpacts()) {
+				for (Impact myImpact: wi.getImpacts()) {
+					int impactWI_id = myImpact.getImpactWI().getId();
+					double likelihood = myImpact.getLikelihood();
+					double risk = myImpact.getRisk();
+					WorkItemEntity impactEntity = mySoS.myWorkItemEntities.get(impactWI_id);
+					entity.getImpactsWIs().add(impactEntity);
+					entity.getImpactsValue().put(impactEntity, risk*TaskChangePropagationRisk);
+					entity.getImpactsLikelihood().put(impactEntity, likelihood*TaskChangePropagationUncertainty);
+				}
 			}
 		}
 		return mySoS;

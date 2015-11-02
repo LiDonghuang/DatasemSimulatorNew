@@ -2,18 +2,17 @@ package workItems;
 
 import java.util.LinkedList;
 
+import datasemSimulator.SystemOfSystems;
 import serviceProviders.ResourceEntity;
 import serviceProviders.ServiceProviderAgent;
 import xtext.objectsModel.Skill;
-import xtext.objectsModel.WorkItem;
 
 public class AggregationNode extends WorkItemEntity{
 	private LinkedList<WorkItemEntity> subtasks = new LinkedList<WorkItemEntity>();
 	
-	public AggregationNode(WorkItem wi) {
+	public AggregationNode(WorkItemEntity wi) {
 		super(wi);
 		this.isAggregationNode = true;
-		this.typeId = wi.getType().getId();
 		if (wi.getRequiredServices().isEmpty()) {
 			this.serviceId = 1;
 		}

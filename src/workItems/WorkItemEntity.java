@@ -94,13 +94,13 @@ public class WorkItemEntity extends WorkItemImpl {
 	private double CycleTimeToEffortsRatio = 0;
 
 	
-	public WorkItemEntity (WorkItem wi) {
+	public WorkItemEntity (WorkItem wi, SystemOfSystems SoS) {
+		this.SoS = SoS;
 		this.myWorkItem = wi;
 		this.id = wi.getId();
 		this.name = wi.getName();
 		this.typeId = wi.getType().getId();
 		this.hierarchy = wi.getType().getHierarchy();
-		this.value = wi.getValue();
 		this.initialValue = this.value;
 		this.currentValue = this.initialValue;
 		this.isAggregationNode = wi.isIsAggregationNode();
@@ -108,7 +108,6 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.fullName = this.fullName();
 	}
 	public WorkItemEntity (WorkItemEntity WorkItemEntity) {
-		
 	}
 	public void addToContext() {
 		if (this.isActivated) {
@@ -264,8 +263,9 @@ public class WorkItemEntity extends WorkItemImpl {
 		}
 	}
 	*/
+
 	public String fullName(){
-		String full_name = " "+this.getType().getName()+"[Hierarchy:"+this.hierarchy+"]"+this.getName()+"(id:"+this.getId()+") ";
+		String full_name = " "+SoS.myWorkItemTypes.get(this.typeId).getName()+"[Hierarchy:"+this.hierarchy+"]"+this.getName()+"(id:"+this.getId()+") ";
 		return full_name;
 	}
 	public void setSuspended() {
@@ -342,9 +342,6 @@ public class WorkItemEntity extends WorkItemImpl {
 	}
 	public void setPerceivedValue(double v) {
 		this.perceivedValue = v;
-	}
-	public WorkItemType getType() {
-		return this.myWorkItem.getType();
 	}
 	public EList<RequiredService> getRequiredServices() {
 		return this.myWorkItem.getRequiredServices();
