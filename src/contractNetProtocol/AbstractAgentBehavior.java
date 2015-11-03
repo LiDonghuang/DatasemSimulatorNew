@@ -19,10 +19,6 @@ import workItems.ResolutionActivity;
 import workItems.DevTask;
 import workItems.Task;
 import workItems.WorkItemEntity;
-import xtext.objectsModel.ServiceProvider;
-import xtext.objectsModel.Skill;
-
-
 
 public class AbstractAgentBehavior {
 	
@@ -30,8 +26,10 @@ public class AbstractAgentBehavior {
 	public HashMap<Integer,String> ActionsMap;
 	public ServiceProviderAgent agent;		
 	
-	public AbstractAgentBehavior(ServiceProviderAgent agent) {
-		this.agent = agent;	
+	public AbstractAgentBehavior() {
+	}
+	public void setAgent(ServiceProviderAgent agent) {
+		this.agent = agent;
 	}
 
 	public void GoToState(int n) {
@@ -42,18 +40,6 @@ public class AbstractAgentBehavior {
 			case "AdvanceWIsProgress": AdvanceWIsProgress();
 			case "TriggerWIsChanges": TriggerWIsChanges();
 			case "CheckWIsCompletion": CheckWIsCompletion();
-		}
-	}
-	public boolean CheckCondition(String condition) {
-		
-		return false;
-	}
-	public void StatementImpl(String statement) {
-		
-	}
-	
-	public void DoAction(int n) {
-		switch(ActionsMap.get(n)) {
 		}
 	}
 	public void DoAction(int n, AbstractClass Object) {
@@ -72,6 +58,18 @@ public class AbstractAgentBehavior {
 			case "requestService": Action(Object);
 			case "acceptWI": Action(Object);
 			case "releaseSubtasks": Action(Object);
+		}
+	}
+	public boolean CheckCondition(String condition) {
+		
+		return false;
+	}
+	public void StatementImpl(String statement) {
+		
+	}
+	
+	public void DoAction(int n) {
+		switch(ActionsMap.get(n)) {
 		}
 	}
 	public WorkItemEntity ObjectToWorkItemEntity(AbstractClass Object) {

@@ -34,9 +34,9 @@ public class SystemOfSystems {
 	public ValueFunction myValueFunction;
 	
 	public int OrgLevels = 4;
-	public int OrgSize = 10;
+	public int OrgSize = 30;
 	public int WINLevels = 4;
-	public int WINComplexity = 5;
+	public int WINComplexity = 4;
 	public int WINSize = 2;
 	
 	public HashMap<Integer, WorkItemEntity> initialList = new HashMap<Integer, WorkItemEntity>();

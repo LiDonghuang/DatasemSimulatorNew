@@ -107,7 +107,8 @@ public class SimulationContextBuilder {
 					while (totalEfforts>0) {
 						c++;
 						String name = wi.getName()+"."+c;	
-						double efforts = Math.min(interval_max, totalEfforts);
+						double efforts = interval_min+Math.random()*(interval_max-interval_min);
+						efforts = Math.min(efforts, totalEfforts);
 						totalEfforts -= efforts;
 						if (totalEfforts<=interval_min) {
 							efforts+=totalEfforts;

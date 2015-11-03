@@ -47,8 +47,8 @@ public class Visualization {
 		context = ctx;
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);	
 		SoS = mySoS;
-		grid2Dsize[0]=SoS.OrgLevels*20; grid2Dsize[1]=SoS.OrgSize*10;
-		gridWINsize[0]=2*SoS.WINSize*(int)Math.pow(SoS.WINComplexity-1, SoS.WINLevels-1); gridWINsize[1]=SoS.WINLevels*10;
+		grid2Dsize[0]=SoS.OrgLevels*20; grid2Dsize[1]=SoS.OrgSize*5;
+		gridWINsize[0]=3*SoS.WINSize*(int)Math.pow(SoS.WINComplexity-1, SoS.WINLevels-1); gridWINsize[1]=SoS.WINLevels*10;
 		
 		int width;
 		int height;
@@ -90,7 +90,7 @@ public class Visualization {
 	public void initializeOrganization() {
 		for (ServiceProviderAgent agent : SoS.myServiceProviderAgents.values()) {											
 			int x=5+5*agent.hierarchy;
-			int y=SoS.OrgSize*10-agent.getId()*10;
+			int y=SoS.OrgSize*5-agent.getId()*5;
 			agent.icon.location[0]=x; agent.icon.location[1]=y;			
 			grid2D.moveTo(agent,x,y);
 			int c = 1;
@@ -114,10 +114,17 @@ public class Visualization {
 				int hierarchy = wItem.hierarchy;
 				count[hierarchy]++;
 				//wItem.icon.location[0] = count[hierarchy]* (int)(Math.pow((SoS.WINLevels-hierarchy),2)-2*(SoS.WINLevels-hierarchy+1));
-				wItem.icon.location[0] = (int)((count[hierarchy]-0.5)*(int)(Math.pow(SoS.WINComplexity,SoS.WINLevels-hierarchy-1)+1));
-				wItem.icon.location[1] = gridWINsize[1]-hierarchy*10-5;			
+				if (wItem.hierarchy!=SoS.WINLevels-1) {
+					wItem.icon.location[0] = (int)((count[hierarchy]-0.5)*(int)(Math.pow(SoS.WINComplexity,SoS.WINLevels-hierarchy-1)+1));
+					wItem.icon.location[1] = gridWINsize[1]-hierarchy*10-5;			
+				}
+//				else {
+//					int c1=0;
+//					wItem.icon.location[0] = wItem.getUppertasks().get(0).icon.location[0];
+//					wItem.icon.location[1] = wItem.getUppertasks().get(0).icon.location[1];			
+//				}
 				gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
-				if (wItem.isAggregationNode) {
+				if (wItem.isAggregationNode && (wItem.hierarchy!=SoS.WINLevels-2)) {
 					for (int i=0;i<((AggregationNode)wItem).getSubtasks().size();i++) {
 						WorkItemEntity wItemsTask = ((AggregationNode)wItem).getSubtasks().get(i);
 						if ( SoS.arrivedList.containsKey(wItemsTask.getId()) ){
@@ -133,13 +140,13 @@ public class Visualization {
 				gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
 				netWI_Hierarchy.addEdge(wItem,wItem1.AnalysisObject);
 			}
-			else if (wItem.isResolutionActivity) {
-				ResolutionActivity wItem1 = (ResolutionActivity)wItem;
-				wItem.icon.location[0] = wItem1.ResolutionObject.icon.location[0]-2;
-				wItem.icon.location[1] = wItem1.ResolutionObject.icon.location[1]-2;
-				gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
-				netWI_Hierarchy.addEdge(wItem,wItem1.ResolutionObject);
-			}
+//			else if (wItem.isResolutionActivity) {
+//				ResolutionActivity wItem1 = (ResolutionActivity)wItem;
+//				wItem.icon.location[0] = wItem1.ResolutionObject.icon.location[0]-2;
+//				wItem.icon.location[1] = wItem1.ResolutionObject.icon.location[1]-2;
+//				gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
+//				netWI_Hierarchy.addEdge(wItem,wItem1.ResolutionObject);
+//			}
 			if (wItem.isStarted) {
 				wItem.icon.color[0]=51;wItem.icon.color[1]=153;wItem.icon.color[2]=255;
 				if (wItem.isSuspended) {
@@ -224,7 +231,7 @@ public class Visualization {
 		comments.addComment("progress:"+Integer.toString((int)(wi.getProgress()*100))+"%");
 		comments.addComment("currentValue:"+(int)wi.currentValue);
 		if (!wi.isAggregationNode) {
-			comments.addComment(SoS.myServices.get(wi.serviceId).getName()+" x"+wi.efforts);
+			comments.addComment(SoS.myServices.get(wi.serviceId).getName()+" x"+(int)wi.efforts);
 			if (wi.getReworkCount()>0) {
 				comments.addComment("rework: "+Integer.toString(wi.getReworkCount()));
 			}

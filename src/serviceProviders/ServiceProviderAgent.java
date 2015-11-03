@@ -92,32 +92,32 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		this.typeId = ServiceProvider.getType().getId();
 		this.hierarchy = ServiceProvider.getType().getHierarchy();
 		this.myStrategy = new AgentStrategy(ServiceProvider.getGovernanceStrategy());
-		this.myBehavior = new AbstractAgentBehavior(this);
+		this.myBehavior = new AbstractAgentBehavior();this.myBehavior.setAgent(this);
 	}
 	
 	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-1)
 	public void step_1() {
-		myBehavior.GoToState(1);
+		myBehavior.CheckRequestedQ();;
 	}
 	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-2)
 	public void step_2() {
-		myBehavior.GoToState(2);
+		myBehavior.MakeAssignments();;
 	}
 	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-3)
 	public void step_3() {
-		myBehavior.GoToState(3);
+		myBehavior.SelectWIsToStart();;
 	}
 	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-4)	
 	public void step_4() {
-		myBehavior.GoToState(4);
+		myBehavior.AdvanceWIsProgress();;
 	}
 	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-5)	
 	public void step_5() {
-		myBehavior.GoToState(5);
+		myBehavior.TriggerWIsChanges();;
 	}
 	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-6)	
 	public void step_6() {
-		myBehavior.GoToState(6);
+		myBehavior.CheckWIsCompletion();;
 	}
 	
 	
