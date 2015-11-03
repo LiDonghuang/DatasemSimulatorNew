@@ -1,14 +1,14 @@
 package workItems;
 
-import datasemSimulator.SystemOfSystems;
 import serviceProviders.ResourceEntity;
 import serviceProviders.ServiceProviderAgent;
 import xtext.objectsModel.Skill;
+import xtext.objectsModel.WorkItem;
 
 public class Task extends WorkItemEntity{
 	protected boolean isAggregationNode = false;
 	
-	public Task(WorkItemEntity wi) {
+	public Task(WorkItem wi) {
 		super(wi);
 	}
 	public void allocateResource(ResourceEntity sR) {

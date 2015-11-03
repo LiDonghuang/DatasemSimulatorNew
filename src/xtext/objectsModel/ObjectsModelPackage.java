@@ -131,13 +131,22 @@ public interface ObjectsModelPackage extends EPackage
   int GOVERNANCE_STRATEGY__NAME = 1;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GOVERNANCE_STRATEGY__TYPE = 2;
+
+  /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GOVERNANCE_STRATEGY__DESCRIPTION = 2;
+  int GOVERNANCE_STRATEGY__DESCRIPTION = 3;
 
   /**
    * The feature id for the '<em><b>Mechanisms</b></em>' containment reference list.
@@ -146,7 +155,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GOVERNANCE_STRATEGY__MECHANISMS = 3;
+  int GOVERNANCE_STRATEGY__MECHANISMS = 4;
 
   /**
    * The number of structural features of the '<em>Governance Strategy</em>' class.
@@ -155,7 +164,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GOVERNANCE_STRATEGY_FEATURE_COUNT = 4;
+  int GOVERNANCE_STRATEGY_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link xtext.objectsModel.impl.MechanismImpl <em>Mechanism</em>}' class.
@@ -918,6 +927,17 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    */
   EAttribute getGovernanceStrategy_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link xtext.objectsModel.GovernanceStrategy#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see xtext.objectsModel.GovernanceStrategy#getType()
+   * @see #getGovernanceStrategy()
+   * @generated
+   */
+  EAttribute getGovernanceStrategy_Type();
 
   /**
    * Returns the meta object for the attribute '{@link xtext.objectsModel.GovernanceStrategy#getDescription <em>Description</em>}'.
@@ -1716,6 +1736,14 @@ public interface ObjectsModelPackage extends EPackage
      * @generated
      */
     EAttribute GOVERNANCE_STRATEGY__NAME = eINSTANCE.getGovernanceStrategy_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GOVERNANCE_STRATEGY__TYPE = eINSTANCE.getGovernanceStrategy_Type();
 
     /**
      * The meta object literal for the '<em><b>Description</b></em>' attribute feature.

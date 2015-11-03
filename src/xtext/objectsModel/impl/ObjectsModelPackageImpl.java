@@ -262,7 +262,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGovernanceStrategy_Description()
+  public EAttribute getGovernanceStrategy_Type()
   {
     return (EAttribute)governanceStrategyEClass.getEStructuralFeatures().get(2);
   }
@@ -272,9 +272,19 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getGovernanceStrategy_Description()
+  {
+    return (EAttribute)governanceStrategyEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getGovernanceStrategy_Mechanisms()
   {
-    return (EReference)governanceStrategyEClass.getEStructuralFeatures().get(3);
+    return (EReference)governanceStrategyEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -955,6 +965,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     governanceStrategyEClass = createEClass(GOVERNANCE_STRATEGY);
     createEAttribute(governanceStrategyEClass, GOVERNANCE_STRATEGY__ID);
     createEAttribute(governanceStrategyEClass, GOVERNANCE_STRATEGY__NAME);
+    createEAttribute(governanceStrategyEClass, GOVERNANCE_STRATEGY__TYPE);
     createEAttribute(governanceStrategyEClass, GOVERNANCE_STRATEGY__DESCRIPTION);
     createEReference(governanceStrategyEClass, GOVERNANCE_STRATEGY__MECHANISMS);
 
@@ -1073,6 +1084,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     initEClass(governanceStrategyEClass, GovernanceStrategy.class, "GovernanceStrategy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getGovernanceStrategy_Id(), ecorePackage.getEInt(), "id", null, 0, 1, GovernanceStrategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGovernanceStrategy_Name(), ecorePackage.getEString(), "name", null, 0, 1, GovernanceStrategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGovernanceStrategy_Type(), ecorePackage.getEString(), "type", null, 0, 1, GovernanceStrategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGovernanceStrategy_Description(), ecorePackage.getEString(), "description", null, 0, 1, GovernanceStrategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGovernanceStrategy_Mechanisms(), this.getMechanism(), null, "Mechanisms", null, 0, -1, GovernanceStrategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

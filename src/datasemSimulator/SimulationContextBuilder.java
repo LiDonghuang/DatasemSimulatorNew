@@ -73,16 +73,16 @@ public class SimulationContextBuilder {
 		Mechanism valueMechanism = ObjectsModelFactory.eINSTANCE.createMechanism();
 		valueMechanism.setName("ValueFunction");valueMechanism.setValue("Derived");
 		MechanismAttribute att1 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-		att1.setAttribute("HierarchyFactor");att1.setValue("0.5");
+		att1.setAttribute("HierarchyFactor");att1.setValue("0.2");
 		MechanismAttribute att2 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-		att2.setAttribute("PrecedencyFactor");att2.setValue("0.5");
+		att2.setAttribute("PrecedencyFactor");att2.setValue("0.8");
 		valueMechanism.getAttributes().add(att1);valueMechanism.getAttributes().add(att2);
 		//valueMechanism.setName("ValueFunction");valueMechanism.setValue("Fiat");
 		mySoS.myValueFunction = new ValueFunction(valueMechanism);
 		// Initial Assignment
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
 			if ((wi.hierarchy==0 )) {	
-				wi.SoS.waitingList.put(wi.getId(), wi);
+				wi.SoS.initialList.put(wi.getId(), wi);
 				context.add(wi);
 				wi.SoS.arrivedList.put(wi.getId(), wi);
 				wi.isActivated = true;
@@ -99,14 +99,25 @@ public class SimulationContextBuilder {
 				wi = (AggregationNode)wi;
 				int c = 0;
 				for (RequiredService reqSev : wi.getRequiredServices()) {
-					c++;
-					String name = wi.getName()+'.'+c;
+					double totalEfforts = reqSev.getEfforts();
+					double interval_max = 30;
+					double interval_min = 10;
+					String serviceName = reqSev.getServiceType().getName();
 					int serviceId = reqSev.getServiceType().getId();
-					double efforts = reqSev.getEfforts();					
-					int currentId = mySoS.getWICount();
-					int st_id = currentId+1;
-					mySoS.increaseWICount();
-					new DevTask((AggregationNode)wi, st_id, name, serviceId, efforts);
+					while (totalEfforts>0) {
+						c++;
+						String name = wi.getName()+"."+c;	
+						double efforts = Math.min(interval_max, totalEfforts);
+						totalEfforts -= efforts;
+						if (totalEfforts<=interval_min) {
+							efforts+=totalEfforts;
+							totalEfforts=0;
+						}
+						int currentId = mySoS.getWICount();
+						int st_id = currentId+1;
+						mySoS.increaseWICount();
+						new DevTask((AggregationNode)wi, st_id, name, serviceId, efforts);
+					}
 				}
 			}
 		}		
@@ -358,7 +369,7 @@ public class SimulationContextBuilder {
 		WorkItem myWorkItem = this.myWorkItems.get(id);
 		// Hierarchy
 		boolean isAggregationNode = Boolean.parseBoolean(e.getAttribute("isAggregationNode")); 
-		myWorkItem.setIsAggregationNode(isAggregationNode); //System.out.println("\n"+myWorkItemEntity.getName()+" (id: "+id+")"+" Type: "+myWorkItemEntity.getType().getName());
+		myWorkItem.setIsAggregationNode(isAggregationNode); 
 		if (myWorkItem.isIsAggregationNode()) {
 			Node Subtasks_node = e.getElementsByTagName("Subtasks").item(0);
 			Element Subtasks_element = (Element)Subtasks_node;
@@ -445,15 +456,15 @@ public class SimulationContextBuilder {
 		}				
 		for (WorkItem wi: myWorkItems.values()) {
 			int id = wi.getId();
-			WorkItemEntity entity = new WorkItemEntity(wi,mySoS);
+			WorkItemEntity entity;
 			if (wi.isIsAggregationNode()) {
-				entity = new AggregationNode(entity);
+				entity = new AggregationNode(wi);
 			}
 			else if (wi.getType().getName().matches("SubSysReq")) {
-				entity = new AggregationNode(entity);
+				entity = new AggregationNode(wi);
 			}
 			else {
-				entity = new Task(entity);
+				entity = new Task(wi);
 				entity = new DevTask(entity);
 			}
 			entity.SoS = mySoS;

@@ -47,8 +47,8 @@ public class Visualization {
 		context = ctx;
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);	
 		SoS = mySoS;
-		grid2Dsize[0]=SoS.OrgLevels*20; grid2Dsize[1]=SoS.OrgSize*5;
-		gridWINsize[0]=SoS.WINSize*(int)Math.pow(SoS.WINComplexity-1, SoS.WINLevels-1); gridWINsize[1]=SoS.WINLevels*10;
+		grid2Dsize[0]=SoS.OrgLevels*20; grid2Dsize[1]=SoS.OrgSize*10;
+		gridWINsize[0]=2*SoS.WINSize*(int)Math.pow(SoS.WINComplexity-1, SoS.WINLevels-1); gridWINsize[1]=SoS.WINLevels*10;
 		
 		int width;
 		int height;
@@ -89,8 +89,8 @@ public class Visualization {
 	}
 	public void initializeOrganization() {
 		for (ServiceProviderAgent agent : SoS.myServiceProviderAgents.values()) {											
-			int x=5+3*agent.hierarchy;
-			int y=SoS.OrgSize*5-agent.getId()*5;
+			int x=5+5*agent.hierarchy;
+			int y=SoS.OrgSize*10-agent.getId()*10;
 			agent.icon.location[0]=x; agent.icon.location[1]=y;			
 			grid2D.moveTo(agent,x,y);
 			int c = 1;
@@ -99,11 +99,11 @@ public class Visualization {
 				c++;
 			}
 		}
-		for (ServiceProviderAgent agent : SoS.myServiceProviderAgents.values()) {
-			for (ServiceProviderAgent target:agent.assignWITo) {
-				netOrg_Hierarchy.addEdge(agent, target);
-			}
-		}
+//		for (ServiceProviderAgent agent : SoS.myServiceProviderAgents.values()) {
+//			for (ServiceProviderAgent target:agent.assignWITo) {
+//				netOrg_Hierarchy.addEdge(agent, target);
+//			}
+//		}
 	}
 
 	public void visualizeWorkItemNetwork() {
@@ -114,20 +114,8 @@ public class Visualization {
 				int hierarchy = wItem.hierarchy;
 				count[hierarchy]++;
 				//wItem.icon.location[0] = count[hierarchy]* (int)(Math.pow((SoS.WINLevels-hierarchy),2)-2*(SoS.WINLevels-hierarchy+1));
-				wItem.icon.location[0] = count[hierarchy]*(int)(Math.pow(SoS.WINComplexity-1,SoS.WINLevels-hierarchy-1)+1);
-				wItem.icon.location[1] = gridWINsize[1]-hierarchy*10-5;
-				if (wItem.isStarted) {
-					wItem.icon.color[0]=0;wItem.icon.color[1]=128;wItem.icon.color[2]=255;
-					if (wItem.isSuspended) {
-						wItem.icon.color[0]=255;wItem.icon.color[1]=0;wItem.icon.color[2]=0;
-					}
-					if (wItem.isCompleted) {
-						wItem.icon.color[0]=0;wItem.icon.color[1]=255;wItem.icon.color[2]=0;
-					}
-				}
-				else {
-					wItem.icon.color[0]=224;wItem.icon.color[1]=224;wItem.icon.color[2]=224;
-				}				
+				wItem.icon.location[0] = (int)((count[hierarchy]-0.5)*(int)(Math.pow(SoS.WINComplexity,SoS.WINLevels-hierarchy-1)+1));
+				wItem.icon.location[1] = gridWINsize[1]-hierarchy*10-5;			
 				gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
 				if (wItem.isAggregationNode) {
 					for (int i=0;i<((AggregationNode)wItem).getSubtasks().size();i++) {
@@ -142,7 +130,6 @@ public class Visualization {
 				AnalysisActivity wItem1 = (AnalysisActivity)wItem;
 				wItem.icon.location[0] = wItem1.AnalysisObject.icon.location[0]-2;
 				wItem.icon.location[1] = wItem1.AnalysisObject.icon.location[1]-2;
-				wItem.icon.color[0]=0;wItem.icon.color[1]=255;wItem.icon.color[2]=0;
 				gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
 				netWI_Hierarchy.addEdge(wItem,wItem1.AnalysisObject);
 			}
@@ -150,9 +137,20 @@ public class Visualization {
 				ResolutionActivity wItem1 = (ResolutionActivity)wItem;
 				wItem.icon.location[0] = wItem1.ResolutionObject.icon.location[0]-2;
 				wItem.icon.location[1] = wItem1.ResolutionObject.icon.location[1]-2;
-				wItem.icon.color[0]=255;wItem.icon.color[1]=0;wItem.icon.color[2]=0;
 				gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
 				netWI_Hierarchy.addEdge(wItem,wItem1.ResolutionObject);
+			}
+			if (wItem.isStarted) {
+				wItem.icon.color[0]=51;wItem.icon.color[1]=153;wItem.icon.color[2]=255;
+				if (wItem.isSuspended) {
+					wItem.icon.color[0]=255;wItem.icon.color[1]=0;wItem.icon.color[2]=0;
+				}
+				if (wItem.isCompleted) {
+					wItem.icon.color[0]=0;wItem.icon.color[1]=255;wItem.icon.color[2]=0;
+				}
+			}
+			else {
+				wItem.icon.color[0]=224;wItem.icon.color[1]=224;wItem.icon.color[2]=224;
 			}
 			commentWI(wItem);
 		}
@@ -161,11 +159,14 @@ public class Visualization {
 		netAllocation.removeEdges();
 		for (ServiceProviderAgent agent:SoS.myServiceProviderAgents.values()){			
 			int count;
-			if (agent.getResourceUtilization()<=0.1) {
-				agent.icon.color[0]=0;agent.icon.color[1]=255;agent.icon.color[2]=255;
+			if (agent.getResourceUtilization()<0.2) {
+				agent.icon.color[0]=224;agent.icon.color[1]=224;agent.icon.color[2]=224;
+			}
+			else if (agent.getResourceUtilization()>=0.8) {
+				agent.icon.color[0]=255;agent.icon.color[1]=255;agent.icon.color[2]=0;
 			}
 			else {
-				agent.icon.color[0]=0;agent.icon.color[1]=0;agent.icon.color[2]=255;
+				agent.icon.color[0]=51;agent.icon.color[1]=153;agent.icon.color[2]=255;
 			}
 			count=1;
 			for (WorkItemEntity task:agent.getBacklogQ()){
@@ -181,15 +182,24 @@ public class Visualization {
 				count++;
 			}
 			count=1;
-			for (WorkItemEntity task:agent.getCompleteQ()){
-				grid2D.moveTo(task, 0,0);
-			}
-			count=1;
 			for (WorkItemEntity task:agent.getComplexQ()){
 				grid2D.moveTo(task, agent.icon.location[0]+count+2,agent.icon.location[1]-3);
 				count++;
 			}
+			count=1;
+			for (WorkItemEntity task:agent.getCompleteQ()){
+				grid2D.moveTo(task, 0,0);
+			}
+//			for (WorkItemEntity task:agent.getRequestedQ()){
+//				grid2D.moveTo(task, 0,0);
+//			}
+//			for (WorkItemEntity task:agent.getAssignmentQ()){
+//				grid2D.moveTo(task, 0,0);
+//			}
 			commentSP(agent);
+		}
+		for (WorkItemEntity task:SoS.endedList.values()){
+			grid2D.moveTo(task, 1,0);
 		}
 	}
 	public void updateKanbanBoard() {
@@ -209,16 +219,24 @@ public class Visualization {
 	}
 	public void commentWI(WorkItemEntity wi) {
 		Comments comments = new Comments();
-		comments.addComment("ID:"+Integer.toString(wi.getId()));
+		comments.addComment("\n\n\nID:"+Integer.toString(wi.getId()));
 		comments.addComment("type:"+this.SoS.myWorkItemTypes.get(wi.typeId).getName());
 		comments.addComment("progress:"+Integer.toString((int)(wi.getProgress()*100))+"%");
 		comments.addComment("currentValue:"+(int)wi.currentValue);
 		if (!wi.isAggregationNode) {
 			comments.addComment(SoS.myServices.get(wi.serviceId).getName()+" x"+wi.efforts);
+			if (wi.getReworkCount()>0) {
+				comments.addComment("rework: "+Integer.toString(wi.getReworkCount()));
+			}
 		}
 		this.commentsList.add(comments);
 		this.context.add(comments);
-		gridWIN.moveTo(comments, wi.icon.location[0],wi.icon.location[1]+1);
+		if (!wi.isAggregationNode) {
+			gridWIN.moveTo(comments, wi.icon.location[0],wi.icon.location[1]-1);
+		}
+		else {
+			gridWIN.moveTo(comments, wi.icon.location[0],wi.icon.location[1]+1);
+		}
 	}
 	public void commentSP(ServiceProviderAgent sp) {
 		Comments comments = new Comments();
@@ -232,17 +250,17 @@ public class Visualization {
 		grid2D.moveTo(comments, sp.icon.location[0]-2,sp.icon.location[1]);
 		
 		Comments comments1 = new Comments();
-		comments1.addComment("ActiveQ");
+		comments1.addComment("ActiveQ: "+sp.getActiveQ().size());
 		this.commentsList.add(comments1);
 		this.context.add(comments1);
 		grid2D.moveTo(comments1, sp.icon.location[0]+1,sp.icon.location[1]-1);	
 		Comments comments2 = new Comments();
-		comments2.addComment("Backlog");
+		comments2.addComment("BacklogQ: "+sp.getBacklogQ().size());
 		this.commentsList.add(comments2);
 		this.context.add(comments2);
 		grid2D.moveTo(comments2, sp.icon.location[0]+1,sp.icon.location[1]-2);	
 		Comments comments3 = new Comments();
-		comments3.addComment("ComplexQ");
+		comments3.addComment("ComplexQ: "+sp.getComplexQ().size());
 		this.commentsList.add(comments3);
 		this.context.add(comments3);
 		grid2D.moveTo(comments3, sp.icon.location[0]+1,sp.icon.location[1]-3);

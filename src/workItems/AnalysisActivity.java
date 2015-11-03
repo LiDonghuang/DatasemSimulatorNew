@@ -11,8 +11,8 @@ public class AnalysisActivity extends Task{
 		this.SoS = aggrNode.SoS;
 		this.AnalysisObject = aggrNode;
 		this.typeId = SoS.getWorkItemTypeId("Analysis");
-		this.setType(SoS.myWorkItemTypes.get(this.typeId));
-		this.hierarchy = this.getType().getHierarchy();
+		this.myType = SoS.myWorkItemTypes.get(typeId);
+		this.hierarchy = this.myType.getHierarchy();	
 		
 		int currentId = this.SoS.getWICount();
 		this.id = currentId+1;

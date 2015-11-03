@@ -31,9 +31,7 @@ import xtext.objectsModel.impl.ServiceProviderImpl;
 
 
 public class ServiceProviderAgent extends ServiceProviderImpl {
-	interface Mediator {
-		
-	}
+
 	public SystemOfSystems SoS;
 	// Static Attributes
 	public ServiceProvider myServiceProvider;
@@ -87,149 +85,47 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	private double ResourceUtilization_stdev;
 			
 	public ServiceProviderAgent(ServiceProvider ServiceProvider) {
+		
 		this.myServiceProvider = ServiceProvider;
 		this.name = ServiceProvider.getName();
 		this.id = ServiceProvider.getId();
 		this.typeId = ServiceProvider.getType().getId();
 		this.hierarchy = ServiceProvider.getType().getHierarchy();
-		new AgentStrategy().implementAgentStrategy(this, ServiceProvider.getGovernanceStrategy());			
+		this.myStrategy = new AgentStrategy(ServiceProvider.getGovernanceStrategy());
+		this.myBehavior = new AbstractAgentBehavior(this);
 	}
-	public void ManagerBehavior() {
-		
+	
+	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-1)
+	public void step_1() {
+		myBehavior.GoToState(1);
 	}
-	public void ContractorBehavior() {
-		
+	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-2)
+	public void step_2() {
+		myBehavior.GoToState(2);
 	}
-	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_CheckRequestedQ)
-	public void CheckRequestedQ() {
-		//requestedQ = this.myStrategy.applyWorkPrioritization(requestedQ);
-		//for (WorkItemEntity requestedWI:this.requestedQ) {
-			//myValueManagement.manageValue(this, requestedWI);
-		//}
-		// ------------ 1. Select WIs to Accept
-		while (!requestedQ.isEmpty()) {
-			// =========== Apply WI Acceptance Rule ====================
-			WorkItemEntity requestedWI = requestedQ.getFirst();			
-			// =========== Service Efficiency Algorithm ==============
-			if (!this.acceptanceDecision(requestedWI)){
-				assignmentQ.add(requestedWI);
-				requestedQ.remove(requestedWI);					
-			}
-			else {	
-				this.acceptWI(requestedWI);
-			}
-		}
+	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-3)
+	public void step_3() {
+		myBehavior.GoToState(3);
 	}
-	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_MakeAssignments)
-	public void MakeAssignments() {
-		//assignmentQ = this.myStrategy.applyWorkPrioritization(assignmentQ);
-		for (int i=0;i<assignmentQ.size();i++) {
-			WorkItemEntity wi = assignmentQ.get(i);
-			LinkedList<ServiceProviderAgent>serviceProviderCandidates = this.findServiceProviders(wi);				
-			if	(serviceProviderCandidates.size()!=0) {
-				// Apply WI Assignment Rule
-				serviceProviderCandidates = this.myStrategy.applyContractorSelection(serviceProviderCandidates);
-				ServiceProviderAgent selectedSP = serviceProviderCandidates.getFirst();
-				// Assign WI to other SP
-				this.requestService(wi, selectedSP);
-				this.assignmentQ.remove(wi);
-				i--;
-				//selectedSP.checkRequestedQ();
-			}
-//				else {
-//					System.out.println("Failed to Assign"+wi.fullName); 
-//					System.out.println("ERROR!");
-//					System.exit(0);
-//				}
-		}
+	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-4)	
+	public void step_4() {
+		myBehavior.GoToState(4);
 	}
-	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_SelectWIsToStart)
-	public void SelectWIsToStart() {
-		LinkedList<Task> readyQ = new LinkedList<Task>();		
-		readyQ = this.myStrategy.applyWorkPrioritization(backlogQ);
-		for (int i=0;i<readyQ.size();i++) {			
-			// =========== Apply WI Selection Rule ====================
-			Task wi = readyQ.get(i);		
-			if (wi.precedencyCleared()) {
-				// ========================================================
-				ArrayList<ResourceEntity> serviceResourceCandidates = this.findResourceEntities(wi);
-				// =========== Apply Resource Allocation Rule =============
-				ArrayList<ResourceEntity> idleResources = new ArrayList<ResourceEntity>();
-				for (int r=0;r<serviceResourceCandidates.size();r++) {
-					ResourceEntity candidateSR = serviceResourceCandidates.get(r);
-					// only look at Idle Candidate Resources;
-					if (!candidateSR.isBusy()) {
-						idleResources.add(candidateSR);
-					}
-				}
-				if (!idleResources.isEmpty()) {
-					ResourceEntity selectedSR = idleResources.get(RandomHelper.nextIntFromTo(0, idleResources.size()-1));
-					selectedSR.allocateTo(wi);				
-				// ========================================================
-					wi.setStarted();
-					double rEfficiency = wi.calculateResourceEfficiency();	
-					wi.setServiceEfficiency(rEfficiency);
-				// =========== Estimate Completion ====================				
-					double eEfforts = wi.efforts/rEfficiency;
-					wi.estimatedEfforts = eEfforts;
-					double eCompletion= eEfforts + this.SoS.timeNow;
-					wi.estimatedCompletionTime = eCompletion;
-					// ====================================================
-					this.activeQ.add((Task)wi);
-					backlogQ.remove(wi);
-				}
-				else {
-					//System.out.println(this.name+" :No Resources available for"+wi.fullName+"now!");				
-				}
-			}
-			else {
-				//System.out.println(this.name+" :Cannot Start"+wi.fullName+"due to Precedency");
-			}
-		}
+	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-5)	
+	public void step_5() {
+		myBehavior.GoToState(5);
 	}
-	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_AdvanceWIsProgress)	
-	public void AdvanceWIsProgress() {
-		//System.out.println("Agent "+this.name+" checkWIsCompletion");
-		for(int i=0;i<activeQ.size();i++) {
-			Task WI = activeQ.get(i);
-			WI.advanceProgress();
-		}
+	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-6)	
+	public void step_6() {
+		myBehavior.GoToState(6);
 	}
-	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_TriggerWIsChanges)	
-	public void TriggerWIsChanges() {
-		//System.out.println("Agent "+this.name+" checkWIsCompletion");
-		for(int i=0;i<activeQ.size();i++) {
-			Task WI = activeQ.get(i);
-			if (WI.isDevTask) {
-				((DevTask)WI).triggerChanges();
-			}
-		}
-	}
-	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_CheckWIsCompletion)	
-	public void CheckWIsCompletion() {
-		//System.out.println("Agent "+this.name+" checkWIsCompletion");
-		for(int i=0;i<activeQ.size();i++) {
-			Task WI = activeQ.get(i);
-			if (WI.getProgress()>=1.00) {
-				WI.setCompleted();
-				WI.withdrawAllResources();
-				if (WI.isAnalysisActivity) {
-					//System.out.println("\nCOMPLETED ANALYSIS @TIME:"+SoS.timeNow+" Agent "+this.name+" completed analyzing"+WI.AnalysisObject.fullName);
-					this.releaseSubtasks((AggregationNode)((AnalysisActivity)WI).AnalysisObject);						
-				}
-				else if (WI.isResolutionActivity) {
-					Task suspendedTask = (Task) ((ResolutionActivity)WI).ResolutionObject;
-					suspendedTask.isSuspended = false;
-					//System.out.println("\nSUSPENSION CLEARED @TIME:"+this.SoS.timeNow+suspendedTask.fullName+"(suspension duration: "+(this.SoS.timeNow-suspendedTask.suspendedTime)+")");
-				}
-				activeQ.remove(WI);
-				completeQ.add(WI);
-				i--;
-			}
-		}
-	}		
+	
+	
+	
+	
 	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_CheckAggregationNodesCompletion)	
 	public void CheckAggregationNodesCompletion() {
+		//myBehavior.CheckAggregationNodesCompletion();
 		for(int i=0;i<complexQ.size();i++) {
 			AggregationNode aggrWI = complexQ.get(i);
 			aggrWI.updateUpperTasksCompletion();
@@ -252,8 +148,8 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 				i--;			
 			}
 		}
-		this.CheckRequestedQ();
-		this.MakeAssignments();
+		myBehavior.CheckRequestedQ();
+		myBehavior.MakeAssignments();
 		this.statusSummary();
 	}
 	public void analyzeAggregationNode(AggregationNode aggrNode) {
@@ -285,8 +181,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	}
 	public boolean acceptanceDecision(WorkItemEntity requestedWI) {
 		boolean accept = true;		
-		System.out.println(requestedWI.fullName);
-		System.out.println(requestedWI.isAggregationNode);
 		if (backlogQ.size()>=BacklogLimit) {
 			if (requestedWI.getRequester().id == this.id) {
 				accept = true;
@@ -458,6 +352,9 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	}
 	public LinkedList<AggregationNode> getComplexQ()	{
 		return this.complexQ;
+	}
+	public LinkedList<WorkItemEntity> getAssignmentQ()	{
+		return this.assignmentQ;
 	}
 	public int getTotalWICount() {
 		int load = this.requestedQ.size()+this.activeQ.size()+this.backlogQ.size();

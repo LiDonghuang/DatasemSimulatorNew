@@ -30,6 +30,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	// Static Attributes
 	public WorkItem myWorkItem;
 	public String fullName;
+	public WorkItemType myType;
 	public int typeId;
 	public int hierarchy = 0;
 	//
@@ -94,13 +95,14 @@ public class WorkItemEntity extends WorkItemImpl {
 	private double CycleTimeToEffortsRatio = 0;
 
 	
-	public WorkItemEntity (WorkItem wi, SystemOfSystems SoS) {
-		this.SoS = SoS;
+	public WorkItemEntity (WorkItem wi) {
 		this.myWorkItem = wi;
 		this.id = wi.getId();
 		this.name = wi.getName();
+		this.myType = wi.getType();
 		this.typeId = wi.getType().getId();
 		this.hierarchy = wi.getType().getHierarchy();
+		this.value = wi.getValue();
 		this.initialValue = this.value;
 		this.currentValue = this.initialValue;
 		this.isAggregationNode = wi.isIsAggregationNode();
@@ -108,6 +110,7 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.fullName = this.fullName();
 	}
 	public WorkItemEntity (WorkItemEntity WorkItemEntity) {
+		
 	}
 	public void addToContext() {
 		if (this.isActivated) {
@@ -263,9 +266,8 @@ public class WorkItemEntity extends WorkItemImpl {
 		}
 	}
 	*/
-
 	public String fullName(){
-		String full_name = " "+SoS.myWorkItemTypes.get(this.typeId).getName()+"[Hierarchy:"+this.hierarchy+"]"+this.getName()+"(id:"+this.getId()+") ";
+		String full_name = " "+this.myType.getName()+"[Hierarchy:"+this.hierarchy+"]"+this.getName()+"(id:"+this.getId()+") ";
 		return full_name;
 	}
 	public void setSuspended() {
@@ -304,7 +306,7 @@ public class WorkItemEntity extends WorkItemImpl {
 			this.cycleTime += (this.completionTime - this.restartedTime);
 		}
 		this.updateUpperTasksCompletion();
-		//System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is completed"+" (rework count:"+this.reworkCount+")");
+		System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is completed"+" (rework count:"+this.getReworkCount()+")");
 	}
 	public void setEnded() {
 		this.isEnded=true;
@@ -313,19 +315,20 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.removeFromSuccessorTasks();
 		this.SoS.deliverValue(this.currentValue);		
 		if (this.hierarchy==0 ) {
-			this.SoS.arrivedList.remove(this.getId());
-			this.SoS.waitingList.remove(this.getId());	
+			this.SoS.initialList.remove(this.getId());	
+			this.SoS.endedList.put(this.getId(), this);
 			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
 			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.getValue()+" stakeholder value");
 		}
 		else if (this.isResolutionActivity||this.isAnalysisActivity) {
-			this.SoS.arrivedList.remove(this.getId());
+			this.SoS.arrivedList.remove(this.getId());	
 			this.removeFromContext();
 		}
 		else {
 			this.CycleTimeToEffortsRatio = this.efforts/this.cycleTime;
+			this.SoS.endedList.put(this.getId(), this);
 		}
-		//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.getReworkCount());
+		//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended. Delivered "+this.currentValue+" Value\n StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.getReworkCount());
 	}
 	public void setAssigned() {
 		this.isAssigned=true;		
@@ -342,6 +345,9 @@ public class WorkItemEntity extends WorkItemImpl {
 	}
 	public void setPerceivedValue(double v) {
 		this.perceivedValue = v;
+	}
+	public WorkItemType getType() {
+		return this.myWorkItem.getType();
 	}
 	public EList<RequiredService> getRequiredServices() {
 		return this.myWorkItem.getRequiredServices();

@@ -31,6 +31,7 @@ import xtext.objectsModel.ObjectsModelPackage;
  * <ul>
  *   <li>{@link xtext.objectsModel.impl.GovernanceStrategyImpl#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.GovernanceStrategyImpl#getName <em>Name</em>}</li>
+ *   <li>{@link xtext.objectsModel.impl.GovernanceStrategyImpl#getType <em>Type</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.GovernanceStrategyImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.GovernanceStrategyImpl#getMechanisms <em>Mechanisms</em>}</li>
  * </ul>
@@ -79,6 +80,26 @@ public class GovernanceStrategyImpl extends MinimalEObjectImpl.Container impleme
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected static final String TYPE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected String type = TYPE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
@@ -182,6 +203,29 @@ public class GovernanceStrategyImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getType()
+  {
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setType(String newType)
+  {
+    String oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ObjectsModelPackage.GOVERNANCE_STRATEGY__TYPE, oldType, type));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public String getDescription()
   {
     return description;
@@ -244,6 +288,8 @@ public class GovernanceStrategyImpl extends MinimalEObjectImpl.Container impleme
         return getId();
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__NAME:
         return getName();
+      case ObjectsModelPackage.GOVERNANCE_STRATEGY__TYPE:
+        return getType();
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__DESCRIPTION:
         return getDescription();
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__MECHANISMS:
@@ -268,6 +314,9 @@ public class GovernanceStrategyImpl extends MinimalEObjectImpl.Container impleme
         return;
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__NAME:
         setName((String)newValue);
+        return;
+      case ObjectsModelPackage.GOVERNANCE_STRATEGY__TYPE:
+        setType((String)newValue);
         return;
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__DESCRIPTION:
         setDescription((String)newValue);
@@ -296,6 +345,9 @@ public class GovernanceStrategyImpl extends MinimalEObjectImpl.Container impleme
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case ObjectsModelPackage.GOVERNANCE_STRATEGY__TYPE:
+        setType(TYPE_EDEFAULT);
+        return;
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__DESCRIPTION:
         setDescription(DESCRIPTION_EDEFAULT);
         return;
@@ -320,6 +372,8 @@ public class GovernanceStrategyImpl extends MinimalEObjectImpl.Container impleme
         return id != ID_EDEFAULT;
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case ObjectsModelPackage.GOVERNANCE_STRATEGY__TYPE:
+        return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__DESCRIPTION:
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case ObjectsModelPackage.GOVERNANCE_STRATEGY__MECHANISMS:
@@ -343,6 +397,8 @@ public class GovernanceStrategyImpl extends MinimalEObjectImpl.Container impleme
     result.append(id);
     result.append(", name: ");
     result.append(name);
+    result.append(", type: ");
+    result.append(type);
     result.append(", description: ");
     result.append(description);
     result.append(')');

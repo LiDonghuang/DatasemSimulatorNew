@@ -2,6 +2,7 @@ package governanceModels;
 
 import java.util.LinkedList;
 
+import contractNetProtocol.ContractNetProtocol;
 import serviceProviders.ServiceProviderAgent;
 import workItems.Task;
 import workItems.WorkItemEntity;
@@ -10,21 +11,48 @@ import xtext.objectsModel.Mechanism;
 import xtext.objectsModel.impl.GovernanceStrategyImpl;
 
 public class AgentStrategy extends GovernanceStrategyImpl {
-	public ServiceProviderAgent myServiceProviderAgent;
+	public boolean isPull=false;
+	public boolean isPush=false;
+	public boolean isCNP=false;
+	
 	protected WISelectionRule mySelectionRule;
 	protected WIAcceptanceRule myAcceptanceRule;
 	protected WIAssignmentRule myAssignmentRule;
 	protected ResourceAllocationRule myAllocationRule;
 	
-	public void implementAgentStrategy(ServiceProviderAgent myServiceProviderAgent, GovernanceStrategy myGovernanceStrategy) {
-		this.myServiceProviderAgent = myServiceProviderAgent;
+	public AgentStrategy(GovernanceStrategy myGovernanceStrategy) {
+		this.implementAgentStrategy(myGovernanceStrategy);
+	}
+	
+	public void implementAgentStrategy(GovernanceStrategy myGovernanceStrategy) {
+		myGovernanceStrategy.setType("Pull");
+		if (myGovernanceStrategy.getType().matches("CNP")) {
+			new ContractNetProtocol(myGovernanceStrategy);
+			this.isCNP = true;
+		}
+		else if (myGovernanceStrategy.getType().matches("Pull")){
+			this.implementPullStrategy(myGovernanceStrategy);
+			this.isPull = true;
+		}	
+		else if (myGovernanceStrategy.getType().matches("Push")){
+			this.implementPullStrategy(myGovernanceStrategy);
+			this.isPush = true;
+		}
+		else {
+			throw new RuntimeException(myGovernanceStrategy.getType()+" is not a Valid Strategy Type!");
+		}
+	}
+
+	public void implementPullStrategy(GovernanceStrategy myGovernanceStrategy) {
 		for (Mechanism m: myGovernanceStrategy.getMechanisms()) {
 			implementMechanism(m);
 		}
-		this.myServiceProviderAgent.myStrategy = this;
-	}	
+	}
 	public void implementMechanism(Mechanism m) {
-		if (m.getName().matches("Acceptance")) {
+		if (m.getName().matches("ValueFunction")) {
+			
+		}
+		else if (m.getName().matches("Acceptance")) {
 			
 		}
 		else if (m.getName().matches("Selection")) {			
@@ -45,10 +73,10 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 			System.out.println("Invalid Mechanism Name!");
 		}		
 	}
-	public LinkedList<Task> applyWorkPrioritization(LinkedList<Task> queue) {		
-		return this.mySelectionRule.applyRule(this.myServiceProviderAgent, queue);		
+	public LinkedList<Task> applyWorkPrioritization(ServiceProviderAgent sp,LinkedList<Task> queue) {		
+		return this.mySelectionRule.applyRule(sp, queue);		
 	}
-	public LinkedList<ServiceProviderAgent> applyContractorSelection(LinkedList<ServiceProviderAgent> candidates) {
-		return this.myAssignmentRule.applyRule(this.myServiceProviderAgent, candidates);
+	public LinkedList<ServiceProviderAgent> applyContractorSelection(ServiceProviderAgent sp, LinkedList<ServiceProviderAgent> candidates) {
+		return this.myAssignmentRule.applyRule(sp, candidates);
 	}
 }

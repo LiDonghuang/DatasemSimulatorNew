@@ -8,22 +8,19 @@ public class DevTask extends Task {
 	public DevTask(WorkItemEntity wi) {
 		super(wi);
 		this.isDevTask = true;
-		this.isAggregationNode = false;
-		this.typeId = wi.getType().getId();
 		this.serviceId = wi.getRequiredServices().get(0).getServiceType().getId();
 		this.efforts = wi.getRequiredServices().get(0).getEfforts();
 	}
 	public DevTask(AggregationNode upperTask, int id, String name, int serviceId, double efforts) {
 		super(upperTask);
 		this.isDevTask = true;
-		this.isAggregationNode = false;
 		this.SoS = upperTask.SoS;
 		this.addUpperTask(upperTask);
 		this.id = id;
-		this.name = name;		
+		this.name = name;
 		this.typeId = SoS.getWorkItemTypeId("DevTask");
-		this.setType(SoS.myWorkItemTypes.get(this.typeId));
-		this.hierarchy = upperTask.hierarchy+1;		
+		this.myType = SoS.myWorkItemTypes.get(typeId);
+		this.hierarchy = this.myType.getHierarchy();		
 		this.serviceId = serviceId;
 		this.efforts = efforts;
 		this.maxMaturityLevels = 5;
@@ -51,7 +48,7 @@ public class DevTask extends Task {
 		this.suspendedTime = this.SoS.timeNow;
 		this.getAssignedAgent().setBottleNeckCount(this.getAssignedAgent().getBottleNeckCount() + 1);
 		this.getAssignedAgent().requestAssistance(this);
-		//System.out.println("\nSUSPENDED @TIME:"+this.SoS.timeNow+this.fullName);
+		System.out.println("\nSUSPENDED @TIME:"+this.SoS.timeNow+this.fullName);
 	}
 	public void changePropagation() {
 		for (WorkItemEntity affectedWI : this.getImpactsWIs()) {	
@@ -75,12 +72,13 @@ public class DevTask extends Task {
 			this.setReworkCount(this.getReworkCount() + 1);
 			this.uncertainty *= 1;
 			this.setProgress(Math.max((this.getProgress()-progressReduction), 0));								
-			//System.out.println("\nREWORK @TIME:"+this.SoS.timeNow+this.fullName+"reworks from "+previousProgress+" to "+this.progress+" (rework count:"+this.reworkCount+")");
+			System.out.println("\nREWORK @TIME:"+this.SoS.timeNow+this.fullName+"reworks from "+previousProgress+" to "+this.getProgress()+" (rework count:"+this.getReworkCount()+")");
 			if (this.isCompleted) {
 				this.isCompleted = false;
 				this.isReactivated = true;	
 				this.completionTime=Integer.MIN_VALUE;
-				this.endTime=Integer.MIN_VALUE; 							
+				this.endTime=Integer.MIN_VALUE;
+				this.getAssignedAgent().getActiveQ().remove(this);
 				this.getAssignedAgent().getCompleteQ().remove(this);
 				this.getAssignedAgent().getBacklogQ().add(this);
 				//System.out.println("Re-Activate"+this.fullName+"at backlog of "+this.assignedAgent.getName());

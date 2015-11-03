@@ -39,8 +39,9 @@ public class SystemOfSystems {
 	public int WINComplexity = 5;
 	public int WINSize = 2;
 	
-	public HashMap<Integer, WorkItemEntity> waitingList = new HashMap<Integer, WorkItemEntity>();
+	public HashMap<Integer, WorkItemEntity> initialList = new HashMap<Integer, WorkItemEntity>();
 	public HashMap<Integer, WorkItemEntity> arrivedList = new HashMap<Integer, WorkItemEntity>();
+	public HashMap<Integer, WorkItemEntity> endedList = new HashMap<Integer, WorkItemEntity>();
 	public int timeNow;
 	private int WICount;
 	
@@ -74,8 +75,9 @@ public class SystemOfSystems {
 	public void EndRunCondition() {
 		ISchedule schedule = RunEnvironment.getInstance().getCurrentSchedule();
 		timeNow = (int)schedule.getTickCount();
+		this.endedList.clear();
 		//System.out.println("\n ============== TIME NOW: "+timeNow+" ============== ");
-		if (this.waitingList.size()==0){
+		if (this.initialList.size()==0){
 			RunEnvironment.getInstance().endRun();
 			System.out.println("\nSIMULATION ENDED: All WIs Completed\n");
 			this.EndRunIndicators();
@@ -166,7 +168,7 @@ public class SystemOfSystems {
 		int observewiTypeId = this.getServiceId(observewiType);
 		int wi_count = 0;
 		for (WorkItemEntity wi : myWorkItemEntities.values()) {
-			if (wi.getType().getId()==observewiTypeId) {
+			if (wi.myType.getId()==observewiTypeId) {
 				wi_count++;				
 			}
 		}
@@ -176,7 +178,7 @@ public class SystemOfSystems {
 		double[] CycleTimeToEffortsRatio = new double[wi_count];		
 		int i = 0;
 		for (WorkItemEntity wi : myWorkItemEntities.values()) {
-			if (wi.getType().getId()==observewiTypeId) {
+			if (wi.myType.getId()==observewiTypeId) {
 				TaskReworkCount[i] = wi.getReworkCount();
 				ChangePropagationCount[i] = wi.getChangePropagationByCount();
 				CycleTimeToEffortsRatio[i] = wi.getCycleTimeToEffortsRatio();

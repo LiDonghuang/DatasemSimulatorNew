@@ -11,8 +11,8 @@ public class ResolutionActivity extends Task{
 		this.SoS = devTask.SoS;
 		this.ResolutionObject = devTask;
 		this.typeId = SoS.getWorkItemTypeId("Resolution");
-		this.setType(SoS.myWorkItemTypes.get(this.typeId));
-		this.hierarchy = this.getType().getHierarchy();
+		this.myType = SoS.myWorkItemTypes.get(typeId);
+		this.hierarchy = this.myType.getHierarchy();	
 			
 		int currentId = this.SoS.getWICount();
 		this.id = currentId+1;
