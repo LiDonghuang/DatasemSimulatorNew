@@ -822,7 +822,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWorkItem_RequiredServices()
+  public EReference getWorkItem_RequiredAnalysis()
   {
     return (EReference)workItemEClass.getEStructuralFeatures().get(12);
   }
@@ -832,9 +832,9 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkItem_Value()
+  public EReference getWorkItem_RequiredServices()
   {
-    return (EAttribute)workItemEClass.getEStructuralFeatures().get(13);
+    return (EReference)workItemEClass.getEStructuralFeatures().get(13);
   }
 
   /**
@@ -842,7 +842,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkItem_ArrivalTime()
+  public EAttribute getWorkItem_Value()
   {
     return (EAttribute)workItemEClass.getEStructuralFeatures().get(14);
   }
@@ -852,9 +852,19 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkItem_DueDate()
+  public EAttribute getWorkItem_ArrivalTime()
   {
     return (EAttribute)workItemEClass.getEStructuralFeatures().get(15);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getWorkItem_DueDate()
+  {
+    return (EAttribute)workItemEClass.getEStructuralFeatures().get(16);
   }
 
   /**
@@ -1030,6 +1040,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     createEReference(workItemEClass, WORK_ITEM__UP_TASKS);
     createEAttribute(workItemEClass, WORK_ITEM__HAS_IMPACTS);
     createEReference(workItemEClass, WORK_ITEM__IMPACTS);
+    createEReference(workItemEClass, WORK_ITEM__REQUIRED_ANALYSIS);
     createEReference(workItemEClass, WORK_ITEM__REQUIRED_SERVICES);
     createEAttribute(workItemEClass, WORK_ITEM__VALUE);
     createEAttribute(workItemEClass, WORK_ITEM__ARRIVAL_TIME);
@@ -1149,6 +1160,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     initEReference(getWorkItem_UpTasks(), this.getWorkItem(), null, "UpTasks", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_HasImpacts(), ecorePackage.getEBoolean(), "hasImpacts", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWorkItem_Impacts(), this.getImpact(), null, "impacts", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWorkItem_RequiredAnalysis(), this.getRequiredService(), null, "requiredAnalysis", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWorkItem_RequiredServices(), this.getRequiredService(), null, "requiredServices", null, 0, -1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItem_ArrivalTime(), ecorePackage.getEInt(), "arrivalTime", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -44,6 +44,7 @@ import xtext.objectsModel.WorkItemType;
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getUpTasks <em>Up Tasks</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#isHasImpacts <em>Has Impacts</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getImpacts <em>Impacts</em>}</li>
+ *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getRequiredAnalysis <em>Required Analysis</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getRequiredServices <em>Required Services</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getValue <em>Value</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemImpl#getArrivalTime <em>Arrival Time</em>}</li>
@@ -234,6 +235,16 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
    * @ordered
    */
   protected EList<Impact> impacts;
+
+  /**
+   * The cached value of the '{@link #getRequiredAnalysis() <em>Required Analysis</em>}' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRequiredAnalysis()
+   * @generated
+   * @ordered
+   */
+  protected EList<RequiredService> requiredAnalysis;
 
   /**
    * The cached value of the '{@link #getRequiredServices() <em>Required Services</em>}' reference list.
@@ -582,6 +593,20 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<RequiredService> getRequiredAnalysis()
+  {
+    if (requiredAnalysis == null)
+    {
+      requiredAnalysis = new EObjectResolvingEList<RequiredService>(RequiredService.class, this, ObjectsModelPackage.WORK_ITEM__REQUIRED_ANALYSIS);
+    }
+    return requiredAnalysis;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<RequiredService> getRequiredServices()
   {
     if (requiredServices == null)
@@ -711,6 +736,8 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
         return isHasImpacts();
       case ObjectsModelPackage.WORK_ITEM__IMPACTS:
         return getImpacts();
+      case ObjectsModelPackage.WORK_ITEM__REQUIRED_ANALYSIS:
+        return getRequiredAnalysis();
       case ObjectsModelPackage.WORK_ITEM__REQUIRED_SERVICES:
         return getRequiredServices();
       case ObjectsModelPackage.WORK_ITEM__VALUE:
@@ -775,6 +802,10 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
         getImpacts().clear();
         getImpacts().addAll((Collection<? extends Impact>)newValue);
         return;
+      case ObjectsModelPackage.WORK_ITEM__REQUIRED_ANALYSIS:
+        getRequiredAnalysis().clear();
+        getRequiredAnalysis().addAll((Collection<? extends RequiredService>)newValue);
+        return;
       case ObjectsModelPackage.WORK_ITEM__REQUIRED_SERVICES:
         getRequiredServices().clear();
         getRequiredServices().addAll((Collection<? extends RequiredService>)newValue);
@@ -838,6 +869,9 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
       case ObjectsModelPackage.WORK_ITEM__IMPACTS:
         getImpacts().clear();
         return;
+      case ObjectsModelPackage.WORK_ITEM__REQUIRED_ANALYSIS:
+        getRequiredAnalysis().clear();
+        return;
       case ObjectsModelPackage.WORK_ITEM__REQUIRED_SERVICES:
         getRequiredServices().clear();
         return;
@@ -888,6 +922,8 @@ public class WorkItemImpl extends MinimalEObjectImpl.Container implements WorkIt
         return hasImpacts != HAS_IMPACTS_EDEFAULT;
       case ObjectsModelPackage.WORK_ITEM__IMPACTS:
         return impacts != null && !impacts.isEmpty();
+      case ObjectsModelPackage.WORK_ITEM__REQUIRED_ANALYSIS:
+        return requiredAnalysis != null && !requiredAnalysis.isEmpty();
       case ObjectsModelPackage.WORK_ITEM__REQUIRED_SERVICES:
         return requiredServices != null && !requiredServices.isEmpty();
       case ObjectsModelPackage.WORK_ITEM__VALUE:

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link xtext.objectsModel.WorkItem#getUpTasks <em>Up Tasks</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#isHasImpacts <em>Has Impacts</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getImpacts <em>Impacts</em>}</li>
+ *   <li>{@link xtext.objectsModel.WorkItem#getRequiredAnalysis <em>Required Analysis</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getRequiredServices <em>Required Services</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getValue <em>Value</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItem#getArrivalTime <em>Arrival Time</em>}</li>
@@ -300,6 +301,22 @@ public interface WorkItem extends EObject
    * @generated
    */
   EList<Impact> getImpacts();
+
+  /**
+   * Returns the value of the '<em><b>Required Analysis</b></em>' reference list.
+   * The list contents are of type {@link xtext.objectsModel.RequiredService}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Required Analysis</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Required Analysis</em>' reference list.
+   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItem_RequiredAnalysis()
+   * @model
+   * @generated
+   */
+  EList<RequiredService> getRequiredAnalysis();
 
   /**
    * Returns the value of the '<em><b>Required Services</b></em>' reference list.

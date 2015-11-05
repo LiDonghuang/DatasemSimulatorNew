@@ -24,6 +24,9 @@ import xtext.objectsModel.Skill;
 import xtext.objectsModel.WorkItemType;
 
 public class SystemOfSystems {
+	public String ModelBuilder;
+	public ServiceProviderAgent coordinator;
+	
 	public HashMap<Integer, ServiceProviderAgent> myServiceProviderAgents = new HashMap<Integer, ServiceProviderAgent>();
 	public HashMap<Integer, WorkItemEntity> myWorkItemEntities = new HashMap<Integer, WorkItemEntity>();
 	public HashMap<Integer, ResourceEntity> myResourceEntities = new HashMap<Integer, ResourceEntity>();
@@ -33,11 +36,11 @@ public class SystemOfSystems {
 	public KanbanBoard myKanbanBoard;
 	public ValueFunction myValueFunction;
 	
-	public int OrgLevels = 4;
-	public int OrgSize = 30;
+	public int OrgLevels = 3;
+	public int OrgComplexity = 3;
 	public int WINLevels = 4;
-	public int WINComplexity = 4;
-	public int WINSize = 2;
+	public int WINComplexity = 3;
+	public int WINSize = 3;
 	
 	public HashMap<Integer, WorkItemEntity> initialList = new HashMap<Integer, WorkItemEntity>();
 	public HashMap<Integer, WorkItemEntity> arrivedList = new HashMap<Integer, WorkItemEntity>();
@@ -45,6 +48,9 @@ public class SystemOfSystems {
 	public int timeNow;
 	private int WICount;
 	
+	// Summary
+	private HashMap<Service,Double> serviceEfforts = new HashMap<Service,Double>();
+	private HashMap<Service,Double> serviceCapabilities = new HashMap<Service,Double>();
 	// Time Series Records
 	private List<Double> recordAgentsResourceUtilization_cov = new ArrayList<Double>();	
 	// End Run Statistics
@@ -75,6 +81,9 @@ public class SystemOfSystems {
 	public void EndRunCondition() {
 		ISchedule schedule = RunEnvironment.getInstance().getCurrentSchedule();
 		timeNow = (int)schedule.getTickCount();
+		for (WorkItemEntity wi:this.arrivedList.values()) {
+			wi.setPreviousProgress(wi.getProgress());
+		}
 		this.endedList.clear();
 		//System.out.println("\n ============== TIME NOW: "+timeNow+" ============== ");
 		if (this.initialList.size()==0){
@@ -109,22 +118,39 @@ public class SystemOfSystems {
 	
 	public void printSoSInformation() {
 		System.out.println("\n");
+		for (Service service:this.myServices.values()) {
+			this.serviceEfforts.put(service, 0.0);
+			this.serviceCapabilities.put(service, 0.0);
+		}
 		for (WorkItemEntity wi:this.myWorkItemEntities.values()) {
 			System.out.println("\nWorkItemEntity:"+wi.fullName+":");
-			if (wi.isIsAggregationNode()) {
+			if (wi.isAggregationNode) {
+				System.out.println(" Process Model: "+((AggregationNode)wi).getProcessModelName());
 				System.out.println(" Supported by:");
 				AggregationNode aggr = (AggregationNode)wi;
 				for (WorkItemEntity sub:aggr.getSubtasks()) {
 					System.out.println(sub.fullName);
 				}
+				System.out.println(" Required Analysis:");
+				for (RequiredService s:wi.myWorkItem.getRequiredAnalysis()) {
+					Service service = s.getServiceType();
+					double efforts = s.getEfforts();
+					double sEfforts = serviceEfforts.get(service);
+					sEfforts += efforts; 
+					serviceEfforts.put(service,sEfforts);
+					System.out.println(" "+service.getName()+"(serviceId:"+service.getId()+") efforts: "+efforts);
+				}
 			}
-			else {
+//			else {
 				System.out.println(" Required Services:");
 				for (RequiredService s:wi.myWorkItem.getRequiredServices()) {
 					Service service = s.getServiceType();
 					double efforts = s.getEfforts();
+					double sEfforts = serviceEfforts.get(service);
+					sEfforts += efforts; 
+					serviceEfforts.put(service,sEfforts);
 					System.out.println(" "+service.getName()+"(serviceId:"+service.getId()+") efforts: "+efforts);
-				}
+//				}
 			}
 		}
 		for (ServiceProviderAgent sp:this.myServiceProviderAgents.values()) {
@@ -136,9 +162,21 @@ public class SystemOfSystems {
 				System.out.println("  SkillSet:");
 				for (Skill sk:r.getSkillSet()) {
 					Service service = sk.getService();
+					double sCapabilities = serviceCapabilities.get(service);
+					sCapabilities += sk.getEfficiency(); 
+					serviceCapabilities.put(service,sCapabilities);
 					System.out.println("  "+service.getName()+"(serviceId:"+service.getId()+") efficiency: "+sk.getEfficiency());
 				}
 			}
+			System.out.println("Service Capacities:\n");
+			for (Service service:this.myServices.values()) {
+				System.out.println(" Service: "+service.getName()+" "+sp.ServiceCapacity.get(service)+" ext:"+sp.ExtendedServiceCapacity.get(service));
+			}
+		}
+		System.out.println("\n\nService Summary:");
+		for (Service service:this.myServices.values()) {
+			System.out.println(service.getName()+" total efforts: "+serviceEfforts.get(service));
+			System.out.println(service.getName()+" total capabilities: "+serviceCapabilities.get(service));
 		}
 		System.out.println("\n\n");
 	}
@@ -165,10 +203,10 @@ public class SystemOfSystems {
 	public void EndRunIndicators() {
 		this.EndTime = this.timeNow-1;
 		String observewiType = "DevTask";
-		int observewiTypeId = this.getServiceId(observewiType);
+		int observewiTypeId = this.getWorkItemTypeId(observewiType);
 		int wi_count = 0;
-		for (WorkItemEntity wi : myWorkItemEntities.values()) {
-			if (wi.myType.getId()==observewiTypeId) {
+		for (WorkItemEntity wi : arrivedList.values()) {
+			if (wi.typeId==observewiTypeId) {
 				wi_count++;				
 			}
 		}
@@ -177,8 +215,8 @@ public class SystemOfSystems {
 		double[] ChangePropagationCount = new double[wi_count];
 		double[] CycleTimeToEffortsRatio = new double[wi_count];		
 		int i = 0;
-		for (WorkItemEntity wi : myWorkItemEntities.values()) {
-			if (wi.myType.getId()==observewiTypeId) {
+		for (WorkItemEntity wi : arrivedList.values()) {
+			if (wi.typeId==observewiTypeId) {
 				TaskReworkCount[i] = wi.getReworkCount();
 				ChangePropagationCount[i] = wi.getChangePropagationByCount();
 				CycleTimeToEffortsRatio[i] = wi.getCycleTimeToEffortsRatio();

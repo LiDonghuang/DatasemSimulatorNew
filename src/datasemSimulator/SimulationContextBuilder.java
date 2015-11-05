@@ -38,10 +38,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import processModels.ProcessModel;
 import contractNetProtocol.ValueFunction;
 
 
 public class SimulationContextBuilder {
+	public String ModelBuilder;
 	public HashMap<Integer, ServiceProvider> myServiceProviders = new HashMap<Integer, ServiceProvider>();
 	public HashMap<Integer, WorkItem> myWorkItems = new HashMap<Integer, WorkItem>();
 	public HashMap<Integer, Asset> myResources = new HashMap<Integer, Asset>();	
@@ -62,23 +64,68 @@ public class SimulationContextBuilder {
 		SystemOfSystems mySoS = BuildSoS();			
 		context.setId("DatasemSimulator");		
 		context.add(mySoS);
+		
 		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
-			context.add(sp);
+			context.add(sp);	
 			for (ResourceEntity r : sp.getMyResourceEntities()) {
 				context.add(r);
 			}
 		}
+		// Extended Service Capacities
+		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
+			for (Service service:this.myServices.values()) {
+				sp.ServiceCapacity.put(service, 0.0);
+				sp.ExtendedServiceCapacity.put(service, 0.0);
+			}
+			for (ResourceEntity r : sp.getMyResourceEntities()) {
+				for (Skill sk:r.getSkillSet()) {
+					Service service = sk.getService();
+					double sCapacity = sp.ServiceCapacity.get(service);
+					sCapacity += sk.getEfficiency(); 
+					sp.ServiceCapacity.put(service,sCapacity);
+				}
+			}
+		}
+		double DiscountFactor = 0.5;
+		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
+			for (Service service: mySoS.myServices.values()) {
+				double exCapacity = sp.ServiceCapacity.get(service);
+				for (ServiceProviderAgent outsource : sp.assignWITo) {
+					exCapacity += outsource.ServiceCapacity.get(service) * DiscountFactor;
+				}
+				sp.ExtendedServiceCapacity.put(service, exCapacity);
+			}
+		}
 		
+		// Process Model
+		ProcessModel CEProcessModel = new ProcessModel("Capability\nEngineering");
+		CEProcessModel.addStage(1,"Objectives\nTranslating");
+		CEProcessModel.addStage(2,"Systems\nRelationships");
+		CEProcessModel.addStage(3,"Performance\nAssesement");
+		CEProcessModel.addStage(4,"Architecturing");
+		CEProcessModel.addStage(5,"Requirements\nSolutions");
+		CEProcessModel.addStage(6,"Upgrades\nOrchestration");
+		//
+		ProcessModel WaterfallModel = new ProcessModel("Waterfall\nModel");
+		WaterfallModel.addStage(1,"Analysis");
+		WaterfallModel.addStage(2,"Design");
+		WaterfallModel.addStage(3,"Implementation");
+		WaterfallModel.addStage(4,"Verification");
+		WaterfallModel.addStage(5,"Maintenance");
 		// ValueFunction
-		Mechanism valueMechanism = ObjectsModelFactory.eINSTANCE.createMechanism();
-		valueMechanism.setName("ValueFunction");valueMechanism.setValue("Derived");
+		Mechanism valueMechanism1 = ObjectsModelFactory.eINSTANCE.createMechanism();
+		valueMechanism1.setName("ValueFunction");valueMechanism1.setValue("Derived");
 		MechanismAttribute att1 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-		att1.setAttribute("HierarchyFactor");att1.setValue("0.2");
+		att1.setAttribute("HierarchyFactor");att1.setValue("0.5");
 		MechanismAttribute att2 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-		att2.setAttribute("PrecedencyFactor");att2.setValue("0.8");
-		valueMechanism.getAttributes().add(att1);valueMechanism.getAttributes().add(att2);
-		//valueMechanism.setName("ValueFunction");valueMechanism.setValue("Fiat");
-		mySoS.myValueFunction = new ValueFunction(valueMechanism);
+		att2.setAttribute("PrecedencyFactor");att2.setValue("0.0");
+		valueMechanism1.getAttributes().add(att1);valueMechanism1.getAttributes().add(att2);
+		//
+		Mechanism valueMechanism2 = ObjectsModelFactory.eINSTANCE.createMechanism();
+		valueMechanism2.setName("ValueFunction");valueMechanism2.setValue("Fiat");
+		
+		mySoS.myValueFunction = new ValueFunction(valueMechanism1);
+		
 		// Initial Assignment
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
 			if ((wi.hierarchy==0 )) {	
@@ -94,7 +141,14 @@ public class SimulationContextBuilder {
 				//
 			}
 			// Process Model
-			else if (wi.getType().getName().matches("SubSysReq")) {
+			String typeName = wi.getType().getName();
+			if ((typeName.matches("SoSCap"))||(typeName.matches("SysFuncCap"))||(typeName.matches("SysOperCap"))) {
+				((AggregationNode)wi).setProcessModel(CEProcessModel);
+			}
+			if ((typeName.matches("Inc_Cap"))||(typeName.matches("New_Cap"))) {
+				((AggregationNode)wi).setProcessModel(WaterfallModel);
+			}
+			if (wi.getType().getName().matches("SubSysReq")) {
 				wi.isAggregationNode = true;
 				wi = (AggregationNode)wi;
 				int c = 0;
@@ -102,7 +156,6 @@ public class SimulationContextBuilder {
 					double totalEfforts = reqSev.getEfforts();
 					double interval_max = 30;
 					double interval_min = 10;
-					String serviceName = reqSev.getServiceType().getName();
 					int serviceId = reqSev.getServiceType().getId();
 					while (totalEfforts>0) {
 						c++;
@@ -122,7 +175,41 @@ public class SimulationContextBuilder {
 				}
 			}
 		}		
+		// Derive Impacts DSM
+		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
+			if (wi1.getType().getName().matches("SubSysReq")) {
+				for (WorkItemEntity wi2 : wi1.getImpactsWIs()) {
+					double likelihood = wi1.getImpactsLikelihood().get(wi2);
+					double risk = wi1.getImpactsRisk().get(wi2);
+					for (WorkItemEntity wi1s: ((AggregationNode)wi1).getSubtasks()) {
+						if (Math.random()<likelihood) {
+							int t =(int) ( Math.random()* ((AggregationNode)wi2).getSubtasks().size() );
+							WorkItemEntity wi2s = ((AggregationNode)wi2).getSubtasks().get(t);
+							wi1s.getImpactsWIs().add(wi2s);
+							wi1s.getImpactsLikelihood().put(wi2s, 0.5);
+							wi1s.getImpactsRisk().put(wi2s, Math.min(1, 2*risk));
+							//System.out.println("Impacts DSM: from "+wi1s.getName()+" to "+wi2s.getName());
+						}
+					}
+				}
+			}
+		}
+		// Experiment and Visualization
 		int numReplications = (Integer)parameters.getValue("NumReplications");
+		if (this.ModelBuilder.matches("DevelopmentOrganizationModel")) {
+			mySoS.OrgLevels = 2;
+			mySoS.OrgComplexity = 5;
+			mySoS.WINLevels = 3;
+			mySoS.WINComplexity = 3;
+			mySoS.WINSize = 10;
+		}
+		else if (this.ModelBuilder.matches("AerospaceAndDefenceProjects")) {
+			mySoS.OrgLevels = 3;
+			mySoS.OrgComplexity = 5;
+			mySoS.WINLevels = 4;
+			mySoS.WINComplexity = 4;
+			mySoS.WINSize = 2;
+		}
 		if (VisualizationOn && (numReplications==1)) {
 			System.out.print("initializing visualization...\n");
 			new Visualization(context,mySoS);
@@ -141,6 +228,10 @@ public class SimulationContextBuilder {
 			dbFactory.setIgnoringElementContentWhitespace(true);
 			Document scenario = dBuilder.parse(scenarioXmlFile);
 			scenario.getDocumentElement().normalize();	
+			//
+			Node modelNode = scenario.getElementsByTagName("ExperimentModel").item(0);
+			Element modelElement = (Element)modelNode;
+			this.ModelBuilder = modelElement.getAttribute("name");
 			//
 			Node serviceProviderTypesNode = scenario.getElementsByTagName("ServiceProviderTypes").item(0);
 			Element ServiceProviderTypesElement = (Element)serviceProviderTypesNode;
@@ -310,6 +401,20 @@ public class SimulationContextBuilder {
 		myWorkItem.setId(id);
 		myWorkItem.setName(name);
 		myWorkItem.setType(myWorkItemTypes.get(typeId));
+		// RequiredAnalysis
+		Node requiredAnalysis_node = e.getElementsByTagName("RequiredAnalysis").item(0);
+		Element requiredAnalysis_element = (Element)requiredAnalysis_node;
+		NodeList requiredAnalysis_nodeList = requiredAnalysis_element.getElementsByTagName("RequiredService");
+		for (int i1=0;i1<requiredAnalysis_nodeList.getLength();i1++) {
+			Node node1 = requiredAnalysis_nodeList.item(i1);
+			Element e1= (Element)node1;
+			int service_id = Integer.parseInt(e1.getAttribute("serviceId")); 
+			double efforts = Double.parseDouble(e1.getAttribute("efforts")); 
+			RequiredService myRequiredService = ObjectsModelFactory.eINSTANCE.createRequiredService();
+			myRequiredService.setServiceType(myServices.get(service_id));
+			myRequiredService.setEfforts(efforts);
+			myWorkItem.getRequiredAnalysis().add(myRequiredService);
+		}
 		// RequiredServices
 		Node requiredServices_node = e.getElementsByTagName("RequiredServices").item(0);
 		Element requiredServices_element = (Element)requiredServices_node;
@@ -454,6 +559,9 @@ public class SimulationContextBuilder {
 			for (ServiceProvider sp2: sp.getOutsourceFrom()) {
 				agent.borrowResourceFrom.add(mySoS.myServiceProviderAgents.get(sp2.getId()));
 			}
+			if (sp.getType().getHierarchy()==0) {
+				mySoS.coordinator = agent;
+			}
 		}				
 		for (WorkItem wi: myWorkItems.values()) {
 			int id = wi.getId();
@@ -499,7 +607,7 @@ public class SimulationContextBuilder {
 					double risk = myImpact.getRisk();
 					WorkItemEntity impactEntity = mySoS.myWorkItemEntities.get(impactWI_id);
 					entity.getImpactsWIs().add(impactEntity);
-					entity.getImpactsValue().put(impactEntity, risk*TaskChangePropagationRisk);
+					entity.getImpactsRisk().put(impactEntity, risk*TaskChangePropagationRisk);
 					entity.getImpactsLikelihood().put(impactEntity, likelihood*TaskChangePropagationUncertainty);
 				}
 			}

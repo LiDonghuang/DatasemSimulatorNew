@@ -23,7 +23,8 @@ public class ResolutionActivity extends Task{
 		this.initialValue = 0;
 		this.currentValue =0;
 		
-		this.serviceId = ResolutionObject.getUppertasks().get(0).serviceId;
+		this.setRequester(ResolutionObject.getRequester());
+		this.serviceId = this.getRequester().getMyResourceEntities().get(0).getSkillSet().get(0).getService().getId();
 		this.efforts = 10;
 		this.maxMaturityLevels = 1;
 		this.uncertainty = 0;

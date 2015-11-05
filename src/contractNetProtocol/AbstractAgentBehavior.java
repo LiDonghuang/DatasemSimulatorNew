@@ -90,38 +90,59 @@ public class AbstractAgentBehavior {
 		// ------------ 1. Select WIs to Accept
 		while (!agent.getRequestedQ().isEmpty()) {
 			// =========== Apply WI Acceptance Rule ====================
-			WorkItemEntity requestedWI = agent.getRequestedQ().getFirst();			
+			WorkItemEntity wi = agent.getRequestedQ().getFirst();			
 			// =========== Service Efficiency Algorithm ==============
-			if (!agent.acceptanceDecision(requestedWI)){
-				agent.getAssignmentQ().add(requestedWI);
-				agent.getRequestedQ().remove(requestedWI);					
+			String decision = agent.acceptanceDecision(wi);
+			//System.out.println("\n"+wi.fullName+"("+wi.SoS.myServices.get(wi.serviceId).getName()+"x"+wi.efforts+") Decision: "+decision);
+			if (decision.matches("Accept")) {
+				//System.out.println(agent.getName()+" accepts"+wi.fullName);
+				agent.acceptWI(wi);
 			}
-			else {	
-				agent.acceptWI(requestedWI);
+			else if (decision.matches("Outsource")) {
+				//System.out.println(agent.getName()+" decides to outsource"+wi.fullName);
+				agent.getAssignmentQ().add(wi);
 			}
+			else if (decision.matches("RequestHelp")) {
+				if (agent.getId()==agent.SoS.coordinator.getId()) {
+					//System.out.println(agent.getName()+" handles"+wi.fullName);
+					agent.getAssignmentQ().add(wi);
+				}
+				else {
+					//System.out.println(agent.getName()+" requests help from "+agent.SoS.coordinator.getName()+" on"+wi.fullName);
+					agent.SoS.coordinator.getRequestedQ().add(wi);
+				}
+			}
+			else if (decision.matches("Decline")) {
+				//System.out.println(agent.getName()+" declines"+wi.fullName+"from "+wi.getRequester().getName());
+				if (wi.getRequester().getId()==agent.getId()) {
+					System.out.println("ERROR: "+agent.getName()+" declines"+wi.fullName+" which is requested by itself!");
+					System.exit(0);
+				}
+				else {
+					wi.getRequester().getRequestedQ().add(wi);
+				}
+			}
+			else {
+				System.out.println("ERROR: "+" invalid decision --"+decision+"--!");
+				System.exit(0);
+			}
+			agent.getRequestedQ().remove(wi);
 		}
 	}
 
 	public void MakeAssignments() {
-		//agent.getAssignmentQ() = agent.myStrategy.applyWorkPrioritization(agent.getAssignmentQ());
-		for (int i=0;i<agent.getAssignmentQ().size();i++) {
-			WorkItemEntity wi = agent.getAssignmentQ().get(i);
-			LinkedList<ServiceProviderAgent>serviceProviderCandidates = agent.findServiceProviders(wi);				
-			if	(serviceProviderCandidates.size()!=0) {
-				// Apply WI Assignment Rule
-				serviceProviderCandidates = agent.myStrategy.applyContractorSelection(agent,serviceProviderCandidates);
-				ServiceProviderAgent selectedSP = serviceProviderCandidates.getFirst();
-				// Assign WI to other SP
-				agent.requestService(wi, selectedSP);
-				agent.getAssignmentQ().remove(wi);
-				i--;
-				//selectedSP.checkRequestedQ();
-			}
-//				else {
-//					System.out.println("Failed to Assign"+wi.fullName); 
-//					System.out.println("ERROR!");
-//					System.exit(0);
-//				}
+		agent.NowRequested.clear();
+		LinkedList<ServiceProviderAgent> candidates = agent.assignWITo;
+		HashMap<WorkItemEntity,ServiceProviderAgent> schedule = 
+				agent.myStrategy.applyContractorSelection(agent, agent.getAssignmentQ(), candidates);
+		for (WorkItemEntity wi: schedule.keySet()) {
+			ServiceProviderAgent selectedSP = schedule.get(wi);
+			agent.NowRequested.add(selectedSP);
+			agent.requestService(wi, selectedSP);
+			agent.getAssignmentQ().remove(wi);
+			//System.out.println(agent.getName()+" assigned"+wi.fullName+"to "+selectedSP.getName());
+			selectedSP.tempQ.clear();
+			//selectedSP.checkRequestedQ();
 		}
 	}
 
@@ -168,7 +189,7 @@ public class AbstractAgentBehavior {
 			}
 		}
 	}
-
+	
 	public void AdvanceWIsProgress() {
 		//System.out.println("Agent "+this.name+" checkWIsCompletion");
 		for(int i=0;i<agent.getActiveQ().size();i++) {
@@ -176,17 +197,17 @@ public class AbstractAgentBehavior {
 			WI.advanceProgress();
 		}
 	}
-
+	
 	public void TriggerWIsChanges() {
 		//System.out.println("Agent "+this.name+" checkWIsCompletion");
 		for(int i=0;i<agent.getActiveQ().size();i++) {
-			Task WI = agent.getActiveQ().get(i);
-			if (WI.isDevTask) {
-				((DevTask)WI).triggerChanges();
+			Task task = agent.getActiveQ().get(i);
+			if (task.isDevTask) {
+				((DevTask)task).triggerChanges();
 			}
 		}
 	}
-
+	
 	public void CheckWIsCompletion() {
 		//System.out.println("Agent "+this.name+" checkWIsCompletion");
 		for(int i=0;i<agent.getActiveQ().size();i++) {
@@ -194,7 +215,18 @@ public class AbstractAgentBehavior {
 			if (WI.getProgress()>=1.00) {
 				if (WI.isAnalysisActivity) {
 					//System.out.println("\nCOMPLETED ANALYSIS @TIME:"+SoS.timeNow+" Agent "+this.name+" completed analyzing"+WI.AnalysisObject.fullName);
-					agent.releaseSubtasks((AggregationNode)((AnalysisActivity)WI).AnalysisObject);						
+					AggregationNode analysisObject = (AggregationNode)((AnalysisActivity)WI).AnalysisObject;		
+					analysisObject.currentAnalysisStage ++;
+					//System.out.println(analysisObject.currentAnalysisStage+" "+analysisObject.totalAnalysisStage);
+					if (analysisObject.currentAnalysisStage == analysisObject.totalAnalysisStage) {
+						agent.releaseSubtasks(analysisObject);
+						agent.SoS.myValueFunction.developValue(analysisObject);
+					}
+					else {
+						analysisObject.serviceId = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getServiceType().getId();
+						analysisObject.efforts = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getEfforts();
+						agent.getRequestedQ().add(analysisObject);
+					}
 				}
 				else if (WI.isResolutionActivity) {
 					Task suspendedTask = (Task) ((ResolutionActivity)WI).ResolutionObject;
@@ -214,29 +246,29 @@ public class AbstractAgentBehavior {
 		for(int i=0;i<agent.getComplexQ().size();i++) {
 			AggregationNode aggrWI = agent.getComplexQ().get(i);
 			aggrWI.updateUpperTasksCompletion();
+			aggrWI.updateProcessModelStage();
 			if (aggrWI.isCompleted) {
 				agent.getComplexQ().remove(aggrWI);
-				agent.getComplexQ().add(aggrWI);
+				agent.getCompleteQ().add(aggrWI);
 				i--;
 			}
 		}			
 	}		
-//	@ScheduledMethod(start=1,interval=1,priority=BASE_PRIORITY_1-SEQUENCE_DisburseWIs)
-//	public void DisburseWIs() {			
-//		for (int i=0;i<agent.getCompleteQ().size();i++) {
-//			WorkItemEntity completedWI=agent.getCompleteQ().get(i);				
-//			//System.out.println("\nDISBURSE @TIME:"+SoS.timeNow+" Agent "+this.name+" try to disburse"+completedWI.fullName+"...");
-//			if (completedWI.precedencyCleared() && completedWI.uppertasksCleared()) {
-//				//System.out.println("\nDISBURSE @TIME:"+SoS.timeNow+" Agent "+this.name+" disbursed"+completedWI.fullName);
-//				completedWI.setEnded();	
-//				agent.getCompleteQ().remove(completedWI);					
-//				i--;			
-//			}
-//		}
-//		this.CheckRequestedQ();
-//		this.MakeAssignments();
-//		agent.statusSummary();
-//	}
+	public void DisburseWIs() {			
+		for (int i=0;i<agent.getCompleteQ().size();i++) {
+			WorkItemEntity completedWI=agent.getCompleteQ().get(i);				
+			//System.out.println("\nDISBURSE @TIME:"+SoS.timeNow+" Agent "+this.name+" try to disburse"+completedWI.fullName+"...");
+			if (completedWI.precedencyCleared() && completedWI.uppertasksCleared()) {
+				//System.out.println("\nDISBURSE @TIME:"+SoS.timeNow+" Agent "+this.name+" disbursed"+completedWI.fullName);
+				completedWI.setEnded();	
+				agent.getCompleteQ().remove(completedWI);					
+				i--;			
+			}
+		}
+	}
+	public void EndState() {					
+		agent.statusSummary();
+	}
 //	public void analyzeAggregationNode(AggregationNode aggrNode) {
 //		AnalysisActivity analysisActivity = new AnalysisActivity(aggrNode);
 //		//

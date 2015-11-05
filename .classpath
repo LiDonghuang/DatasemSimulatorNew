@@ -7,5 +7,6 @@
 	<classpathentry kind="con" path="REPAST_SIMPHONY_SUPPORT"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.common_2.10.0.v20140514-1158.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.ecore_2.10.0.v20140514-1158.jar"/>
+	<classpathentry kind="lib" path="lib/jansi-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,54 +1,59 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>SOS Data Set</name>
-  <type>AGGREGATE</type>
+  <name>WI EndRun Data Set</name>
+  <type>NON_AGGREGATE</type>
+  <sourceType>workItems.DevTask</sourceType>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
   <inclRandomSeed>false</inclRandomSeed>
   <scheduleParams>
-    <start>1.0</start>
+    <start>9.99999999999999E14</start>
     <interval>1.0</interval>
     <priority>-Infinity</priority>
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>1254935644</hashCode>
+    <hashCode>1965386771</hashCode>
   </scheduleParams>
-  <atEnd>false</atEnd>
+  <atEnd>true</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
-      <string>ValueDelivered</string>
+      <string>ReworkCount</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>ValueDelivered</id>
-        <className>datasemSimulator.SystemOfSystems</className>
-        <methodName>getValueDelivered</methodName>
-        <aggType>MEAN</aggType>
+        <id>ReworkCount</id>
+        <className>workItems.DevTask</className>
+        <methodName>getReworkCount</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>NPV</string>
+      <string>Efforts</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>NPV</id>
-        <className>datasemSimulator.SystemOfSystems</className>
-        <methodName>getNPV</methodName>
-        <aggType>MEAN</aggType>
+        <id>Efforts</id>
+        <className>workItems.DevTask</className>
+        <methodName>getEfforts</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>AgentsResourceUtilization_cov</string>
+      <string>CycleTimeToEffortsRatio</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>AgentsResourceUtilization_cov</id>
-        <className>datasemSimulator.SystemOfSystems</className>
-        <methodName>getAgentsResourceUtilization_cov</methodName>
-        <aggType>MEAN</aggType>
+        <id>CycleTimeToEffortsRatio</id>
+        <className>workItems.DevTask</className>
+        <methodName>getCycleTimeToEffortsRatio</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
-      <string>AgentsResourceUtilization_mean</string>
+      <string>ChangePropagationByCount</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>AgentsResourceUtilization_mean</id>
-        <className>datasemSimulator.SystemOfSystems</className>
-        <methodName>getAgentsResourceUtilization_mean</methodName>
-        <aggType>MEAN</aggType>
+        <id>ChangePropagationByCount</id>
+        <className>workItems.DevTask</className>
+        <methodName>getChangePropagationByCount</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>ChangePropagationToCount</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>ChangePropagationToCount</id>
+        <className>workItems.DevTask</className>
+        <methodName>getChangePropagationToCount</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
   </methodDataSources>

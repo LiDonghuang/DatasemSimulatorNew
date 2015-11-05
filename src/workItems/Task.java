@@ -19,17 +19,23 @@ public class Task extends WorkItemEntity{
 		this.getAllocatedResources().remove(sR);
 		//System.out.println("Resource "+sR.getName()+" is Withdrawed from "+this.getName());
 	}
-	public double calculateServiceEfficiency(ServiceProviderAgent sp) {
+	public double calculateExtendedServiceCapacity(ServiceProviderAgent sp) {
 		double sEfficiency = 0;
-		for (ResourceEntity r: sp.getMyResourceEntities()) {
-			for (Skill sk: r.getSkillSet()){
-				int service_id = sk.getService().getId();
-				if (service_id == this.serviceId){
-					sEfficiency = sk.getEfficiency();				
-					break;
-				}		
-			}
-		}
+		sEfficiency = sp.ExtendedServiceCapacity.get(SoS.myServices.get(this.serviceId));
+		return sEfficiency;
+	}
+	public double calculateServiceCapacity(ServiceProviderAgent sp) {
+		double sEfficiency = 0;
+		sEfficiency = sp.ServiceCapacity.get(SoS.myServices.get(this.serviceId));
+//		for (ResourceEntity r: sp.getMyResourceEntities()) {
+//			for (Skill sk: r.getSkillSet()){
+//				int service_id = sk.getService().getId();
+//				if (service_id == this.serviceId){
+//					sEfficiency = sk.getEfficiency();				
+//					break;
+//				}		
+//			}
+//		}
 		//System.out.println(this.name+"- serviceId:"+this.getRequiredServices().get(0).getId()+", efficiency:"+sEfficiency);
 		return sEfficiency;
 	}
@@ -47,7 +53,7 @@ public class Task extends WorkItemEntity{
 	public void advanceProgress() {
 		// ------------ Compute WI Progress (percentage) -----------	
 		if (this.isStarted) {
-			progressRate = getServiceEfficiency() / efforts;															
+			progressRate = this.getServiceEfficiency() / efforts;															
 			setProgress(getProgress() + progressRate + 0.000001);					
 			if (getProgress() >= 1) {			
 				setProgress(1.00);	

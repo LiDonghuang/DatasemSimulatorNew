@@ -22,14 +22,14 @@ public class AnalysisActivity extends Task{
 		this.value = 0;
 		this.initialValue = 0;
 		this.currentValue =0;
+		this.serviceId = aggrNode.myWorkItem.getRequiredAnalysis().get(aggrNode.currentAnalysisStage).getServiceType().getId();
+		this.efforts = aggrNode.myWorkItem.getRequiredAnalysis().get(aggrNode.currentAnalysisStage).getEfforts();		
 		
-		this.serviceId = aggrNode.serviceId;
-		this.efforts = 10;		
 		this.maxMaturityLevels = 1;
 		this.uncertainty = 0;
 		this.risk = 0;		
 		this.setActivated();	
 		this.fullName = this.fullName();
+	
 	}
-
 }

@@ -1,5 +1,6 @@
 package governanceModels;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import contractNetProtocol.ContractNetProtocol;
@@ -76,7 +77,7 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 	public LinkedList<Task> applyWorkPrioritization(ServiceProviderAgent sp,LinkedList<Task> queue) {		
 		return this.mySelectionRule.applyRule(sp, queue);		
 	}
-	public LinkedList<ServiceProviderAgent> applyContractorSelection(ServiceProviderAgent sp, LinkedList<ServiceProviderAgent> candidates) {
-		return this.myAssignmentRule.applyRule(sp, candidates);
+	public HashMap<WorkItemEntity, ServiceProviderAgent> applyContractorSelection(ServiceProviderAgent me, LinkedList<WorkItemEntity> WIs, LinkedList<ServiceProviderAgent> SPs) {
+		return this.myAssignmentRule.applyRule(me, WIs, SPs);
 	}
 }

@@ -1,7 +1,7 @@
 <repast.simphony.data2.engine.DataSetDescriptor>
-  <name>WI Progress Data Set</name>
+  <name>SP Data Set</name>
   <type>NON_AGGREGATE</type>
-  <sourceType>workItems.DevTask</sourceType>
+  <sourceType>serviceProviders.ServiceProviderAgent</sourceType>
   <inclTick>true</inclTick>
   <inclBatchRun>false</inclBatchRun>
   <inclRandomSeed>false</inclRandomSeed>
@@ -12,24 +12,64 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>612824954</hashCode>
+    <hashCode>-916098462</hashCode>
   </scheduleParams>
-  <atEnd>false</atEnd>
+  <atEnd>true</atEnd>
   <methodDataSources class="linked-hash-map">
     <entry>
-      <string>Progress</string>
+      <string>Id</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
-        <id>Progress</id>
-        <className>workItems.DevTask</className>
-        <methodName>getProgress</methodName>
+        <id>Id</id>
+        <className>serviceProviders.ServiceProviderAgent</className>
+        <methodName>getId</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
     <entry>
       <string>Name</string>
       <repast.simphony.data2.engine.MethodDataSourceDefinition>
         <id>Name</id>
-        <className>workItems.DevTask</className>
+        <className>serviceProviders.ServiceProviderAgent</className>
         <methodName>getName</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>TotalWICount</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>TotalWICount</id>
+        <className>serviceProviders.ServiceProviderAgent</className>
+        <methodName>getTotalWICount</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>TotalWorkload</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>TotalWorkload</id>
+        <className>serviceProviders.ServiceProviderAgent</className>
+        <methodName>getTotalWorkload</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>ActiveWorkload</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>ActiveWorkload</id>
+        <className>serviceProviders.ServiceProviderAgent</className>
+        <methodName>getActiveWorkload</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>ResourceUtilization</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>ResourceUtilization</id>
+        <className>serviceProviders.ServiceProviderAgent</className>
+        <methodName>getResourceUtilization</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+    <entry>
+      <string>BottleneckCount</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>BottleneckCount</id>
+        <className>serviceProviders.ServiceProviderAgent</className>
+        <methodName>getBottleneckCount</methodName>
       </repast.simphony.data2.engine.MethodDataSourceDefinition>
     </entry>
   </methodDataSources>

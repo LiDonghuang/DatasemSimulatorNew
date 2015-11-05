@@ -47,7 +47,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	private LinkedList<AggregationNode> uppertasks = new LinkedList<AggregationNode>();
 	private LinkedList<WorkItemEntity> impactsWIs = new LinkedList<WorkItemEntity>();
 	private HashMap<WorkItemEntity,Double> impactsLikelihood = new HashMap<WorkItemEntity,Double>();
-	private HashMap<WorkItemEntity,Double> impactsValue = new HashMap<WorkItemEntity,Double>();
+	private HashMap<WorkItemEntity,Double> impactsRisk = new HashMap<WorkItemEntity,Double>();
 	
 	public int maxMaturityLevels = 1;
 	public double uncertainty = 0;
@@ -83,6 +83,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	
 	private double serviceEfficiency = 0;
 	private double progress= 0;
+	private double previousProgress = 0;
 	protected double progressRate= 0;
 	protected double perceivedValue= 0;
 	
@@ -196,7 +197,7 @@ public class WorkItemEntity extends WorkItemImpl {
 
 		for (WorkItemEntity impactsTarget: this.getImpactsWIs()) {
 			double likelihood = this.getImpactsLikelihood().get(impactsTarget);
-			double risk = this.getImpactsValue().get(impactsTarget);
+			double risk = this.getImpactsRisk().get(impactsTarget);
 			imp += likelihood*risk*5;
 		}
 		if (this.isAnalysisActivity) {
@@ -306,7 +307,7 @@ public class WorkItemEntity extends WorkItemImpl {
 			this.cycleTime += (this.completionTime - this.restartedTime);
 		}
 		this.updateUpperTasksCompletion();
-		System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is completed"+" (rework count:"+this.getReworkCount()+")");
+		//System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is completed"+" (rework count:"+this.getReworkCount()+")");
 	}
 	public void setEnded() {
 		this.isEnded=true;
@@ -457,11 +458,11 @@ public class WorkItemEntity extends WorkItemImpl {
 	public void setImpactsWIs(LinkedList<WorkItemEntity> impactsWIs) {
 		this.impactsWIs = impactsWIs;
 	}
-	public HashMap<WorkItemEntity,Double> getImpactsValue() {
-		return impactsValue;
+	public HashMap<WorkItemEntity,Double> getImpactsRisk() {
+		return impactsRisk;
 	}
-	public void setImpactsValue(HashMap<WorkItemEntity,Double> impactsValue) {
-		this.impactsValue = impactsValue;
+	public void setImpactsRisk(HashMap<WorkItemEntity,Double> risk) {
+		this.impactsRisk = risk;
 	}
 	public HashMap<WorkItemEntity,Double> getImpactsLikelihood() {
 		return impactsLikelihood;
@@ -508,5 +509,11 @@ public class WorkItemEntity extends WorkItemImpl {
 	}
 	public double getIconSize() {
 		return icon.size;
+	}
+	public double getPreviousProgress() {
+		return previousProgress;
+	}
+	public void setPreviousProgress(double previousProgress) {
+		this.previousProgress = previousProgress;
 	}
 }

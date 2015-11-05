@@ -38,7 +38,7 @@ public class DevTask extends Task {
 				this.rework(this.risk);						
 			}
 			this.changePropagation();
-			if (Math.random()<=0.2) {
+			if (Math.random()<=0.3) {
 				this.suspendForResolution();
 			}
 		}
@@ -48,16 +48,16 @@ public class DevTask extends Task {
 		this.suspendedTime = this.SoS.timeNow;
 		this.getAssignedAgent().setBottleNeckCount(this.getAssignedAgent().getBottleNeckCount() + 1);
 		this.getAssignedAgent().requestAssistance(this);
-		System.out.println("\nSUSPENDED @TIME:"+this.SoS.timeNow+this.fullName);
+		//System.out.println("\nSUSPENDED @TIME:"+this.SoS.timeNow+this.fullName);
 	}
 	public void changePropagation() {
 		for (WorkItemEntity affectedWI : this.getImpactsWIs()) {	
 			double likelihood = this.getImpactsLikelihood().get(affectedWI);			
 			if (Math.random()<likelihood) {
-				double impact = this.getImpactsValue().get(affectedWI);
+				double impact = this.getImpactsRisk().get(affectedWI);
 				if (!affectedWI.isIsAggregationNode() && affectedWI.isStarted && !affectedWI.isEnded) {	
 					//System.out.println("\nCHANGE PROPAGATION @TIME:"+this.SoS.timeNow+this.fullName+"propagates rework to"+affectedWI.fullName);								
-					((DevTask) affectedWI).rework(impact);	
+					((DevTask) affectedWI).rework(impact);
 					this.setChangePropagationToCount(this.getChangePropagationToCount() + 1);
 					affectedWI.setChangePropagationByCount(affectedWI.getChangePropagationByCount() + 1);
 				}	
@@ -72,7 +72,7 @@ public class DevTask extends Task {
 			this.setReworkCount(this.getReworkCount() + 1);
 			this.uncertainty *= 1;
 			this.setProgress(Math.max((this.getProgress()-progressReduction), 0));								
-			System.out.println("\nREWORK @TIME:"+this.SoS.timeNow+this.fullName+"reworks from "+previousProgress+" to "+this.getProgress()+" (rework count:"+this.getReworkCount()+")");
+			//System.out.println("\nREWORK @TIME:"+this.SoS.timeNow+this.fullName+"reworks from "+previousProgress+" to "+this.getProgress()+" (rework count:"+this.getReworkCount()+")");
 			if (this.isCompleted) {
 				this.isCompleted = false;
 				this.isReactivated = true;	

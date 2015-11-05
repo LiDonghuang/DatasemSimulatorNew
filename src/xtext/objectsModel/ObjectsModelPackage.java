@@ -725,13 +725,22 @@ public interface ObjectsModelPackage extends EPackage
   int WORK_ITEM__IMPACTS = 11;
 
   /**
+   * The feature id for the '<em><b>Required Analysis</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORK_ITEM__REQUIRED_ANALYSIS = 12;
+
+  /**
    * The feature id for the '<em><b>Required Services</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WORK_ITEM__REQUIRED_SERVICES = 12;
+  int WORK_ITEM__REQUIRED_SERVICES = 13;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -740,7 +749,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__VALUE = 13;
+  int WORK_ITEM__VALUE = 14;
 
   /**
    * The feature id for the '<em><b>Arrival Time</b></em>' attribute.
@@ -749,7 +758,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__ARRIVAL_TIME = 14;
+  int WORK_ITEM__ARRIVAL_TIME = 15;
 
   /**
    * The feature id for the '<em><b>Due Date</b></em>' attribute.
@@ -758,7 +767,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM__DUE_DATE = 15;
+  int WORK_ITEM__DUE_DATE = 16;
 
   /**
    * The number of structural features of the '<em>Work Item</em>' class.
@@ -767,7 +776,7 @@ public interface ObjectsModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WORK_ITEM_FEATURE_COUNT = 16;
+  int WORK_ITEM_FEATURE_COUNT = 17;
 
   /**
    * The meta object id for the '{@link xtext.objectsModel.impl.RequiredServiceImpl <em>Required Service</em>}' class.
@@ -1536,6 +1545,17 @@ public interface ObjectsModelPackage extends EPackage
   EReference getWorkItem_Impacts();
 
   /**
+   * Returns the meta object for the reference list '{@link xtext.objectsModel.WorkItem#getRequiredAnalysis <em>Required Analysis</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Required Analysis</em>'.
+   * @see xtext.objectsModel.WorkItem#getRequiredAnalysis()
+   * @see #getWorkItem()
+   * @generated
+   */
+  EReference getWorkItem_RequiredAnalysis();
+
+  /**
    * Returns the meta object for the reference list '{@link xtext.objectsModel.WorkItem#getRequiredServices <em>Required Services</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2202,6 +2222,14 @@ public interface ObjectsModelPackage extends EPackage
      * @generated
      */
     EReference WORK_ITEM__IMPACTS = eINSTANCE.getWorkItem_Impacts();
+
+    /**
+     * The meta object literal for the '<em><b>Required Analysis</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WORK_ITEM__REQUIRED_ANALYSIS = eINSTANCE.getWorkItem_RequiredAnalysis();
 
     /**
      * The meta object literal for the '<em><b>Required Services</b></em>' reference list feature.

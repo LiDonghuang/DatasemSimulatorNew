@@ -2,6 +2,8 @@ package workItems;
 
 import java.util.LinkedList;
 
+import bsh.This;
+import processModels.ProcessModel;
 import serviceProviders.ResourceEntity;
 import serviceProviders.ServiceProviderAgent;
 import xtext.objectsModel.Skill;
@@ -9,16 +11,18 @@ import xtext.objectsModel.WorkItem;
 
 public class AggregationNode extends WorkItemEntity{
 	private LinkedList<WorkItemEntity> subtasks = new LinkedList<WorkItemEntity>();
+	public boolean hasProcessModel = false;
+	private ProcessModel processModel;
+	private int currentProcessStage;
+	public int currentAnalysisStage;
+	public int totalAnalysisStage;
 	
 	public AggregationNode(WorkItem wi) {
 		super(wi);
-		this.isAggregationNode = true;
-		if (wi.getRequiredServices().isEmpty()) {
-			this.serviceId = 1;
-		}
-		else {
-			this.serviceId = wi.getRequiredServices().get(0).getServiceType().getId();
-		}
+		this.isAggregationNode = true;		
+		this.serviceId = wi.getRequiredAnalysis().get(0).getServiceType().getId();
+		this.efforts = wi.getRequiredAnalysis().get(0).getEfforts();	
+		this.totalAnalysisStage = wi.getRequiredAnalysis().size();
 	}
 	
 //	public void advanceProgress() {
@@ -43,6 +47,38 @@ public class AggregationNode extends WorkItemEntity{
 				this.updateUpperTasksCompletion();				
 			}
 		}
+	}
+	public void updateProcessModelStage() {
+		if (this.hasProcessModel) {
+			this.processModel.updateStage(this);
+		}
+	}
+	public void setProcessModel(ProcessModel processModel) {
+		this.processModel = processModel;
+		this.hasProcessModel = true;
+	}
+	public ProcessModel getProcessModel() {
+		return this.processModel;
+	}
+	public String getProcessModelName() {
+		String s;
+		if (this.hasProcessModel) {
+			s = this.processModel.name;
+		}
+		else {
+			s = "N/A";
+		}
+		return s;
+	}
+	public String getProcessStage(int stageNumber) {
+		return this.processModel.stages.get(stageNumber).name;
+	}
+	public String getCurrentProcessStage() {
+		System.out.println(this.fullName);
+		return this.getProcessStage(currentProcessStage);
+	}
+	public void setCurrentProcessStage(int currentProcessStage) {
+		this.currentProcessStage = currentProcessStage;
 	}
 	public LinkedList<WorkItemEntity> getSubtasks() {
 		return subtasks;
@@ -80,17 +116,23 @@ public class AggregationNode extends WorkItemEntity{
 		this.setProgressRate(progressRate);
 		return progressRate;
 	}
-	public double calculateServiceEfficiency(ServiceProviderAgent sp) {
+	public double calculateExtendedServiceCapacity(ServiceProviderAgent sp) {
 		double sEfficiency = 0;
-		for (ResourceEntity r: sp.getMyResourceEntities()) {
-			for (Skill sk: r.getSkillSet()){
-				int service_id = sk.getService().getId();
-				if (service_id == this.serviceId){
-					sEfficiency = sk.getEfficiency();				
-					break;
-				}		
-			}
-		}
+		sEfficiency = sp.ExtendedServiceCapacity.get(SoS.myServices.get(this.serviceId));
+		return sEfficiency;
+	}
+	public double calculateServiceCapacity(ServiceProviderAgent sp) {
+		double sEfficiency = 0;
+		sEfficiency = sp.ServiceCapacity.get(SoS.myServices.get(this.serviceId));
+//		for (ResourceEntity r: sp.getMyResourceEntities()) {
+//			for (Skill sk: r.getSkillSet()){
+//				int service_id = sk.getService().getId();
+//				if (service_id == this.serviceId){
+//					sEfficiency = sk.getEfficiency();				
+//					break;
+//				}		
+//			}
+//		}
 		//System.out.println(this.name+"- serviceId:"+this.getRequiredServices().get(0).getId()+", efficiency:"+sEfficiency);
 		return sEfficiency;
 	}
