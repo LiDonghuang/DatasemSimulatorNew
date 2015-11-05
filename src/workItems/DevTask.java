@@ -2,8 +2,8 @@ package workItems;
 
 public class DevTask extends Task {
 	public int maxMaturityLevels = 5;
-	public double uncertainty = 0.2;
-	public double risk = 0.2;
+	public double uncertainty = 0;
+	public double risk = 0;
 	
 	public DevTask(WorkItemEntity wi) {
 		super(wi);
@@ -23,22 +23,22 @@ public class DevTask extends Task {
 		this.hierarchy = this.myType.getHierarchy();		
 		this.serviceId = serviceId;
 		this.efforts = efforts;
-		this.maxMaturityLevels = 5;
-		this.uncertainty = 0.2;
-		this.risk = 0.2;
+		this.maxMaturityLevels = (Integer)this.SoS.parameters.getValue("TaskMaturityLevels");
 		this.fullName = this.fullName();
 	}
 	
 	public void triggerChanges() {
 		int incMaturityLevels = getCurrentMaturityLevel()- getPreviousMaturityLevel();	
 		setPreviousMaturityLevel(getPreviousMaturityLevel() + incMaturityLevels);
-		//if (incMaturityLevels>0) {System.out.println(this.fullName+"increased Maturity Level by "+incMaturityLevels+" to "+getCurrentMaturityLevel());}
+		if (incMaturityLevels>0) {System.out.println(this.fullName+"increased Maturity Level by "+incMaturityLevels+" to "+getCurrentMaturityLevel());}
+		System.out.println(this.fullName+"uncertainty:"+this.uncertainty+" risk:"+this.risk);
 		for (int i=0; i< incMaturityLevels; i++) {				
-			if (Math.random()<=this.uncertainty) {
-				this.rework(this.risk);						
+			if (Math.random()<=this.risk) {
+				double reduction = 1/(this.maxMaturityLevels);
+				this.rework(reduction);						
 			}
 			this.changePropagation();
-			if (Math.random()<=0.3) {
+			if (Math.random()<=this.uncertainty) {
 				this.suspendForResolution();
 			}
 		}

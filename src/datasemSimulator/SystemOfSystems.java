@@ -13,6 +13,7 @@ import contractNetProtocol.ValueFunction;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ISchedule;
 import repast.simphony.engine.schedule.ScheduledMethod;
+import repast.simphony.parameter.Parameters;
 import serviceProviders.ResourceEntity;
 import serviceProviders.ServiceProviderAgent;
 import workItems.AggregationNode;
@@ -26,6 +27,7 @@ import xtext.objectsModel.WorkItemType;
 public class SystemOfSystems {
 	public String ModelBuilder;
 	public ServiceProviderAgent coordinator;
+	public Parameters parameters;
 	
 	public HashMap<Integer, ServiceProviderAgent> myServiceProviderAgents = new HashMap<Integer, ServiceProviderAgent>();
 	public HashMap<Integer, WorkItemEntity> myWorkItemEntities = new HashMap<Integer, WorkItemEntity>();
@@ -58,7 +60,6 @@ public class SystemOfSystems {
 	private int CountTasks;
 	private double ValueDelivered;
 	private double NPV;
-	private double ROR=0.12;
 	private double TaskReworkCount_total;
 	private double TaskReworkCount_mean;
 	private double TaskReworkCount_stdev;
@@ -74,7 +75,7 @@ public class SystemOfSystems {
 	private double AgentsResourceUtilization_cov;
 	private double AgentsResourceUtilization_mean;
 	
-	
+	protected double ROR;
 	
 	
 	@ScheduledMethod(start=1,interval=1,priority=1000)

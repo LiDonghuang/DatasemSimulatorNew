@@ -74,7 +74,6 @@ public class AggregationNode extends WorkItemEntity{
 		return this.processModel.stages.get(stageNumber).name;
 	}
 	public String getCurrentProcessStage() {
-		System.out.println(this.fullName);
 		return this.getProcessStage(currentProcessStage);
 	}
 	public void setCurrentProcessStage(int currentProcessStage) {

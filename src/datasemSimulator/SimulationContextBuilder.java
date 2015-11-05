@@ -61,7 +61,7 @@ public class SimulationContextBuilder {
 	}
 	public void ContextImplementation(Context<Object> context) {
 		parameters = RunEnvironment.getInstance().getParameters();
-		SystemOfSystems mySoS = BuildSoS();			
+		SystemOfSystems mySoS = BuildSoS();	
 		context.setId("DatasemSimulator");		
 		context.add(mySoS);
 		
@@ -202,6 +202,13 @@ public class SimulationContextBuilder {
 			mySoS.WINLevels = 3;
 			mySoS.WINComplexity = 3;
 			mySoS.WINSize = 10;
+		}
+		else if (this.ModelBuilder.matches("ThreeProgrammersThreeTasksModel")) {
+			mySoS.OrgLevels = 2;
+			mySoS.OrgComplexity = 3;
+			mySoS.WINLevels = 2;
+			mySoS.WINComplexity = 4;
+			mySoS.WINSize = 3;
 		}
 		else if (this.ModelBuilder.matches("AerospaceAndDefenceProjects")) {
 			mySoS.OrgLevels = 3;
@@ -523,15 +530,18 @@ public class SimulationContextBuilder {
 		}
 	}
 	public SystemOfSystems BuildSoS() {
-		Parameters p = parameters;
-		int TaskMaturityLevels = (Integer)p.getValue("TaskMaturityLevels");
-		double TaskUncertainty = (Double)p.getValue("TaskUncertainty");
-		double TaskRisk = (Double)p.getValue("TaskRisk");
-		double TaskChangePropagationUncertainty = (Double)p.getValue("TaskChangePropagationUncertainty");
-		double TaskChangePropagationRisk = (Double)p.getValue("TaskChangePropagationRisk");
 		
 		SystemOfSystems mySoS = new SystemOfSystems();
+
+		mySoS.parameters = this.parameters;
 		
+		int TaskMaturityLevels = (Integer)mySoS.parameters.getValue("TaskMaturityLevels");
+		double TaskUncertainty = (Double)mySoS.parameters.getValue("TaskUncertainty");
+		double ReworkRisk = (Double)mySoS.parameters.getValue("ReworkRisk");
+		double ChangePropagationFactor = (Double)mySoS.parameters.getValue("ChangePropagationFactor");
+		double ROR = (Double)mySoS.parameters.getValue("ROR");
+		
+		mySoS.ROR = ROR;
 		mySoS.myServices = myServices;
 		mySoS.myServiceProviderTypes = myServiceProviderTypes;
 		mySoS.myWorkItemTypes = myWorkItemTypes;
@@ -578,8 +588,9 @@ public class SimulationContextBuilder {
 			}
 			entity.SoS = mySoS;
 			entity.maxMaturityLevels = TaskMaturityLevels;
-			entity.uncertainty = TaskUncertainty*TaskChangePropagationUncertainty;
-			entity.risk = TaskRisk*TaskChangePropagationRisk;
+			entity.uncertainty = TaskUncertainty;
+			entity.risk = ReworkRisk;
+			System.out.println(TaskMaturityLevels);System.out.println(TaskUncertainty);System.out.println(ReworkRisk);
 			mySoS.myWorkItemEntities.put(id, entity);
 			mySoS.increaseWICount();
 		}
@@ -607,8 +618,8 @@ public class SimulationContextBuilder {
 					double risk = myImpact.getRisk();
 					WorkItemEntity impactEntity = mySoS.myWorkItemEntities.get(impactWI_id);
 					entity.getImpactsWIs().add(impactEntity);
-					entity.getImpactsRisk().put(impactEntity, risk*TaskChangePropagationRisk);
-					entity.getImpactsLikelihood().put(impactEntity, likelihood*TaskChangePropagationUncertainty);
+					entity.getImpactsRisk().put(impactEntity, risk*ChangePropagationFactor);
+					entity.getImpactsLikelihood().put(impactEntity, likelihood);
 				}
 			}
 		}

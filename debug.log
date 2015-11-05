@@ -384,3 +384,72 @@ Caused by: java.lang.NullPointerException
 	at visualization.Visualization.updateKanbanBoard(Visualization.java:247)
 	at visualization.Visualization.step(Visualization.java:91)
 	... 10 more
+FATAL [Thread-8] 2015-11-05 02:19:54,139 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at visualization.Visualization$$FastClassByCGLIB$$95f8c5ba.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.NullPointerException
+	at workItems.AggregationNode.getProcessStage(AggregationNode.java:74)
+	at workItems.AggregationNode.getCurrentProcessStage(AggregationNode.java:78)
+	at kanbanBoard.KanbanBoard.updateElements(KanbanBoard.java:55)
+	at visualization.Visualization.updateKanbanBoard(Visualization.java:247)
+	at visualization.Visualization.step(Visualization.java:91)
+	... 10 more
+FATAL [Thread-8] 2015-11-05 12:00:24,422 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (1.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.NullPointerException
+	at workItems.AnalysisActivity.<init>(AnalysisActivity.java:15)
+	at serviceProviders.ServiceProviderAgent.analyzeAggregationNode(ServiceProviderAgent.java:145)
+	at serviceProviders.ServiceProviderAgent.acceptWI(ServiceProviderAgent.java:269)
+	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:99)
+	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
+	... 10 more
+FATAL [Thread-8] 2015-11-05 12:14:46,572 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (0.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.reflect.InvocationTargetException
+	at visualization.Visualization$$FastClassByCGLIB$$95f8c5ba.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.NullPointerException
+	at workItems.AggregationNode.getProcessStage(AggregationNode.java:74)
+	at workItems.AggregationNode.getCurrentProcessStage(AggregationNode.java:77)
+	at kanbanBoard.KanbanBoard.updateElements(KanbanBoard.java:55)
+	at visualization.Visualization.updateKanbanBoard(Visualization.java:247)
+	at visualization.Visualization.step(Visualization.java:91)
+	... 10 more
