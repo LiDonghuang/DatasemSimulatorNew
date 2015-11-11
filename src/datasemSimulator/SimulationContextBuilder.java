@@ -114,8 +114,8 @@ public class SimulationContextBuilder {
 		WaterfallModel.addStage(5,"Maintenance");
 		//
 		ProcessModel MyProcess = new ProcessModel("My\nProcess");
-		WaterfallModel.addStage(1,"Analysis");
-		WaterfallModel.addStage(2,"Development");
+		MyProcess.addStage(1,"Analysis");
+		MyProcess.addStage(2,"Development");
 		// ValueFunction
 		Mechanism valueMechanism1 = ObjectsModelFactory.eINSTANCE.createMechanism();
 		valueMechanism1.setName("ValueFunction");valueMechanism1.setValue("Derived");
