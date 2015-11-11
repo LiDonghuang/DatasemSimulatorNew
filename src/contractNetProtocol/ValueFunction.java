@@ -51,48 +51,59 @@ public class ValueFunction extends MechanismImpl {
 	}
 	
 	private void algorithmDerivedValue(WorkItemEntity wi) {
-		double baseValue = wi.currentValue;	
-		double hierarchyFactor = Double.parseDouble(getAttributeValue("HierarchyFactor"));
-		double precedencyFactor = Double.parseDouble(getAttributeValue("PrecedencyFactor"));
-		wi.currentValue = baseValue* hierarchyFactor;
-		double[] weights = new double[((AggregationNode)wi).getSubtasks().size()];
-		for (int i=0; i<((AggregationNode)wi).getSubtasks().size();i++){	
-			WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);
-			weights[i] += 1;
-			for (WorkItemEntity successor:subtask.getSuccessors()) {
-				if (!(successor.isAnalysisActivity||successor.isResolutionActivity)) {
-					if (((AggregationNode)wi).getSubtasks().contains(successor)) {
-						weights[i] += precedencyFactor;
+			double baseValue = wi.Value;	
+			//if (wi.getId()==31){System.out.println("base "+baseValue);}
+			double hierarchyFactor = Double.parseDouble(getAttributeValue("HierarchyFactor"));
+			double precedencyFactor = Double.parseDouble(getAttributeValue("PrecedencyFactor"));
+			
+			double[] weights = new double[((AggregationNode)wi).getSubtasks().size()];
+			for (int i=0; i<((AggregationNode)wi).getSubtasks().size();i++){	
+				WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);
+				weights[i] += 1;		
+//				for (WorkItemEntity successor:subtask.getSuccessors()) {
+//					if (!(successor.isAnalysisActivity||successor.isResolutionActivity)) {
+//						if (((AggregationNode)wi).getSubtasks().contains(successor)) {
+//							weights[i] += precedencyFactor;
+//						}
+//					}
+//				}
+			}
+			double totalWeights = StatUtils.sum(weights);
+			double sumValue = 0;
+			for (int i=0; i<((AggregationNode)wi).getSubtasks().size();i++){
+				WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);
+				double previousValue = subtask.currentValue;			
+				double increase = (weights[i]/totalWeights)*baseValue*(1-hierarchyFactor);
+				//if (subtask.getId()==31){System.out.println("prev "+previousValue+" inc "+increase);}
+				subtask.Value += increase;					
+				wi.currentValue -= increase;
+				//if (wi.getId()==31){System.out.println("base "+baseValue+"decrease "+increase);}
+				if (subtask.isAggregationNode) {			
+					if (subtask.isEnded) {
+						subtask.currentValue = increase;
+						subtask.SoS.deliverValue(increase);			
+						subtask.currentValue += previousValue;
+					}
+					else if (((AggregationNode)subtask).currentAnalysisStage==((AggregationNode)subtask).totalAnalysisStage) {
+						subtask.Value = increase/(1-hierarchyFactor);
+						subtask.currentValue = subtask.Value*(1-hierarchyFactor);
+						developValue(subtask);
+						subtask.currentValue = subtask.Value*(1-hierarchyFactor);			
+					}
+					else {
+						subtask.currentValue += increase;
+					}
+				}
+				else {
+					if (subtask.isEnded) {
+						subtask.SoS.deliverValue(increase);
+						subtask.currentValue += increase;
+					}
+					else {
+						subtask.currentValue += increase;
 					}
 				}
 			}
-		}
-		double totalWeights = StatUtils.sum(weights);
-		for (int i=0; i<((AggregationNode)wi).getSubtasks().size();i++){	
-			WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);
-			if (subtask.isAggregationNode && subtask.isActivated) {
-				double previousValue = subtask.currentValue;	
-				double increase = (weights[i]/totalWeights)*baseValue*(1-hierarchyFactor);
-				if (subtask.isEnded) {
-					subtask.currentValue += increase;
-					subtask.SoS.deliverValue(increase);
-				}
-				else {
-					subtask.currentValue = increase;
-					developValue(subtask);
-					subtask.currentValue += previousValue;
-				}					
-			}
-			else {	
-				double increase = (weights[i]/totalWeights)*baseValue*(1-hierarchyFactor);
-				if (subtask.isEnded) {
-					subtask.currentValue += increase;
-					subtask.SoS.deliverValue(increase);
-				}
-				else {
-					subtask.currentValue += (weights[i]/totalWeights)*baseValue*(1-hierarchyFactor);
-				}
-			}
-		}
 	}
+	
 }

@@ -25,9 +25,10 @@ public class KanbanBoard {
 		addElement(0,0,"Capability\n ",10,255,255);
 		addElement(1,0,"\nType /"+"\nLife Cycle\nModel",10,255,255);
 		addElement(2,0,"Phase\n ",10,255,255);
-		addElement(3,0,"Value\nDeployed",20,255,255);
-		addElement(4,0,"Current\nProgress",20,255,255);
-		addElement(5,0,"Progress\nRate",20,255,255);	
+		addElement(3,0,"Activation\nTime",20,255,255);	
+		addElement(4,0,"Value\nDeployed",20,255,255);
+		addElement(5,0,"Current\nProgress",20,255,255);
+		addElement(6,0,"Progress\nRate",20,255,255);	
 
 		int c=1;
 		double value;
@@ -53,12 +54,19 @@ public class KanbanBoard {
 			addElement(0,c,myCap.getName()+'\n',r,g,b);
 			addElement(1,c,"\n\n\n\n"+SoS.myWorkItemTypes.get(myCap.typeId).getName()+" /"+"\n\n"+((AggregationNode)myCap).getProcessModelName(),r,g,b);
 			addElement(2,c,'\n'+((AggregationNode)myCap).getCurrentProcessStage(),r,g,b);
+			
+			value = myCap.activatedTime;
+			addElement(3,c,String.valueOf(((int)value))+'\n',r,g,b);
+			
 			value = myCap.getProgress()*myCap.currentValue;
-			addElement(3,c,new DecimalFormat("##.###").format(value)+'\n',r,g,b);
+			addElement(4,c,new DecimalFormat("##.###").format(value)+'\n',r,g,b);
+			
 			value = myCap.getProgress()*100;
-			addElement(4,c,new DecimalFormat("##.#").format(value)+"%"+'\n',r,g,b);
-			value = myCap.getProgressRate()*100;
 			addElement(5,c,new DecimalFormat("##.#").format(value)+"%"+'\n',r,g,b);
+			
+			value = myCap.getProgressRate()*100;
+			addElement(6,c,new DecimalFormat("##.#").format(value)+"%"+'\n',r,g,b);
+			
 			c++;
 		}
 	}

@@ -1,0 +1,128 @@
+<ExperimentModel experimentId="0" name="ThreeProgrammersThreeTasksModel" description="3 Programmers to be assigned with 3 programming tasks">
+<Indicator name="Total_Value"></Indicator>
+<Indicator name="Active_WorkLoad"></Indicator>
+<ServiceProviderTypes>
+<ServiceProviderType spTypeId="1" hierarchy="0" name="DevTeam" description="an individual manager"></ServiceProviderType>
+</ServiceProviderTypes>
+<WorkItemTypes>
+<WorkItemType wiTypeId="1" hierarchy="0" name="Requirement" description="Requirement Analysis"></WorkItemType>
+<WorkItemType wiTypeId="2" hierarchy="1" name="DevTask" description="General Task"></WorkItemType>
+<WorkItemType wiTypeId="3" hierarchy="1" name="Analysis" description="decomposites Decomposition Analysis"></WorkItemType>
+<WorkItemType wiTypeId="4" hierarchy="1" name="Resolution" description="Bottleneck Resolution"></WorkItemType>
+</WorkItemTypes>
+<Services>
+<Service serviceId="1" name="Management" description="Analyzing Requirements"></Service>
+<Service serviceId="2" name="Java" description="Java Programming"></Service>
+<Service serviceId="3" name="Python" description="Python Programming"></Service>
+<Service serviceId="4" name="SQL" description="SQL Programming"></Service>
+</Services>
+<ClassOfServices>
+</ClassOfServices>
+
+	<Runs>
+	<Run runId="1" description="ThreeProgrammers" numberOfReplications="100" numberOfSteps="10000">
+		<OrganizationalModel>
+		<ServiceProviders>
+		<ServiceProvider serviceProviderId="1" name="MyTeam" typeId="1" description="">
+		<AssignWITo>
+		</AssignWITo>
+		<BorrowResourceFrom>
+		</BorrowResourceFrom>
+		<GovernanceStrategy>
+		<Mechanisms>
+		<Mechanism name="Acceptance" value="Neutral">
+		</Mechanism>
+		<Mechanism name="Selection" value="Neutral">
+		</Mechanism>
+		<Mechanism name="Assignment" value="Neutral">
+		</Mechanism>
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		<Mechanism name="ValueFunction" value="Fiat">
+		</Mechanism>
+		</Mechanisms>		
+		</GovernanceStrategy>	
+		<Resources>
+		<Resource resourceId="1" name="Manager.1" description="">
+		<SkillSet>
+		<Skill serviceId="1" name="Management" efficiency="1.0"></Skill>
+		</SkillSet>	
+		</Resource>	
+		<Resource resourceId="2" name="Dev1.1" description="">
+		<SkillSet>
+		<Skill serviceId="2" name="Java" efficiency="1.0"></Skill>
+		</SkillSet>	
+		</Resource>	
+		<Resource resourceId="3" name="Dev2.1" description="">
+		<SkillSet>
+		<Skill serviceId="3" name="Python" efficiency="1.0"></Skill>
+		</SkillSet>	
+		</Resource>	
+		<Resource resourceId="4" name="Dev3.1" description="">
+		<SkillSet>
+		<Skill serviceId="4" name="SQL" efficiency="1.0"></Skill>
+		</SkillSet>	
+		</Resource>	
+		</Resources>
+		</ServiceProvider> 
+		</ServiceProviders>
+		</OrganizationalModel>
+		<WorkItemNetworkModel>		
+		<WorkSources>
+		<WorkSource name="Stakeholder" description="a stakeholder">
+		<AssignWITo>
+		<serviceProviderId>1</serviceProviderId>
+		</AssignWITo>
+		</WorkSource>
+		</WorkSources>	
+		<WorkItems>
+		<WorkItem wiId="1" name="Req" typeId="1" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+			<GovernanceAttributes>
+			<GovernanceAttribute name="Value" value="300.0"></GovernanceAttribute>
+			</GovernanceAttributes>
+			<Subtasks>
+			<workItemId>2</workItemId>
+			<workItemId>3</workItemId>
+			<workItemId>4</workItemId>
+			</Subtasks>
+			<RequiredAnalysis>
+			<RequiredService serviceId="1" efforts="5.0"></RequiredService>
+			</RequiredAnalysis>
+			<RequiredServices>
+			</RequiredServices>
+		</WorkItem>
+		<WorkItem wiId="2" name="T_SQL" typeId="2" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
+			<GovernanceAttributes>
+			<GovernanceAttribute name="Value" value="0.0"></GovernanceAttribute>
+			</GovernanceAttributes>
+			<RequiredAnalysis>
+			</RequiredAnalysis>
+			<RequiredServices>
+			<RequiredService serviceId="4" efforts="10.0"></RequiredService>
+			</RequiredServices>
+		</WorkItem>
+		<WorkItem wiId="3" name="T_Pyt" typeId="2" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
+			<GovernanceAttributes>
+			<GovernanceAttribute name="Value" value="0.0"></GovernanceAttribute>
+			</GovernanceAttributes>
+			<RequiredAnalysis>
+			</RequiredAnalysis>
+			<RequiredServices>
+			<RequiredService serviceId="3" efforts="15.0"></RequiredService>
+			</RequiredServices>
+		</WorkItem>
+		<WorkItem wiId="4" name="T_Java" typeId="2" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
+			<GovernanceAttributes>
+			<GovernanceAttribute name="Value" value="0.0"></GovernanceAttribute>
+			</GovernanceAttributes>
+			<RequiredAnalysis>
+			</RequiredAnalysis>
+			<RequiredServices>
+			<RequiredService serviceId="2" efforts="20.0"></RequiredService>
+			</RequiredServices>
+		</WorkItem>
+		</WorkItems>
+		</WorkItemNetworkModel>
+	</Run>
+	</Runs>
+</ExperimentModel>	

@@ -63,7 +63,9 @@ public class WorkItemEntity extends WorkItemImpl {
 	public boolean isCompleted=false;
 	public boolean isEnded=false;
 	public double currentValue;
+	public double Value;
 	
+	public int arrivalTime = Integer.MAX_VALUE;
 	public double estimatedEfforts=Double.MAX_VALUE;
 	public double estimatedCompletionTime=Double.MAX_VALUE;
 	public int activatedTime=Integer.MAX_VALUE;	
@@ -103,8 +105,8 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.myType = wi.getType();
 		this.typeId = wi.getType().getId();
 		this.hierarchy = wi.getType().getHierarchy();
-		this.value = wi.getValue();
-		this.initialValue = this.value;
+		this.initialValue = wi.getValue();
+		this.Value = initialValue;
 		this.currentValue = this.initialValue;
 		this.isAggregationNode = wi.isIsAggregationNode();
 		this.hasPredecessors = wi.isHasPredecessors();
@@ -141,19 +143,19 @@ public class WorkItemEntity extends WorkItemImpl {
 			}
 		}	
 	}	
-	public void addUpperTask(AggregationNode upperTask) {
-		if (!this.getUppertasks().contains(upperTask)){
-			this.getUppertasks().add(upperTask);
-			upperTask.addSubTask(this);
-		}
-	}
-	
-	public void removeUpperTask(AggregationNode upperTask) {
-		if (this.getUppertasks().contains(upperTask)) {
-			this.getUppertasks().remove(upperTask);
-			upperTask.removeSubTask(this);
-		}
-	}	
+//	public void addUpperTask(AggregationNode upperTask) {
+//		if (!this.getUppertasks().contains(upperTask)){
+//			this.getUppertasks().add(upperTask);
+//			upperTask.addSubTask(this);
+//		}
+//	}
+//	
+//	public void removeUpperTask(AggregationNode upperTask) {
+//		if (this.getUppertasks().contains(upperTask)) {
+//			this.getUppertasks().remove(upperTask);
+//			upperTask.removeSubTask(this);
+//		}
+//	}	
 	public int countIncompletedPredecessors() {
 		int count = 0;
 		for (WorkItemEntity predecessor:this.getPredecessors()) {
@@ -284,12 +286,15 @@ public class WorkItemEntity extends WorkItemImpl {
 		}
 		//System.out.println("WorkItem "+this.getName()+"(id:"+this.getId()+")"+" is activated");
 	}
-	public void setStarted() {
-		this.isStarted= true;
-		if (this.isReactivated) {
-			this.restartedTime = this.SoS.timeNow;
+	public void setStarted() {	
+		if (this.isStarted) {
+			if (this.isSuspended) {
+				this.isSuspended = false;
+				this.restartedTime = this.SoS.timeNow;
+			}
 		}
 		else {
+			this.isStarted= true;
 			this.startTime = this.SoS.timeNow;
 			//System.out.println("\nSTART @TIME:"+this.SoS.timeNow+this.fullName+"is started from progress:"+this.progress);
 		}
@@ -314,12 +319,11 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.endTime = this.SoS.timeNow;
 		this.leadTime = this.endTime - this.activatedTime + 1;	
 		this.removeFromSuccessorTasks();
-		this.SoS.deliverValue(this.currentValue);		
+		this.SoS.deliverValue(this.currentValue);				
 		if (this.hierarchy==0 ) {
 			this.SoS.initialList.remove(this.getId());	
 			this.SoS.endedList.put(this.getId(), this);
-			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
-			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.getValue()+" stakeholder value");
+			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.currentValue+" stakeholder value");
 		}
 		else if (this.isResolutionActivity||this.isAnalysisActivity) {
 			this.SoS.arrivedList.remove(this.getId());	
@@ -328,8 +332,11 @@ public class WorkItemEntity extends WorkItemImpl {
 		else {
 			this.CycleTimeToEffortsRatio = this.efforts/this.cycleTime;
 			this.SoS.endedList.put(this.getId(), this);
+			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
+			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.currentValue+" stakeholder value");
+			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"(efforts:"+this.efforts+") is Ended. Delivered "+this.currentValue+" Value\n StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.getReworkCount());
 		}
-		//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended. Delivered "+this.currentValue+" Value\n StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.getReworkCount());
+		//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"(efforts:"+this.efforts+") is Ended. Delivered "+this.currentValue+" Value\n StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.getReworkCount());
 	}
 	public void setAssigned() {
 		this.isAssigned=true;		

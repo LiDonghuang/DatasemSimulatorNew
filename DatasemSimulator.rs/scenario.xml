@@ -7,7 +7,6 @@
 <repast.simphony.action.data_set context="DatasemSimulator" file="repast.simphony.action.data_set_4.xml" />
 <repast.simphony.action.data_set context="DatasemSimulator" file="repast.simphony.action.data_set_5.xml" />
 <repast.simphony.action.file_sink context="DatasemSimulator" file="repast.simphony.action.file_sink_6.xml" />
-<repast.simphony.action.file_sink context="DatasemSimulator" file="repast.simphony.action.file_sink_7.xml" />
 <repast.simphony.action.histogram_chart context="DatasemSimulator" file="repast.simphony.action.histogram_chart_8.xml" />
 <repast.simphony.action.histogram_chart context="DatasemSimulator" file="repast.simphony.action.histogram_chart_9.xml" />
 <repast.simphony.action.histogram_chart context="DatasemSimulator" file="repast.simphony.action.histogram_chart_10.xml" />

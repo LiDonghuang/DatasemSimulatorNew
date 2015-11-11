@@ -10,6 +10,7 @@ import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
 
 import contractNetProtocol.ValueFunction;
+import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ISchedule;
 import repast.simphony.engine.schedule.ScheduledMethod;
@@ -26,6 +27,7 @@ import xtext.objectsModel.WorkItemType;
 
 public class SystemOfSystems {
 	public String ModelBuilder;
+	public Context<Object> context;
 	public ServiceProviderAgent coordinator;
 	public Parameters parameters;
 	
@@ -38,11 +40,11 @@ public class SystemOfSystems {
 	public KanbanBoard myKanbanBoard;
 	public ValueFunction myValueFunction;
 	
-	public int OrgLevels = 3;
-	public int OrgComplexity = 3;
-	public int WINLevels = 4;
-	public int WINComplexity = 3;
-	public int WINSize = 3;
+	public int OrgLevels;
+	public int OrgComplexity;
+	public int WINLevels;
+	public int WINComplexity;
+	public int WINSize;
 	
 	public HashMap<Integer, WorkItemEntity> initialList = new HashMap<Integer, WorkItemEntity>();
 	public HashMap<Integer, WorkItemEntity> arrivedList = new HashMap<Integer, WorkItemEntity>();
@@ -75,16 +77,31 @@ public class SystemOfSystems {
 	private double AgentsResourceUtilization_cov;
 	private double AgentsResourceUtilization_mean;
 	
-	protected double ROR;
+	public int TaskMaturityLevels;
+	public double TaskUncertainty;
+	public double ReworkRisk;
+	public double ROR;
 	
-	
+	public SystemOfSystems(Context<Object> context) {
+		this.context = context;
+		this.OrgLevels = 3;
+		this.OrgComplexity = 3;
+		this.WINLevels = 4;
+		this.WINComplexity = 3;
+		this.WINSize = 3;
+	}
 	@ScheduledMethod(start=1,interval=1,priority=1000)
-	public void EndRunCondition() {
+	public void step() {
 		ISchedule schedule = RunEnvironment.getInstance().getCurrentSchedule();
-		timeNow = (int)schedule.getTickCount();
+		this.timeNow = (int)schedule.getTickCount();
 		for (WorkItemEntity wi:this.arrivedList.values()) {
 			wi.setPreviousProgress(wi.getProgress());
 		}
+		
+		ReleaseWIs();
+		CheckEndRunCondition();
+	}
+	public void CheckEndRunCondition() {	
 		this.endedList.clear();
 		//System.out.println("\n ============== TIME NOW: "+timeNow+" ============== ");
 		if (this.initialList.size()==0){
@@ -116,7 +133,21 @@ public class SystemOfSystems {
 		//System.out.println("AgentsResourceUtilization:\n mean="+AgentsResourceUtilization_mean+" stdev="+AgentsResourceUtilization_stdev+" cov="+AgentsResourceUtilization_cov);
 	}
 	
-	
+	public void ReleaseWIs() {
+		for (WorkItemEntity wi:this.initialList.values()) {
+			if ((!wi.isActivated)&&(wi.arrivalTime <= this.timeNow)) {
+				this.context.add(wi);
+				wi.SoS.arrivedList.put(wi.getId(), wi);
+				wi.isActivated = true;
+				wi.activatedTime = this.timeNow;
+				this.coordinator.getRequestedQ().add(wi);
+				wi.setRequester(this.coordinator);
+				wi.setAssignedAgent(this.coordinator);
+				System.out.println("\nINCOMING @TIME:"+timeNow+wi.fullName+"initialized at "+this.coordinator.getName());
+			}
+		}
+	}
+
 	public void printSoSInformation() {
 		System.out.println("\n");
 		for (Service service:this.myServices.values()) {

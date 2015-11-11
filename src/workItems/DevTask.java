@@ -15,7 +15,7 @@ public class DevTask extends Task {
 		super(upperTask);
 		this.isDevTask = true;
 		this.SoS = upperTask.SoS;
-		this.addUpperTask(upperTask);
+		upperTask.getSubtasks().add(this);
 		this.id = id;
 		this.name = name;
 		this.typeId = SoS.getWorkItemTypeId("DevTask");
@@ -30,15 +30,14 @@ public class DevTask extends Task {
 	public void triggerChanges() {
 		int incMaturityLevels = getCurrentMaturityLevel()- getPreviousMaturityLevel();	
 		setPreviousMaturityLevel(getPreviousMaturityLevel() + incMaturityLevels);
-		if (incMaturityLevels>0) {System.out.println(this.fullName+"increased Maturity Level by "+incMaturityLevels+" to "+getCurrentMaturityLevel());}
-		System.out.println(this.fullName+"uncertainty:"+this.uncertainty+" risk:"+this.risk);
+		//if (incMaturityLevels>0) {System.out.println("@TIME:"+SoS.timeNow+this.fullName+"increased Maturity Level by "+incMaturityLevels+" to "+getCurrentMaturityLevel());}
 		for (int i=0; i< incMaturityLevels; i++) {				
-			if (Math.random()<=this.risk) {
-				double reduction = 1/(this.maxMaturityLevels);
+			if (Math.random()<=SoS.ReworkRisk) {
+				double reduction = 1/(SoS.TaskMaturityLevels);
 				this.rework(reduction);						
 			}
 			this.changePropagation();
-			if (Math.random()<=this.uncertainty) {
+			if (Math.random()<=SoS.TaskUncertainty) {
 				this.suspendForResolution();
 			}
 		}
@@ -53,14 +52,15 @@ public class DevTask extends Task {
 	public void changePropagation() {
 		for (WorkItemEntity affectedWI : this.getImpactsWIs()) {	
 			double likelihood = this.getImpactsLikelihood().get(affectedWI);			
-			if (Math.random()<likelihood) {
+			if (Math.random()<likelihood) {				
 				double impact = this.getImpactsRisk().get(affectedWI);
-				if (!affectedWI.isIsAggregationNode() && affectedWI.isStarted && !affectedWI.isEnded) {	
-					//System.out.println("\nCHANGE PROPAGATION @TIME:"+this.SoS.timeNow+this.fullName+"propagates rework to"+affectedWI.fullName);								
+				if (!affectedWI.isAggregationNode && affectedWI.isStarted && !affectedWI.isEnded) {	
+					//System.out.println("\nCHANGE PROPAGATION @TIME:"+this.SoS.timeNow+this.fullName+"propagates rework to"+affectedWI.fullName);
+					//System.out.println(likelihood+" "+impact);
 					((DevTask) affectedWI).rework(impact);
 					this.setChangePropagationToCount(this.getChangePropagationToCount() + 1);
 					affectedWI.setChangePropagationByCount(affectedWI.getChangePropagationByCount() + 1);
-				}	
+				}
 			}
 		}
 	}

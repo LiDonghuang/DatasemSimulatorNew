@@ -35,10 +35,10 @@ public class WIAssignmentRule {
 		
 		for (ServiceProviderAgent sp:SPs) {
 			list.add(sp);
-			if (sp.getBacklogQ().size()>=sp.BacklogLimit) {
+			if (sp.getBacklogQ().size()>=sp.myBehavior.BacklogLimit) {
 				scheduleLimit.put(sp, true);
 			}
-			if (sp.getActiveQ().size()>=sp.WIPLimit) {
+			if (sp.getActiveQ().size()>=sp.myBehavior.WIPLimit) {
 				scheduleLimit.put(sp, true);
 			}
 			scheduleLimit.put(sp, false);

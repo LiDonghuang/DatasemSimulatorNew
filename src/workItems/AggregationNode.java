@@ -13,7 +13,7 @@ public class AggregationNode extends WorkItemEntity{
 	private LinkedList<WorkItemEntity> subtasks = new LinkedList<WorkItemEntity>();
 	public boolean hasProcessModel = false;
 	private ProcessModel processModel;
-	private int currentProcessStage;
+	public int currentProcessStage;
 	public int currentAnalysisStage;
 	public int totalAnalysisStage;
 	
@@ -85,18 +85,18 @@ public class AggregationNode extends WorkItemEntity{
 	public void setSubtasks(LinkedList<WorkItemEntity> subtasks) {
 		this.subtasks = subtasks;
 	}
-	public void addSubTask(WorkItemEntity subTask) {
-		if (!this.getSubtasks().contains(subTask)) {
-			this.getSubtasks().add(subTask);
-			subTask.addUpperTask(this);
-		}
-	}
-	public void removeSubTask(WorkItemEntity subTask) {
-		if (this.getSubtasks().contains(subTask)) {
-			this.getSubtasks().remove(subTask);
-			subTask.removeUpperTask(this);
-		}
-	}
+//	public void addSubTask(WorkItemEntity subTask) {
+//		if (!this.getSubtasks().contains(subTask)) {
+//			this.getSubtasks().add(subTask);
+//			subTask.addUpperTask(this);
+//		}
+//	}
+//	public void removeSubTask(WorkItemEntity subTask) {
+//		if (this.getSubtasks().contains(subTask)) {
+//			this.getSubtasks().remove(subTask);
+//			subTask.removeUpperTask(this);
+//		}
+//	}
 	public double getProgress() {
 		double progress = 0;
 		for (WorkItemEntity subtask:this.getSubtasks()) {

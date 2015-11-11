@@ -1,25 +1,293 @@
-FATAL [Thread-8] 2015-11-03 21:58:35,086 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (595.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at datasemSimulator.SystemOfSystems$$FastClassByCGLIB$$50004f63.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
-	at datasemSimulator.SystemOfSystems.EndRunIndicators(SystemOfSystems.java:193)
-	at datasemSimulator.SystemOfSystems.EndRunCondition(SystemOfSystems.java:86)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 00:22:23,046 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
+INFO  [Thread-3] 2015-11-07 16:06:33,321 repast.simphony.batch.ssh.LocalSession - 0.1 0.5489999999999999
+INFO  [Thread-3] 2015-11-07 16:06:33,321 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,321 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:93 DevTask[Hierarchy:2]I02_2(2)(id:114) propagates rework to DevTask[Hierarchy:2]I02_1(2)(id:113) 
+INFO  [Thread-3] 2015-11-07 16:06:33,321 repast.simphony.batch.ssh.LocalSession - 0.1 0.504
+INFO  [Thread-3] 2015-11-07 16:06:33,321 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,321 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:94 DevTask[Hierarchy:2]E01_1(2)(id:40) propagates rework to DevTask[Hierarchy:2]E01_2(2)(id:41) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:96 DevTask[Hierarchy:2]I01_6(3)(id:126) propagates rework to DevTask[Hierarchy:2]I01_1(3)(id:121) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.252
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:97 DevTask[Hierarchy:2]E02_4(id:20) propagates rework to DevTask[Hierarchy:2]E02_5(id:21) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:97 DevTask[Hierarchy:2]E02_4(id:20) propagates rework to DevTask[Hierarchy:2]E02_6(id:22) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:97 DevTask[Hierarchy:2]I02_1(2)(id:113) propagates rework to DevTask[Hierarchy:2]I02_2(2)(id:114) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.579
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:98 DevTask[Hierarchy:2]E01_1(2)(id:40) propagates rework to DevTask[Hierarchy:2]E01_2(2)(id:41) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:98 DevTask[Hierarchy:2]E02_4(id:20) propagates rework to DevTask[Hierarchy:2]E02_6(id:22) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:106 DevTask[Hierarchy:2]I02_2(3)(id:136) propagates rework to DevTask[Hierarchy:2]I02_3(3)(id:137) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.006
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:107 DevTask[Hierarchy:2]I01_3(2)(id:101) propagates rework to DevTask[Hierarchy:2]I01_4(2)(id:102) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.378
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:115 DevTask[Hierarchy:2]I01_3(2)(id:101) propagates rework to DevTask[Hierarchy:2]I01_4(2)(id:102) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.378
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:115 DevTask[Hierarchy:2]I01_1(2)(id:99) propagates rework to DevTask[Hierarchy:2]I01_2(2)(id:100) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.372
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:118 DevTask[Hierarchy:2]I01_5(3)(id:125) propagates rework to DevTask[Hierarchy:2]I01_2(3)(id:122) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.22199999999999998
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:122 DevTask[Hierarchy:2]I02_1(id:91) propagates rework to DevTask[Hierarchy:2]I02_2(id:92) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.5309999999999999
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:124 DevTask[Hierarchy:2]I01_2(3)(id:122) propagates rework to DevTask[Hierarchy:2]I01_5(3)(id:125) 
+INFO  [Thread-3] 2015-11-07 16:06:33,322 repast.simphony.batch.ssh.LocalSession - 0.1 0.29100000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:125 DevTask[Hierarchy:2]I01_4(2)(id:102) propagates rework to DevTask[Hierarchy:2]I01_1(2)(id:99) 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 0.1 0.369
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:126 DevTask[Hierarchy:2]I02_6(id:96) propagates rework to DevTask[Hierarchy:2]I02_1(id:91) 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 0.1 0.237
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:128 DevTask[Hierarchy:2]I01_1(2)(id:99) propagates rework to DevTask[Hierarchy:2]I01_3(2)(id:101) 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 0.1 0.339
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:132 DevTask[Hierarchy:2]I02_2(id:92) propagates rework to DevTask[Hierarchy:2]I02_1(id:91) 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 0.1 0.14700000000000002
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:136 DevTask[Hierarchy:2]I01_2(id:78) propagates rework to DevTask[Hierarchy:2]I01_1(id:77) 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 0.1 0.183
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:141 DevTask[Hierarchy:2]I01_1(id:77) propagates rework to DevTask[Hierarchy:2]I01_5(id:81) 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 0.1 0.045
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,323 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:141 DevTask[Hierarchy:2]I02_5(2)(id:117) propagates rework to DevTask[Hierarchy:2]I02_2(2)(id:114) 
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - 0.1 0.132
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:142 DevTask[Hierarchy:2]I02_2(id:92) propagates rework to DevTask[Hierarchy:2]I02_3(id:93) 
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - 0.1 0.252
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:144 DevTask[Hierarchy:2]I02_3(2)(id:115) propagates rework to DevTask[Hierarchy:2]I02_1(2)(id:113) 
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - 0.1 0.378
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:147 DevTask[Hierarchy:2]I01_2(id:78) propagates rework to DevTask[Hierarchy:2]I01_1(id:77) 
+INFO  [Thread-3] 2015-11-07 16:06:33,324 repast.simphony.batch.ssh.LocalSession - 0.1 0.183
+INFO  [Thread-3] 2015-11-07 16:06:33,325 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,325 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:166 DevTask[Hierarchy:2]E03_1(3)(id:128) propagates rework to DevTask[Hierarchy:2]E03_2(3)(id:129) 
+INFO  [Thread-3] 2015-11-07 16:06:33,325 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,330 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,330 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:190 DevTask[Hierarchy:2]E03_1(2)(id:106) propagates rework to DevTask[Hierarchy:2]E03_2(2)(id:107) 
+INFO  [Thread-3] 2015-11-07 16:06:33,330 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,331 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,331 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:228 DevTask[Hierarchy:2]E03_4(id:87) propagates rework to DevTask[Hierarchy:2]E03_5(id:88) 
+INFO  [Thread-3] 2015-11-07 16:06:33,331 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,332 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,332 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED: All WIs Completed
+INFO  [Thread-3] 2015-11-07 16:06:33,332 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,332 repast.simphony.batch.ssh.LocalSession - EndTime: 236
+INFO  [Thread-3] 2015-11-07 16:06:33,332 repast.simphony.batch.ssh.LocalSession - Value Delivered: 25974.839172619046
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - NPV: 24236.56519019786
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - CountTasks: 111
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - TaskReworkCount:
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession -  total: 419.0 mean: 3.7747747747747735 stdev: 1.6770357218761953
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount:
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession -  total: 50.0 mean: 0.45045045045045057 stdev: 0.9413601256473985
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio:
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession -  mean: 0.5790332988136297 stdev: 0.2548194444107501
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - AgentsBottleNeckCount:
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession -  total: 192.0 mean: 21.333333333333332 stdev: 16.347782724271816
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - AgentsWorkloadInbalance: 1.3015843555006954
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - ----------------------------------------------------
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - REPLICATION #50
+INFO  [Thread-3] 2015-11-07 16:06:33,333 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,337 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,337 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:44 DevTask[Hierarchy:2]E02_1(id:17) propagates rework to DevTask[Hierarchy:2]E02_2(id:18) 
+INFO  [Thread-3] 2015-11-07 16:06:33,337 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,337 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,337 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:53 DevTask[Hierarchy:2]I02_4(id:94) propagates rework to DevTask[Hierarchy:2]I02_2(id:92) 
+INFO  [Thread-3] 2015-11-07 16:06:33,337 repast.simphony.batch.ssh.LocalSession - 0.1 0.306
+INFO  [Thread-3] 2015-11-07 16:06:33,338 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,338 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:61 DevTask[Hierarchy:2]I01_2(3)(id:122) propagates rework to DevTask[Hierarchy:2]I01_1(3)(id:121) 
+INFO  [Thread-3] 2015-11-07 16:06:33,338 repast.simphony.batch.ssh.LocalSession - 0.1 0.039
+INFO  [Thread-3] 2015-11-07 16:06:33,338 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,338 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:64 DevTask[Hierarchy:2]I01_3(3)(id:123) propagates rework to DevTask[Hierarchy:2]I01_1(3)(id:121) 
+INFO  [Thread-3] 2015-11-07 16:06:33,338 repast.simphony.batch.ssh.LocalSession - 0.1 0.42000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,338 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:64 DevTask[Hierarchy:2]I02_1(id:91) propagates rework to DevTask[Hierarchy:2]I02_3(id:93) 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 0.1 0.10500000000000001
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:65 DevTask[Hierarchy:2]I01_4(3)(id:124) propagates rework to DevTask[Hierarchy:2]I01_1(3)(id:121) 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 0.1 0.063
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:65 DevTask[Hierarchy:2]I01_4(3)(id:124) propagates rework to DevTask[Hierarchy:2]I01_2(3)(id:122) 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 0.1 0.17400000000000002
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:67 DevTask[Hierarchy:2]I02_1(id:91) propagates rework to DevTask[Hierarchy:2]I02_3(id:93) 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 0.1 0.10500000000000001
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:70 DevTask[Hierarchy:2]I02_6(2)(id:118) propagates rework to DevTask[Hierarchy:2]I02_1(2)(id:113) 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 0.1 0.399
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,339 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:74 DevTask[Hierarchy:2]I01_6(3)(id:126) propagates rework to DevTask[Hierarchy:2]I01_3(3)(id:123) 
+INFO  [Thread-3] 2015-11-07 16:06:33,340 repast.simphony.batch.ssh.LocalSession - 0.1 0.28500000000000003
+INFO  [Thread-3] 2015-11-07 16:06:33,340 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,340 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:74 DevTask[Hierarchy:2]I02_5(id:95) propagates rework to DevTask[Hierarchy:2]I02_2(id:92) 
+INFO  [Thread-3] 2015-11-07 16:06:33,340 repast.simphony.batch.ssh.LocalSession - 0.1 0.056999999999999995
+INFO  [Thread-3] 2015-11-07 16:06:33,340 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,340 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:76 DevTask[Hierarchy:2]I02_1(2)(id:113) propagates rework to DevTask[Hierarchy:2]I02_2(2)(id:114) 
+INFO  [Thread-3] 2015-11-07 16:06:33,340 repast.simphony.batch.ssh.LocalSession - 0.1 0.579
+INFO  [Thread-3] 2015-11-07 16:06:33,340 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,341 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:84 DevTask[Hierarchy:2]I02_2(id:92) propagates rework to DevTask[Hierarchy:2]I02_1(id:91) 
+INFO  [Thread-3] 2015-11-07 16:06:33,341 repast.simphony.batch.ssh.LocalSession - 0.1 0.14700000000000002
+INFO  [Thread-3] 2015-11-07 16:06:33,341 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,341 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:90 DevTask[Hierarchy:2]E02_4(2)(id:57) propagates rework to DevTask[Hierarchy:2]E02_6(2)(id:59) 
+INFO  [Thread-3] 2015-11-07 16:06:33,341 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,341 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,341 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:90 DevTask[Hierarchy:2]I01_6(2)(id:104) propagates rework to DevTask[Hierarchy:2]I01_1(2)(id:99) 
+INFO  [Thread-3] 2015-11-07 16:06:33,341 repast.simphony.batch.ssh.LocalSession - 0.1 0.315
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:91 DevTask[Hierarchy:2]E02_4(id:20) propagates rework to DevTask[Hierarchy:2]E02_5(id:21) 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:91 DevTask[Hierarchy:2]I02_4(2)(id:116) propagates rework to DevTask[Hierarchy:2]I02_2(2)(id:114) 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 0.1 0.20700000000000002
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:92 DevTask[Hierarchy:2]I01_2(2)(id:100) propagates rework to DevTask[Hierarchy:2]I01_3(2)(id:101) 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 0.1 0.015
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:95 DevTask[Hierarchy:2]E02_4(id:20) propagates rework to DevTask[Hierarchy:2]E02_6(id:22) 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:96 DevTask[Hierarchy:2]I02_4(2)(id:116) propagates rework to DevTask[Hierarchy:2]I02_1(2)(id:113) 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 0.1 0.342
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,342 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:99 DevTask[Hierarchy:2]I02_3(2)(id:115) propagates rework to DevTask[Hierarchy:2]I02_1(2)(id:113) 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 0.1 0.378
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:101 DevTask[Hierarchy:2]I01_5(2)(id:103) propagates rework to DevTask[Hierarchy:2]I01_2(2)(id:100) 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 0.1 0.546
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:102 DevTask[Hierarchy:2]E01_1(id:3) propagates rework to DevTask[Hierarchy:2]E01_2(id:4) 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:104 DevTask[Hierarchy:2]I01_4(2)(id:102) propagates rework to DevTask[Hierarchy:2]I01_2(2)(id:100) 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 0.1 0.372
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:104 DevTask[Hierarchy:2]I01_2(2)(id:100) propagates rework to DevTask[Hierarchy:2]I01_1(2)(id:99) 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 0.1 0.522
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,343 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:107 DevTask[Hierarchy:2]I01_3(2)(id:101) propagates rework to DevTask[Hierarchy:2]I01_4(2)(id:102) 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 0.1 0.378
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:110 DevTask[Hierarchy:2]I01_3(2)(id:101) propagates rework to DevTask[Hierarchy:2]I01_1(2)(id:99) 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 0.1 0.45599999999999996
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:112 DevTask[Hierarchy:2]I01_4(2)(id:102) propagates rework to DevTask[Hierarchy:2]I01_2(2)(id:100) 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 0.1 0.372
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:114 DevTask[Hierarchy:2]I02_4(3)(id:138) propagates rework to DevTask[Hierarchy:2]I02_2(3)(id:136) 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 0.1 0.29400000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:116 DevTask[Hierarchy:2]I01_2(2)(id:100) propagates rework to DevTask[Hierarchy:2]I01_3(2)(id:101) 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 0.1 0.015
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:117 DevTask[Hierarchy:2]I01_2(2)(id:100) propagates rework to DevTask[Hierarchy:2]I01_1(2)(id:99) 
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 0.1 0.522
+INFO  [Thread-3] 2015-11-07 16:06:33,344 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,345 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:119 DevTask[Hierarchy:2]I02_3(3)(id:137) propagates rework to DevTask[Hierarchy:2]I02_4(3)(id:138) 
+INFO  [Thread-3] 2015-11-07 16:06:33,345 repast.simphony.batch.ssh.LocalSession - 0.1 0.276
+INFO  [Thread-3] 2015-11-07 16:06:33,345 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,345 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:119 DevTask[Hierarchy:2]I01_6(id:82) propagates rework to DevTask[Hierarchy:2]I01_1(id:77) 
+INFO  [Thread-3] 2015-11-07 16:06:33,345 repast.simphony.batch.ssh.LocalSession - 0.1 0.23399999999999999
+INFO  [Thread-3] 2015-11-07 16:06:33,353 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,353 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:127 DevTask[Hierarchy:2]I02_4(3)(id:138) propagates rework to DevTask[Hierarchy:2]I02_2(3)(id:136) 
+INFO  [Thread-3] 2015-11-07 16:06:33,353 repast.simphony.batch.ssh.LocalSession - 0.1 0.29400000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,353 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,353 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:127 DevTask[Hierarchy:2]I01_3(id:79) propagates rework to DevTask[Hierarchy:2]I01_1(id:77) 
+INFO  [Thread-3] 2015-11-07 16:06:33,353 repast.simphony.batch.ssh.LocalSession - 0.1 0.5700000000000001
+INFO  [Thread-3] 2015-11-07 16:06:33,353 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:131 DevTask[Hierarchy:2]I01_4(id:80) propagates rework to DevTask[Hierarchy:2]I01_1(id:77) 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 0.1 0.237
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:132 DevTask[Hierarchy:2]I01_6(id:82) propagates rework to DevTask[Hierarchy:2]I01_1(id:77) 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 0.1 0.23399999999999999
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:133 DevTask[Hierarchy:2]I02_3(3)(id:137) propagates rework to DevTask[Hierarchy:2]I02_4(3)(id:138) 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 0.1 0.276
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:137 DevTask[Hierarchy:2]I01_3(id:79) propagates rework to DevTask[Hierarchy:2]I01_1(id:77) 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 0.1 0.5700000000000001
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:138 DevTask[Hierarchy:2]I02_5(3)(id:139) propagates rework to DevTask[Hierarchy:2]I02_2(3)(id:136) 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 0.1 0.066
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:138 DevTask[Hierarchy:2]I01_5(id:81) propagates rework to DevTask[Hierarchy:2]I01_2(id:78) 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 0.1 0.492
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:143 DevTask[Hierarchy:2]E01_4(id:6) propagates rework to DevTask[Hierarchy:2]E01_5(id:7) 
+INFO  [Thread-3] 2015-11-07 16:06:33,354 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:144 DevTask[Hierarchy:2]I01_1(id:77) propagates rework to DevTask[Hierarchy:2]I01_3(id:79) 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 0.1 0.402
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:148 DevTask[Hierarchy:2]I01_1(id:77) propagates rework to DevTask[Hierarchy:2]I01_2(id:78) 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 0.1 0.21599999999999997
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:148 DevTask[Hierarchy:2]I01_3(id:79) propagates rework to DevTask[Hierarchy:2]I01_4(id:80) 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 0.1 0.042
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:150 DevTask[Hierarchy:2]I01_2(id:78) propagates rework to DevTask[Hierarchy:2]I01_1(id:77) 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 0.1 0.183
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:163 DevTask[Hierarchy:2]E03_1(3)(id:128) propagates rework to DevTask[Hierarchy:2]E03_2(3)(id:129) 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:174 DevTask[Hierarchy:2]E03_1(2)(id:106) propagates rework to DevTask[Hierarchy:2]E03_2(2)(id:107) 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:199 DevTask[Hierarchy:2]E03_4(3)(id:131) propagates rework to DevTask[Hierarchy:2]E03_5(3)(id:132) 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - CHANGE PROPAGATION @TIME:208 DevTask[Hierarchy:2]E03_1(id:84) propagates rework to DevTask[Hierarchy:2]E03_2(id:85) 
+INFO  [Thread-3] 2015-11-07 16:06:33,355 repast.simphony.batch.ssh.LocalSession - 0.1 0.30000000000000004
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - SIMULATION ENDED: All WIs Completed
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - EndTime: 245
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - Value Delivered: 25922.61575
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - NPV: 24271.383372060274
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - CountTasks: 111
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - TaskReworkCount:
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession -  total: 413.0 mean: 3.720720720720721 stdev: 1.931420443711036
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - ChangePropagationCount:
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession -  total: 50.0 mean: 0.45045045045045057 stdev: 0.9792273274812944
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - CycleTimeToEffortsRatio:
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession -  mean: 0.603850693498915 stdev: 0.2541027351434891
+INFO  [Thread-3] 2015-11-07 16:06:33,419 repast.simphony.batch.ssh.LocalSession - AgentsBottleNeckCount:
+INFO  [Thread-3] 2015-11-07 16:06:33,420 repast.simphony.batch.ssh.LocalSession -  total: 179.0 mean: 19.88888888888889 stdev: 15.136416719656971
+INFO  [Thread-3] 2015-11-07 16:06:33,420 repast.simphony.batch.ssh.LocalSession - AgentsWorkloadInbalance: 1.356204049069131
+INFO  [Thread-3] 2015-11-07 16:06:33,420 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,420 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,420 repast.simphony.batch.ssh.LocalSession - 
+INFO  [Thread-3] 2015-11-07 16:06:33,420 repast.simphony.batch.ssh.LocalSession - ----------------------------------------------------
+INFO  [pool-2-thread-1] 2015-11-07 16:07:13,562 repast.simphony.batch.ssh.LocalDonePoller - Polled C:\TEMP\simphony_model_1446933968628 for DONE:  yes
+INFO  [SwingWorker-pool-1-thread-1] 2015-11-07 16:07:13,562 repast.simphony.batch.ssh.SessionsDriver - Run Time: 1.0186
+INFO  [SwingWorker-pool-1-thread-1] 2015-11-07 16:07:13,578 repast.simphony.batch.ssh.LocalSession - Finding output on localhost in C:\TEMP\simphony_model_1446933968628
+WARN  [SwingWorker-pool-1-thread-1] 2015-11-07 16:07:13,588 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\dzl0023\\Desktop\\DatasemFiles\\SimulationOutput\\SOS_data*.batch_param_map.txt in C:\TEMP\simphony_model_1446933968628\instance_1
+WARN  [SwingWorker-pool-1-thread-1] 2015-11-07 16:07:13,588 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\dzl0023\\Desktop\\DatasemFiles\\SimulationOutput\\SP_data*.batch_param_map.txt in C:\TEMP\simphony_model_1446933968628\instance_1
+WARN  [SwingWorker-pool-1-thread-1] 2015-11-07 16:07:13,588 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\dzl0023\\Desktop\\DatasemFiles\\SimulationOutput\\SOS_data*.txt in C:\TEMP\simphony_model_1446933968628\instance_1
+WARN  [SwingWorker-pool-1-thread-1] 2015-11-07 16:07:13,588 repast.simphony.batch.ssh.OutputFinder - No model output found matching glob:{**\\,}C:\\Users\\dzl0023\\Desktop\\DatasemFiles\\SimulationOutput\\SP_data*.txt in C:\TEMP\simphony_model_1446933968628\instance_1
+INFO  [SwingWorker-pool-1-thread-1] 2015-11-07 16:07:13,588 repast.simphony.batch.ssh.SessionsDriver - Aggregating output into C:/Users/dzl0023/git/DatasemSimulatorNew/output
+FATAL [Thread-8] 2015-11-10 21:33:17,482 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (31.0)
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
 	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
@@ -36,13 +304,13 @@ Caused by: java.lang.reflect.InvocationTargetException
 	... 7 more
 Caused by: org.eclipse.emf.common.util.BasicEList$BasicIndexOutOfBoundsException: index=1, size=1
 	at org.eclipse.emf.common.util.BasicEList.get(BasicEList.java:346)
-	at workItems.AnalysisActivity.<init>(AnalysisActivity.java:35)
-	at serviceProviders.ServiceProviderAgent.analyzeAggregationNode(ServiceProviderAgent.java:140)
-	at serviceProviders.ServiceProviderAgent.acceptWI(ServiceProviderAgent.java:211)
-	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:130)
-	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:101)
+	at workItems.AnalysisActivity.<init>(AnalysisActivity.java:25)
+	at serviceProviders.ServiceProviderAgent.analyzeAggregationNode(ServiceProviderAgent.java:145)
+	at serviceProviders.ServiceProviderAgent.acceptWI(ServiceProviderAgent.java:269)
+	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:99)
+	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
 	... 10 more
-FATAL [Thread-8] 2015-11-04 00:32:41,877 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+FATAL [Thread-8] 2015-11-11 02:03:49,318 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
 Current tick (30.0)
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
@@ -58,398 +326,11 @@ Caused by: java.lang.reflect.InvocationTargetException
 	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
 	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
 	... 7 more
-Caused by: org.eclipse.emf.common.util.BasicEList$BasicIndexOutOfBoundsException: index=1, size=1
-	at org.eclipse.emf.common.util.BasicEList.get(BasicEList.java:346)
-	at contractNetProtocol.AbstractAgentBehavior.CheckWIsCompletion(AbstractAgentBehavior.java:230)
-	at serviceProviders.ServiceProviderAgent.step_6(ServiceProviderAgent.java:121)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 10:00:28,387 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (31.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at governanceModels.WIAssignmentRule.applyRule(WIAssignmentRule.java:56)
-	at governanceModels.AgentStrategy.applyContractorSelection(AgentStrategy.java:81)
-	at contractNetProtocol.AbstractAgentBehavior.MakeAssignments(AbstractAgentBehavior.java:128)
-	at serviceProviders.ServiceProviderAgent.step_2(ServiceProviderAgent.java:108)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 10:02:51,493 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (31.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at governanceModels.WIAssignmentRule.applyRule(WIAssignmentRule.java:59)
-	at governanceModels.AgentStrategy.applyContractorSelection(AgentStrategy.java:81)
-	at contractNetProtocol.AbstractAgentBehavior.MakeAssignments(AbstractAgentBehavior.java:128)
-	at serviceProviders.ServiceProviderAgent.step_2(ServiceProviderAgent.java:108)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 10:08:34,007 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (63.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.util.ConcurrentModificationException
-	at java.util.LinkedList$ListItr.checkForComodification(LinkedList.java:966)
-	at java.util.LinkedList$ListItr.next(LinkedList.java:888)
-	at governanceModels.WIAssignmentRule.applyRule(WIAssignmentRule.java:59)
-	at governanceModels.AgentStrategy.applyContractorSelection(AgentStrategy.java:81)
-	at contractNetProtocol.AbstractAgentBehavior.MakeAssignments(AbstractAgentBehavior.java:128)
-	at serviceProviders.ServiceProviderAgent.step_2(ServiceProviderAgent.java:108)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 10:13:20,038 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (63.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.util.ConcurrentModificationException
-	at java.util.LinkedList$ListItr.checkForComodification(LinkedList.java:966)
-	at java.util.LinkedList$ListItr.next(LinkedList.java:888)
-	at governanceModels.WIAssignmentRule.applyRule(WIAssignmentRule.java:59)
-	at governanceModels.AgentStrategy.applyContractorSelection(AgentStrategy.java:81)
-	at contractNetProtocol.AbstractAgentBehavior.MakeAssignments(AbstractAgentBehavior.java:128)
-	at serviceProviders.ServiceProviderAgent.step_2(ServiceProviderAgent.java:108)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 10:37:20,091 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (119.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:174)
-	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:95)
-	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 10:38:38,193 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (203.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:175)
-	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:95)
-	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 10:44:41,462 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (109.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.ClassCastException: workItems.ResolutionActivity cannot be cast to workItems.AggregationNode
-	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:182)
-	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:95)
-	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 10:52:37,892 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (134.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.ClassCastException: workItems.ResolutionActivity cannot be cast to workItems.AggregationNode
-	at serviceProviders.ServiceProviderAgent.acceptanceDecision(ServiceProviderAgent.java:182)
-	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:95)
-	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 12:05:57,192 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:104)
-	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 12:16:22,808 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (31.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: org.eclipse.emf.common.util.BasicEList$BasicIndexOutOfBoundsException: index=1, size=1
-	at org.eclipse.emf.common.util.BasicEList.get(BasicEList.java:346)
-	at workItems.AnalysisActivity.<init>(AnalysisActivity.java:25)
-	at serviceProviders.ServiceProviderAgent.analyzeAggregationNode(ServiceProviderAgent.java:145)
-	at serviceProviders.ServiceProviderAgent.acceptWI(ServiceProviderAgent.java:263)
-	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:100)
-	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
-	... 10 more
-FATAL [Thread-8] 2015-11-04 12:19:51,381 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (31.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: org.eclipse.emf.common.util.BasicEList$BasicIndexOutOfBoundsException: index=1, size=1
-	at org.eclipse.emf.common.util.BasicEList.get(BasicEList.java:346)
-	at workItems.AnalysisActivity.<init>(AnalysisActivity.java:25)
-	at serviceProviders.ServiceProviderAgent.analyzeAggregationNode(ServiceProviderAgent.java:145)
-	at serviceProviders.ServiceProviderAgent.acceptWI(ServiceProviderAgent.java:263)
-	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:100)
-	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
-	... 10 more
-ERROR [AWT-EventQueue-0] 2015-11-04 21:47:49,572 repast.simphony.ui.RSApplication - Error while initializing simulation
-java.lang.ClassCastException: workItems.DevTask cannot be cast to workItems.AggregationNode
-	at datasemSimulator.SimulationContextBuilder.ContextImplementation(SimulationContextBuilder.java:133)
-	at datasemSimulator.DatasemSimulatorModel.build(DatasemSimulatorModel.java:19)
-	at repast.simphony.dataLoader.engine.ClassNameContextBuilder.build(ClassNameContextBuilder.java:41)
-	at repast.simphony.dataLoader.engine.DataLoaderControllerAction.runInitialize(DataLoaderControllerAction.java:48)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:214)
-	at repast.simphony.engine.controller.DefaultController$2.visit(DefaultController.java:1)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:292)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraverals(NaryTree.java:295)
-	at repast.simphony.util.collections.NaryTree.preOrderTraversal(NaryTree.java:288)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:212)
-	at repast.simphony.engine.controller.DefaultController.runInitialize(DefaultController.java:383)
-	at repast.simphony.ui.RSApplication.initSim(RSApplication.java:157)
-	at repast.simphony.ui.RSApplication.start(RSApplication.java:189)
-	at repast.simphony.ui.action.StartRun.actionPerformed(StartRun.java:17)
-	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
-	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
-	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
-	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
-	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
-	at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:289)
-	at java.awt.Component.processMouseEvent(Component.java:6535)
-	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
-	at java.awt.Component.processEvent(Component.java:6300)
-	at java.awt.Container.processEvent(Container.java:2236)
-	at java.awt.Component.dispatchEventImpl(Component.java:4891)
-	at java.awt.Container.dispatchEventImpl(Container.java:2294)
-	at java.awt.Component.dispatchEvent(Component.java:4713)
-	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4888)
-	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4525)
-	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4466)
-	at java.awt.Container.dispatchEventImpl(Container.java:2280)
-	at java.awt.Window.dispatchEventImpl(Window.java:2750)
-	at java.awt.Component.dispatchEvent(Component.java:4713)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
-	at java.awt.EventQueue$4.run(EventQueue.java:731)
-	at java.awt.EventQueue$4.run(EventQueue.java:729)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:76)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
-FATAL [Thread-8] 2015-11-05 00:08:25,820 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (10.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at visualization.Visualization$$FastClassByCGLIB$$95f8c5ba.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at workItems.AggregationNode.getProcessStage(AggregationNode.java:74)
-	at workItems.AggregationNode.getCurrentProcessStage(AggregationNode.java:77)
-	at kanbanBoard.KanbanBoard.updateElements(KanbanBoard.java:55)
-	at visualization.Visualization.updateKanbanBoard(Visualization.java:247)
-	at visualization.Visualization.step(Visualization.java:91)
-	... 10 more
-FATAL [Thread-8] 2015-11-05 02:19:54,139 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (0.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at visualization.Visualization$$FastClassByCGLIB$$95f8c5ba.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at workItems.AggregationNode.getProcessStage(AggregationNode.java:74)
-	at workItems.AggregationNode.getCurrentProcessStage(AggregationNode.java:78)
-	at kanbanBoard.KanbanBoard.updateElements(KanbanBoard.java:55)
-	at visualization.Visualization.updateKanbanBoard(Visualization.java:247)
-	at visualization.Visualization.step(Visualization.java:91)
-	... 10 more
-FATAL [Thread-8] 2015-11-05 12:00:24,422 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (1.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at workItems.AnalysisActivity.<init>(AnalysisActivity.java:15)
-	at serviceProviders.ServiceProviderAgent.analyzeAggregationNode(ServiceProviderAgent.java:145)
-	at serviceProviders.ServiceProviderAgent.acceptWI(ServiceProviderAgent.java:269)
-	at contractNetProtocol.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:99)
-	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:106)
-	... 10 more
-FATAL [Thread-8] 2015-11-05 12:14:46,572 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
-Current tick (0.0)
-java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
-	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
-	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
-	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
-	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
-	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
-	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.lang.reflect.InvocationTargetException
-	at visualization.Visualization$$FastClassByCGLIB$$95f8c5ba.invoke(<generated>)
-	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
-	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
-	... 7 more
-Caused by: java.lang.NullPointerException
-	at workItems.AggregationNode.getProcessStage(AggregationNode.java:74)
-	at workItems.AggregationNode.getCurrentProcessStage(AggregationNode.java:77)
-	at kanbanBoard.KanbanBoard.updateElements(KanbanBoard.java:55)
-	at visualization.Visualization.updateKanbanBoard(Visualization.java:247)
-	at visualization.Visualization.step(Visualization.java:91)
+Caused by: java.lang.Error: Unresolved compilation problem: 
+	Syntax error on token "+", ++ expected
+
+	at contractNetProtocol.ValueFunction.algorithmDerivedValue(ValueFunction.java:55)
+	at contractNetProtocol.ValueFunction.developValue(ValueFunction.java:49)
+	at contractNetProtocol.AbstractAgentBehavior.CheckWIsCompletion(AbstractAgentBehavior.java:231)
+	at serviceProviders.ServiceProviderAgent.step_6(ServiceProviderAgent.java:122)
 	... 10 more

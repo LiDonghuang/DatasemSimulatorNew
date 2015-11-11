@@ -61,7 +61,7 @@ public class SimulationContextBuilder {
 	}
 	public void ContextImplementation(Context<Object> context) {
 		parameters = RunEnvironment.getInstance().getParameters();
-		SystemOfSystems mySoS = BuildSoS();	
+		SystemOfSystems mySoS = BuildSoS(context);	
 		context.setId("DatasemSimulator");		
 		context.add(mySoS);
 		
@@ -112,6 +112,10 @@ public class SimulationContextBuilder {
 		WaterfallModel.addStage(3,"Implementation");
 		WaterfallModel.addStage(4,"Verification");
 		WaterfallModel.addStage(5,"Maintenance");
+		//
+		ProcessModel MyProcess = new ProcessModel("My\nProcess");
+		WaterfallModel.addStage(1,"Analysis");
+		WaterfallModel.addStage(2,"Development");
 		// ValueFunction
 		Mechanism valueMechanism1 = ObjectsModelFactory.eINSTANCE.createMechanism();
 		valueMechanism1.setName("ValueFunction");valueMechanism1.setValue("Derived");
@@ -124,29 +128,38 @@ public class SimulationContextBuilder {
 		Mechanism valueMechanism2 = ObjectsModelFactory.eINSTANCE.createMechanism();
 		valueMechanism2.setName("ValueFunction");valueMechanism2.setValue("Fiat");
 		
-		mySoS.myValueFunction = new ValueFunction(valueMechanism1);
-		
 		// Initial Assignment
+		int x = 0;
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
 			if ((wi.hierarchy==0 )) {	
 				wi.SoS.initialList.put(wi.getId(), wi);
-				context.add(wi);
-				wi.SoS.arrivedList.put(wi.getId(), wi);
-				wi.isActivated = true;
-				wi.activatedTime = 1;
-				mySoS.myServiceProviderAgents.get(1).getRequestedQ().add(wi);
-				// temp
-				wi.setRequester(mySoS.myServiceProviderAgents.get(1));
-				wi.setAssignedAgent(mySoS.myServiceProviderAgents.get(1));
-				//
+				wi.arrivalTime = 1 + x;
+				x += 200;
 			}
 			// Process Model
 			String typeName = wi.getType().getName();
-			if ((typeName.matches("SoSCap"))||(typeName.matches("SysFuncCap"))||(typeName.matches("SysOperCap"))) {
-				((AggregationNode)wi).setProcessModel(CEProcessModel);
+			if (this.ModelBuilder.matches("DevelopmentOrganizationModel")) {
+				if ((typeName.matches("Inc_Cap"))||(typeName.matches("New_Cap"))) {
+					((AggregationNode)wi).setProcessModel(WaterfallModel);
+				}
 			}
-			if ((typeName.matches("Inc_Cap"))||(typeName.matches("New_Cap"))) {
-				((AggregationNode)wi).setProcessModel(WaterfallModel);
+			else if (this.ModelBuilder.matches("ThreeProgrammersThreeTasksModel")) {
+				if (typeName.matches("Requirement")) {
+					((AggregationNode)wi).setProcessModel(MyProcess);
+				}
+			}
+			else if (this.ModelBuilder.matches("AerospaceAndDefenceProjects")) {
+				if (typeName.matches("SoSCap")) {
+					((AggregationNode)wi).setProcessModel(CEProcessModel);
+				}
+				else if ((typeName.matches("SysFuncCap"))||(typeName.matches("SysOperCap"))) {
+					((AggregationNode)wi).setProcessModel(CEProcessModel);
+				}
+			}
+			else {
+				if (wi.isAggregationNode) {
+					((AggregationNode)wi).setProcessModel(MyProcess);
+				}
 			}
 			if (wi.getType().getName().matches("SubSysReq")) {
 				wi.isAggregationNode = true;
@@ -170,12 +183,15 @@ public class SimulationContextBuilder {
 						int currentId = mySoS.getWICount();
 						int st_id = currentId+1;
 						mySoS.increaseWICount();
+						
 						new DevTask((AggregationNode)wi, st_id, name, serviceId, efforts);
 					}
 				}
 			}
-		}		
+		}	
+		
 		// Derive Impacts DSM
+		double ChangePropagationFactor = (Double)mySoS.parameters.getValue("ChangePropagationFactor");
 		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
 			if (wi1.getType().getName().matches("SubSysReq")) {
 				for (WorkItemEntity wi2 : wi1.getImpactsWIs()) {
@@ -186,8 +202,8 @@ public class SimulationContextBuilder {
 							int t =(int) ( Math.random()* ((AggregationNode)wi2).getSubtasks().size() );
 							WorkItemEntity wi2s = ((AggregationNode)wi2).getSubtasks().get(t);
 							wi1s.getImpactsWIs().add(wi2s);
-							wi1s.getImpactsLikelihood().put(wi2s, 0.5);
-							wi1s.getImpactsRisk().put(wi2s, Math.min(1, 2*risk));
+							wi1s.getImpactsLikelihood().put(wi2s, ChangePropagationFactor*0.5);
+							wi1s.getImpactsRisk().put(wi2s, Math.min(1,risk));
 							//System.out.println("Impacts DSM: from "+wi1s.getName()+" to "+wi2s.getName());
 						}
 					}
@@ -202,6 +218,7 @@ public class SimulationContextBuilder {
 			mySoS.WINLevels = 3;
 			mySoS.WINComplexity = 3;
 			mySoS.WINSize = 10;
+			mySoS.myValueFunction = new ValueFunction(valueMechanism1);
 		}
 		else if (this.ModelBuilder.matches("ThreeProgrammersThreeTasksModel")) {
 			mySoS.OrgLevels = 2;
@@ -209,6 +226,7 @@ public class SimulationContextBuilder {
 			mySoS.WINLevels = 2;
 			mySoS.WINComplexity = 4;
 			mySoS.WINSize = 3;
+			mySoS.myValueFunction = new ValueFunction(valueMechanism2);
 		}
 		else if (this.ModelBuilder.matches("AerospaceAndDefenceProjects")) {
 			mySoS.OrgLevels = 3;
@@ -216,9 +234,10 @@ public class SimulationContextBuilder {
 			mySoS.WINLevels = 4;
 			mySoS.WINComplexity = 4;
 			mySoS.WINSize = 2;
+			mySoS.myValueFunction = new ValueFunction(valueMechanism1);
 		}
 		if (VisualizationOn && (numReplications==1)) {
-			System.out.print("initializing visualization...\n");
+			System.out.print("\ninitializing visualization...\n");
 			new Visualization(context,mySoS);
 			mySoS.printSoSInformation();		
 		}
@@ -239,6 +258,7 @@ public class SimulationContextBuilder {
 			Node modelNode = scenario.getElementsByTagName("ExperimentModel").item(0);
 			Element modelElement = (Element)modelNode;
 			this.ModelBuilder = modelElement.getAttribute("name");
+			System.out.println("Model Builder: "+this.ModelBuilder);
 			//
 			Node serviceProviderTypesNode = scenario.getElementsByTagName("ServiceProviderTypes").item(0);
 			Element ServiceProviderTypesElement = (Element)serviceProviderTypesNode;
@@ -529,9 +549,9 @@ public class SimulationContextBuilder {
 			}
 		}
 	}
-	public SystemOfSystems BuildSoS() {
+	public SystemOfSystems BuildSoS(Context<Object> context) {
 		
-		SystemOfSystems mySoS = new SystemOfSystems();
+		SystemOfSystems mySoS = new SystemOfSystems(context);
 
 		mySoS.parameters = this.parameters;
 		
@@ -540,12 +560,17 @@ public class SimulationContextBuilder {
 		double ReworkRisk = (Double)mySoS.parameters.getValue("ReworkRisk");
 		double ChangePropagationFactor = (Double)mySoS.parameters.getValue("ChangePropagationFactor");
 		double ROR = (Double)mySoS.parameters.getValue("ROR");
+		double VolatilityLevel = (double)(Integer)mySoS.parameters.getValue("Volatility");
 		
+		mySoS.TaskMaturityLevels = TaskMaturityLevels;
+		mySoS.TaskUncertainty = TaskUncertainty*(VolatilityLevel);
+		mySoS.ReworkRisk = ReworkRisk*(VolatilityLevel);
 		mySoS.ROR = ROR;
 		mySoS.myServices = myServices;
 		mySoS.myServiceProviderTypes = myServiceProviderTypes;
 		mySoS.myWorkItemTypes = myWorkItemTypes;
-				
+		
+		
 		for (Asset r: myResources.values()) {
 			int id = r.getId();
 			ResourceEntity res = new ResourceEntity(r);
@@ -590,7 +615,7 @@ public class SimulationContextBuilder {
 			entity.maxMaturityLevels = TaskMaturityLevels;
 			entity.uncertainty = TaskUncertainty;
 			entity.risk = ReworkRisk;
-			System.out.println(TaskMaturityLevels);System.out.println(TaskUncertainty);System.out.println(ReworkRisk);
+			//System.out.println(TaskMaturityLevels);System.out.println(TaskUncertainty);System.out.println(ReworkRisk);
 			mySoS.myWorkItemEntities.put(id, entity);
 			mySoS.increaseWICount();
 		}
@@ -599,9 +624,7 @@ public class SimulationContextBuilder {
 			WorkItem wi = myWorkItems.get(id);
 			if (wi.isIsAggregationNode()) {
 				for (WorkItem st: wi.getSbTasks()) {
-					int st_id = st.getId();
 					((AggregationNode)entity).getSubtasks().add(mySoS.myWorkItemEntities.get(st.getId()));
-					mySoS.myWorkItemEntities.get(st_id).getUppertasks().add((AggregationNode)entity);
 				}
 			}
 			if (wi.isHasPredecessors()) {
@@ -618,8 +641,8 @@ public class SimulationContextBuilder {
 					double risk = myImpact.getRisk();
 					WorkItemEntity impactEntity = mySoS.myWorkItemEntities.get(impactWI_id);
 					entity.getImpactsWIs().add(impactEntity);
-					entity.getImpactsRisk().put(impactEntity, risk*ChangePropagationFactor);
-					entity.getImpactsLikelihood().put(impactEntity, likelihood);
+					entity.getImpactsRisk().put(impactEntity, risk*(VolatilityLevel));
+					entity.getImpactsLikelihood().put(impactEntity, ChangePropagationFactor*likelihood);
 				}
 			}
 		}

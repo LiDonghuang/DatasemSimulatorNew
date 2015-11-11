@@ -44,9 +44,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	public AgentStrategy myStrategy;
 	private LinkedList<ResourceEntity> myResourceEntities = new LinkedList<ResourceEntity>();
 	public LinkedList<ServiceProviderAgent> assignWITo = new LinkedList<ServiceProviderAgent>();
-	public LinkedList<ServiceProviderAgent> borrowResourceFrom = new LinkedList<ServiceProviderAgent>();
-	public int WIPLimit = Integer.MAX_VALUE;
-	public int BacklogLimit = Integer.MAX_VALUE;		
+	public LinkedList<ServiceProviderAgent> borrowResourceFrom = new LinkedList<ServiceProviderAgent>();		
 	private LinkedList<WorkItemEntity> requestedQ = new LinkedList<WorkItemEntity>();
 	private LinkedList<WorkItemEntity> assignmentQ = new LinkedList<WorkItemEntity>();	
 	private LinkedList<Task> backlogQ = new LinkedList<Task>();
@@ -97,8 +95,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		this.hierarchy = ServiceProvider.getType().getHierarchy();
 		this.myStrategy = new AgentStrategy(ServiceProvider.getGovernanceStrategy());
 		this.myBehavior = new AbstractAgentBehavior();this.myBehavior.setAgent(this);
-		this.BacklogLimit = 20;
-		this.WIPLimit = 10;
 	}
 	
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-1)
@@ -168,86 +164,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		devTask.getRequester().requestedQ.add(resolutionActivity);
 
 	}
-	public String acceptanceDecision(WorkItemEntity requestedWI) {
-		String decision = "Decline";
-		
-		if (requestedWI.isAggregationNode) {
-			double capacity = ((AggregationNode)requestedWI).calculateServiceCapacity(this);	
-			if (capacity>0) {
-				decision = "Accept";
-				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
-			}
-			else {
-				double exCapacity = ((AggregationNode)requestedWI).calculateExtendedServiceCapacity(this);	
-				if (exCapacity>0) {
-					decision = "Outsource";
-				}
-				else {
-					if (requestedWI.getRequester().id == this.id) {
-						decision = "RequestHelp";
-					}
-					else {
-						decision = "Decline";
-					}
-				}
-			}
-		}
-		else if (requestedWI.isResolutionActivity) {
-			double capacity = ((Task)requestedWI).calculateServiceCapacity(this);	
-			if (capacity>0) {
-				decision = "Accept";
-				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
-			}
-			else {
-				double exCapacity = ((Task)requestedWI).calculateExtendedServiceCapacity(this);	
-				if (exCapacity>0) {
-					decision = "Outsource";
-				}
-				else {
-					decision = "RequestHelp";
-				}
-			}
-		}
-		else {
-			if (requestedWI.getRequester().id == this.id) {
-				double capacity = ((Task)requestedWI).calculateServiceCapacity(this);
-				if (capacity>0) {
-					decision = "Accept";
-					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
-				}
-				else {
-					double exCapacity = ((Task)requestedWI).calculateExtendedServiceCapacity(this);	
-					if (exCapacity>0) {
-						decision = "Outsource";
-					}
-					else {
-						decision = "RequestHelp";
-					}
-				}
-			}
-			else if (backlogQ.size()>=BacklogLimit) {
-					decision = "Decline";
-				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to BacklogLimit");		
-			}
-			else {
-				double capacity = ((Task)requestedWI).calculateServiceCapacity(this);
-				if (capacity>0) {
-					decision = "Accept";
-					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
-				}
-				else {
-					double exCapacity = ((Task)requestedWI).calculateExtendedServiceCapacity(this);	
-					if (exCapacity>0) {
-						decision = "Outsource";
-					}
-					else {
-						decision = "Decline";
-					}
-				}
-			}
-		}
-		return decision;
-	}	
+
 	public void requestService(WorkItemEntity newWI, ServiceProviderAgent requestToSP) {
 		requestToSP.requestedQ.add(newWI);		
 		newWI.setRequester(this);
@@ -276,23 +193,24 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		@SuppressWarnings("unchecked")
 		Context<Object> context = ContextUtils.getContext(this);	
 		//-
-		for (WorkItemEntity subtask: wi.getSubtasks()) {				
+		for (WorkItemEntity subtask: wi.getSubtasks()) {	
+			subtask.getUppertasks().add(wi);
 			if (!subtask.isActivated) {
-				subtask.setActivated();				
+				subtask.setActivated();			
+				context.add(subtask);
+				SoS.arrivedList.put(subtask.getId(),subtask);
+				subtask.setRequester(wi.getRequester());
+				this.requestedQ.add(subtask);
 //					for (WorkItemEntity predecessor : wi.predecessors){
 //						for (WorkItemEntity predecessorSub : predecessor.subtasks) {
 //							subtask.addPredecessorTask(predecessorSub);
 //						}
-//					}					
-				context.add(subtask);
-				SoS.arrivedList.put(subtask.getId(), subtask);
-				subtask.setRequester(wi.getRequester());
-				this.requestedQ.add(subtask);
-				//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");			
+//					}		
 			}
 			else {
 				//System.out.println(wi.fullName+"'s subtask"+subtask.fullName+"already activated");	
 			}
+			//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");			
 		}
 	}
 	

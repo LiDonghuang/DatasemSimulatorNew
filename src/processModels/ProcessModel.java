@@ -32,7 +32,7 @@ public class ProcessModel {
 			}
 			else {
 				double x = aggr.getProgress();
-				x = Math.pow(x, 0.5);
+				x = Math.pow(x, 0.7);
 				x = x*(maxStages-2);
 				x = Math.floor(x)+1;
 				if (x >= maxStages-2) {

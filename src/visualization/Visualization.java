@@ -48,7 +48,7 @@ public class Visualization {
 		GridFactory gridFactory = GridFactoryFinder.createGridFactory(null);	
 		SoS = mySoS;
 		grid2Dsize[0]=(SoS.OrgLevels+1)*15; grid2Dsize[1]=SoS.OrgLevels*SoS.OrgComplexity*5+10;
-		gridWINsize[0]=(int)(SoS.WINSize*Math.pow(SoS.WINComplexity-1, SoS.WINLevels)+20); gridWINsize[1]=SoS.WINLevels*10+20; 
+		gridWINsize[0]=(int)(SoS.WINSize*Math.pow(SoS.WINComplexity-1, SoS.WINLevels)+100); gridWINsize[1]=SoS.WINLevels*10+50; 
 		System.out.println("2D Graph: "+grid2Dsize[0]+" x "+grid2Dsize[1]);
 		System.out.println("WIN Graph: "+gridWINsize[0]+" x "+gridWINsize[1]);
 
@@ -126,18 +126,20 @@ public class Visualization {
 				if (wItem.isAggregationNode) {
 					int s1=0;int s2=0;
 					for (int i=0;i<((AggregationNode)wItem).getSubtasks().size();i++) {
-						WorkItemEntity wItemsTask = ((AggregationNode)wItem).getSubtasks().get(i);					
+						WorkItemEntity wItemsTask = ((AggregationNode)wItem).getSubtasks().get(i);						
 						if ( SoS.arrivedList.containsKey(wItemsTask.getId()) ){
 							if (wItemsTask.hierarchy==(SoS.WINLevels-1)) {								
 								wItemsTask.icon.location[0] = wItem.icon.location[0]+s1*2;
 								wItemsTask.icon.location[1] = wItem.icon.location[1]-s2*2-2;
 								gridWIN.moveTo(wItemsTask, wItemsTask.icon.location[0], wItemsTask.icon.location[1]);
 								s1++;
-								if (s1==(SoS.WINComplexity-1)){
+								if (s1==SoS.WINComplexity){
 									s1=0;s2++;
 								}
 							}
-							netWI_Hierarchy.addEdge(wItem,wItemsTask);
+							if (wItemsTask.getUppertasks().contains(wItem)) {
+								netWI_Hierarchy.addEdge(wItem,wItemsTask);
+							}			
 						}
 					}
 				}
@@ -240,7 +242,7 @@ public class Visualization {
 		this.SoS.myKanbanBoard.clearBoard();
 		
 		for (WorkItemEntity wi:this.SoS.arrivedList.values()) {
-			if (wi.hierarchy < (SoS.WINLevels-2)) {
+			if ( (wi.hierarchy==0) || (wi.hierarchy < (SoS.WINLevels-2)) ) {
 				this.SoS.myKanbanBoard.addCapability(wi);
 			}
 		}
@@ -255,7 +257,8 @@ public class Visualization {
 		comments.addComment("\n\n\nID:"+Integer.toString(wi.getId()));
 		comments.addComment("type:"+this.SoS.myWorkItemTypes.get(wi.typeId).getName());
 		comments.addComment("progress:"+Integer.toString((int)(wi.getProgress()*100))+"%");
-		comments.addComment("currentValue:"+(int)wi.currentValue);
+		comments.addComment("Value:"+new DecimalFormat("##.#").format(wi.Value));
+		comments.addComment("currentValue:"+new DecimalFormat("##.#").format(wi.currentValue));
 		if (!wi.isAggregationNode) {
 			comments.addComment(SoS.myServices.get(wi.serviceId).getName()+" x"+(int)wi.efforts);
 			if (wi.getReworkCount()>0) {

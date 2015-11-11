@@ -25,11 +25,15 @@ public class AbstractAgentBehavior {
 	public HashMap<Integer,String> StatesMap;
 	public HashMap<Integer,String> ActionsMap;
 	public ServiceProviderAgent agent;		
+	public int WIPLimit = Integer.MAX_VALUE;
+	public int BacklogLimit = Integer.MAX_VALUE;
 	
 	public AbstractAgentBehavior() {
 	}
 	public void setAgent(ServiceProviderAgent agent) {
 		this.agent = agent;
+		this.BacklogLimit = 8;
+		this.WIPLimit = 10;
 	}
 
 	public void GoToState(int n) {
@@ -52,7 +56,7 @@ public class AbstractAgentBehavior {
 			case "acceptanceDecision": 
 				if(Object.getClass().equals("WorkItemEntity")){
 					WorkItemEntity wi = ObjectToWorkItemEntity(Object);
-					agent.acceptanceDecision(wi);
+					this.acceptanceDecision(wi);
 				}
 			case "analyzeAggregationNode": Action(Object);
 			case "requestService": Action(Object);
@@ -92,7 +96,7 @@ public class AbstractAgentBehavior {
 			// =========== Apply WI Acceptance Rule ====================
 			WorkItemEntity wi = agent.getRequestedQ().getFirst();			
 			// =========== Service Efficiency Algorithm ==============
-			String decision = agent.acceptanceDecision(wi);
+			String decision = this.acceptanceDecision(wi);
 			//System.out.println("\n"+wi.fullName+"("+wi.SoS.myServices.get(wi.serviceId).getName()+"x"+wi.efforts+") Decision: "+decision);
 			if (decision.matches("Accept")) {
 				//System.out.println(agent.getName()+" accepts"+wi.fullName);
@@ -139,7 +143,12 @@ public class AbstractAgentBehavior {
 			ServiceProviderAgent selectedSP = schedule.get(wi);
 			agent.NowRequested.add(selectedSP);
 			agent.requestService(wi, selectedSP);
-			agent.getAssignmentQ().remove(wi);
+			if (wi.isAggregationNode) {
+				agent.getAssignmentQ().remove(wi);
+			}
+			else {
+				agent.getAssignmentQ().remove(wi);
+			}
 			//System.out.println(agent.getName()+" assigned"+wi.fullName+"to "+selectedSP.getName());
 			selectedSP.tempQ.clear();
 			//selectedSP.checkRequestedQ();
@@ -219,8 +228,8 @@ public class AbstractAgentBehavior {
 					analysisObject.currentAnalysisStage ++;
 					//System.out.println(analysisObject.currentAnalysisStage+" "+analysisObject.totalAnalysisStage);
 					if (analysisObject.currentAnalysisStage == analysisObject.totalAnalysisStage) {
-						agent.releaseSubtasks(analysisObject);
 						agent.SoS.myValueFunction.developValue(analysisObject);
+						agent.releaseSubtasks(analysisObject);					
 					}
 					else {
 						analysisObject.serviceId = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getServiceType().getId();
@@ -269,140 +278,86 @@ public class AbstractAgentBehavior {
 	public void EndState() {					
 		agent.statusSummary();
 	}
-//	public void analyzeAggregationNode(AggregationNode aggrNode) {
-//		AnalysisActivity analysisActivity = new AnalysisActivity(aggrNode);
-//		//
-//		@SuppressWarnings("unchecked")
-//		Context<Object> context = ContextUtils.getContext(agent);	
-//		context.add(analysisActivity);
-//		//
-//		agent.SoS.arrivedList.put(analysisActivity.getId(), analysisActivity);
-//		agent.getBacklogQ().add(analysisActivity);
-//		analysisActivity.setAssigned();
-//		//System.out.println("\nANALYSIS AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" start analyzing"+aggrNode.fullName);
-//	}	
-//	public void requestAssistance(DevTask devTask) {
-//		ResolutionActivity resolutionActivity = new ResolutionActivity(devTask);
-//		devTask.addPredecessorTask(resolutionActivity);
-//		//
-//		@SuppressWarnings("unchecked")
-//		Context<Object> context = ContextUtils.getContext(agent);	
-//		context.add(resolutionActivity);
-//		//
-//		agent.SoS.arrivedList.put(resolutionActivity.getId(), resolutionActivity);
-//		agent.getActiveQ().remove(devTask);
-//		devTask.withdrawAllResources();
-//		agent.getBacklogQ().add(devTask);	
-//		agent.getRequestedQ().add(resolutionActivity);
-//
-//	}
-//	public boolean acceptanceDecision(WorkItemEntity requestedWI) {
-//		boolean accept = true;		
-//		if (agent.getBacklogQ().size()>=agent.BacklogLimit) {
-//			if (requestedWI.getRequester().getId() == agent.getId()) {
-//				accept = true;
-//			}
-//			else {
-//				accept = false;
-//				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to BacklogLimit");
-//			}				
-//		}
-//		if (requestedWI.isAggregationNode) {
-//			double eEfficiency = ((AggregationNode)requestedWI).calculateServiceEfficiency(agent);	
-//			if (eEfficiency==0) {
-//				accept = false;
-//				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
-//			}
-//		}
-//		else {
-//			double eEfficiency = ((Task)requestedWI).calculateServiceEfficiency(agent);	
-//			if (eEfficiency==0) {
-//				accept = false;
-//				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
-//			}
-//		}
-//		return accept;
-//	}	
-//	public void requestService(WorkItemEntity newWI, ServiceProviderAgent requestToSP) {
-//		requestToSP.getRequestedQ().add(newWI);		
-//		newWI.setRequester(agent);
-//		//newWI.triggerCausalities();
-//		//System.out.println("\nREQUEST SERVICE @TIME:"+SoS.timeNow+" Agent "+this.name+" Requested "+requestToSP.name+" to serve"+newWI.fullName);
-//		//myValueManagement.manageValue(this, newWI);
-//	}		
-//	public void acceptWI(WorkItemEntity requestedWI) {
-//		if (!requestedWI.isAggregationNode) {
-//			requestedWI.setAssigned(); 
-//			requestedWI.setAssignedAgent(agent);
-//			//System.out.println("\nACCEPTED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Accepted WI:"+requestedWI.fullName);
-//			agent.getBacklogQ().add((Task)requestedWI);		
-//			agent.getRequestedQ().remove(requestedWI);
-//		}
-//		else {
-//			requestedWI.setAssigned(); 
-//			//System.out.println("\nACCEPTED AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" Accepted AggregationNode:"+requestedWI.fullName);
-//			this.analyzeAggregationNode((AggregationNode)requestedWI);
-//			agent.getComplexQ().add((AggregationNode)requestedWI);								
-//			agent.getRequestedQ().remove(requestedWI);
-//		}
-//	}
-//	public void releaseSubtasks (AggregationNode wi) {
-//		agent.SoS.myValueFunction.developValue(wi);
-//		//-
-//		@SuppressWarnings("unchecked")
-//		Context<Object> context = ContextUtils.getContext(agent);	
-//		//-
-//		for (WorkItemEntity subtask: wi.getSubtasks()) {				
-//			if (!subtask.isActivated) {
-//				subtask.setActivated();				
-////					for (WorkItemEntity predecessor : wi.predecessors){
-////						for (WorkItemEntity predecessorSub : predecessor.subtasks) {
-////							subtask.addPredecessorTask(predecessorSub);
-////						}
-////					}					
-//				context.add(subtask);
-//				agent.SoS.arrivedList.put(subtask.getId(), subtask);
-//				subtask.setRequester(agent);										
-//				agent.getRequestedQ().add(subtask);
-//				//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");			
-//			}
-//			else {
-//				//System.out.println(wi.fullName+"'s subtask"+subtask.fullName+"already activated");	
-//			}
-//		}
-//	}
-//	
-//	public LinkedList<ServiceProviderAgent> findServiceProviders(WorkItemEntity wItem) {
-//		int wItem_reqService_id = wItem.serviceId;
-//		LinkedList<ServiceProviderAgent> serviceProviderCandidates = new LinkedList<ServiceProviderAgent>();
-//		for (ServiceProviderAgent tAgent: agent.assignWITo) {
-//			for (ResourceEntity sResource: tAgent.getMyResourceEntities()) {
-//				for (Skill sResourceSkill: sResource.getSkillSet()) {
-//					int sResource_Service_id = sResourceSkill.getService().getId();
-//					if (sResource_Service_id==wItem_reqService_id) {
-//						if (!serviceProviderCandidates.contains(tAgent)) {
-//							serviceProviderCandidates.add(tAgent);
-//							//System.out.println(" candidate for "+this.name+" to Assign "+wItem.getName()+" :"+tAgent.name);								
-//						}
-//						break;
-//					}
-//				}
-//			}
-//		}
-//		return serviceProviderCandidates;
-//	}
-//	public ArrayList<ResourceEntity> findResourceEntities(WorkItemEntity wItem) {
-//		int wItem_reqService_id = wItem.serviceId;
-//		ArrayList<ResourceEntity> serviceResourceCandidates = new ArrayList<ResourceEntity>(0);
-//		for (ResourceEntity sResource: agent.getMyResourceEntities()) {
-//			for (Skill sResourceSkill: sResource.getSkillSet()) {
-//				int sResource_Service_id = sResourceSkill.getService().getId();
-//				if (sResource_Service_id==wItem_reqService_id) {
-//					serviceResourceCandidates.add(sResource);
-//				}
-//			}
-//		}	
-//		return serviceResourceCandidates;
-//	}
 
+	public String acceptanceDecision(WorkItemEntity requestedWI) {
+		String decision = "Decline";
+		
+		if (requestedWI.isAggregationNode) {
+			double capacity = ((AggregationNode)requestedWI).calculateServiceCapacity(agent);	
+			if (capacity>0) {
+				decision = "Accept";
+				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
+			}
+			else {
+				double exCapacity = ((AggregationNode)requestedWI).calculateExtendedServiceCapacity(agent);	
+				if (exCapacity>0) {
+					decision = "Outsource";
+				}
+				else {
+					if (requestedWI.getRequester().getId() == agent.getId()) {
+						decision = "RequestHelp";
+					}
+					else {
+						decision = "Decline";
+					}
+				}
+			}
+		}
+		else if (requestedWI.isResolutionActivity) {
+			double capacity = ((Task)requestedWI).calculateServiceCapacity(agent);	
+			if (capacity>0) {
+				decision = "Accept";
+				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
+			}
+			else {
+				double exCapacity = ((Task)requestedWI).calculateExtendedServiceCapacity(agent);	
+				if (exCapacity>0) {
+					decision = "Outsource";
+				}
+				else {
+					decision = "RequestHelp";
+				}
+			}
+		}
+		else {
+			if (requestedWI.getRequester().getId() == agent.getId()) {
+				double capacity = ((Task)requestedWI).calculateServiceCapacity(agent);
+				if (capacity>0) {
+					decision = "Accept";
+					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
+				}
+				else {
+					double exCapacity = ((Task)requestedWI).calculateExtendedServiceCapacity(agent);	
+					if (exCapacity>0) {
+						decision = "Outsource";
+					}
+					else {
+						decision = "RequestHelp";
+					}
+				}
+			}
+			else if (agent.getBacklogQ().size()>=this.BacklogLimit) {
+					decision = "Decline";
+				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to BacklogLimit");		
+			}
+			else {
+				double capacity = ((Task)requestedWI).calculateServiceCapacity(agent);
+				if (capacity>0) {
+					decision = "Accept";
+					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
+				}
+				else {
+					double exCapacity = ((Task)requestedWI).calculateExtendedServiceCapacity(agent);	
+					if (exCapacity>0) {
+						decision = "Outsource";
+					}
+					else {
+						decision = "Decline";
+					}
+				}
+			}
+		}
+		return decision;
+	}	
+	
 }
