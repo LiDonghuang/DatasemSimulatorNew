@@ -1,6 +1,9 @@
 package contractNetProtocol;
 
+import governanceModels.ValueFunction;
+
 import java.util.LinkedList;
+
 import serviceProviders.ServiceProviderAgent;
 import workItems.WorkItemEntity;
 

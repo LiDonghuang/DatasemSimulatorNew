@@ -16,7 +16,7 @@ public class DatasemSimulatorModel implements ContextBuilder<Object>{
 	
 	public Context<Object> build(Context<Object> context) {
 		File folder = new File("SimulationOutputs");
-		deleteFolder(folder);
+		clearFolder(folder);
 		//context.setId("DatasemSimulator");
 		contextbuilder.ContextImplementation(context);
 		Parameters p = RunEnvironment.getInstance().getParameters();
@@ -26,12 +26,12 @@ public class DatasemSimulatorModel implements ContextBuilder<Object>{
 		return context;
 	}
 	
-	public static void deleteFolder(File folder) {
+	public static void clearFolder(File folder) {
 	    File[] files = folder.listFiles();
 	    if(files!=null) { //some JVMs return null for empty dirs
 	        for(File f: files) {
 	            if(f.isDirectory()) {
-	                deleteFolder(f);
+	                clearFolder(f);
 	            } else {
 	                f.delete();
 	            }

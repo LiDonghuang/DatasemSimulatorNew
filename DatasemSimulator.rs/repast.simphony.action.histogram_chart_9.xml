@@ -1,9 +1,9 @@
 <repast.simphony.chart2.engine.HistogramChartDescriptor>
-  <name>WI Efforts Histogram Chart</name>
+  <name>WI Rework Count Histogram Chart</name>
   <dataSet>WI EndRun Data Set</dataSet>
-  <xAxisLabel>Nominal Efforts</xAxisLabel>
-  <yAxisLabel>WI Counts</yAxisLabel>
-  <chartTitle>WI Nominal Efforts Histogram Chart</chartTitle>
+  <xAxisLabel>Rework Count</xAxisLabel>
+  <yAxisLabel>Number of WIs</yAxisLabel>
+  <chartTitle>WI Rework Count Histogram Chart</chartTitle>
   <type>HISTOGRAM</type>
   <background>
     <red>192</red>
@@ -21,10 +21,10 @@
   <showLegend>true</showLegend>
   <histType>DYNAMIC</histType>
   <binCount>20</binCount>
-  <sourceId>Efforts</sourceId>
-  <outOfRange>IGNORE</outOfRange>
+  <sourceId>ReworkCount</sourceId>
+  <outOfRange>DISPLAY</outOfRange>
   <min>0.0</min>
-  <max>0.0</max>
+  <max>20.0</max>
   <barColor>
     <red>255</red>
     <green>0</green>

@@ -1,9 +1,9 @@
 <repast.simphony.chart2.engine.HistogramChartDescriptor>
-  <name>WI Efficiency Histogram Chart</name>
+  <name>WI Efforts Histogram Chart</name>
   <dataSet>WI EndRun Data Set</dataSet>
-  <xAxisLabel>CycleTime To NominalEfforts Ratio</xAxisLabel>
-  <yAxisLabel>WIs Count</yAxisLabel>
-  <chartTitle>WI Efficiency Histogram Chart</chartTitle>
+  <xAxisLabel>Nominal Efforts</xAxisLabel>
+  <yAxisLabel>WI Counts</yAxisLabel>
+  <chartTitle>WI Nominal Efforts Histogram Chart</chartTitle>
   <type>HISTOGRAM</type>
   <background>
     <red>192</red>
@@ -21,7 +21,7 @@
   <showLegend>true</showLegend>
   <histType>DYNAMIC</histType>
   <binCount>20</binCount>
-  <sourceId>CycleTimeToEffortsRatio</sourceId>
+  <sourceId>Efforts</sourceId>
   <outOfRange>IGNORE</outOfRange>
   <min>0.0</min>
   <max>0.0</max>

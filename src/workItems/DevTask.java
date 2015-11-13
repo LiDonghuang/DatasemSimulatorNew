@@ -34,7 +34,7 @@ public class DevTask extends Task {
 		for (int i=0; i< incMaturityLevels; i++) {				
 			if (Math.random()<=SoS.ReworkRisk) {
 				double reduction = 1/(SoS.TaskMaturityLevels);
-				this.rework(reduction);						
+				this.rework(reduction);	
 			}
 			this.changePropagation();
 			if (Math.random()<=SoS.TaskUncertainty) {
@@ -45,6 +45,7 @@ public class DevTask extends Task {
 	public void suspendForResolution() {
 		this.isSuspended = true;
 		this.suspendedTime = this.SoS.timeNow;
+		this.setResolutionCount(this.getResolutionCount() + 1);
 		this.getAssignedAgent().setBottleNeckCount(this.getAssignedAgent().getBottleNeckCount() + 1);
 		this.getAssignedAgent().requestAssistance(this);
 		//System.out.println("\nSUSPENDED @TIME:"+this.SoS.timeNow+this.fullName);
@@ -68,9 +69,9 @@ public class DevTask extends Task {
 		if (this.getPreviousReworkTime()<this.SoS.timeNow && this.getProgress()>0) {
 			//System.out.println(previousReworkTime+" "+SoS.timeNow);
 			this.setPreviousReworkTime(this.SoS.timeNow);
-			double previousProgress = this.getProgress();		
+			//this.getPreviousProgress();
 			this.setReworkCount(this.getReworkCount() + 1);
-			this.uncertainty *= 1;
+			this.uncertainty *= 1; // Learning Factor
 			this.setProgress(Math.max((this.getProgress()-progressReduction), 0));								
 			//System.out.println("\nREWORK @TIME:"+this.SoS.timeNow+this.fullName+"reworks from "+previousProgress+" to "+this.getProgress()+" (rework count:"+this.getReworkCount()+")");
 			if (this.isCompleted) {

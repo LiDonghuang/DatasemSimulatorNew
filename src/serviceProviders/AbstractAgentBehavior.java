@@ -1,18 +1,11 @@
-package contractNetProtocol;
+package serviceProviders;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import org.apache.commons.math3.stat.StatUtils;
-import org.apache.commons.math3.util.FastMath;
-
-import repast.simphony.engine.schedule.ScheduledMethod;
+import datasemSimulator.AbstractClass;
 import repast.simphony.random.RandomHelper;
-import repast.simphony.util.ContextUtils;
-import repast.simphony.context.Context;
-import serviceProviders.ResourceEntity;
-import serviceProviders.ServiceProviderAgent;
 import workItems.AggregationNode;
 import workItems.AnalysisActivity;
 import workItems.ResolutionActivity;
@@ -232,9 +225,11 @@ public class AbstractAgentBehavior {
 						agent.releaseSubtasks(analysisObject);					
 					}
 					else {
+						agent.releaseSubtasks(analysisObject);
 						analysisObject.serviceId = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getServiceType().getId();
 						analysisObject.efforts = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getEfforts();
 						agent.getRequestedQ().add(analysisObject);
+						agent.getComplexQ().remove(analysisObject);
 					}
 				}
 				else if (WI.isResolutionActivity) {

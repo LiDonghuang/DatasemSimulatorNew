@@ -1,8 +1,10 @@
 package contractNetProtocol;
+import datasemSimulator.AbstractClass;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.util.ContextUtils;
 import repast.simphony.context.Context;
+import serviceProviders.AbstractAgentBehavior;
 import serviceProviders.ServiceProviderAgent;
 import workItems.DevTask;
 import workItems.WorkItemEntity;

@@ -1,11 +1,12 @@
 package workItems;
 
+import governanceModels.ValueFunction;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.eclipse.emf.common.util.EList;
 
-import contractNetProtocol.ValueFunction;
 import datasemSimulator.SystemOfSystems;
 import bsh.This;
 import repast.simphony.context.Context;
@@ -91,12 +92,13 @@ public class WorkItemEntity extends WorkItemImpl {
 	
 	private int currentMaturityLevel = 0;
 	private int ReworkCount = 0;
+	private int ResolutionCount = 0;
 	private int ChangePropagationToCount = 0;
 	private int ChangePropagationByCount = 0;
 	private double previousReworkTime = 0;
 	private int previousMaturityLevel = 0;
 	private double CycleTimeToEffortsRatio = 0;
-
+	private boolean hasDelivered;
 	
 	public WorkItemEntity (WorkItem wi) {
 		this.myWorkItem = wi;
@@ -110,6 +112,7 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.currentValue = this.initialValue;
 		this.isAggregationNode = wi.isIsAggregationNode();
 		this.hasPredecessors = wi.isHasPredecessors();
+		this.arrivalTime = wi.getArrivalTime();
 		this.fullName = this.fullName();
 	}
 	public WorkItemEntity (WorkItemEntity WorkItemEntity) {
@@ -315,11 +318,18 @@ public class WorkItemEntity extends WorkItemImpl {
 		//System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is completed"+" (rework count:"+this.getReworkCount()+")");
 	}
 	public void setEnded() {
+		if (this.hasDelivered) {
+			//System.out.println(this.fullName+"has already delivered!");
+		}
+		else {
+			this.SoS.deliverValue(this.currentValue);
+			this.hasDelivered = true;
+		}
 		this.isEnded=true;
 		this.endTime = this.SoS.timeNow;
 		this.leadTime = this.endTime - this.activatedTime + 1;	
 		this.removeFromSuccessorTasks();
-		this.SoS.deliverValue(this.currentValue);				
+				
 		if (this.hierarchy==0 ) {
 			this.SoS.initialList.remove(this.getId());	
 			this.SoS.endedList.put(this.getId(), this);
@@ -522,5 +532,11 @@ public class WorkItemEntity extends WorkItemImpl {
 	}
 	public void setPreviousProgress(double previousProgress) {
 		this.previousProgress = previousProgress;
+	}
+	public int getResolutionCount() {
+		return ResolutionCount;
+	}
+	public void setResolutionCount(int resolutionCount) {
+		ResolutionCount = resolutionCount;
 	}
 }

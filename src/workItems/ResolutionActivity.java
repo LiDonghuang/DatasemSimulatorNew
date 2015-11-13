@@ -17,7 +17,7 @@ public class ResolutionActivity extends Task{
 		int currentId = this.SoS.getWICount();
 		this.id = currentId+1;
 		this.SoS.increaseWICount();
-		this.name = "Res."+devTask.getName();
+		this.name = "Res-"+devTask.getName();
 		this.hasPredecessors = false;
 		this.value = 0;
 		this.initialValue = 0;
@@ -25,7 +25,7 @@ public class ResolutionActivity extends Task{
 		
 		this.setRequester(ResolutionObject.getRequester());
 		this.serviceId = this.getRequester().getMyResourceEntities().get(0).getSkillSet().get(0).getService().getId();
-		this.efforts = 2;
+		this.efforts = ResolutionObject.efforts * 0.5;
 		this.maxMaturityLevels = 1;
 		this.uncertainty = 0;
 		this.risk = 0;		

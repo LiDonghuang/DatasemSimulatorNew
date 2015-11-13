@@ -161,25 +161,29 @@ public class Visualization {
 //				gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
 //				netWI_Hierarchy.addEdge(wItem,wItem1.ResolutionObject);
 //			}
-			if (wItem.isStarted) {
-				if (wItem.getProgress() < wItem.getPreviousProgress()) {
-					wItem.icon.color[0]=255;wItem.icon.color[1]=0;wItem.icon.color[2]=0;
-				}
-				else if (wItem.isSuspended) {
-					wItem.icon.color[0]=255;wItem.icon.color[1]=128;wItem.icon.color[2]=0;
-				}
-				
-				else if (wItem.isCompleted) {
+			// Coloring
+			wItem.icon.color[0]=224;wItem.icon.color[1]=224;wItem.icon.color[2]=224;
+			if (wItem.isStarted) {	
+				if (wItem.isCompleted) {
 					wItem.icon.color[0]=0;wItem.icon.color[1]=255;wItem.icon.color[2]=0;
 				}
 				else {
-					wItem.icon.color[0]=51;wItem.icon.color[1]=153;wItem.icon.color[2]=255;
+					if (wItem.getProgress() < wItem.getPreviousProgress()) {
+						wItem.icon.color[0]=255;wItem.icon.color[1]=0;wItem.icon.color[2]=0;
+					}
+					else {
+						wItem.icon.color[0]=51;wItem.icon.color[1]=153;wItem.icon.color[2]=255;
+					}	
 				}
 			}
-			else {
-				wItem.icon.color[0]=224;wItem.icon.color[1]=224;wItem.icon.color[2]=224;
-			}
-			
+			if (!wItem.precedencyCleared()) {
+				if (wItem.isSuspended) {
+					wItem.icon.color[0]=127;wItem.icon.color[1]=0;wItem.icon.color[2]=255;
+				}
+				else {
+					wItem.icon.color[0]=255;wItem.icon.color[1]=128;wItem.icon.color[2]=0;
+				}
+			}	
 		}
 	}
 	public void visualizeOrganization() {	
@@ -263,6 +267,9 @@ public class Visualization {
 			comments.addComment(SoS.myServices.get(wi.serviceId).getName()+" x"+(int)wi.efforts);
 			if (wi.getReworkCount()>0) {
 				comments.addComment("rework: "+Integer.toString(wi.getReworkCount()));
+			}
+			if (wi.getResolutionCount()>0) {
+				comments.addComment("resolution: "+Integer.toString(wi.getResolutionCount()));
 			}
 		}
 		this.commentsList.add(comments);

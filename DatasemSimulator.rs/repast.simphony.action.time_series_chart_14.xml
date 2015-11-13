@@ -1,9 +1,9 @@
 <repast.simphony.chart2.engine.TimeSeriesChartDescriptor>
-  <name>Agents Resource Utilization Time Series Chart</name>
+  <name>BottleneckCount Time Series Chart</name>
   <dataSet>SP Data Set</dataSet>
-  <xAxisLabel>Time</xAxisLabel>
+  <xAxisLabel>Tick Count</xAxisLabel>
   <yAxisLabel></yAxisLabel>
-  <chartTitle>Agents Resource Utilization</chartTitle>
+  <chartTitle>BottleneckCount</chartTitle>
   <type>TIME_SERIES</type>
   <background>
     <red>192</red>
@@ -28,7 +28,7 @@
     </entry>
   </seriesIds>
   <dataValueIds>
-    <string>ResourceUtilization</string>
+    <string>BottleneckCount</string>
   </dataValueIds>
   <plotRangeLength>-1</plotRangeLength>
 </repast.simphony.chart2.engine.TimeSeriesChartDescriptor>

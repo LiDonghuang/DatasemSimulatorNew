@@ -1,4 +1,4 @@
-package contractNetProtocol;
+package governanceModels;
 
 import org.apache.commons.math3.stat.StatUtils;
 
@@ -51,7 +51,7 @@ public class ValueFunction extends MechanismImpl {
 	}
 	
 	private void algorithmDerivedValue(WorkItemEntity wi) {
-			double baseValue = wi.Value;	
+			double baseValue = wi.Value;
 			//if (wi.getId()==31){System.out.println("base "+baseValue);}
 			double hierarchyFactor = Double.parseDouble(getAttributeValue("HierarchyFactor"));
 			double precedencyFactor = Double.parseDouble(getAttributeValue("PrecedencyFactor"));
@@ -60,47 +60,37 @@ public class ValueFunction extends MechanismImpl {
 			for (int i=0; i<((AggregationNode)wi).getSubtasks().size();i++){	
 				WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);
 				weights[i] += 1;		
-//				for (WorkItemEntity successor:subtask.getSuccessors()) {
-//					if (!(successor.isAnalysisActivity||successor.isResolutionActivity)) {
-//						if (((AggregationNode)wi).getSubtasks().contains(successor)) {
-//							weights[i] += precedencyFactor;
-//						}
-//					}
-//				}
+				for (WorkItemEntity successor:subtask.getSuccessors()) {
+					if (!(successor.isAnalysisActivity||successor.isResolutionActivity)) {
+						if (((AggregationNode)wi).getSubtasks().contains(successor)) {
+							weights[i] += precedencyFactor;
+						}
+					}
+				}
 			}
 			double totalWeights = StatUtils.sum(weights);
-			double sumValue = 0;
 			for (int i=0; i<((AggregationNode)wi).getSubtasks().size();i++){
-				WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);
-				double previousValue = subtask.currentValue;			
-				double increase = (weights[i]/totalWeights)*baseValue*(1-hierarchyFactor);
+				WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);		
+				double incSValue = (weights[i]/totalWeights)*baseValue*(1-hierarchyFactor);
+				double previousSValue = subtask.Value;
 				//if (subtask.getId()==31){System.out.println("prev "+previousValue+" inc "+increase);}
-				subtask.Value += increase;					
-				wi.currentValue -= increase;
+				subtask.Value += incSValue;	
+				subtask.currentValue += incSValue;			
+				wi.currentValue -= incSValue;
 				//if (wi.getId()==31){System.out.println("base "+baseValue+"decrease "+increase);}
 				if (subtask.isAggregationNode) {			
 					if (subtask.isEnded) {
-						subtask.currentValue = increase;
-						subtask.SoS.deliverValue(increase);			
-						subtask.currentValue += previousValue;
+						subtask.SoS.deliverValue(incSValue);
 					}
 					else if (((AggregationNode)subtask).currentAnalysisStage==((AggregationNode)subtask).totalAnalysisStage) {
-						subtask.Value = increase/(1-hierarchyFactor);
-						subtask.currentValue = subtask.Value*(1-hierarchyFactor);
+						subtask.Value = incSValue;
 						developValue(subtask);
-						subtask.currentValue = subtask.Value*(1-hierarchyFactor);			
-					}
-					else {
-						subtask.currentValue += increase;
+						subtask.Value += previousSValue;			
 					}
 				}
 				else {
 					if (subtask.isEnded) {
-						subtask.SoS.deliverValue(increase);
-						subtask.currentValue += increase;
-					}
-					else {
-						subtask.currentValue += increase;
+						subtask.SoS.deliverValue(incSValue);
 					}
 				}
 			}

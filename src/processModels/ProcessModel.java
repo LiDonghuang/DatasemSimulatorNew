@@ -2,11 +2,9 @@ package processModels;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-
 import workItems.AggregationNode;
 
 public class ProcessModel {
-
 	public String name;
 	public HashMap<Integer,Stage> stages = new HashMap<Integer,Stage>();
 	
@@ -48,5 +46,8 @@ public class ProcessModel {
 				}	
 			}
 		}
+	}
+	public void transition(AggregationNode aggr) {
+		
 	}
 }

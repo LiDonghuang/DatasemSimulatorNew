@@ -1,38 +1,28 @@
 <repast.simphony.visualization.engine.CartesianDisplayDescriptor>
-  <name>WIN Display</name>
+  <name>Kanban Display</name>
   <type>2D</type>
   <styles>
     <entry>
-      <string>workItems.WorkItemEntity</string>
+      <string>kanbanBoard.KanbanElement</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
-      <string>visualization.Comments</string>
-      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+      <string>kanbanBoard.KanbanBoard</string>
+      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
     </entry>
   </styles>
   <editedStyles>
     <entry>
-      <string>workItems.WorkItemEntity</string>
-      <string>workItems.WorkItemEntity.style_4.xml</string>
+      <string>kanbanBoard.KanbanElement</string>
+      <string>kanbanBoard.KanbanElement.style_0.xml</string>
     </entry>
     <entry>
-      <string>visualization.Comments</string>
-      <string>visualization.Comments.style_0.xml</string>
+      <string>kanbanBoard.KanbanBoard</string>
+      <null/>
     </entry>
   </editedStyles>
-  <netStyles>
-    <entry>
-      <string>WI_Hierarchy</string>
-      <string>repast.simphony.visualization.editedStyle.EditedEdgeStyle2D</string>
-    </entry>
-  </netStyles>
-  <editedNetStyles>
-    <entry>
-      <string>WI_Hierarchy</string>
-      <string>WI_Hierarchy.style_0.xml</string>
-    </entry>
-  </editedNetStyles>
+  <netStyles/>
+  <editedNetStyles/>
   <frequency>ON_MOVE</frequency>
   <schedParams>
     <start>1.0</start>
@@ -41,31 +31,26 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-429344607</hashCode>
+    <hashCode>-1322700753</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
-  <layoutProjection>WINGrid</layoutProjection>
+  <layoutProjection>KanbanGrid</layoutProjection>
   <layoutInterval>0</layoutInterval>
   <layerOrder>
     <entry>
-      <string>workItems.WorkItemEntity</string>
+      <string>kanbanBoard.KanbanElement</string>
       <int>1</int>
     </entry>
     <entry>
-      <string>visualization.Comments</string>
+      <string>kanbanBoard.KanbanBoard</string>
       <int>0</int>
     </entry>
   </layerOrder>
   <projections>
     <repast.simphony.scenario.data.ProjectionData>
-      <id>WINGrid</id>
+      <id>KanbanGrid</id>
       <attributes/>
       <type>grid</type>
-    </repast.simphony.scenario.data.ProjectionData>
-    <repast.simphony.scenario.data.ProjectionData>
-      <id>WI_Hierarchy</id>
-      <attributes/>
-      <type>network</type>
     </repast.simphony.scenario.data.ProjectionData>
   </projections>
   <visualizationProperties class="repast.simphony.visualization.UnitSizeLayoutProperties">
@@ -73,14 +58,7 @@
   </visualizationProperties>
   <projectionDescriptors>
     <entry>
-      <string>WI_Hierarchy</string>
-      <repast.simphony.visualization.engine.DefaultProjectionDescriptor>
-        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[2]"/>
-        <props/>
-      </repast.simphony.visualization.engine.DefaultProjectionDescriptor>
-    </entry>
-    <entry>
-      <string>WINGrid</string>
+      <string>KanbanGrid</string>
       <repast.simphony.visualization.grid.GridProjectionDescriptor>
         <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData"/>
         <props>
@@ -97,7 +75,7 @@
               </entry>
               <entry>
                 <string>SHOW</string>
-                <boolean>false</boolean>
+                <boolean>true</boolean>
               </entry>
             </map>
           </entry>

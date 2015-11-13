@@ -3,8 +3,6 @@ package serviceProviders;
 import governanceModels.AgentStrategy;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.HashMap;
@@ -12,10 +10,8 @@ import java.util.HashMap;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
 
-import contractNetProtocol.AbstractAgentBehavior;
 import datasemSimulator.SystemOfSystems;
 import repast.simphony.engine.schedule.ScheduledMethod;
-import repast.simphony.random.RandomHelper;
 import repast.simphony.util.ContextUtils;
 import repast.simphony.context.Context;
 import visualization.Icon;
@@ -55,16 +51,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	public HashMap<Service,Double> ServiceCapacity = new HashMap<Service,Double>();
 	public HashMap<Service,Double> ExtendedServiceCapacity = new HashMap<Service,Double>();
 	
-	private static final int BASE_PRIORITY_1 = 200;
-	private static final int SEQUENCE_CheckRequestedQ = 10;
-	private static final int SEQUENCE_MakeAssignments = 20;
-	private static final int SEQUENCE_SelectWIsToStart = 30;
-	private static final int SEQUENCE_AdvanceWIsProgress = 40;
-	private static final int SEQUENCE_TriggerWIsChanges = 50;
-	private static final int SEQUENCE_CheckWIsCompletion = 60;
-	private static final int SEQUENCE_CheckAggregationNodesCompletion = 70;
-	private static final int SEQUENCE_DisburseWIs = 80;
-	
+	private static final int BASE_PRIORITY_1 = 200;	
 	
 	// Visualization
 	public Icon icon = new Icon();
@@ -188,26 +175,30 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			//this.requestedQ.remove(requestedWI);
 		}
 	}
-	public void releaseSubtasks (AggregationNode wi) {		
+	public void releaseSubtasks (AggregationNode aggr) {
+		double releaseProbability = ((double)aggr.currentAnalysisStage / (double)aggr.totalAnalysisStage);
 		//-
 		@SuppressWarnings("unchecked")
 		Context<Object> context = ContextUtils.getContext(this);	
 		//-
-		for (WorkItemEntity subtask: wi.getSubtasks()) {	
-			subtask.getUppertasks().add(wi);
+		for (WorkItemEntity subtask: aggr.getSubtasks()) {				
 			if (!subtask.isActivated) {
-				subtask.setActivated();			
-				context.add(subtask);
-				SoS.arrivedList.put(subtask.getId(),subtask);
-				subtask.setRequester(wi.getRequester());
-				this.requestedQ.add(subtask);
+				if (Math.random() < releaseProbability) {
+					subtask.setActivated();			
+					subtask.getUppertasks().add(aggr);
+					context.add(subtask);
+					SoS.arrivedList.put(subtask.getId(),subtask);
+					subtask.setRequester(aggr.getRequester());
+					this.requestedQ.add(subtask);			
 //					for (WorkItemEntity predecessor : wi.predecessors){
 //						for (WorkItemEntity predecessorSub : predecessor.subtasks) {
 //							subtask.addPredecessorTask(predecessorSub);
 //						}
-//					}		
+//					}	
+				}
 			}
 			else {
+				subtask.getUppertasks().add(aggr);
 				//System.out.println(wi.fullName+"'s subtask"+subtask.fullName+"already activated");	
 			}
 			//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");			
@@ -242,6 +233,8 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		}	
 		return serviceResourceCandidates;
 	}
+	
+	
 	public boolean hasIdleResources() {
 		boolean hasIdleResources = false;
 		for (int r=0;r<this.getMyResourceEntities().size();r++) {

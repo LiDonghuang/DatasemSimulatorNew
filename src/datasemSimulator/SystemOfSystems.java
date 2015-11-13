@@ -1,5 +1,7 @@
 package datasemSimulator;
 
+import governanceModels.ValueFunction;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +11,6 @@ import kanbanBoard.KanbanBoard;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
 
-import contractNetProtocol.ValueFunction;
 import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.engine.schedule.ISchedule;
@@ -188,7 +189,7 @@ public class SystemOfSystems {
 		for (ServiceProviderAgent sp:this.myServiceProviderAgents.values()) {
 			System.out.println("\nServiceProviderAgent: ");
 			System.out.println("serviceProviderId: "+sp.getId()+" name: "+sp.getName()+" type:"+this.myServiceProviderTypes.get(sp.typeId).getName());
-			System.out.println(" ResourceEntities:");
+			System.out.println("-- ResourceEntities:");
 			for (ResourceEntity r:sp.getMyResourceEntities()) {
 				System.out.println(" resourceId: "+r.getId()+" name: "+r.getName());
 				System.out.println("  SkillSet:");
@@ -200,7 +201,7 @@ public class SystemOfSystems {
 					System.out.println("  "+service.getName()+"(serviceId:"+service.getId()+") efficiency: "+sk.getEfficiency());
 				}
 			}
-			System.out.println("Service Capacities:\n");
+			System.out.println("-- Service Capacities:");
 			for (Service service:this.myServices.values()) {
 				System.out.println(" Service: "+service.getName()+" "+sp.ServiceCapacity.get(service)+" ext:"+sp.ExtendedServiceCapacity.get(service));
 			}

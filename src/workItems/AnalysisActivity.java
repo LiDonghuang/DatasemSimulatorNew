@@ -16,14 +16,15 @@ public class AnalysisActivity extends Task{
 		
 		int currentId = this.SoS.getWICount();
 		this.id = currentId+1;
-		this.SoS.increaseWICount();
-		this.name = "Ana."+aggrNode.getName();
+		this.SoS.increaseWICount();		
 		this.getPredecessors().addAll(aggrNode.getPredecessors());
 		this.value = 0;
 		this.initialValue = 0;
 		this.currentValue =0;
+		
+		this.name = "Ana."+aggrNode.currentAnalysisStage+"-"+aggrNode.getName();
 		this.serviceId = aggrNode.myWorkItem.getRequiredAnalysis().get(aggrNode.currentAnalysisStage).getServiceType().getId();
-		this.efforts = aggrNode.myWorkItem.getRequiredAnalysis().get(aggrNode.currentAnalysisStage).getEfforts();		
+		this.efforts = aggrNode.myWorkItem.getRequiredAnalysis().get(aggrNode.currentAnalysisStage).getEfforts();
 		
 		this.maxMaturityLevels = 1;
 		this.uncertainty = 0;

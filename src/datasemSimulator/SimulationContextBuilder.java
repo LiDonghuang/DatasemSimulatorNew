@@ -1,5 +1,7 @@
 package datasemSimulator;
 
+import governanceModels.ValueFunction;
+
 import java.io.File;
 import java.util.HashMap;
 
@@ -31,7 +33,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import kanbanBoard.KanbanBoard;
-import kanbanBoard.KanbanElement;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -39,7 +40,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import processModels.ProcessModel;
-import contractNetProtocol.ValueFunction;
 
 
 public class SimulationContextBuilder {
@@ -120,21 +120,18 @@ public class SimulationContextBuilder {
 		Mechanism valueMechanism1 = ObjectsModelFactory.eINSTANCE.createMechanism();
 		valueMechanism1.setName("ValueFunction");valueMechanism1.setValue("Derived");
 		MechanismAttribute att1 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-		att1.setAttribute("HierarchyFactor");att1.setValue("0.5");
+		att1.setAttribute("HierarchyFactor");att1.setValue("0.7");
 		MechanismAttribute att2 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-		att2.setAttribute("PrecedencyFactor");att2.setValue("0.0");
+		att2.setAttribute("PrecedencyFactor");att2.setValue("0.2");
 		valueMechanism1.getAttributes().add(att1);valueMechanism1.getAttributes().add(att2);
 		//
 		Mechanism valueMechanism2 = ObjectsModelFactory.eINSTANCE.createMechanism();
 		valueMechanism2.setName("ValueFunction");valueMechanism2.setValue("Fiat");
 		
 		// Initial Assignment
-		int x = 0;
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
 			if ((wi.hierarchy==0 )) {	
 				wi.SoS.initialList.put(wi.getId(), wi);
-				wi.arrivalTime = 1 + x;
-				x += 200;
 			}
 			// Process Model
 			String typeName = wi.getType().getName();
@@ -161,6 +158,7 @@ public class SimulationContextBuilder {
 					((AggregationNode)wi).setProcessModel(MyProcess);
 				}
 			}
+			// Auto Decompose
 			if (wi.getType().getName().matches("SubSysReq")) {
 				wi.isAggregationNode = true;
 				wi = (AggregationNode)wi;
@@ -190,26 +188,58 @@ public class SimulationContextBuilder {
 			}
 		}	
 		
-		// Derive Impacts DSM
-		double ChangePropagationFactor = (Double)mySoS.parameters.getValue("ChangePropagationFactor");
+		
+		// Complexity Algorithm
+		double ComplexityFactor = 1;
 		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
-			if (wi1.getType().getName().matches("SubSysReq")) {
-				for (WorkItemEntity wi2 : wi1.getImpactsWIs()) {
-					double likelihood = wi1.getImpactsLikelihood().get(wi2);
-					double risk = wi1.getImpactsRisk().get(wi2);
-					for (WorkItemEntity wi1s: ((AggregationNode)wi1).getSubtasks()) {
-						if (Math.random()<likelihood) {
-							int t =(int) ( Math.random()* ((AggregationNode)wi2).getSubtasks().size() );
-							WorkItemEntity wi2s = ((AggregationNode)wi2).getSubtasks().get(t);
-							wi1s.getImpactsWIs().add(wi2s);
-							wi1s.getImpactsLikelihood().put(wi2s, ChangePropagationFactor*0.5);
-							wi1s.getImpactsRisk().put(wi2s, Math.min(1,risk));
-							//System.out.println("Impacts DSM: from "+wi1s.getName()+" to "+wi2s.getName());
+			double AveragePrecedency = 1;
+			if (wi1.getType().getName().matches("SubSysReq")) {					
+				for (WorkItemEntity wi1s: ((AggregationNode)wi1).getSubtasks()) {
+					boolean loop = true;
+					int loopcount = 0;
+					if (Math.random()<ComplexityFactor) {
+						while (loop) {
+							loopcount ++;
+							int t =(int) ( Math.random()* ((AggregationNode)wi1).getSubtasks().size() );
+							WorkItemEntity pred = ((AggregationNode)wi1).getSubtasks().get(t);
+							if ( (pred.getId()<wi1s.getId()) && (!pred.getPredecessors().contains(wi1s)) ) {
+								wi1s.addPredecessorTask(pred);
+								//System.out.println("Add Predecessor: "+pred.getName()+" to "+wi1s.getName());
+								loop = false;
+							}
+							else if (loopcount >= 3) {
+								loop = false;
+							}
 						}
 					}
 				}
 			}
 		}
+		// End Complexity
+				
+		// Derive Impacts DSM
+		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
+			if (wi1.getType().getName().matches("SubSysReq")) {	
+				for (WorkItemEntity wi2 : wi1.getImpactsWIs()) {
+					if (wi2.getType().getName().matches("SubSysReq")) {
+						double likelihood = wi1.getImpactsLikelihood().get(wi2);
+						double risk = wi1.getImpactsRisk().get(wi2);
+						for (WorkItemEntity wi1s: ((AggregationNode)wi1).getSubtasks()) {
+							if (Math.random()<(likelihood*2)) {
+								int t =(int) ( Math.random()* ((AggregationNode)wi2).getSubtasks().size() );
+								WorkItemEntity wi2s = ((AggregationNode)wi2).getSubtasks().get(t);
+								wi1s.getImpactsWIs().add(wi2s);
+								wi1s.getImpactsLikelihood().put(wi2s, 0.5);
+								wi1s.getImpactsRisk().put(wi2s, Math.min(1,risk));
+								//System.out.println("Impacts DSM: from "+wi1s.getName()+" to "+wi2s.getName());
+							}
+						}
+					}
+				}	
+			}
+		}
+		// End DSM
+		
 		// Experiment and Visualization
 		int numReplications = (Integer)parameters.getValue("NumReplications");
 		if (this.ModelBuilder.matches("DevelopmentOrganizationModel")) {
@@ -468,6 +498,10 @@ public class SimulationContextBuilder {
 				double att_value = Double.parseDouble(e1.getAttribute("value")); 
 				myWorkItem.setValue(att_value);
 			}
+			else if (att_name.matches("ArrivalTime")) {				
+				int att_value = Integer.parseInt(e1.getAttribute("value")); 
+				myWorkItem.setArrivalTime(att_value);
+			}
 		}
 		myWorkItems.put(id, myWorkItem);
 	}
@@ -560,7 +594,7 @@ public class SimulationContextBuilder {
 		double ReworkRisk = (Double)mySoS.parameters.getValue("ReworkRisk");
 		double ChangePropagationFactor = (Double)mySoS.parameters.getValue("ChangePropagationFactor");
 		double ROR = (Double)mySoS.parameters.getValue("ROR");
-		double VolatilityLevel = (double)(Integer)mySoS.parameters.getValue("Volatility");
+		double VolatilityLevel = ((double)(Integer)mySoS.parameters.getValue("Volatility"))/2;
 		
 		mySoS.TaskMaturityLevels = TaskMaturityLevels;
 		mySoS.TaskUncertainty = TaskUncertainty*(VolatilityLevel);

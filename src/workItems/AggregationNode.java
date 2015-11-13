@@ -123,16 +123,6 @@ public class AggregationNode extends WorkItemEntity{
 	public double calculateServiceCapacity(ServiceProviderAgent sp) {
 		double sEfficiency = 0;
 		sEfficiency = sp.ServiceCapacity.get(SoS.myServices.get(this.serviceId));
-//		for (ResourceEntity r: sp.getMyResourceEntities()) {
-//			for (Skill sk: r.getSkillSet()){
-//				int service_id = sk.getService().getId();
-//				if (service_id == this.serviceId){
-//					sEfficiency = sk.getEfficiency();				
-//					break;
-//				}		
-//			}
-//		}
-		//System.out.println(this.name+"- serviceId:"+this.getRequiredServices().get(0).getId()+", efficiency:"+sEfficiency);
 		return sEfficiency;
 	}
 }
