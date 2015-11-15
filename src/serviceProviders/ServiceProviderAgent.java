@@ -149,9 +149,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		devTask.withdrawAllResources();
 		this.backlogQ.add(devTask);	
 		devTask.getRequester().requestedQ.add(resolutionActivity);
-
 	}
-
 	public void requestService(WorkItemEntity newWI, ServiceProviderAgent requestToSP) {
 		requestToSP.requestedQ.add(newWI);		
 		newWI.setRequester(this);
@@ -176,32 +174,34 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		}
 	}
 	public void releaseSubtasks (AggregationNode aggr) {
-		double releaseProbability = ((double)aggr.currentAnalysisStage / (double)aggr.totalAnalysisStage);
-		//-
 		@SuppressWarnings("unchecked")
 		Context<Object> context = ContextUtils.getContext(this);	
-		//-
-		for (WorkItemEntity subtask: aggr.getSubtasks()) {				
+		double releaseProbability = (double)aggr.currentAnalysisStage/aggr.totalAnalysisStage;
+		int c = (int) (releaseProbability*(double)aggr.getSubtasks().size());
+		int total = c;
+		int count = 0;
+		//System.out.println(aggr.getName()+" stage:"+aggr.currentAnalysisStage+"/"+aggr.totalAnalysisStage+" release:"+total+"/"+aggr.getSubtasks().size());
+		for (WorkItemEntity subtask: aggr.getSubtasks()) {		
 			if (!subtask.isActivated) {
-				if (Math.random() < releaseProbability) {
-					subtask.setActivated();			
-					subtask.getUppertasks().add(aggr);
-					context.add(subtask);
-					SoS.arrivedList.put(subtask.getId(),subtask);
-					subtask.setRequester(aggr.getRequester());
-					this.requestedQ.add(subtask);			
-//					for (WorkItemEntity predecessor : wi.predecessors){
-//						for (WorkItemEntity predecessorSub : predecessor.subtasks) {
-//							subtask.addPredecessorTask(predecessorSub);
-//						}
-//					}	
-				}
+				//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");	
+				count++;
+				subtask.setActivated();			
+				subtask.getUppertasks().add(aggr);
+				context.add(subtask);
+				SoS.arrivedList.put(subtask.getId(),subtask);
+				subtask.setRequester(aggr.getRequester());
+				this.requestedQ.add(subtask);			
 			}
 			else {
-				subtask.getUppertasks().add(aggr);
+				count++;
 				//System.out.println(wi.fullName+"'s subtask"+subtask.fullName+"already activated");	
+				if (!subtask.getUppertasks().contains(aggr)) {
+					subtask.getUppertasks().add(aggr);
+				}	
 			}
-			//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");			
+			if (count>total) {
+				break;
+			}
 		}
 	}
 	

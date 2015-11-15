@@ -1,12 +1,11 @@
 package workItems;
 
-import governanceModels.ValueFunction;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.eclipse.emf.common.util.EList;
 
+import processModels.ValueFunction;
 import datasemSimulator.SystemOfSystems;
 import bsh.This;
 import repast.simphony.context.Context;
@@ -141,7 +140,7 @@ public class WorkItemEntity extends WorkItemImpl {
 		if (this.isCompleted) {
 			for (AggregationNode upperTask:this.getUppertasks()) {
 				if (upperTask.isActivated && !upperTask.isCompleted) {
-					upperTask.checkSubTasksCompletion();
+					upperTask.updateCompletionStatus();
 				}
 			}
 		}	
@@ -187,6 +186,12 @@ public class WorkItemEntity extends WorkItemImpl {
 				cleared = false;
 				//System.out.println(this.fullName+"uppertask"+upperTask.fullName+"not cleared");
 				break;
+			}
+			else if (upperTask.isActivated && upperTask.isCompleted) {
+				cleared = upperTask.uppertasksCleared();
+				if (!cleared) {
+					break;
+				}
 			}
 		}	
 		return cleared;

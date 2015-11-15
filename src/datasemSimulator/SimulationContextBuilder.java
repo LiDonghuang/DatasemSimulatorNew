@@ -1,7 +1,5 @@
 package datasemSimulator;
 
-import governanceModels.ValueFunction;
-
 import java.io.File;
 import java.util.HashMap;
 
@@ -40,6 +38,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import processModels.ProcessModel;
+import processModels.ValueFunction;
 
 
 public class SimulationContextBuilder {
@@ -50,7 +49,7 @@ public class SimulationContextBuilder {
 	public HashMap<Integer, ServiceProviderType> myServiceProviderTypes = new HashMap<Integer, ServiceProviderType>();
 	public HashMap<Integer, WorkItemType> myWorkItemTypes = new HashMap<Integer, WorkItemType>();
 	public HashMap<Integer, Service> myServices = new HashMap<Integer, Service>();
-	Parameters parameters;
+	public Parameters parameters;
 	public boolean VisualizationOn = true;
 	
 	public SimulationContextBuilder(File scenarioXmlFile) {
@@ -64,7 +63,7 @@ public class SimulationContextBuilder {
 		SystemOfSystems mySoS = BuildSoS(context);	
 		context.setId("DatasemSimulator");		
 		context.add(mySoS);
-		
+		// Add SPs to context
 		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
 			context.add(sp);	
 			for (ResourceEntity r : sp.getMyResourceEntities()) {
@@ -133,7 +132,9 @@ public class SimulationContextBuilder {
 			if ((wi.hierarchy==0 )) {	
 				wi.SoS.initialList.put(wi.getId(), wi);
 			}
-			// Process Model
+		}
+		// Process Model
+		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {	
 			String typeName = wi.getType().getName();
 			if (this.ModelBuilder.matches("DevelopmentOrganizationModel")) {
 				if ((typeName.matches("Inc_Cap"))||(typeName.matches("New_Cap"))) {
@@ -165,8 +166,8 @@ public class SimulationContextBuilder {
 				int c = 0;
 				for (RequiredService reqSev : wi.getRequiredServices()) {
 					double totalEfforts = reqSev.getEfforts();
-					double interval_max = 30;
-					double interval_min = 10;
+					double interval_max = 20;
+					double interval_min = 5;
 					int serviceId = reqSev.getServiceType().getId();
 					while (totalEfforts>0) {
 						c++;
@@ -187,10 +188,9 @@ public class SimulationContextBuilder {
 				}
 			}
 		}	
-		
-		
+				
 		// Complexity Algorithm
-		double ComplexityFactor = 1;
+		double ComplexityFactor = 0.5;
 		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
 			double AveragePrecedency = 1;
 			if (wi1.getType().getName().matches("SubSysReq")) {					
@@ -276,6 +276,8 @@ public class SimulationContextBuilder {
 		context.add(myKanbanBoard);
 	}
 
+	
+	
 	public void ReadXMLFile(File scenarioXmlFile) {
 		System.out.println("\nstart parsing scenario.xml...\n");
 		try {

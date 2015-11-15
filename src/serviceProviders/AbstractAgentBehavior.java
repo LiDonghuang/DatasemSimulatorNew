@@ -25,7 +25,7 @@ public class AbstractAgentBehavior {
 	}
 	public void setAgent(ServiceProviderAgent agent) {
 		this.agent = agent;
-		this.BacklogLimit = 8;
+		this.BacklogLimit = 10;
 		this.WIPLimit = 10;
 	}
 
@@ -214,7 +214,7 @@ public class AbstractAgentBehavior {
 		//System.out.println("Agent "+this.name+" checkWIsCompletion");
 		for(int i=0;i<agent.getActiveQ().size();i++) {
 			Task WI = agent.getActiveQ().get(i);
-			if (WI.getProgress()>=1.00) {
+			if ( (WI.getProgress()>=1.00) && (!WI.isSuspended) ){
 				if (WI.isAnalysisActivity) {
 					//System.out.println("\nCOMPLETED ANALYSIS @TIME:"+SoS.timeNow+" Agent "+this.name+" completed analyzing"+WI.AnalysisObject.fullName);
 					AggregationNode analysisObject = (AggregationNode)((AnalysisActivity)WI).AnalysisObject;		
@@ -260,12 +260,22 @@ public class AbstractAgentBehavior {
 	}		
 	public void DisburseWIs() {			
 		for (int i=0;i<agent.getCompleteQ().size();i++) {
-			WorkItemEntity completedWI=agent.getCompleteQ().get(i);				
+			WorkItemEntity wi=agent.getCompleteQ().get(i);				
 			//System.out.println("\nDISBURSE @TIME:"+SoS.timeNow+" Agent "+this.name+" try to disburse"+completedWI.fullName+"...");
-			if (completedWI.precedencyCleared() && completedWI.uppertasksCleared()) {
+			if (wi.getProgress() <= 0.99999) {
+				agent.getCompleteQ().remove(wi);	
+				if (wi.isAggregationNode) {
+					agent.getComplexQ().add((AggregationNode)wi);
+				}
+				else {
+					agent.getBacklogQ().add((Task)wi);
+				}				
+				i--;
+			}
+			else if (wi.uppertasksCleared()) {
 				//System.out.println("\nDISBURSE @TIME:"+SoS.timeNow+" Agent "+this.name+" disbursed"+completedWI.fullName);
-				completedWI.setEnded();	
-				agent.getCompleteQ().remove(completedWI);					
+				wi.setEnded();	
+				agent.getCompleteQ().remove(wi);					
 				i--;			
 			}
 		}

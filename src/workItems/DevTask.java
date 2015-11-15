@@ -61,6 +61,9 @@ public class DevTask extends Task {
 					((DevTask) affectedWI).rework(impact);
 					this.setChangePropagationToCount(this.getChangePropagationToCount() + 1);
 					affectedWI.setChangePropagationByCount(affectedWI.getChangePropagationByCount() + 1);
+					// Learning factor
+					double learningfactor = 0.8;
+					this.getImpactsLikelihood().put(affectedWI, likelihood*learningfactor);
 				}
 			}
 		}
@@ -79,10 +82,12 @@ public class DevTask extends Task {
 				this.isReactivated = true;	
 				this.completionTime=Integer.MIN_VALUE;
 				this.endTime=Integer.MIN_VALUE;
-				this.getAssignedAgent().getActiveQ().remove(this);
 				this.getAssignedAgent().getCompleteQ().remove(this);
 				this.getAssignedAgent().getBacklogQ().add(this);
 				//System.out.println("Re-Activate"+this.fullName+"at backlog of "+this.assignedAgent.getName());
+				for (AggregationNode upperTask : this.getUppertasks()) {
+					upperTask.updateCompletionStatus();
+				}
 			}
 		}
 	}

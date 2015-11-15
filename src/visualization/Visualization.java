@@ -183,7 +183,10 @@ public class Visualization {
 				else {
 					wItem.icon.color[0]=255;wItem.icon.color[1]=128;wItem.icon.color[2]=0;
 				}
-			}	
+			}
+			if (wItem.isEnded) {
+				wItem.icon.color[0]=0;wItem.icon.color[1]=50;wItem.icon.color[2]=0;
+			}
 		}
 	}
 	public void visualizeOrganization() {	
@@ -200,11 +203,7 @@ public class Visualization {
 			else {
 				agent.icon.color[0]=51;agent.icon.color[1]=153;agent.icon.color[2]=255;
 			}
-			count=1;
-			for (WorkItemEntity task:agent.getBacklogQ()){
-				grid2D.moveTo(task, agent.icon.location[0]+count+2,agent.icon.location[1]-2);
-				count++;
-			}
+			
 			count=1;
 			for (WorkItemEntity task:agent.getActiveQ()){
 				grid2D.moveTo(task, agent.icon.location[0]+count+2,agent.icon.location[1]-1);
@@ -214,13 +213,23 @@ public class Visualization {
 				count++;
 			}
 			count=1;
-			for (WorkItemEntity task:agent.getComplexQ()){
-				grid2D.moveTo(task, agent.icon.location[0]+count+2,agent.icon.location[1]-3);
+			for (WorkItemEntity task:agent.getBacklogQ()){
+				grid2D.moveTo(task, agent.icon.location[0]+count+2,agent.icon.location[1]-2);
 				count++;
 			}
 			count=1;
-			for (WorkItemEntity task:agent.getCompleteQ()){
-				grid2D.moveTo(task, 0,0);
+			for (WorkItemEntity wi:agent.getComplexQ()){
+				grid2D.moveTo(wi, agent.icon.location[0]+count+2,agent.icon.location[1]-3);
+				count++;
+			}
+//			count=1;
+//			for (WorkItemEntity wi:agent.getRequestedQ()){
+//				grid2D.moveTo(wi, agent.icon.location[0]+count+2,agent.icon.location[1]-4);
+//				count++;
+//			}
+			count=1;
+			for (WorkItemEntity wi:agent.getCompleteQ()){
+				grid2D.moveTo(wi, 0,0);
 			}
 //			for (WorkItemEntity task:agent.getRequestedQ()){
 //				grid2D.moveTo(task, 0,0);
@@ -307,5 +316,10 @@ public class Visualization {
 		this.commentsList.add(comments3);
 		this.context.add(comments3);
 		grid2D.moveTo(comments3, sp.icon.location[0]+1,sp.icon.location[1]-3);
+//		Comments comments4 = new Comments();
+//		comments4.addComment("Requested: "+sp.getRequestedQ().size());
+//		this.commentsList.add(comments4);
+//		this.context.add(comments4);
+//		grid2D.moveTo(comments4, sp.icon.location[0]+1,sp.icon.location[1]-4);
 	}
 }

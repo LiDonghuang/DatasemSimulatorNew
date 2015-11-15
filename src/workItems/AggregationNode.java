@@ -31,13 +31,15 @@ public class AggregationNode extends WorkItemEntity{
 //	public void triggerChanges() {
 //	}
 
-	public void checkSubTasksCompletion() {
+	public void updateCompletionStatus() {
 		if (this.isAggregationNode && !this.isCompleted) {
 			int unfinished = 0;			
 			boolean cpl = true;
 			for (WorkItemEntity subTask: this.getSubtasks()) {	
 				if (!subTask.isCompleted) {
 					cpl = false;
+					this.isCompleted = false;
+					this.completionTime = Integer.MAX_VALUE;
 					unfinished++;
 				}
 			}

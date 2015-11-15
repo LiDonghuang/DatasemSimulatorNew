@@ -1,4 +1,4 @@
-package governanceModels;
+package processModels;
 
 import org.apache.commons.math3.stat.StatUtils;
 
@@ -41,12 +41,12 @@ public class ValueFunction extends MechanismImpl {
 	}
 	
 	public void developValue(WorkItemEntity wi) {
-		if (this.type.matches("Fiat")) {
-			wi.currentValue = wi.initialValue;
-		}
 		// Derived Hierarchy
-		else if (this.type.matches("Derived")) {
+		if (this.type.matches("Derived")) {
 			algorithmDerivedValue(wi);
+		}
+		else if (this.type.matches("Fiat")) {
+			wi.currentValue = wi.initialValue;
 		}
 	}
 	

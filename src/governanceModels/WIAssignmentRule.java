@@ -14,6 +14,8 @@ import java.util.LinkedList;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.util.SimUtilities;
 import serviceProviders.ServiceProviderAgent;
+import workItems.AggregationNode;
+import workItems.Task;
 import workItems.WorkItemEntity;
 import xtext.objectsModel.Mechanism;
 import xtext.objectsModel.Service;
@@ -28,31 +30,50 @@ public class WIAssignmentRule {
 	}
 	
 	public HashMap<WorkItemEntity,ServiceProviderAgent> applyRule(ServiceProviderAgent me, LinkedList<WorkItemEntity> WIs, LinkedList<ServiceProviderAgent> SPs) {
-		//
-		LinkedList<ServiceProviderAgent> list = new LinkedList<ServiceProviderAgent>();
 		HashMap<WorkItemEntity,ServiceProviderAgent> schedule = new HashMap<WorkItemEntity,ServiceProviderAgent>(); 
-		HashMap<ServiceProviderAgent,Boolean> scheduleLimit = new HashMap<ServiceProviderAgent,Boolean>(); 
-		
-		for (ServiceProviderAgent sp:SPs) {
-			list.add(sp);
-			if (sp.getBacklogQ().size()>=sp.myBehavior.BacklogLimit) {
-				scheduleLimit.put(sp, true);
+		if (!SPs.isEmpty()) {
+		//
+			LinkedList<ServiceProviderAgent> list = new LinkedList<ServiceProviderAgent>();
+			HashMap<ServiceProviderAgent,Boolean> scheduleLimit = new HashMap<ServiceProviderAgent,Boolean>(); 		
+			
+			//LinkedList<AggregationNode> aggrList = new LinkedList<AggregationNode>();
+			LinkedList<Task> taskList = new LinkedList<Task>();
+			for (int i=0;i<WIs.size();i++) {
+				WorkItemEntity wi = WIs.get(i);
+				if (!wi.isAggregationNode) {
+					taskList.add((Task)wi);
+					WIs.remove(wi);
+					i--;
+				}
 			}
-			if (sp.getActiveQ().size()>=sp.myBehavior.WIPLimit) {
-				scheduleLimit.put(sp, true);
+			me.myStrategy.applyWorkPrioritization(me, taskList);
+			for (WorkItemEntity wi:taskList) {
+//				if (wi.precedencyCleared()) {
+					WIs.add(wi);
+//				}	
 			}
-			scheduleLimit.put(sp, false);
-		}			
-		if (!SPs.isEmpty()) {	
+			
+			for (ServiceProviderAgent sp:SPs) {
+				list.add(sp);
+				if (sp.getBacklogQ().size()>=sp.myBehavior.BacklogLimit) {
+					scheduleLimit.put(sp, true);
+				}
+				if (sp.getActiveQ().size()>=sp.myBehavior.WIPLimit) {
+					scheduleLimit.put(sp, true);
+				}
+				scheduleLimit.put(sp, false);
+			}
 			if (this.ruleValue.matches("Neutral")) {
 				for (WorkItemEntity wi:WIs) {
 					LinkedList<ServiceProviderAgent> candidates = me.findServiceProviders(wi, list);
 					if (!candidates.isEmpty()) {
-//						for (ServiceProviderAgent sp:candidates) {
-//							if (scheduleLimit.get(sp)) {
-//								candidates.remove(sp);
-//							}
-//						}
+						for (int i=0;i<candidates.size();i++) {
+							ServiceProviderAgent sp = candidates.get(i);
+							if (scheduleLimit.get(sp)) {
+								candidates.remove(sp);
+								i--;
+							}
+						}
 						SimUtilities.shuffle(candidates, RandomHelper.getUniform()); 
 						ServiceProviderAgent selectedSP = candidates.getFirst();
 						schedule.put(wi, selectedSP);
@@ -64,11 +85,13 @@ public class WIAssignmentRule {
 				for (WorkItemEntity wi:WIs) {
 					LinkedList<ServiceProviderAgent> candidates = me.findServiceProviders(wi, list);
 					if (!candidates.isEmpty()) {
-//						for (ServiceProviderAgent sp:candidates) {
-//							if (scheduleLimit.get(sp)) {
-//								candidates.remove(sp);
-//							}
-//						}
+						for (int i=0;i<candidates.size();i++) {
+							ServiceProviderAgent sp = candidates.get(i);
+							if (scheduleLimit.get(sp)) {
+								candidates.remove(sp);
+								i--;
+							}
+						}
 						Collections.sort(candidates, new LessPredictedLoad());
 						ServiceProviderAgent selectedSP = candidates.getFirst();
 						schedule.put(wi, selectedSP);
@@ -84,11 +107,13 @@ public class WIAssignmentRule {
 					this.currentService = me.SoS.myServices.get(currentWI.serviceId);
 					LinkedList<ServiceProviderAgent> candidates = me.findServiceProviders(wi, list);
 					if (!candidates.isEmpty()) {
-//						for (ServiceProviderAgent sp:candidates) {
-//							if (scheduleLimit.get(sp)) {
-//								candidates.remove(sp);
-//							}
-//						}
+						for (int i=0;i<candidates.size();i++) {
+							ServiceProviderAgent sp = candidates.get(i);
+							if (scheduleLimit.get(sp)) {
+								candidates.remove(sp);
+								i--;
+							}
+						}
 						Collections.sort(candidates, new ExtendedCapacity());
 						ServiceProviderAgent selectedSP = candidates.getFirst();
 						schedule.put(wi, selectedSP);
