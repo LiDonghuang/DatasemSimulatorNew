@@ -13,30 +13,50 @@ import workItems.DevTask;
 import workItems.Task;
 import workItems.WorkItemEntity;
 
-public class AbstractAgentBehavior {
-	
-	public HashMap<Integer,String> StatesMap;
+public class AbstractAgentBehavior {	
+	public HashMap<Integer,String> StepsMap;
 	public HashMap<Integer,String> ActionsMap;
 	public ServiceProviderAgent agent;		
 	public int WIPLimit = Integer.MAX_VALUE;
 	public int BacklogLimit = Integer.MAX_VALUE;
 	
 	public AbstractAgentBehavior() {
+		this.StepsMap = new HashMap<Integer,String>();
+		addStep(1, "CheckRequestedQ");
+		addStep(2, "MakeAssignments");
+		addStep(3, "SelectWIsToStart");
+		addStep(4, "AdvanceWIsProgress");
+		addStep(5, "TriggerWIsChanges");
+		addStep(6, "CheckWIsCompletion");
+		addStep(7, "CheckAggregationNodesCompletion");
+		addStep(8, "DisburseWIs");
+		addStep(9, "EndState");
 	}
 	public void setAgent(ServiceProviderAgent agent) {
 		this.agent = agent;
 		this.BacklogLimit = 10;
 		this.WIPLimit = 10;
 	}
-
-	public void GoToState(int n) {
-		switch(StatesMap.get(n)) {
-			case "CheckRequestedQ": CheckRequestedQ();
-			case "MakeAssignments": MakeAssignments();
-			case "SelectWIsToStart": SelectWIsToStart();
-			case "AdvanceWIsProgress": AdvanceWIsProgress();
-			case "TriggerWIsChanges": TriggerWIsChanges();
-			case "CheckWIsCompletion": CheckWIsCompletion();
+	public void addStep(int key,String state) {
+		this.StepsMap.put(key, state);
+	}
+	public void addAction(int key,String action) {
+		this.ActionsMap.put(key, action);
+	}
+	public void GoToStep(int n) {
+		if (StepsMap.containsKey(n)) {
+			//System.out.println(agent.getName()+" step code: "+n+" step "+StepsMap.get(n));
+			switch(StepsMap.get(n)) {		
+				case "CheckRequestedQ": CheckRequestedQ(); break;
+				case "MakeAssignments": MakeAssignments(); break;
+				case "SelectWIsToStart": SelectWIsToStart(); break;
+				case "AdvanceWIsProgress": AdvanceWIsProgress();  break;
+				case "TriggerWIsChanges": TriggerWIsChanges(); break;
+				case "CheckWIsCompletion": CheckWIsCompletion(); break;
+				case "CheckAggregationNodesCompletion": CheckAggregationNodesCompletion(); break;
+				case "DisburseWIs": DisburseWIs(); break;
+				case "EndState": EndState(); break;
+			}
 		}
 	}
 	public void DoAction(int n, AbstractClass Object) {
@@ -57,14 +77,10 @@ public class AbstractAgentBehavior {
 			case "releaseSubtasks": Action(Object);
 		}
 	}
-	public boolean CheckCondition(String condition) {
-		
+	public boolean CheckCondition(String condition) {	
 		return false;
 	}
-	public void StatementImpl(String statement) {
-		
-	}
-	
+
 	public void DoAction(int n) {
 		switch(ActionsMap.get(n)) {
 		}
@@ -131,17 +147,14 @@ public class AbstractAgentBehavior {
 		agent.NowRequested.clear();
 		LinkedList<ServiceProviderAgent> candidates = agent.assignWITo;
 		HashMap<WorkItemEntity,ServiceProviderAgent> schedule = 
-				agent.myStrategy.applyContractorSelection(agent, agent.getAssignmentQ(), candidates);
+				agent.myStrategy.applyAgentSelection(agent, agent.getAssignmentQ(), candidates);
 		for (WorkItemEntity wi: schedule.keySet()) {
 			ServiceProviderAgent selectedSP = schedule.get(wi);
 			agent.NowRequested.add(selectedSP);
 			agent.requestService(wi, selectedSP);
-			if (wi.isAggregationNode) {
-				agent.getAssignmentQ().remove(wi);
-			}
-			else {
-				agent.getAssignmentQ().remove(wi);
-			}
+
+			agent.getAssignmentQ().remove(wi);
+
 			//System.out.println(agent.getName()+" assigned"+wi.fullName+"to "+selectedSP.getName());
 			selectedSP.tempQ.clear();
 			//selectedSP.checkRequestedQ();
@@ -285,8 +298,7 @@ public class AbstractAgentBehavior {
 	}
 
 	public String acceptanceDecision(WorkItemEntity requestedWI) {
-		String decision = "Decline";
-		
+		String decision = "Decline";		
 		if (requestedWI.isAggregationNode) {
 			double capacity = ((AggregationNode)requestedWI).calculateServiceCapacity(agent);	
 			if (capacity>0) {
@@ -342,7 +354,7 @@ public class AbstractAgentBehavior {
 				}
 			}
 			else if (agent.getBacklogQ().size()>=this.BacklogLimit) {
-					decision = "Decline";
+				decision = "Decline";
 				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to BacklogLimit");		
 			}
 			else {

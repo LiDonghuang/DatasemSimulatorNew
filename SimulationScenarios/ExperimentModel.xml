@@ -58,7 +58,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -68,15 +68,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="1" name="S_SysEng.1" description="">
@@ -104,7 +106,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -114,15 +116,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="4" name="SysEng.1" description="">
@@ -149,7 +153,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -159,15 +163,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="7" name="SysEng.1" description="">
@@ -194,7 +200,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -204,15 +210,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="10" name="SysEng.1" description="">
@@ -240,7 +248,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -250,15 +258,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="13" name="SysEng.1" description="">
@@ -286,7 +296,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -296,15 +306,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="16" name="SysEng.1" description="">
@@ -332,7 +344,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -342,15 +354,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="19" name="SysEng.1" description="">
@@ -385,7 +399,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -395,15 +409,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="24" name="Elec_Eng.1" description="">
@@ -443,7 +459,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -453,15 +469,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="30" name="Elec_Eng.1" description="">
@@ -501,7 +519,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -511,15 +529,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="36" name="Elec_Eng.1" description="">
@@ -554,7 +574,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -564,15 +584,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="41" name="Elec_Eng.1" description="">
@@ -607,7 +629,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -617,15 +639,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="46" name="Elec_Eng.1" description="">
@@ -660,7 +684,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -670,15 +694,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="51" name="IT_Mng.1" description="">
@@ -741,7 +767,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -751,15 +777,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="58" name="IT_Mng.1" description="">
@@ -806,7 +834,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -816,15 +844,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="63" name="IT_Mng.1" description="">
@@ -871,7 +901,7 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		<GovernanceStrategy>
+		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="ValueFunction" value="Derived">
 		<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
@@ -881,15 +911,17 @@
 		<Attribute name="BacklogLimit" value="8"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Selection" value="RPW">
-		<Attribute name="Weight_Precedency" value="0.3"></Attribute> 
-		<Attribute name="Weight_COS" value="0.25"></Attribute> 
-		<Attribute name="Weight_Progress" value="0.1"></Attribute> 
+		<Attribute name="WeightPrecedency" value="0.3"></Attribute> 
+		<Attribute name="WeightCOS" value="0.25"></Attribute> 
+		<Attribute name="WeightProgress" value="0.1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		<Mechanism name="Allocation" value="LeastLoad">
+		<Mechanism name="Allocation" value="BestMatch">
+		<Attribute name="WeightEfficiency" value="0.5"></Attribute> 
+		<Attribute name="WeightMultiSkill" value="0.5"></Attribute> 
 		</Mechanism>
-		</Mechanisms>		
+		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="68" name="Tester.1" description="">

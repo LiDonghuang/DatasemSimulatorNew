@@ -42,8 +42,9 @@ public class Task extends WorkItemEntity{
 	}
 	public void advanceProgress() {
 		// ------------ Compute WI Progress (percentage) -----------	
-		if (this.isStarted) {
-			progressRate = this.getServiceEfficiency() / efforts;															
+		if (this.isStarted) {		
+			progressRate = this.getServiceEfficiency() / efforts;		
+			//System.out.println(this.getName()+" at "+this.getAllocatedResources().get(0).getName()+" progress rate "+this.progressRate);
 			setProgress(getProgress() + progressRate + 0.000001);					
 			if (getProgress() >= 1) {			
 				setProgress(1.00);	

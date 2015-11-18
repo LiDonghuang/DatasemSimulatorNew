@@ -26,16 +26,16 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 	}
 	
 	public void implementAgentStrategy(GovernanceStrategy myGovernanceStrategy) {
-		myGovernanceStrategy.setType("Pull");
-		if (myGovernanceStrategy.getType().matches("CNP")) {
+		if (myGovernanceStrategy.getType().matches("cnp")) {
 			new ContractNetProtocol(myGovernanceStrategy);
 			this.isCNP = true;
+			this.implementPullStrategy(myGovernanceStrategy);
 		}
-		else if (myGovernanceStrategy.getType().matches("Pull")){
+		else if (myGovernanceStrategy.getType().matches("pull")){
 			this.implementPullStrategy(myGovernanceStrategy);
 			this.isPull = true;
 		}	
-		else if (myGovernanceStrategy.getType().matches("Push")){
+		else if (myGovernanceStrategy.getType().matches("push")){
 			this.implementPullStrategy(myGovernanceStrategy);
 			this.isPush = true;
 		}
@@ -77,7 +77,7 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 	public LinkedList<Task> applyWorkPrioritization(ServiceProviderAgent sp,LinkedList<Task> queue) {		
 		return this.mySelectionRule.applyRule(sp, queue);		
 	}
-	public HashMap<WorkItemEntity, ServiceProviderAgent> applyContractorSelection(ServiceProviderAgent me, LinkedList<WorkItemEntity> WIs, LinkedList<ServiceProviderAgent> SPs) {
+	public HashMap<WorkItemEntity, ServiceProviderAgent> applyAgentSelection(ServiceProviderAgent me, LinkedList<WorkItemEntity> WIs, LinkedList<ServiceProviderAgent> SPs) {
 		return this.myAssignmentRule.applyRule(me, WIs, SPs);
 	}
 }

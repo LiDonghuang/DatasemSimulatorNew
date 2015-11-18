@@ -133,7 +133,7 @@ public class Visualization {
 								wItemsTask.icon.location[1] = wItem.icon.location[1]-s2*2-2;
 								gridWIN.moveTo(wItemsTask, wItemsTask.icon.location[0], wItemsTask.icon.location[1]);
 								s1++;
-								if (s1==SoS.WINComplexity){
+								if (s1==(SoS.WINComplexity-1)){
 									s1=0;s2++;
 								}
 							}

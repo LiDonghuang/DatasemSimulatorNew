@@ -269,7 +269,7 @@ public class SimulationContextBuilder {
 		if (VisualizationOn && (numReplications==1)) {
 			System.out.print("\ninitializing visualization...\n");
 			new Visualization(context,mySoS);
-			mySoS.printSoSInformation();		
+			//mySoS.printSoSInformation();		
 		}
 		KanbanBoard myKanbanBoard = new KanbanBoard(mySoS);
 		mySoS.myKanbanBoard = myKanbanBoard;
@@ -391,8 +391,20 @@ public class SimulationContextBuilder {
 		myServiceProvider.setId(id);
 		myServiceProvider.setName(name);	
 		myServiceProvider.setType(myServiceProviderTypes.get(spId));
+		
 		// GovernanceStrategy
-		GovernanceStrategy myGovernanceStrategy = ObjectsModelFactory.eINSTANCE.createGovernanceStrategy(); 
+		Node stg_node = e.getElementsByTagName("GovernanceStrategy").item(0);
+		Element stg_element = (Element)stg_node;
+		String stgType = stg_element.getAttribute("type");
+		GovernanceStrategy myGovernanceStrategy = ObjectsModelFactory.eINSTANCE.createGovernanceStrategy(); 		
+		myGovernanceStrategy.setType(stgType);
+		//System.out.println(myServiceProvider.getName()+" strategy:"+myGovernanceStrategy.getType());
+		if (stgType.matches("cnp")) {
+			
+		}
+		else if (stgType.matches("pull")) {
+			
+		}
 		Node mechanisms_node = e.getElementsByTagName("Mechanisms").item(0);
 		Element mechanisms_element = (Element)mechanisms_node;
 		NodeList mechanism_nodeList = mechanisms_element.getElementsByTagName("Mechanism");
@@ -417,8 +429,9 @@ public class SimulationContextBuilder {
 				myAttribute.setValue(attribute_value);
 				myMechanism.getAttributes().add(myAttribute);
 			}
-			myGovernanceStrategy.getMechanisms().add(myMechanism);
+			myGovernanceStrategy.getMechanisms().add(myMechanism);			
 		}
+		
 		myServiceProvider.setGovernanceStrategy(myGovernanceStrategy);
 		myServiceProviders.put(id, myServiceProvider);
 		// Resources

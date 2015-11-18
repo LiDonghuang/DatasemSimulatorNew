@@ -10,6 +10,8 @@ import java.util.HashMap;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
 
+import contractNetProtocol.ContractorBehavior;
+import contractNetProtocol.ManagerBehavior;
 import datasemSimulator.SystemOfSystems;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.util.ContextUtils;
@@ -78,47 +80,59 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		this.myServiceProvider = ServiceProvider;
 		this.name = ServiceProvider.getName();
 		this.id = ServiceProvider.getId();
+		this.type = ServiceProvider.getType();
 		this.typeId = ServiceProvider.getType().getId();
 		this.hierarchy = ServiceProvider.getType().getHierarchy();
 		this.myStrategy = new AgentStrategy(ServiceProvider.getGovernanceStrategy());
-		this.myBehavior = new AbstractAgentBehavior();this.myBehavior.setAgent(this);
+		if (myStrategy.isCNP) {
+			if (this.type.getName().matches("DevTeam")) {
+				this.myBehavior = new ContractorBehavior();
+			}
+			else {
+				this.myBehavior = new ManagerBehavior();
+			}
+		}
+		else {
+			this.myBehavior = new AbstractAgentBehavior();
+		}
+		this.myBehavior.setAgent(this);
 	}
 	
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-1)
 	public void step_1() {
-		myBehavior.CheckRequestedQ();
+		myBehavior.GoToStep(1);
 	}
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-2)
 	public void step_2() {
-		myBehavior.MakeAssignments();
+		myBehavior.GoToStep(2);
 	}
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-3)
 	public void step_3() {
-		myBehavior.SelectWIsToStart();
+		myBehavior.GoToStep(3);
 	}
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-4)	
 	public void step_4() {
-		myBehavior.AdvanceWIsProgress();
+		myBehavior.GoToStep(4);
 	}
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-5)	
 	public void step_5() {
-		myBehavior.TriggerWIsChanges();
+		myBehavior.GoToStep(5);
 	}
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-6)	
 	public void step_6() {
-		myBehavior.CheckWIsCompletion();
+		myBehavior.GoToStep(6);
 	}
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-7)	
 	public void step_7() {
-		myBehavior.CheckAggregationNodesCompletion();
+		myBehavior.GoToStep(7);
 	}
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-8)	
 	public void step_8() {
-		myBehavior.DisburseWIs();
+		myBehavior.GoToStep(8);
 	}
 	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-9)	
 	public void step_9() {
-		myBehavior.EndState();
+		myBehavior.GoToStep(9);
 	}
 	
 	
