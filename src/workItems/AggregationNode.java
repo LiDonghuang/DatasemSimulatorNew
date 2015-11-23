@@ -20,8 +20,14 @@ public class AggregationNode extends WorkItemEntity{
 	public AggregationNode(WorkItem wi) {
 		super(wi);
 		this.isAggregationNode = true;		
-		this.serviceId = wi.getRequiredAnalysis().get(0).getServiceType().getId();
-		this.efforts = wi.getRequiredAnalysis().get(0).getEfforts();	
+		if (wi.getRequiredAnalysis().size()>0) {
+			this.serviceId = wi.getRequiredAnalysis().get(0).getServiceType().getId();
+			this.efforts = wi.getRequiredAnalysis().get(0).getEfforts();
+		}
+		else {
+			this.serviceId = wi.getRequiredServices().get(0).getServiceType().getId();
+			this.efforts = wi.getRequiredServices().get(0).getEfforts();
+		}
 		this.totalAnalysisStage = wi.getRequiredAnalysis().size();
 	}
 	
@@ -73,7 +79,14 @@ public class AggregationNode extends WorkItemEntity{
 		return s;
 	}
 	public String getProcessStage(int stageNumber) {
-		return this.processModel.stages.get(stageNumber).name;
+		String s;
+		if (this.hasProcessModel) {
+			s = this.processModel.stages.get(stageNumber).name;
+		}
+		else {
+			s = "N/A";
+		}
+		return s;
 	}
 	public String getCurrentProcessStage() {
 		return this.getProcessStage(currentProcessStage);

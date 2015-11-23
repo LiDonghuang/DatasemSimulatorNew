@@ -102,11 +102,6 @@ public class Visualization {
 				c++;
 			}
 		}
-//		for (ServiceProviderAgent agent : SoS.myServiceProviderAgents.values()) {
-//			for (ServiceProviderAgent target:agent.assignWITo) {
-//				netOrg_Hierarchy.addEdge(agent, target);
-//			}
-//		}
 	}
 
 	public void visualizeWorkItemNetwork() {
@@ -117,9 +112,9 @@ public class Visualization {
 				int hierarchy = wItem.hierarchy;
 				count[hierarchy]++;
 				//wItem.icon.location[0] = count[hierarchy]* (int)(Math.pow((SoS.WINLevels-hierarchy),2)-2*(SoS.WINLevels-hierarchy+1));
-				if (wItem.hierarchy!=SoS.WINLevels-1) {
-					wItem.icon.location[0] = (int)( (count[hierarchy]-0.5) * Math.pow(SoS.WINComplexity-1,SoS.WINLevels-hierarchy) );
-					wItem.icon.location[1] = gridWINsize[1]-10-hierarchy*10;	
+				if (wItem.hierarchy!=0) {
+					wItem.icon.location[0] = (int)( (count[hierarchy]-0.5) * Math.pow(SoS.WINComplexity-1,hierarchy+1) );
+					wItem.icon.location[1] = 30+hierarchy*10;	
 					//System.out.println(wItem.getName()+" "+wItem.icon.location[0]+" "+wItem.icon.location[1]);
 					gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
 				}
@@ -128,7 +123,7 @@ public class Visualization {
 					for (int i=0;i<((AggregationNode)wItem).getSubtasks().size();i++) {
 						WorkItemEntity wItemsTask = ((AggregationNode)wItem).getSubtasks().get(i);						
 						if ( SoS.arrivedList.containsKey(wItemsTask.getId()) ){
-							if (wItemsTask.hierarchy==(SoS.WINLevels-1)) {								
+							if (wItemsTask.hierarchy==0) {								
 								wItemsTask.icon.location[0] = wItem.icon.location[0]+s1*2;
 								wItemsTask.icon.location[1] = wItem.icon.location[1]-s2*2-2;
 								gridWIN.moveTo(wItemsTask, wItemsTask.icon.location[0], wItemsTask.icon.location[1]);
@@ -185,7 +180,7 @@ public class Visualization {
 				}
 			}
 			if (wItem.isEnded) {
-				wItem.icon.color[0]=0;wItem.icon.color[1]=50;wItem.icon.color[2]=0;
+				wItem.icon.color[0]=50;wItem.icon.color[1]=100;wItem.icon.color[2]=50;
 			}
 		}
 	}
@@ -255,7 +250,7 @@ public class Visualization {
 		this.SoS.myKanbanBoard.clearBoard();
 		
 		for (WorkItemEntity wi:this.SoS.arrivedList.values()) {
-			if ( (wi.hierarchy==0) || (wi.hierarchy < (SoS.WINLevels-2)) ) {
+			if ( (wi.hierarchy == SoS.WINLevels-1)) {
 				this.SoS.myKanbanBoard.addCapability(wi);
 			}
 		}

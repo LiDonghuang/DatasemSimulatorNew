@@ -335,7 +335,7 @@ public class WorkItemEntity extends WorkItemImpl {
 		this.leadTime = this.endTime - this.activatedTime + 1;	
 		this.removeFromSuccessorTasks();
 				
-		if (this.hierarchy==0 ) {
+		if (this.hierarchy==this.SoS.WINLevels-1 ) {
 			this.SoS.initialList.remove(this.getId());	
 			this.SoS.endedList.put(this.getId(), this);
 			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.currentValue+" stakeholder value");

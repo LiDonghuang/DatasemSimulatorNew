@@ -1,7 +1,7 @@
 package workItems;
 
 public class AnalysisActivity extends Task{
-	public WorkItemEntity AnalysisObject;
+	public AggregationNode AnalysisObject;
 	protected boolean isAggregationNode = false;
 
 	public AnalysisActivity (AggregationNode aggrNode) {	

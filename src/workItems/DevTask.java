@@ -17,8 +17,8 @@ public class DevTask extends Task {
 		this.SoS = upperTask.SoS;
 		upperTask.getSubtasks().add(this);
 		this.id = id;
-		this.name = name;
-		this.typeId = SoS.getWorkItemTypeId("DevTask");
+		this.name = name;		
+		this.typeId = this.SoS.getWorkItemTypeId("DevTask");
 		this.myType = SoS.myWorkItemTypes.get(typeId);
 		this.hierarchy = this.myType.getHierarchy();		
 		this.serviceId = serviceId;

@@ -8,13 +8,13 @@
 <ServiceProviderType spTypeId="4" hierarchy="2" name="CntrTeam" description="Outsourced Contractor"></ServiceProviderType>
 </ServiceProviderTypes>
 <WorkItemTypes>
-<WorkItemType wiTypeId="1" hierarchy="0" name="SoSCap" description="System-of-Systems Capability"></WorkItemType>
-<WorkItemType wiTypeId="2" hierarchy="1" name="SysFuncCap" description="System Functional Capability"></WorkItemType>
-<WorkItemType wiTypeId="3" hierarchy="1" name="SysOperCap" description="System Operational Capability"></WorkItemType>
-<WorkItemType wiTypeId="4" hierarchy="2" name="SubSysReq" description="Subsystem Requirement"></WorkItemType>
-<WorkItemType wiTypeId="5" hierarchy="3" name="DevTask" description="General Development Task"></WorkItemType>
-<WorkItemType wiTypeId="6" hierarchy="3" name="Analysis" description="decomposites Decomposition Analysis"></WorkItemType>
-<WorkItemType wiTypeId="7" hierarchy="3" name="Resolution" description="Bottleneck Resolution"></WorkItemType>
+<WorkItemType wiTypeId="1" hierarchy="3" name="SoSCap" description="System-of-Systems Capability"></WorkItemType>
+<WorkItemType wiTypeId="2" hierarchy="2" name="SysFuncCap" description="System Functional Capability"></WorkItemType>
+<WorkItemType wiTypeId="3" hierarchy="2" name="SysOperCap" description="System Operational Capability"></WorkItemType>
+<WorkItemType wiTypeId="4" hierarchy="1" name="SubSysReq" description="Subsystem Requirement"></WorkItemType>
+<WorkItemType wiTypeId="5" hierarchy="0" name="DevTask" description="General Development Task"></WorkItemType>
+<WorkItemType wiTypeId="6" hierarchy="0" name="Analysis" description="decomposites Decomposition Analysis"></WorkItemType>
+<WorkItemType wiTypeId="7" hierarchy="0" name="Resolution" description="Bottleneck Resolution"></WorkItemType>
 </WorkItemTypes>
 <Services>
 <Service serviceId="1" name="SoSE" description="System-of-Systems Engineering"></Service>
@@ -961,6 +961,7 @@
 			<GovernanceAttributes>
 			<GovernanceAttribute name="Value" value="4500.0"></GovernanceAttribute>
 			<GovernanceAttribute name="ArrivalTime" value="1"></GovernanceAttribute>
+			<GovernanceAttribute name="DueDate" value="601"></GovernanceAttribute>
 			</GovernanceAttributes>
 			<Subtasks>
 			<workItemId>3</workItemId>
@@ -979,6 +980,7 @@
 			<GovernanceAttributes>
 			<GovernanceAttribute name="Value" value="3000.0"></GovernanceAttribute>
 			<GovernanceAttribute name="ArrivalTime" value="201"></GovernanceAttribute>
+			<GovernanceAttribute name="DueDate" value="801"></GovernanceAttribute>
 			</GovernanceAttributes>
 			<Subtasks>
 			<workItemId>6</workItemId>
@@ -1106,9 +1108,11 @@
 			<RequiredServices>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="9" name="R1" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="9" name="R1" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="11" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
@@ -1130,9 +1134,11 @@
 			<RequiredService serviceId="11" efforts="40.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="10" name="R2" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="10" name="R2" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="9" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="11" likelihood="0.2" risk="0.2"></Impact>
@@ -1154,9 +1160,11 @@
 			<RequiredService serviceId="14" efforts="15.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="11" name="R3" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="11" name="R3" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="9" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="17" likelihood="0.2" risk="0.2"></Impact>
@@ -1184,9 +1192,11 @@
 			<RequiredService serviceId="11" efforts="20.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="12" name="R4" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="12" name="R4" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="10" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
@@ -1214,9 +1224,11 @@
 			<RequiredService serviceId="11" efforts="50.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="13" name="R5" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="13" name="R5" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="14" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="9" likelihood="0.5" risk="0.2"></Impact>
@@ -1240,9 +1252,11 @@
 			<RequiredService serviceId="8" efforts="60.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="14" name="R6" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="14" name="R6" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="15" likelihood="0.7" risk="0.2"></Impact>
 			<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
@@ -1259,9 +1273,11 @@
 			<RequiredService serviceId="11" efforts="40.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="15" name="R7" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="15" name="R7" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="14" likelihood="0.7" risk="0.2"></Impact>
 			<Impact workItemId="22" likelihood="0.2" risk="0.4"></Impact>
@@ -1278,9 +1294,11 @@
 			<RequiredService serviceId="12" efforts="30.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="16" name="R8" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="16" name="R8" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="9" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
@@ -1298,9 +1316,11 @@
 			<RequiredService serviceId="11" efforts="20.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="17" name="R9" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="17" name="R9" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="15" likelihood="0.2" risk="0.2"></Impact>
@@ -1319,9 +1339,11 @@
 			<RequiredService serviceId="11" efforts="20.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="18" name="R10" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="18" name="R10" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="11" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="14" likelihood="0.2" risk="0.2"></Impact>
@@ -1347,9 +1369,11 @@
 			<RequiredService serviceId="11" efforts="60.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="19" name="R11" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="19" name="R11" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="14" likelihood="0.2" risk="0.2"></Impact>
@@ -1371,9 +1395,11 @@
 			<RequiredService serviceId="11" efforts="40.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="20" name="R12" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="20" name="R12" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
 			</Impacts>
@@ -1385,9 +1411,11 @@
 			<RequiredService serviceId="9" efforts="50.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="21" name="R13" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="21" name="R13" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
@@ -1410,9 +1438,11 @@
 			<RequiredService serviceId="11" efforts="40.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="22" name="R14" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="22" name="R14" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="23" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="25" likelihood="0.2" risk="0.2"></Impact>
@@ -1427,9 +1457,11 @@
 			<RequiredService serviceId="10" efforts="35.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="23" name="R15" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="23" name="R15" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="22" likelihood="0.2" risk="0.6"></Impact>
 			<Impact workItemId="24" likelihood="0.2" risk="0.6"></Impact>
@@ -1443,9 +1475,11 @@
 			<RequiredService serviceId="11" efforts="40.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="24" name="R16" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="24" name="R16" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="22" likelihood="0.2" risk="0.2"></Impact>
@@ -1462,9 +1496,11 @@
 			<RequiredService serviceId="11" efforts="50.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="25" name="R17" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="25" name="R17" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="23" likelihood="0.2" risk="0.2"></Impact>
@@ -1480,9 +1516,11 @@
 			<RequiredService serviceId="11" efforts="20.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="26" name="R18" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="26" name="R18" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="21" likelihood="0.2" risk="0.2"></Impact>
@@ -1505,9 +1543,11 @@
 			<RequiredService serviceId="11" efforts="40.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="27" name="R19" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="27" name="R19" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="15" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="16" likelihood="0.2" risk="0.2"></Impact>
@@ -1528,9 +1568,11 @@
 			<RequiredService serviceId="11" efforts="20.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="28" name="R20" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="28" name="R20" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="16" likelihood="0.3" risk="0.2"></Impact>
 			<Impact workItemId="26" likelihood="0.3" risk="0.2"></Impact>
@@ -1549,9 +1591,11 @@
 			<RequiredService serviceId="14" efforts="40.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="29" name="R21" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
+		<WorkItem wiId="29" name="R21" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<RequiredAnalysis>
 			<RequiredService serviceId="7" efforts="30.0"></RequiredService>
 			<RequiredService serviceId="5" efforts="30.0"></RequiredService>
@@ -1561,9 +1605,11 @@
 			<RequiredService serviceId="16" efforts="100.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="30" name="R22" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="30" name="R22" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="31" likelihood="0.2" risk="0.2"></Impact>
 			<Impact workItemId="32" likelihood="0.2" risk="0.2"></Impact>
@@ -1582,9 +1628,11 @@
 			<RequiredService serviceId="14" efforts="55.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="31" name="R23" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
+		<WorkItem wiId="31" name="R23" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<RequiredAnalysis>
 			<RequiredService serviceId="7" efforts="30.0"></RequiredService>
 			<RequiredService serviceId="5" efforts="30.0"></RequiredService>
@@ -1597,9 +1645,11 @@
 			<RequiredService serviceId="16" efforts="40.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="32" name="R24" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="true">
+		<WorkItem wiId="32" name="R24" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="20" likelihood="0.4" risk="0.2"></Impact>
 			<Impact workItemId="21" likelihood="0.4" risk="0.2"></Impact>
@@ -1617,12 +1667,14 @@
 			<RequiredService serviceId="16" efforts="100.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
-		<WorkItem wiId="33" name="R25" typeId="4" isAggregationNode="false" hasPredecessors="true" hasImpacts="true">
+		<WorkItem wiId="33" name="R25" typeId="4" isAggregationNode="true" hasPredecessors="true" hasImpacts="true">
 			<GovernanceAttributes>
 			</GovernanceAttributes>
 			<Predecessors>
 			<workItemId>32</workItemId>
 			</Predecessors>
+			<Subtasks>
+			</Subtasks>
 			<Impacts>
 			<Impact workItemId="25" likelihood="0.4" risk="0.2"></Impact>
 			<Impact workItemId="26" likelihood="0.4" risk="0.2"></Impact>

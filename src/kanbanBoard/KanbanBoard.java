@@ -22,7 +22,7 @@ public class KanbanBoard {
 		this.Capabilities.clear();
 	}
 	public void updateElements() {	
-		addElement(0,0,"Capability\n ",10,255,255);
+		addElement(0,0,"WorkItem\n ",10,255,255);
 		addElement(1,0,"\nType /"+"\nLife Cycle\nModel",10,255,255);
 		addElement(2,0,"Phase\n ",10,255,255);
 		addElement(3,0,"Activation\nTime",20,255,255);	
@@ -33,7 +33,8 @@ public class KanbanBoard {
 		int c=1;
 		double value;
 		int r=0;int g=0;int b=0;
-		for (WorkItemEntity myCap:Capabilities) {
+		for (int i=0;i<Capabilities.size();i++) {
+			WorkItemEntity myCap = Capabilities.get(i);
 			if (myCap.isStarted) {
 				if (myCap.getProgress() < myCap.getPreviousProgress()) {
 					r=255;g=0;b=0;

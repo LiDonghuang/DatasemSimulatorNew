@@ -50,7 +50,7 @@ public class SimulationContextBuilder {
 	public HashMap<Integer, WorkItemType> myWorkItemTypes = new HashMap<Integer, WorkItemType>();
 	public HashMap<Integer, Service> myServices = new HashMap<Integer, Service>();
 	public Parameters parameters;
-	public boolean VisualizationOn = true;
+	public String Visualization;
 	
 	public SimulationContextBuilder(File scenarioXmlFile) {
 		this.ReadXMLFile(scenarioXmlFile);
@@ -115,6 +115,7 @@ public class SimulationContextBuilder {
 		ProcessModel MyProcess = new ProcessModel("My\nProcess");
 		MyProcess.addStage(1,"Analysis");
 		MyProcess.addStage(2,"Development");
+		
 		// ValueFunction
 		Mechanism valueMechanism1 = ObjectsModelFactory.eINSTANCE.createMechanism();
 		valueMechanism1.setName("ValueFunction");valueMechanism1.setValue("Derived");
@@ -129,39 +130,22 @@ public class SimulationContextBuilder {
 		
 		// Initial Assignment
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
-			if ((wi.hierarchy==0 )) {	
+			if ((wi.hierarchy== mySoS.WINLevels-1 )) {	
 				wi.SoS.initialList.put(wi.getId(), wi);
 			}
 		}
 		// Process Model
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {	
 			String typeName = wi.getType().getName();
-			if (this.ModelBuilder.matches("DevelopmentOrganizationModel")) {
-				if ((typeName.matches("Inc_Cap"))||(typeName.matches("New_Cap"))) {
-					((AggregationNode)wi).setProcessModel(WaterfallModel);
-				}
+			if (wi.isAggregationNode) {
+				((AggregationNode)wi).setProcessModel(MyProcess);
 			}
-			else if (this.ModelBuilder.matches("ThreeProgrammersThreeTasksModel")) {
-				if (typeName.matches("Requirement")) {
-					((AggregationNode)wi).setProcessModel(MyProcess);
-				}
-			}
-			else if (this.ModelBuilder.matches("AerospaceAndDefenceProjects")) {
-				if (typeName.matches("SoSCap")) {
-					((AggregationNode)wi).setProcessModel(CEProcessModel);
-				}
-				else if ((typeName.matches("SysFuncCap"))||(typeName.matches("SysOperCap"))) {
-					((AggregationNode)wi).setProcessModel(CEProcessModel);
-				}
-			}
-			else {
-				if (wi.isAggregationNode) {
-					((AggregationNode)wi).setProcessModel(MyProcess);
-				}
-			}
-			// Auto Decompose
+		}
+		
+		// Auto Decompose
+		double ComplexityFactor = 0.5;
+		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {				
 			if (wi.getType().getName().matches("SubSysReq")) {
-				wi.isAggregationNode = true;
 				wi = (AggregationNode)wi;
 				int c = 0;
 				for (RequiredService reqSev : wi.getRequiredServices()) {
@@ -181,41 +165,34 @@ public class SimulationContextBuilder {
 						}
 						int currentId = mySoS.getWICount();
 						int st_id = currentId+1;
-						mySoS.increaseWICount();
-						
+						mySoS.increaseWICount();						
 						new DevTask((AggregationNode)wi, st_id, name, serviceId, efforts);
+					}
+				}
+			}
+			// Complexity
+			for (WorkItemEntity wis: ((AggregationNode)wi).getSubtasks()) {
+				boolean loop = true;
+				int loopcount = 0;
+				if (Math.random()<ComplexityFactor) {
+					while (loop) {
+						loopcount ++;
+						int t =(int) ( Math.random()* ((AggregationNode)wi).getSubtasks().size() );
+						WorkItemEntity pred = ((AggregationNode)wi).getSubtasks().get(t);
+						if ( (pred.getId()<wis.getId()) && (!pred.getPredecessors().contains(wis)) ) {
+							wis.addPredecessorTask(pred);
+							//System.out.println("Add Predecessor: "+pred.getName()+" to "+wi1s.getName());
+							loop = false;
+						}
+						else if (loopcount >= 3) {
+							loop = false;
+						}
 					}
 				}
 			}
 		}	
 				
-		// Complexity Algorithm
-		double ComplexityFactor = 0.5;
-		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
-			double AveragePrecedency = 1;
-			if (wi1.getType().getName().matches("SubSysReq")) {					
-				for (WorkItemEntity wi1s: ((AggregationNode)wi1).getSubtasks()) {
-					boolean loop = true;
-					int loopcount = 0;
-					if (Math.random()<ComplexityFactor) {
-						while (loop) {
-							loopcount ++;
-							int t =(int) ( Math.random()* ((AggregationNode)wi1).getSubtasks().size() );
-							WorkItemEntity pred = ((AggregationNode)wi1).getSubtasks().get(t);
-							if ( (pred.getId()<wi1s.getId()) && (!pred.getPredecessors().contains(wi1s)) ) {
-								wi1s.addPredecessorTask(pred);
-								//System.out.println("Add Predecessor: "+pred.getName()+" to "+wi1s.getName());
-								loop = false;
-							}
-							else if (loopcount >= 3) {
-								loop = false;
-							}
-						}
-					}
-				}
-			}
-		}
-		// End Complexity
+
 				
 		// Derive Impacts DSM
 		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
@@ -241,39 +218,47 @@ public class SimulationContextBuilder {
 		// End DSM
 		
 		// Experiment and Visualization
+		mySoS.myValueFunction = new ValueFunction(valueMechanism1);		
 		int numReplications = (Integer)parameters.getValue("NumReplications");
-		if (this.ModelBuilder.matches("DevelopmentOrganizationModel")) {
-			mySoS.OrgLevels = 2;
-			mySoS.OrgComplexity = 5;
-			mySoS.WINLevels = 3;
-			mySoS.WINComplexity = 3;
-			mySoS.WINSize = 10;
-			mySoS.myValueFunction = new ValueFunction(valueMechanism1);
-		}
-		else if (this.ModelBuilder.matches("ThreeProgrammersThreeTasksModel")) {
-			mySoS.OrgLevels = 2;
-			mySoS.OrgComplexity = 3;
-			mySoS.WINLevels = 2;
-			mySoS.WINComplexity = 4;
-			mySoS.WINSize = 3;
-			mySoS.myValueFunction = new ValueFunction(valueMechanism2);
-		}
-		else if (this.ModelBuilder.matches("AerospaceAndDefenceProjects")) {
-			mySoS.OrgLevels = 3;
-			mySoS.OrgComplexity = 5;
-			mySoS.WINLevels = 4;
-			mySoS.WINComplexity = 4;
-			mySoS.WINSize = 2;
-			mySoS.myValueFunction = new ValueFunction(valueMechanism1);
-		}
-		if (VisualizationOn && (numReplications==1)) {
-			System.out.print("\ninitializing visualization...\n");
+		Visualization = (String)parameters.getValue("Visualization");
+		if (Visualization.matches("on") && (numReplications==1)) {
+			System.out.print("\ninitializing visualization...\n");		
+			for (ServiceProviderType t : mySoS.myServiceProviderTypes.values()) {
+				if (t.getHierarchy()> (mySoS.OrgLevels-1)) {
+					mySoS.OrgLevels = t.getHierarchy()+1;
+				}
+			}
+			for (WorkItemType t : mySoS.myWorkItemTypes.values()) {
+				if (t.getHierarchy()> (mySoS.WINLevels-1)) {
+					mySoS.WINLevels = t.getHierarchy()+1;
+				}
+			}
+			if (this.ModelBuilder.matches("DevelopmentOrganizationModel")) {
+				mySoS.OrgComplexity = 5;
+				mySoS.WINComplexity = 3;
+				mySoS.WINSize = 10;				
+			}
+			else if (this.ModelBuilder.matches("ThreeProgrammersThreeTasksModel")) {
+				mySoS.OrgComplexity = 3;
+				mySoS.WINComplexity = 4;
+				mySoS.WINSize = 3;
+			}
+			else if (this.ModelBuilder.matches("AerospaceAndDefenceProjects")) {
+				mySoS.OrgComplexity = 5;
+				mySoS.WINComplexity = 4;
+				mySoS.WINSize = 2;
+			}
+			else {
+				mySoS.OrgComplexity = 3;
+				mySoS.WINComplexity = 3;
+				mySoS.WINSize = 2;
+			}
 			new Visualization(context,mySoS);
-			//mySoS.printSoSInformation();		
-		}
-		KanbanBoard myKanbanBoard = new KanbanBoard(mySoS);
-		mySoS.myKanbanBoard = myKanbanBoard;
-		context.add(myKanbanBoard);
+			KanbanBoard myKanbanBoard = new KanbanBoard(mySoS);
+			mySoS.myKanbanBoard = myKanbanBoard;
+			context.add(myKanbanBoard);
+			mySoS.printSoSInformation();		
+		}	
 	}
 
 	
@@ -375,7 +360,7 @@ public class SimulationContextBuilder {
 	}
 	public void xmlCreateWorkItemType(Element e) {
 		int id = Integer.parseInt(e.getAttribute("wiTypeId"));
-		String name = e.getAttribute("name");
+		String name = e.getAttribute("name");		
 		int hierarchy = Integer.parseInt(e.getAttribute("hierarchy"));
 		WorkItemType myWorkItemType = ObjectsModelFactory.eINSTANCE.createWorkItemType();
 		myWorkItemType.setId(id);
@@ -615,9 +600,10 @@ public class SimulationContextBuilder {
 		mySoS.TaskUncertainty = TaskUncertainty*(VolatilityLevel);
 		mySoS.ReworkRisk = ReworkRisk*(VolatilityLevel);
 		mySoS.ROR = ROR;
-		mySoS.myServices = myServices;
-		mySoS.myServiceProviderTypes = myServiceProviderTypes;
-		mySoS.myWorkItemTypes = myWorkItemTypes;
+		
+		mySoS.myServices = this.myServices;
+		mySoS.myServiceProviderTypes = this.myServiceProviderTypes;		
+		mySoS.myWorkItemTypes = this.myWorkItemTypes;
 		
 		
 		for (Asset r: myResources.values()) {
@@ -651,9 +637,6 @@ public class SimulationContextBuilder {
 			int id = wi.getId();
 			WorkItemEntity entity;
 			if (wi.isIsAggregationNode()) {
-				entity = new AggregationNode(wi);
-			}
-			else if (wi.getType().getName().matches("SubSysReq")) {
 				entity = new AggregationNode(wi);
 			}
 			else {

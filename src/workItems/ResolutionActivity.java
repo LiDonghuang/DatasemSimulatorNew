@@ -1,7 +1,7 @@
 package workItems;
 
 public class ResolutionActivity extends Task{
-	public WorkItemEntity ResolutionObject;
+	public DevTask ResolutionObject;
 	protected boolean isAggregationNode = false;
 	
 	public ResolutionActivity(DevTask devTask) {
