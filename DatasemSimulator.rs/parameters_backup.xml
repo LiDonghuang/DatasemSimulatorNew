@@ -1,57 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <parameters>
-				<parameter name="randomSeed" displayName="1) Default Random Seed" type="int" 
+					<parameter name="randomSeed" displayName="1) Default Random Seed" type="int" 
 						defaultValue="__NULL__"
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
-		
-				<parameter name="ChangePropagationFactor" displayName="2) Change Propagation Factor (0-5)" type="double" 
-						defaultValue="1.0" 
+				<parameter name="ROR" displayName="6) Stakeholder Value: Rate of Return (0-0.2)" type="double" 
+						defaultValue="0.12" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
-
-				<parameter name="TaskMaturityLevels" displayName="3) Task Maturity Levels (>=1)" type="int" 
-						defaultValue="1" 
+				<parameter name="Volatility" displayName="7) Overall Task Volatility Level" type="int" 
+						defaultValue="2" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
-
 				<parameter name="TaskUncertainty" displayName="4) Task Uncertainty (0-1)" type="double" 
 						defaultValue="0.2" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
-				
-				<parameter name="ReworkRisk" displayName="5) Rework Risk (0-1)" type="double" 
-						defaultValue="0.2" 
-						isReadOnly="false" 
-						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
-	
-		/>
-
-				<parameter name="ROR" displayName="6) Stakeholder Value: Rate of Return (0-0.2)" type="double" 
-						defaultValue="0.12" 
-						isReadOnly="false" 
-						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
-									
-		/>		
-
-				<parameter name="ObserveWIType1" displayName="7) Observation Work Item" type="java.lang.String" 
+				<parameter name="ObserveWIType1" displayName="Observation Work Item" type="java.lang.String" 
 						defaultValue="DevTask" 
 						isReadOnly="true" 
 						converter="repast.simphony.parameter.StringConverterFactory$StringStringConverter"
 									
 		/>
-				<parameter name="Volatility" displayName="7) Overall Task Volatility Level" type="int" 
-						defaultValue="2" 
-						isReadOnly="true" 
+				<parameter name="TaskMaturityLevels" displayName="3) Task Maturity Levels (>=1)" type="int" 
+						defaultValue="1" 
+						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+									
+		/>
+				<parameter name="ReworkRisk" displayName="5) Rework Risk (0-1)" type="double" 
+						defaultValue="0.2" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
+									
+		/>
+				<parameter name="ChangePropagationFactor" displayName="2) Change Propagation Factor (0-5)" type="double" 
+						defaultValue="1.0" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
 				<parameter name="NumReplications" displayName="Number of Simulation Replications" type="int" 
@@ -60,7 +54,6 @@
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									
 		/>
-		
 		</parameters>
 
 
