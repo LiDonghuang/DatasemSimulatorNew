@@ -59,7 +59,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	public boolean isAssigned=false;
 	public boolean isStarted=false;
 	public boolean isSuspended=false;
-	public boolean isReactivated=false;
+	public boolean isRestarted=false;
 	public boolean isCompleted=false;
 	public boolean isEnded=false;
 	public double currentValue;
@@ -71,8 +71,6 @@ public class WorkItemEntity extends WorkItemImpl {
 	public int activatedTime=Integer.MAX_VALUE;	
 	public int startTime=Integer.MAX_VALUE;
 	public int assignedTime=Integer.MAX_VALUE;
-	public int suspendedTime=Integer.MAX_VALUE;
-	public int restartedTime=Integer.MAX_VALUE;
 	public int completionTime=Integer.MAX_VALUE;
 	public int endTime=Integer.MAX_VALUE;
 	public int leadTime=Integer.MAX_VALUE;
@@ -295,32 +293,13 @@ public class WorkItemEntity extends WorkItemImpl {
 		//System.out.println("WorkItem "+this.getName()+"(id:"+this.getId()+")"+" is activated");
 	}
 	public void setStarted() {	
-		if (this.isStarted) {
-			if (this.isSuspended) {
-				this.isSuspended = false;
-				this.restartedTime = this.SoS.timeNow;
-			}
-		}
-		else {
-			this.isStarted= true;
-			this.startTime = this.SoS.timeNow;
-			//System.out.println("\nSTART @TIME:"+this.SoS.timeNow+this.fullName+"is started from progress:"+this.progress);
-		}
-		if (this.isAnalysisActivity) {
-			((AnalysisActivity)this).AnalysisObject.setStarted();
-		}
+		this.isStarted= true;
+		this.startTime = this.SoS.timeNow;
 	}
 	public void setCompleted() {
 		this.isCompleted=true;		
 		this.completionTime=this.SoS.timeNow;
-		if (!this.isReactivated) {
-			this.cycleTime = this.completionTime - this.startTime + 1;
-		}
-		else {
-			this.cycleTime += (this.completionTime - this.restartedTime);
-		}
 		this.updateUpperTasksCompletion();
-		//System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is completed"+" (rework count:"+this.getReworkCount()+")");
 	}
 	public void setEnded() {
 		if (this.hasDelivered) {
@@ -332,26 +311,25 @@ public class WorkItemEntity extends WorkItemImpl {
 		}
 		this.isEnded=true;
 		this.endTime = this.SoS.timeNow;
-		this.leadTime = this.endTime - this.activatedTime + 1;	
+		this.leadTime = this.endTime - this.activatedTime + 1;			
 		this.removeFromSuccessorTasks();
-				
-		if (this.hierarchy==this.SoS.WINLevels-1 ) {
-			this.SoS.initialList.remove(this.getId());	
-			this.SoS.endedList.put(this.getId(), this);
-			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.currentValue+" stakeholder value");
-		}
-		else if (this.isResolutionActivity||this.isAnalysisActivity) {
-			this.SoS.arrivedList.remove(this.getId());	
+		
+		this.CycleTimeToEffortsRatio = this.efforts/this.cycleTime;
+		
+		if (this.isResolutionActivity||this.isAnalysisActivity) {
 			this.removeFromContext();
+			this.SoS.arrivedList.remove(this.getId());
 		}
-		else {
-			this.CycleTimeToEffortsRatio = this.efforts/this.cycleTime;
-			this.SoS.endedList.put(this.getId(), this);
-			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
+		else if (this.hierarchy==this.SoS.WINLevels-1) {
+			this.SoS.initialList.remove(this.getId());
+			this.SoS.endedList.add(this);
+			System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
 			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.currentValue+" stakeholder value");
 			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"(efforts:"+this.efforts+") is Ended. Delivered "+this.currentValue+" Value\n StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.getReworkCount());
 		}
-		//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"(efforts:"+this.efforts+") is Ended. Delivered "+this.currentValue+" Value\n StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.getReworkCount());
+		else {		
+			this.SoS.endedList.add(this);		
+		}
 	}
 	public void setAssigned() {
 		this.isAssigned=true;		

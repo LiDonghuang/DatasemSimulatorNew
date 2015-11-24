@@ -4,6 +4,7 @@ public class DevTask extends Task {
 	public int maxMaturityLevels = 5;
 	public double uncertainty = 0;
 	public double risk = 0;
+	public double learningFactor = 0;
 	
 	public DevTask(WorkItemEntity wi) {
 		super(wi);
@@ -33,7 +34,7 @@ public class DevTask extends Task {
 		//if (incMaturityLevels>0) {System.out.println("@TIME:"+SoS.timeNow+this.fullName+"increased Maturity Level by "+incMaturityLevels+" to "+getCurrentMaturityLevel());}
 		for (int i=0; i< incMaturityLevels; i++) {				
 			if (Math.random()<=SoS.ReworkRisk) {
-				double reduction = 1/(SoS.TaskMaturityLevels);
+				double reduction = 1/((double)SoS.TaskMaturityLevels);
 				this.rework(reduction);	
 			}
 			this.changePropagation();
@@ -44,26 +45,26 @@ public class DevTask extends Task {
 	}
 	public void suspendForResolution() {
 		this.isSuspended = true;
-		this.suspendedTime = this.SoS.timeNow;
 		this.setResolutionCount(this.getResolutionCount() + 1);
 		this.getAssignedAgent().setBottleNeckCount(this.getAssignedAgent().getBottleNeckCount() + 1);
 		this.getAssignedAgent().requestAssistance(this);
+		this.isCompleted = false;
 		//System.out.println("\nSUSPENDED @TIME:"+this.SoS.timeNow+this.fullName);
 	}
 	public void changePropagation() {
 		for (WorkItemEntity affectedWI : this.getImpactsWIs()) {	
 			double likelihood = this.getImpactsLikelihood().get(affectedWI);			
-			if (Math.random()<likelihood) {				
-				double impact = this.getImpactsRisk().get(affectedWI);
+			if (Math.random()<likelihood) {								
 				if (!affectedWI.isAggregationNode && affectedWI.isStarted && !affectedWI.isEnded) {	
+					double impact = this.getImpactsRisk().get(affectedWI);
+					double reduction = impact/((double)SoS.TaskMaturityLevels);
 					//System.out.println("\nCHANGE PROPAGATION @TIME:"+this.SoS.timeNow+this.fullName+"propagates rework to"+affectedWI.fullName);
 					//System.out.println(likelihood+" "+impact);
-					((DevTask) affectedWI).rework(impact);
+					((DevTask) affectedWI).rework(reduction);
 					this.setChangePropagationToCount(this.getChangePropagationToCount() + 1);
 					affectedWI.setChangePropagationByCount(affectedWI.getChangePropagationByCount() + 1);
 					// Learning factor
-					double learningfactor = 0.8;
-					this.getImpactsLikelihood().put(affectedWI, likelihood*learningfactor);
+					this.getImpactsLikelihood().put(affectedWI, likelihood*(1-SoS.LearningFactor));
 				}
 			}
 		}
@@ -72,14 +73,13 @@ public class DevTask extends Task {
 		if (this.getPreviousReworkTime()<this.SoS.timeNow && this.getProgress()>0) {
 			//System.out.println(previousReworkTime+" "+SoS.timeNow);
 			this.setPreviousReworkTime(this.SoS.timeNow);
-			//this.getPreviousProgress();
 			this.setReworkCount(this.getReworkCount() + 1);
-			this.uncertainty *= 1; // Learning Factor
+			// Learning Factor
+			this.uncertainty *= (1-SoS.LearningFactor); 
 			this.setProgress(Math.max((this.getProgress()-progressReduction), 0));								
-			//System.out.println("\nREWORK @TIME:"+this.SoS.timeNow+this.fullName+"reworks from "+previousProgress+" to "+this.getProgress()+" (rework count:"+this.getReworkCount()+")");
+			//System.out.println("\nREWORK @TIME:"+this.SoS.timeNow+this.fullName+"reworks from "+this.getPreviousProgress()+" to "+this.getProgress()+" (rework count:"+this.getReworkCount()+")");
 			if (this.isCompleted) {
 				this.isCompleted = false;
-				this.isReactivated = true;	
 				this.completionTime=Integer.MIN_VALUE;
 				this.endTime=Integer.MIN_VALUE;
 				this.getAssignedAgent().getCompleteQ().remove(this);
@@ -89,7 +89,7 @@ public class DevTask extends Task {
 					upperTask.updateCompletionStatus();
 				}
 			}
+			this.setPreviousReworkTime(SoS.timeNow);
 		}
 	}
-	
 }

@@ -2,6 +2,7 @@ package datasemSimulator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import kanbanBoard.KanbanBoard;
@@ -48,7 +49,7 @@ public class SystemOfSystems {
 	
 	public HashMap<Integer, WorkItemEntity> initialList = new HashMap<Integer, WorkItemEntity>();
 	public HashMap<Integer, WorkItemEntity> arrivedList = new HashMap<Integer, WorkItemEntity>();
-	public HashMap<Integer, WorkItemEntity> endedList = new HashMap<Integer, WorkItemEntity>();
+	public LinkedList<WorkItemEntity> endedList = new LinkedList<WorkItemEntity>();
 	public int timeNow;
 	private int WICount;
 	
@@ -81,14 +82,11 @@ public class SystemOfSystems {
 	public double TaskUncertainty;
 	public double ReworkRisk;
 	public double ROR;
+	public double LearningFactor;
 	
 	public SystemOfSystems(Context<Object> context) {
 		this.context = context;
-		this.OrgLevels = 3;
-		this.OrgComplexity = 3;
-		this.WINLevels = 4;
-		this.WINComplexity = 3;
-		this.WINSize = 3;
+
 	}
 	@ScheduledMethod(start=1,interval=1,priority=1000)
 	public void step() {
@@ -96,12 +94,14 @@ public class SystemOfSystems {
 		this.timeNow = (int)schedule.getTickCount();
 		for (WorkItemEntity wi:this.arrivedList.values()) {
 			wi.setPreviousProgress(wi.getProgress());
-		}
-		
+		}		
 		ReleaseWIs();
 		CheckEndRunCondition();
 	}
-	public void CheckEndRunCondition() {	
+	public void CheckEndRunCondition() {
+		for (WorkItemEntity task:this.endedList){
+			task.removeFromContext();
+		}
 		this.endedList.clear();
 		//System.out.println("\n ============== TIME NOW: "+timeNow+" ============== ");
 		if (this.initialList.size()==0){
@@ -247,7 +247,7 @@ public class SystemOfSystems {
 		double[] ChangePropagationCount = new double[wi_count];
 		double[] CycleTimeToEffortsRatio = new double[wi_count];		
 		int i = 0;
-		for (WorkItemEntity wi : arrivedList.values()) {
+		for (WorkItemEntity wi : arrivedList.values()) {		
 			if (wi.typeId==observewiTypeId) {
 				TaskReworkCount[i] = wi.getReworkCount();
 				ChangePropagationCount[i] = wi.getChangePropagationByCount();

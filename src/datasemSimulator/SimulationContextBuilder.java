@@ -128,12 +128,7 @@ public class SimulationContextBuilder {
 		Mechanism valueMechanism2 = ObjectsModelFactory.eINSTANCE.createMechanism();
 		valueMechanism2.setName("ValueFunction");valueMechanism2.setValue("Fiat");
 		
-		// Initial Assignment
-		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
-			if ((wi.hierarchy== mySoS.WINLevels-1 )) {	
-				wi.SoS.initialList.put(wi.getId(), wi);
-			}
-		}
+		
 		// Process Model
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {	
 			String typeName = wi.getType().getName();
@@ -169,27 +164,27 @@ public class SimulationContextBuilder {
 						new DevTask((AggregationNode)wi, st_id, name, serviceId, efforts);
 					}
 				}
-			}
-			// Complexity
-			for (WorkItemEntity wis: ((AggregationNode)wi).getSubtasks()) {
-				boolean loop = true;
-				int loopcount = 0;
-				if (Math.random()<ComplexityFactor) {
-					while (loop) {
-						loopcount ++;
-						int t =(int) ( Math.random()* ((AggregationNode)wi).getSubtasks().size() );
-						WorkItemEntity pred = ((AggregationNode)wi).getSubtasks().get(t);
-						if ( (pred.getId()<wis.getId()) && (!pred.getPredecessors().contains(wis)) ) {
-							wis.addPredecessorTask(pred);
-							//System.out.println("Add Predecessor: "+pred.getName()+" to "+wi1s.getName());
-							loop = false;
-						}
-						else if (loopcount >= 3) {
-							loop = false;
+				// Complexity
+				for (WorkItemEntity wis: ((AggregationNode)wi).getSubtasks()) {
+					boolean loop = true;
+					int loopcount = 0;
+					if (Math.random()<ComplexityFactor) {
+						while (loop) {
+							loopcount ++;
+							int t =(int) ( Math.random()* ((AggregationNode)wi).getSubtasks().size() );
+							WorkItemEntity pred = ((AggregationNode)wi).getSubtasks().get(t);
+							if ( (pred.getId()<wis.getId()) && (!pred.getPredecessors().contains(wis)) ) {
+								wis.addPredecessorTask(pred);
+								//System.out.println("Add Predecessor: "+pred.getName()+" to "+wi1s.getName());
+								loop = false;
+							}
+							else if (loopcount >= 3) {
+								loop = false;
+							}
 						}
 					}
 				}
-			}
+			}		
 		}	
 				
 
@@ -216,7 +211,7 @@ public class SimulationContextBuilder {
 			}
 		}
 		// End DSM
-		
+				
 		// Experiment and Visualization
 		mySoS.myValueFunction = new ValueFunction(valueMechanism1);		
 		int numReplications = (Integer)parameters.getValue("NumReplications");
@@ -253,10 +248,18 @@ public class SimulationContextBuilder {
 				mySoS.WINComplexity = 3;
 				mySoS.WINSize = 2;
 			}
+			// Initial Assignment
+			for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
+				if ((wi.hierarchy== mySoS.WINLevels-1 )) {	
+					wi.SoS.initialList.put(wi.getId(), wi);
+				}
+			}
 			new Visualization(context,mySoS);
 			KanbanBoard myKanbanBoard = new KanbanBoard(mySoS);
 			mySoS.myKanbanBoard = myKanbanBoard;
 			context.add(myKanbanBoard);
+			System.out.println("OrgLevels="+mySoS.OrgLevels);
+			System.out.println("WINLevels="+mySoS.WINLevels);			
 			mySoS.printSoSInformation();		
 		}	
 	}
@@ -594,11 +597,13 @@ public class SimulationContextBuilder {
 		double ReworkRisk = (Double)mySoS.parameters.getValue("ReworkRisk");
 		double ChangePropagationFactor = (Double)mySoS.parameters.getValue("ChangePropagationFactor");
 		double ROR = (Double)mySoS.parameters.getValue("ROR");
+		double LearningFactor = (Double)mySoS.parameters.getValue("LearningFactor");
 		double VolatilityLevel = ((double)(Integer)mySoS.parameters.getValue("Volatility"))/2;
 		
 		mySoS.TaskMaturityLevels = TaskMaturityLevels;
 		mySoS.TaskUncertainty = TaskUncertainty*(VolatilityLevel);
 		mySoS.ReworkRisk = ReworkRisk*(VolatilityLevel);
+		mySoS.LearningFactor = LearningFactor;
 		mySoS.ROR = ROR;
 		
 		mySoS.myServices = this.myServices;

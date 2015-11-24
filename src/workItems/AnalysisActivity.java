@@ -30,7 +30,11 @@ public class AnalysisActivity extends Task{
 		this.uncertainty = 0;
 		this.risk = 0;		
 		this.setActivated();	
-		this.fullName = this.fullName();
-	
+		this.fullName = this.fullName();	
+	}
+	public void setStarted() {	
+		this.isStarted= true;
+		this.startTime = this.SoS.timeNow;
+		this.AnalysisObject.setStarted();
 	}
 }

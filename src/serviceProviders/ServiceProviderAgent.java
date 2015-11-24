@@ -152,7 +152,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	}	
 	public void requestAssistance(DevTask devTask) {
 		ResolutionActivity resolutionActivity = new ResolutionActivity(devTask);
-		devTask.addPredecessorTask(resolutionActivity);
 		//
 		@SuppressWarnings("unchecked")
 		Context<Object> context = ContextUtils.getContext(this);	

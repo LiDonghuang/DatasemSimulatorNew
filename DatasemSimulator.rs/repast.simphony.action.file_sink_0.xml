@@ -1,0 +1,22 @@
+<repast.simphony.data2.engine.FileSinkDescriptor>
+  <name>EndRun File Sink</name>
+  <dataSet>EndRum Data Set</dataSet>
+  <delimiter>,</delimiter>
+  <format>TABULAR</format>
+  <sourceIds class="linked-hash-set">
+    <string>tick</string>
+    <string>random_seed</string>
+    <string>EndTime</string>
+    <string>CountTasks</string>
+    <string>TaskReworkCount_total</string>
+    <string>TaskReworkCount_mean</string>
+    <string>TaskReworkCount_stdev</string>
+    <string>ChangePropagationCount_total</string>
+    <string>ChangePropagationCount_mean</string>
+    <string>ChangePropagationCount_stdev</string>
+    <string>CycleTimeToEffortsRatio_mean</string>
+    <string>CycleTimeToEffortsRatio_stdev</string>
+  </sourceIds>
+  <fileName>SimulationOutputs\SOS_data.txt</fileName>
+  <addTimeStamp>false</addTimeStamp>
+</repast.simphony.data2.engine.FileSinkDescriptor>

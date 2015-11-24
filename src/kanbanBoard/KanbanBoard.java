@@ -30,19 +30,19 @@ public class KanbanBoard {
 		addElement(5,0,"Current\nProgress",20,255,255);
 		addElement(6,0,"Progress\nRate",20,255,255);	
 
-		int c=1;
+		int row=1;
 		double value;
 		int r=0;int g=0;int b=0;
 		for (int i=0;i<Capabilities.size();i++) {
-			WorkItemEntity myCap = Capabilities.get(i);
-			if (myCap.isStarted) {
-				if (myCap.getProgress() < myCap.getPreviousProgress()) {
+			WorkItemEntity wi = Capabilities.get(i);
+			if (wi.isStarted) {
+				if (wi.getProgress() < wi.getPreviousProgress()) {
 					r=255;g=0;b=0;
 				}
-				else if (myCap.isSuspended) {
+				else if (wi.isSuspended) {
 					r=255;g=128;b=0;
 				}
-				else if (myCap.isCompleted) {
+				else if (wi.isCompleted) {
 					r=0;g=255;b=0;
 				}
 				else {
@@ -52,26 +52,32 @@ public class KanbanBoard {
 			else {
 				r=224;g=224;b=224;
 			}
-			addElement(0,c,myCap.getName()+'\n',r,g,b);
-			addElement(1,c,"\n\n\n\n"+SoS.myWorkItemTypes.get(myCap.typeId).getName()+" /"+"\n\n"+((AggregationNode)myCap).getProcessModelName(),r,g,b);
-			addElement(2,c,'\n'+((AggregationNode)myCap).getCurrentProcessStage(),r,g,b);
+			addElement(0,row,wi.getName()+'\n',r,g,b);
 			
-			value = myCap.activatedTime;
-			addElement(3,c,String.valueOf(((int)value))+'\n',r,g,b);
+			if (wi.isAggregationNode) {
+				addElement(1,row,"\n\n\n\n"+SoS.myWorkItemTypes.get(wi.typeId).getName()+" /"+"\n\n"+((AggregationNode)wi).getProcessModelName(),r,g,b);
+				addElement(2,row,'\n'+((AggregationNode)wi).getCurrentProcessStage(),r,g,b);
+			}
+			else {
+				addElement(1,row,"N/A",r,g,b);
+				addElement(2,row,"N/A",r,g,b);
+			}
+			value = wi.activatedTime;
+			addElement(3,row,String.valueOf(((int)value))+'\n',r,g,b);
 			
-			value = myCap.getProgress()*myCap.currentValue;
-			addElement(4,c,new DecimalFormat("##.###").format(value)+'\n',r,g,b);
+			value = wi.getProgress()*wi.currentValue;
+			addElement(4,row,new DecimalFormat("##.###").format(value)+'\n',r,g,b);
 			
-			value = myCap.getProgress()*100;
-			addElement(5,c,new DecimalFormat("##.#").format(value)+"%"+'\n',r,g,b);
+			value = wi.getProgress()*100;
+			addElement(5,row,new DecimalFormat("##.#").format(value)+"%"+'\n',r,g,b);
 			
-			value = myCap.getProgressRate()*100;
-			addElement(6,c,new DecimalFormat("##.#").format(value)+"%"+'\n',r,g,b);
+			value = wi.getProgressRate()*100;
+			addElement(6,row,new DecimalFormat("##.#").format(value)+"%"+'\n',r,g,b);
 			
-			c++;
+			row++;
 		}
 	}
-	public void addCapability(WorkItemEntity cap) {
+	public void addWorkItem(WorkItemEntity cap) {
 		Capabilities.add(cap);
 	}
 	public void addElement(int x,int y,String value,int r,int g, int b) {

@@ -43,8 +43,12 @@ public class Task extends WorkItemEntity{
 	public void advanceProgress() {
 		// ------------ Compute WI Progress (percentage) -----------	
 		if (this.isStarted) {		
-			progressRate = this.getServiceEfficiency() / efforts;		
-			//System.out.println(this.getName()+" at "+this.getAllocatedResources().get(0).getName()+" progress rate "+this.progressRate);
+			progressRate = this.getServiceEfficiency() / efforts;
+			this.cycleTime += 1;
+			if (this.isResolutionActivity) {
+				((ResolutionActivity)this).ResolutionObject.cycleTime += 1;
+			}
+			//System.out.println(this.getName()+"(CycleTime:"+this.cycleTime+") at "+this.getAllocatedResources().get(0).getName()+" progress rate "+this.progressRate);
 			setProgress(getProgress() + progressRate + 0.000001);					
 			if (getProgress() >= 1) {			
 				setProgress(1.00);	
@@ -58,6 +62,18 @@ public class Task extends WorkItemEntity{
 		while (!this.getAllocatedResources().isEmpty()) {
 			ResourceEntity resource = this.getAllocatedResources().getFirst();
 			resource.withdrawFrom(this);
+		}
+	}
+	public void setStarted() {	
+		if (this.isStarted) {
+			this.isRestarted = true;
+			//System.out.println("\nRE-START @TIME:"+this.SoS.timeNow+this.fullName+"restarted from progress:"+this.getProgress());
+		}
+		else {
+			this.cycleTime = 0;
+			this.isStarted= true;
+			this.startTime = this.SoS.timeNow;
+			//System.out.println("\nSTART @TIME:"+this.SoS.timeNow+this.fullName+"is started");
 		}
 	}
 }

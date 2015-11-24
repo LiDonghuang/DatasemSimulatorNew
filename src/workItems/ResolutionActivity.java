@@ -31,6 +31,8 @@ public class ResolutionActivity extends Task{
 		this.risk = 0;		
 		this.setActivated();
 		this.fullName = this.fullName();
+		
+		devTask.addPredecessorTask(this);
 	}
 
 }

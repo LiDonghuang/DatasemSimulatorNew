@@ -88,6 +88,11 @@ public class Visualization {
 		this.commentsList.clear();
 		visualizeWorkItemNetwork();
 		visualizeOrganization();
+		
+		for (WorkItemEntity task:SoS.endedList){
+			gridWIN.moveTo(task, 0,0);
+			grid2D.moveTo(task, 0,0);
+		}	
 		updateKanbanBoard();
 	}
 	public void initializeOrganization() {
@@ -108,11 +113,14 @@ public class Visualization {
 		netWI_Hierarchy.removeEdges();
 		int count[] = new int[SoS.WINLevels];
 		for (WorkItemEntity wItem: SoS.arrivedList.values()) {
-			if ((!wItem.isResolutionActivity)&&(!wItem.isAnalysisActivity)) {
+			if (wItem.isEnded) {
+
+			}
+			else if ((!wItem.isResolutionActivity)&&(!wItem.isAnalysisActivity)) {
 				int hierarchy = wItem.hierarchy;
 				count[hierarchy]++;
 				//wItem.icon.location[0] = count[hierarchy]* (int)(Math.pow((SoS.WINLevels-hierarchy),2)-2*(SoS.WINLevels-hierarchy+1));
-				if (wItem.hierarchy!=0) {
+				if (wItem.hierarchy!=0 || wItem.hierarchy==SoS.WINLevels-1) {
 					wItem.icon.location[0] = (int)( (count[hierarchy]-0.5) * Math.pow(SoS.WINComplexity-1,hierarchy+1) );
 					wItem.icon.location[1] = 30+hierarchy*10;	
 					//System.out.println(wItem.getName()+" "+wItem.icon.location[0]+" "+wItem.icon.location[1]);
@@ -139,8 +147,7 @@ public class Visualization {
 					}
 				}
 				commentWI(wItem);
-			}
-			
+			}			
 			else if (wItem.isAnalysisActivity) {
 				AnalysisActivity wItem1 = (AnalysisActivity)wItem;
 				wItem.icon.location[0] = wItem1.AnalysisObject.icon.location[0]+2;
@@ -149,13 +156,6 @@ public class Visualization {
 				netWI_Hierarchy.addEdge(wItem,wItem1.AnalysisObject);
 				commentWI(wItem);
 			}
-//			else if (wItem.isResolutionActivity) {
-//				ResolutionActivity wItem1 = (ResolutionActivity)wItem;
-//				wItem.icon.location[0] = wItem1.ResolutionObject.icon.location[0]-2;
-//				wItem.icon.location[1] = wItem1.ResolutionObject.icon.location[1]-2;
-//				gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
-//				netWI_Hierarchy.addEdge(wItem,wItem1.ResolutionObject);
-//			}
 			// Coloring
 			wItem.icon.color[0]=224;wItem.icon.color[1]=224;wItem.icon.color[2]=224;
 			if (wItem.isStarted) {	
@@ -217,30 +217,16 @@ public class Visualization {
 				grid2D.moveTo(wi, agent.icon.location[0]+count+2,agent.icon.location[1]-3);
 				count++;
 			}
-//			count=1;
-//			for (WorkItemEntity wi:agent.getRequestedQ()){
-//				grid2D.moveTo(wi, agent.icon.location[0]+count+2,agent.icon.location[1]-4);
-//				count++;
-//			}
 			count=1;
 			for (WorkItemEntity wi:agent.getCompleteQ()){
 				grid2D.moveTo(wi, 0,0);
 			}
-//			for (WorkItemEntity task:agent.getRequestedQ()){
-//				grid2D.moveTo(task, 0,0);
-//			}
-//			for (WorkItemEntity task:agent.getAssignmentQ()){
-//				grid2D.moveTo(task, 0,0);
-//			}
 			commentSP(agent);
 		}
 		for (ServiceProviderAgent agent : SoS.myServiceProviderAgents.values()) {
 			for (ServiceProviderAgent target:agent.NowRequested) {
 				netOrg_Hierarchy.addEdge(agent, target);
 			}
-		}
-		for (WorkItemEntity task:SoS.endedList.values()){
-			grid2D.moveTo(task, 1,0);
 		}
 	}
 	public void updateKanbanBoard() {
@@ -250,8 +236,10 @@ public class Visualization {
 		this.SoS.myKanbanBoard.clearBoard();
 		
 		for (WorkItemEntity wi:this.SoS.arrivedList.values()) {
-			if ( (wi.hierarchy == SoS.WINLevels-1)) {
-				this.SoS.myKanbanBoard.addCapability(wi);
+			if ( (wi.hierarchy==SoS.WINLevels-1) ) {
+				if (!wi.isAnalysisActivity && !wi.isResolutionActivity) {
+					this.SoS.myKanbanBoard.addWorkItem(wi);
+				}				
 			}
 		}
 		this.SoS.myKanbanBoard.updateElements();
@@ -264,17 +252,22 @@ public class Visualization {
 		Comments comments = new Comments();
 		comments.addComment("\n\n\nID:"+Integer.toString(wi.getId()));
 		comments.addComment("type:"+this.SoS.myWorkItemTypes.get(wi.typeId).getName());
-		comments.addComment("progress:"+Integer.toString((int)(wi.getProgress()*100))+"%");
-		comments.addComment("Value:"+new DecimalFormat("##.#").format(wi.Value));
-		comments.addComment("currentValue:"+new DecimalFormat("##.#").format(wi.currentValue));
-		if (!wi.isAggregationNode) {
-			comments.addComment(SoS.myServices.get(wi.serviceId).getName()+" x"+(int)wi.efforts);
-			if (wi.getReworkCount()>0) {
-				comments.addComment("rework: "+Integer.toString(wi.getReworkCount()));
+		if (!wi.isEnded) {
+			comments.addComment("progress:"+Integer.toString((int)(wi.getProgress()*100))+"%");
+			comments.addComment("Value:"+new DecimalFormat("##.#").format(wi.Value));
+			comments.addComment("currentValue:"+new DecimalFormat("##.#").format(wi.currentValue));
+			if (!wi.isAggregationNode) {
+				comments.addComment(SoS.myServices.get(wi.serviceId).getName()+" x"+(int)wi.efforts);
+				if (wi.getReworkCount()>0) {
+					comments.addComment("rework: "+Integer.toString(wi.getReworkCount()));
+				}
+				if (wi.getResolutionCount()>0) {
+					comments.addComment("resolution: "+Integer.toString(wi.getResolutionCount()));
+				}
 			}
-			if (wi.getResolutionCount()>0) {
-				comments.addComment("resolution: "+Integer.toString(wi.getResolutionCount()));
-			}
+		}
+		else {
+			comments.addComment("\n-- Ended --");
 		}
 		this.commentsList.add(comments);
 		this.context.add(comments);

@@ -13,7 +13,7 @@
 <WorkItemType wiTypeId="3" hierarchy="2" name="SysOperCap" description="System Operational Capability"></WorkItemType>
 <WorkItemType wiTypeId="4" hierarchy="1" name="SubSysReq" description="Subsystem Requirement"></WorkItemType>
 <WorkItemType wiTypeId="5" hierarchy="0" name="DevTask" description="General Development Task"></WorkItemType>
-<WorkItemType wiTypeId="6" hierarchy="0" name="Analysis" description="decomposites Decomposition Analysis"></WorkItemType>
+<WorkItemType wiTypeId="6" hierarchy="0" name="Analysis" description="Decomposition Analysis"></WorkItemType>
 <WorkItemType wiTypeId="7" hierarchy="0" name="Resolution" description="Bottleneck Resolution"></WorkItemType>
 </WorkItemTypes>
 <Services>

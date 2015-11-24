@@ -166,8 +166,12 @@ public class AbstractAgentBehavior {
 		readyQ = agent.myStrategy.applyWorkPrioritization(agent,agent.getBacklogQ());
 		for (int i=0;i<readyQ.size();i++) {			
 			// =========== Apply WI Selection Rule ====================
-			Task wi = readyQ.get(i);		
-			if (wi.precedencyCleared()) {
+			Task wi = readyQ.get(i);
+			if (this.taskCompletionHandling(wi)) {
+				readyQ.remove(wi);
+				i--;
+			}
+			else if (wi.precedencyCleared()) {
 				// ========================================================
 				ArrayList<ResourceEntity> serviceResourceCandidates = agent.findResourceEntities(wi);
 				// =========== Apply Resource Allocation Rule =============
@@ -226,34 +230,8 @@ public class AbstractAgentBehavior {
 	public void CheckWIsCompletion() {
 		//System.out.println("Agent "+this.name+" checkWIsCompletion");
 		for(int i=0;i<agent.getActiveQ().size();i++) {
-			Task WI = agent.getActiveQ().get(i);
-			if ( (WI.getProgress()>=1.00) && (!WI.isSuspended) ){
-				if (WI.isAnalysisActivity) {
-					//System.out.println("\nCOMPLETED ANALYSIS @TIME:"+SoS.timeNow+" Agent "+this.name+" completed analyzing"+WI.AnalysisObject.fullName);
-					AggregationNode analysisObject = (AggregationNode)((AnalysisActivity)WI).AnalysisObject;		
-					analysisObject.currentAnalysisStage ++;
-					//System.out.println(analysisObject.currentAnalysisStage+" "+analysisObject.totalAnalysisStage);
-					if (analysisObject.currentAnalysisStage == analysisObject.totalAnalysisStage) {
-						agent.SoS.myValueFunction.developValue(analysisObject);
-						agent.releaseSubtasks(analysisObject);					
-					}
-					else {
-						agent.releaseSubtasks(analysisObject);
-						analysisObject.serviceId = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getServiceType().getId();
-						analysisObject.efforts = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getEfforts();
-						agent.getRequestedQ().add(analysisObject);
-						agent.getComplexQ().remove(analysisObject);
-					}
-				}
-				else if (WI.isResolutionActivity) {
-					Task suspendedTask = (Task) ((ResolutionActivity)WI).ResolutionObject;
-					suspendedTask.isSuspended = false;
-					//System.out.println("\nSUSPENSION CLEARED @TIME:"+this.SoS.timeNow+suspendedTask.fullName+"(suspension duration: "+(this.SoS.timeNow-suspendedTask.suspendedTime)+")");
-				}
-				WI.setCompleted();
-				WI.withdrawAllResources();
-				agent.getActiveQ().remove(WI);
-				agent.getCompleteQ().add(WI);
+			Task wi = agent.getActiveQ().get(i);
+			if ( this.taskCompletionHandling(wi) ){
 				i--;
 			}
 		}
@@ -275,7 +253,8 @@ public class AbstractAgentBehavior {
 		for (int i=0;i<agent.getCompleteQ().size();i++) {
 			WorkItemEntity wi=agent.getCompleteQ().get(i);				
 			//System.out.println("\nDISBURSE @TIME:"+SoS.timeNow+" Agent "+this.name+" try to disburse"+completedWI.fullName+"...");
-			if (wi.getProgress() <= 0.99999) {
+			if (wi.getProgress() <= 0.9999) {
+				wi.isCompleted = false;
 				agent.getCompleteQ().remove(wi);	
 				if (wi.isAggregationNode) {
 					agent.getComplexQ().add((AggregationNode)wi);
@@ -377,4 +356,39 @@ public class AbstractAgentBehavior {
 		return decision;
 	}	
 	
+	public boolean taskCompletionHandling(Task WI) {
+		boolean completion = false;
+		if ( (WI.getProgress()>0.9999) && (!WI.isSuspended) ){
+			if (WI.isAnalysisActivity) {
+				//System.out.println("\nCOMPLETED ANALYSIS @TIME:"+SoS.timeNow+" Agent "+this.name+" completed analyzing"+WI.AnalysisObject.fullName);
+				AggregationNode analysisObject = (AggregationNode)((AnalysisActivity)WI).AnalysisObject;		
+				analysisObject.currentAnalysisStage ++;
+				//System.out.println(analysisObject.currentAnalysisStage+" "+analysisObject.totalAnalysisStage);
+				if (analysisObject.currentAnalysisStage == analysisObject.totalAnalysisStage) {
+					agent.SoS.myValueFunction.developValue(analysisObject);
+					agent.releaseSubtasks(analysisObject);					
+				}
+				else {
+					agent.releaseSubtasks(analysisObject);
+					analysisObject.serviceId = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getServiceType().getId();
+					analysisObject.efforts = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getEfforts();
+					agent.getRequestedQ().add(analysisObject);
+					agent.getComplexQ().remove(analysisObject);
+				}
+			}
+			else if (WI.isResolutionActivity) {
+				Task suspendedTask = (Task) ((ResolutionActivity)WI).ResolutionObject;
+				suspendedTask.isSuspended = false;
+				suspendedTask.getPredecessors().remove(WI);
+				//System.out.println("\nSUSPENSION CLEARED @TIME:"+this.SoS.timeNow+suspendedTask.fullName+"(suspension duration: "+(this.SoS.timeNow-suspendedTask.suspendedTime)+")");
+			}
+			completion = true;
+			WI.setCompleted();
+			WI.withdrawAllResources();
+			agent.getBacklogQ().remove(WI);
+			agent.getActiveQ().remove(WI);
+			agent.getCompleteQ().add(WI);
+		}
+		return completion;
+	}	
 }
