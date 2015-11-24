@@ -250,7 +250,7 @@ public class SimulationContextBuilder {
 			}
 			// Initial Assignment
 			for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
-				if ((wi.hierarchy== mySoS.WINLevels-1 )) {	
+				if ((wi.myWorkItem.getArrivalTime()>0 )) {						
 					wi.SoS.initialList.put(wi.getId(), wi);
 				}
 			}

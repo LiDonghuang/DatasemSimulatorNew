@@ -1,29 +1,28 @@
-<ExperimentModel experimentId="0" name="MyModel" description="My Model">
-<Indicator name="Total_Value"></Indicator>
-<Indicator name="Active_WorkLoad"></Indicator>
+<ExperimentModel experimentId="0" name="JeffsModelBuilder" description="Jeff's Model">
 <ServiceProviderTypes>
-<ServiceProviderType spTypeId="1" hierarchy="0" name="DevTeam" description="an individual manager"></ServiceProviderType>
+<ServiceProviderType spTypeId="1" hierarchy="0" name="MyTeam" description="an individual manager"></ServiceProviderType>
 </ServiceProviderTypes>
 <WorkItemTypes>
-<WorkItemType wiTypeId="1" hierarchy="1" name="SubSysReq" description="Subsystem Requirement"></WorkItemType>
-<WorkItemType wiTypeId="2" hierarchy="0" name="DevTask" description="General Task"></WorkItemType>
-<WorkItemType wiTypeId="3" hierarchy="0" name="Analysis" description="Decomposition Analysis"></WorkItemType>
-<WorkItemType wiTypeId="4" hierarchy="0" name="Resolution" description="Bottleneck Resolution"></WorkItemType>
+<WorkItemType wiTypeId="1" hierarchy="0" name="DevTask" description="General Task"></WorkItemType>
+<WorkItemType wiTypeId="2" hierarchy="0" name="Analysis" description="Decomposition Analysis"></WorkItemType>
+<WorkItemType wiTypeId="3" hierarchy="0" name="Resolution" description="Bottleneck Resolution"></WorkItemType>
+<WorkItemType wiTypeId="4" hierarchy="1" name="SubSysReq" description="Subsystem Requirement"></WorkItemType>
+<WorkItemType wiTypeId="5" hierarchy="1" name="RequirementType1" description="my capability type 1"></WorkItemType>
 </WorkItemTypes>
 <Services>
-<Service serviceId="1" name="Management" description="Analyzing Requirements"></Service>
-<Service serviceId="2" name="Java" description="Java Programming"></Service>
-<Service serviceId="3" name="Python" description="Python Programming"></Service>
-<Service serviceId="4" name="SQL" description="SQL Programming"></Service>
+<Service serviceId="1" name="S1" description="S1"></Service>
+<Service serviceId="2" name="S2" description="S2"></Service>
+<Service serviceId="3" name="S3" description=""></Service>
+<Service serviceId="4" name="Mngt" description="Management"></Service>
 </Services>
 <ClassOfServices>
 </ClassOfServices>
 
 	<Runs>
-	<Run runId="1" description="ThreeProgrammers" numberOfReplications="100" numberOfSteps="10000">
+	<Run runId="1" description="JeffsModel" numberOfReplications="100" numberOfSteps="10000">
 		<OrganizationalModel>
 		<ServiceProviders>
-		<ServiceProvider serviceProviderId="1" name="MyTeam" typeId="1" description="">
+		<ServiceProvider serviceProviderId="1" name="Team1" typeId="1" description="">
 		<AssignWITo>
 		</AssignWITo>
 		<BorrowResourceFrom>
@@ -43,11 +42,25 @@
 		</Mechanisms>
 		</GovernanceStrategy>	
 		<Resources>
-		<Resource resourceId="1" name="Dev.1" description="">
+		<Resource resourceId="1" name="Dev1.1" description="">
 		<SkillSet>
-		<Skill serviceId="2" name="Java" efficiency="1.0"></Skill>
-		<Skill serviceId="3" name="Python" efficiency="1.0"></Skill>
-		<Skill serviceId="4" name="SQL" efficiency="1.0"></Skill>
+		<Skill serviceId="1" name="S1" efficiency="1.0"></Skill>
+		<Skill serviceId="4" name="Mngt" efficiency="1.0"></Skill>
+		</SkillSet>	
+		</Resource>	
+		<Resource resourceId="2" name="Dev2.1" description="">
+		<SkillSet>
+		<Skill serviceId="2" name="S2" efficiency="1.0"></Skill>
+		</SkillSet>	
+		</Resource>	
+		<Resource resourceId="3" name="Dev3.1" description="">
+		<SkillSet>
+		<Skill serviceId="3" name="S3" efficiency="1.033"></Skill>
+		</SkillSet>	
+		</Resource>	
+		<Resource resourceId="4" name="Dev3.2" description="">
+		<SkillSet>
+		<Skill serviceId="3" name="S3" efficiency="0.991"></Skill>
 		</SkillSet>	
 		</Resource>	
 		</Resources>
@@ -63,17 +76,65 @@
 		</WorkSource>
 		</WorkSources>	
 		<WorkItems>
-		<WorkItem wiId="1" name="R1" typeId="1" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+		<WorkItem wiId="1" name="T1" typeId="1" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
 			<GovernanceAttributes>
+			<GovernanceAttribute name="ArrivalTime" value="1"></GovernanceAttribute>
+			</GovernanceAttributes>
+			<RequiredAnalysis>
+			</RequiredAnalysis>
+			<RequiredServices>
+			<RequiredService serviceId="1" efforts="10.0"></RequiredService>
+			</RequiredServices>
+		</WorkItem>
+		<WorkItem wiId="2" name="R1" typeId="5" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+			<GovernanceAttributes>
+			<GovernanceAttribute name="Value" value="5000.0"></GovernanceAttribute>
+			<GovernanceAttribute name="ArrivalTime" value="1"></GovernanceAttribute>
+			<GovernanceAttribute name="DueDate" value="101"></GovernanceAttribute>
+			</GovernanceAttributes>
+			<Subtasks>
+			<workItemId>3</workItemId>
+			<workItemId>4</workItemId>
+			</Subtasks>
+			<RequiredAnalysis>
+			<RequiredService serviceId="4" efforts="10.0"></RequiredService>
+			</RequiredAnalysis>
+			<RequiredServices>
+			</RequiredServices>
+		</WorkItem>
+		<WorkItem wiId="3" name="T2" typeId="1" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
+			<GovernanceAttributes>
+			</GovernanceAttributes>
+			<RequiredAnalysis>
+			</RequiredAnalysis>
+			<RequiredServices>
+			<RequiredService serviceId="2" efforts="15.0"></RequiredService>
+			</RequiredServices>
+		</WorkItem>
+		<WorkItem wiId="4" name="T3" typeId="1" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
+			<GovernanceAttributes>
+			</GovernanceAttributes>
+			<RequiredAnalysis>
+			</RequiredAnalysis>
+			<RequiredServices>
+			<RequiredService serviceId="3" efforts="20.0"></RequiredService>
+			</RequiredServices>
+		</WorkItem>
+		<WorkItem wiId="5" name="R2" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+			<GovernanceAttributes>
+			<GovernanceAttribute name="Value" value="3000.0"></GovernanceAttribute>
+			<GovernanceAttribute name="ArrivalTime" value="20"></GovernanceAttribute>
 			</GovernanceAttributes>
 			<Subtasks>
 			</Subtasks>
 			<RequiredAnalysis>
+			<RequiredService serviceId="4" efforts="10.0"></RequiredService>
+			<RequiredService serviceId="1" efforts="10.0"></RequiredService>
 			</RequiredAnalysis>
 			<RequiredServices>
-			<RequiredService serviceId="4" efforts="10.0"></RequiredService>
-			<RequiredService serviceId="3" efforts="10.0"></RequiredService>
-			<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+			<RequiredService serviceId="1" efforts="30.0"></RequiredService>
+			<RequiredService serviceId="2" efforts="40.0"></RequiredService>
+			<RequiredService serviceId="3" efforts="50.0"></RequiredService>
 			</RequiredServices>
 		</WorkItem>
 		</WorkItems>
