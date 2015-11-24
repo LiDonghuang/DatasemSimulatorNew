@@ -84,8 +84,8 @@ public class WorkItemEntity extends WorkItemImpl {
 	private double serviceEfficiency = 0;
 	private double progress= 0;
 	private double previousProgress = 0;
-	protected double progressRate= 0;
-	protected double perceivedValue= 0;
+	private double progressRate= 0;
+	private double perceivedValue= 0;
 	
 	private int currentMaturityLevel = 0;
 	private int ReworkCount = 0;
@@ -195,29 +195,6 @@ public class WorkItemEntity extends WorkItemImpl {
 		return cleared;
 	}
 
-	public double calculateRPW() {
-		double rpw = 0;
-		double suc = this.getSuccessors().size();
-		double obj = 0;
-		double imp = 0;
-		double deco = 0;
-		double susp = 0;
-
-		for (WorkItemEntity impactsTarget: this.getImpactsWIs()) {
-			double likelihood = this.getImpactsLikelihood().get(impactsTarget);
-			double risk = this.getImpactsRisk().get(impactsTarget);
-			imp += likelihood*risk*5;
-		}
-		if (this.isAnalysisActivity) {
-			AggregationNode AnalysisObject = (AggregationNode) ((AnalysisActivity)this).AnalysisObject;
-			deco = (AnalysisObject.calculateRPW()+AnalysisObject.hierarchy) * (3-AnalysisObject.hierarchy);
-		}
-		if (this.isResolutionActivity) {
-			susp = ((ResolutionActivity)this).ResolutionObject.calculateRPW();
-		}
-		rpw = suc + obj + imp + deco + susp;
-		return rpw;
-	}
 	public boolean precedencyCleared() {
 		boolean cleared = true;
 		for (int i=0;i<this.getPredecessors().size();i++) {
@@ -299,6 +276,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	public void setCompleted() {
 		this.isCompleted=true;		
 		this.completionTime=this.SoS.timeNow;
+		System.out.println("\nCompletion @TIME:"+this.SoS.timeNow+this.fullName+"is Completed");
 		this.updateUpperTasksCompletion();
 	}
 	public void setEnded() {
@@ -311,7 +289,10 @@ public class WorkItemEntity extends WorkItemImpl {
 		}
 		this.isEnded=true;
 		this.endTime = this.SoS.timeNow;
-		this.leadTime = this.endTime - this.activatedTime + 1;			
+		this.leadTime = this.endTime - this.activatedTime + 1;
+		if (this.isAggregationNode) {
+			this.cycleTime = this.leadTime;
+		}
 		this.removeFromSuccessorTasks();
 		
 		this.CycleTimeToEffortsRatio = this.efforts/this.cycleTime;

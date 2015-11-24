@@ -40,7 +40,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	public AbstractAgentBehavior myBehavior;
 	//***
 	public AgentStrategy myStrategy;
-	private LinkedList<ResourceEntity> myResourceEntities = new LinkedList<ResourceEntity>();
+	public LinkedList<ResourceEntity> myResourceEntities = new LinkedList<ResourceEntity>();
 	public LinkedList<ServiceProviderAgent> assignWITo = new LinkedList<ServiceProviderAgent>();
 	public LinkedList<ServiceProviderAgent> borrowResourceFrom = new LinkedList<ServiceProviderAgent>();		
 	private LinkedList<WorkItemEntity> requestedQ = new LinkedList<WorkItemEntity>();
@@ -139,16 +139,21 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 
 	
 	public void analyzeAggregationNode(AggregationNode aggrNode) {
-		AnalysisActivity analysisActivity = new AnalysisActivity(aggrNode);
-		//
-		@SuppressWarnings("unchecked")
-		Context<Object> context = ContextUtils.getContext(this);	
-		context.add(analysisActivity);
-		//
-		SoS.arrivedList.put(analysisActivity.getId(), analysisActivity);
-		this.backlogQ.add(analysisActivity);
-		analysisActivity.setAssigned();
-		//System.out.println("\nANALYSIS AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" start analyzing"+aggrNode.fullName);
+		if (aggrNode.totalAnalysisStages>0) {
+			AnalysisActivity analysisActivity = new AnalysisActivity(aggrNode);
+			//
+			@SuppressWarnings("unchecked")
+			Context<Object> context = ContextUtils.getContext(this);	
+			context.add(analysisActivity);
+			//
+			SoS.arrivedList.put(analysisActivity.getId(), analysisActivity);
+			this.backlogQ.add(analysisActivity);
+			analysisActivity.setAssigned();
+			//System.out.println("\nANALYSIS AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" start analyzing"+aggrNode.fullName);
+		}
+		else {
+			releaseSubtasks(aggrNode);
+		}
 	}	
 	public void requestAssistance(DevTask devTask) {
 		ResolutionActivity resolutionActivity = new ResolutionActivity(devTask);
@@ -187,17 +192,22 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		}
 	}
 	public void releaseSubtasks (AggregationNode aggr) {
+		//
+		double releasePortion = (double)aggr.currentAnalysisStage/aggr.totalAnalysisStages;
+		if (aggr.totalAnalysisStages==0) {
+			releasePortion = 1.0;
+			aggr.setStarted();
+		}
+		//
 		@SuppressWarnings("unchecked")
 		Context<Object> context = ContextUtils.getContext(this);	
-		double releaseProbability = (double)aggr.currentAnalysisStage/aggr.totalAnalysisStage;
-		int c = (int) (releaseProbability*(double)aggr.getSubtasks().size());
-		int total = c;
+		int total = (int) (releasePortion*(double)aggr.getSubtasks().size());
 		int count = 0;
 		//System.out.println(aggr.getName()+" stage:"+aggr.currentAnalysisStage+"/"+aggr.totalAnalysisStage+" release:"+total+"/"+aggr.getSubtasks().size());
 		for (WorkItemEntity subtask: aggr.getSubtasks()) {		
+			count++;
 			if (!subtask.isActivated) {
-				//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");	
-				count++;
+				//System.out.println(wi.fullName+" released subtask "+subtask.getName()+"(id:"+subtask.getId()+")");			
 				subtask.setActivated();			
 				subtask.getUppertasks().add(aggr);
 				context.add(subtask);
@@ -206,7 +216,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 				this.requestedQ.add(subtask);			
 			}
 			else {
-				count++;
 				//System.out.println(wi.fullName+"'s subtask"+subtask.fullName+"already activated");	
 				if (!subtask.getUppertasks().contains(aggr)) {
 					subtask.getUppertasks().add(aggr);
@@ -233,15 +242,12 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		}
 		return candidates;
 	}
-	public ArrayList<ResourceEntity> findResourceEntities(WorkItemEntity wItem) {
+	public LinkedList<ResourceEntity> findResourceEntities(WorkItemEntity wItem) {
 		int wItem_reqService_id = wItem.serviceId;
-		ArrayList<ResourceEntity> serviceResourceCandidates = new ArrayList<ResourceEntity>(0);
+		LinkedList<ResourceEntity> serviceResourceCandidates = new LinkedList<ResourceEntity>();
 		for (ResourceEntity sResource: this.getMyResourceEntities()) {
-			for (Skill sResourceSkill: sResource.getSkillSet()) {
-				int sResource_Service_id = sResourceSkill.getService().getId();
-				if (sResource_Service_id==wItem_reqService_id) {
-					serviceResourceCandidates.add(sResource);
-				}
+			if (sResource.isAvailable() && sResource.getEfficiency(wItem_reqService_id)>0) {				
+				serviceResourceCandidates.add(sResource);
 			}
 		}	
 		return serviceResourceCandidates;

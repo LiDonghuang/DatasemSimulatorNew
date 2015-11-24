@@ -82,7 +82,7 @@ public class ValueFunction extends MechanismImpl {
 					if (subtask.isEnded) {
 						subtask.SoS.deliverValue(incSValue);
 					}
-					else if (((AggregationNode)subtask).currentAnalysisStage==((AggregationNode)subtask).totalAnalysisStage) {
+					else if (((AggregationNode)subtask).currentAnalysisStage==((AggregationNode)subtask).totalAnalysisStages) {
 						subtask.Value = incSValue;
 						developValue(subtask);
 						subtask.Value += previousSValue;			

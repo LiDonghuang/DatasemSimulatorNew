@@ -117,27 +117,25 @@ public class AbstractAgentBehavior {
 			}
 			else if (decision.matches("RequestHelp")) {
 				if (agent.getId()==agent.SoS.coordinator.getId()) {
-					//System.out.println(agent.getName()+" handles"+wi.fullName);
+					System.out.println(agent.getName()+" handles"+wi.fullName);
 					agent.getAssignmentQ().add(wi);
 				}
 				else {
-					//System.out.println(agent.getName()+" requests help from "+agent.SoS.coordinator.getName()+" on"+wi.fullName);
+					System.out.println(agent.getName()+" requests help from "+agent.SoS.coordinator.getName()+" on"+wi.fullName);
 					agent.SoS.coordinator.getRequestedQ().add(wi);
 				}
 			}
 			else if (decision.matches("Decline")) {
-				//System.out.println(agent.getName()+" declines"+wi.fullName+"from "+wi.getRequester().getName());
+				System.out.println(agent.getName()+" declines"+wi.fullName+"from "+wi.getRequester().getName());
 				if (wi.getRequester().getId()==agent.getId()) {
-					System.out.println("ERROR: "+agent.getName()+" declines"+wi.fullName+" which is requested by itself!");
-					System.exit(0);
+					throw new RuntimeException("ERROR: "+agent.getName()+" declines"+wi.fullName+" which is requested by itself!");
 				}
 				else {
 					wi.getRequester().getRequestedQ().add(wi);
 				}
 			}
 			else {
-				System.out.println("ERROR: "+" invalid decision --"+decision+"--!");
-				System.exit(0);
+				throw new RuntimeException("ERROR: "+" invalid decision --"+decision+"--!");
 			}
 			agent.getRequestedQ().remove(wi);
 		}
@@ -152,9 +150,7 @@ public class AbstractAgentBehavior {
 			ServiceProviderAgent selectedSP = schedule.get(wi);
 			agent.NowRequested.add(selectedSP);
 			agent.requestService(wi, selectedSP);
-
 			agent.getAssignmentQ().remove(wi);
-
 			//System.out.println(agent.getName()+" assigned"+wi.fullName+"to "+selectedSP.getName());
 			selectedSP.tempQ.clear();
 			//selectedSP.checkRequestedQ();
@@ -163,54 +159,31 @@ public class AbstractAgentBehavior {
 
 	public void SelectWIsToStart() {
 		LinkedList<Task> readyQ = new LinkedList<Task>();		
-		readyQ = agent.myStrategy.applyWorkPrioritization(agent,agent.getBacklogQ());
+		readyQ.addAll(agent.myStrategy.applyWorkPrioritization(agent,agent.getBacklogQ())) ;
 		for (int i=0;i<readyQ.size();i++) {			
-			// =========== Apply WI Selection Rule ====================
-			Task wi = readyQ.get(i);
-			if (this.taskCompletionHandling(wi)) {
+			Task wi = readyQ.get(i);	
+			if (!wi.precedencyCleared()) {
 				readyQ.remove(wi);
 				i--;
+				//System.out.println(agent.getName()+": Cannot Start"+wi.fullName+"due to Precedency");
 			}
-			else if (wi.precedencyCleared()) {
-				// ========================================================
-				ArrayList<ResourceEntity> serviceResourceCandidates = agent.findResourceEntities(wi);
-				// =========== Apply Resource Allocation Rule =============
-				ArrayList<ResourceEntity> idleResources = new ArrayList<ResourceEntity>();
-				for (int r=0;r<serviceResourceCandidates.size();r++) {
-					ResourceEntity candidateSR = serviceResourceCandidates.get(r);
-					// only look at Idle Candidate Resources;
-					if (!candidateSR.isBusy()) {
-						idleResources.add(candidateSR);
-					}
-				}
-				if (!idleResources.isEmpty()) {
-					ResourceEntity selectedSR = idleResources.get(RandomHelper.nextIntFromTo(0, idleResources.size()-1));
-					selectedSR.allocateTo(wi);				
-				// ========================================================
-					wi.setStarted();
-					double rEfficiency = wi.calculateResourceEfficiency();	
-					wi.setServiceEfficiency(rEfficiency);
-				// =========== Estimate Completion ====================				
-					double eEfforts = wi.efforts/rEfficiency;
-					wi.estimatedEfforts = eEfforts;
-					double eCompletion= eEfforts + agent.SoS.timeNow;
-					wi.estimatedCompletionTime = eCompletion;
-					// ====================================================
-					agent.getActiveQ().add((Task)wi);
-					agent.getBacklogQ().remove(wi);
-				}
-				else {
-					//System.out.println(this.name+" :No Resources available for"+wi.fullName+"now!");				
-				}
+			else if (this.taskCompletionHandling(wi)) {
+				readyQ.remove(wi);				
+				//System.out.println(agent.getName()+": found"+wi.fullName+"already Completed");
+				i--;
 			}
-			else {
-				//System.out.println(this.name+" :Cannot Start"+wi.fullName+"due to Precedency");
-			}
+		}
+		HashMap<Task,ResourceEntity> schedule = agent.myStrategy.applyResourceAllocation(agent, readyQ);
+		for (Task wi: schedule.keySet()) {
+			ResourceEntity selectedR = schedule.get(wi);
+			selectedR.allocateTo(wi);
+			wi.setStarted();
+			agent.getActiveQ().add((Task)wi);
+			agent.getBacklogQ().remove(wi);
 		}
 	}
 	
 	public void AdvanceWIsProgress() {
-		//System.out.println("Agent "+this.name+" checkWIsCompletion");
 		for(int i=0;i<agent.getActiveQ().size();i++) {
 			Task WI = agent.getActiveQ().get(i);
 			WI.advanceProgress();
@@ -252,8 +225,9 @@ public class AbstractAgentBehavior {
 	public void DisburseWIs() {			
 		for (int i=0;i<agent.getCompleteQ().size();i++) {
 			WorkItemEntity wi=agent.getCompleteQ().get(i);				
-			//System.out.println("\nDISBURSE @TIME:"+SoS.timeNow+" Agent "+this.name+" try to disburse"+completedWI.fullName+"...");
+			//System.out.println("\nDISBURSE @TIME:"+agent.SoS.timeNow+" Agent "+agent.getName()+" try to disburse"+wi.fullName+"...");
 			if (wi.getProgress() <= 0.9999) {
+				//System.out.println("Progress Not Satisfied");
 				wi.isCompleted = false;
 				agent.getCompleteQ().remove(wi);	
 				if (wi.isAggregationNode) {
@@ -279,25 +253,30 @@ public class AbstractAgentBehavior {
 	public String acceptanceDecision(WorkItemEntity requestedWI) {
 		String decision = "Decline";		
 		if (requestedWI.isAggregationNode) {
-			double capacity = ((AggregationNode)requestedWI).calculateServiceCapacity(agent);	
-			if (capacity>0) {
+			if (((AggregationNode)requestedWI).totalAnalysisStages==0) {
 				decision = "Accept";
-				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
 			}
 			else {
-				double exCapacity = ((AggregationNode)requestedWI).calculateExtendedServiceCapacity(agent);	
-				if (exCapacity>0) {
-					decision = "Outsource";
+				double capacity = ((AggregationNode)requestedWI).calculateServiceCapacity(agent);	
+				if (capacity>0) {
+					decision = "Accept";
+					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
 				}
 				else {
-					if (requestedWI.getRequester().getId() == agent.getId()) {
-						decision = "RequestHelp";
+					double exCapacity = ((AggregationNode)requestedWI).calculateExtendedServiceCapacity(agent);	
+					if (exCapacity>0) {
+						decision = "Outsource";
 					}
 					else {
-						decision = "Decline";
+						if (requestedWI.getRequester().getId() == agent.getId()) {
+							decision = "RequestHelp";
+						}
+						else {
+							decision = "Decline";
+						}
 					}
 				}
-			}
+			}		
 		}
 		else if (requestedWI.isResolutionActivity) {
 			double capacity = ((Task)requestedWI).calculateServiceCapacity(agent);	
@@ -358,13 +337,13 @@ public class AbstractAgentBehavior {
 	
 	public boolean taskCompletionHandling(Task WI) {
 		boolean completion = false;
-		if ( (WI.getProgress()>0.9999) && (!WI.isSuspended) ){
+		if ( (WI.getProgress()>0.9999) && (!WI.isSuspended) ){			
 			if (WI.isAnalysisActivity) {
 				//System.out.println("\nCOMPLETED ANALYSIS @TIME:"+SoS.timeNow+" Agent "+this.name+" completed analyzing"+WI.AnalysisObject.fullName);
 				AggregationNode analysisObject = (AggregationNode)((AnalysisActivity)WI).AnalysisObject;		
 				analysisObject.currentAnalysisStage ++;
 				//System.out.println(analysisObject.currentAnalysisStage+" "+analysisObject.totalAnalysisStage);
-				if (analysisObject.currentAnalysisStage == analysisObject.totalAnalysisStage) {
+				if (analysisObject.currentAnalysisStage == analysisObject.totalAnalysisStages) {
 					agent.SoS.myValueFunction.developValue(analysisObject);
 					agent.releaseSubtasks(analysisObject);					
 				}
@@ -380,14 +359,15 @@ public class AbstractAgentBehavior {
 				Task suspendedTask = (Task) ((ResolutionActivity)WI).ResolutionObject;
 				suspendedTask.isSuspended = false;
 				suspendedTask.getPredecessors().remove(WI);
-				//System.out.println("\nSUSPENSION CLEARED @TIME:"+this.SoS.timeNow+suspendedTask.fullName+"(suspension duration: "+(this.SoS.timeNow-suspendedTask.suspendedTime)+")");
+				taskCompletionHandling(suspendedTask);
+				//System.out.println("\nSUSPENSION CLEARED @TIME:"+agent.SoS.timeNow+suspendedTask.fullName);
 			}
-			completion = true;
-			WI.setCompleted();
-			WI.withdrawAllResources();
 			agent.getBacklogQ().remove(WI);
 			agent.getActiveQ().remove(WI);
 			agent.getCompleteQ().add(WI);
+			completion = true;
+			WI.setCompleted();
+			WI.withdrawAllResources();
 		}
 		return completion;
 	}	

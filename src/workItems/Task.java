@@ -30,26 +30,30 @@ public class Task extends WorkItemEntity{
 		return sEfficiency;
 	}
 	public double calculateResourceEfficiency() {
-		double rEfficiency = 0;
-		for (int s=0;s<this.getAllocatedResources().get(0).getSkillSet().size();s++){
-			Skill skill = this.getAllocatedResources().get(0).getSkillSet().get(s);
-			if (skill.getService().getId() == this.serviceId){
-				rEfficiency = skill.getEfficiency();				
-				break;
-			}		
-		}		
-		return rEfficiency;
+		double myEfficiency = 0;
+		int totalResources = this.getAllocatedResources().size();
+		double coop_discount = 1.0/Math.pow((double)totalResources, 0.5);		
+		for (ResourceEntity r : this.getAllocatedResources()) {
+			double efficiency = r.getEfficiency(serviceId);
+			int totalTasks = r.getWip().size();
+			double multi_discount = 1.0/Math.pow((double)totalTasks, 0.33) /((double)(r.getWip().size()));
+			//System.out.println(share_discount+" "+multi_discount);
+			double finalAdd = efficiency*coop_discount*multi_discount;
+			myEfficiency += Math.max(0, finalAdd);
+		}	
+		return myEfficiency;
 	}
 	public void advanceProgress() {
 		// ------------ Compute WI Progress (percentage) -----------	
-		if (this.isStarted) {		
-			progressRate = this.getServiceEfficiency() / efforts;
+		if (this.isStarted) {
+			this.setServiceEfficiency(this.calculateResourceEfficiency());
+			setProgressRate(this.getServiceEfficiency() / efforts);
 			this.cycleTime += 1;
 			if (this.isResolutionActivity) {
 				((ResolutionActivity)this).ResolutionObject.cycleTime += 1;
 			}
 			//System.out.println(this.getName()+"(CycleTime:"+this.cycleTime+") at "+this.getAllocatedResources().get(0).getName()+" progress rate "+this.progressRate);
-			setProgress(getProgress() + progressRate + 0.000001);					
+			setProgress(getProgress() + getProgressRate() + 0.000001);					
 			if (getProgress() >= 1) {			
 				setProgress(1.00);	
 			}

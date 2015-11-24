@@ -138,7 +138,7 @@ public class SimulationContextBuilder {
 		}
 		
 		// Auto Decompose
-		double ComplexityFactor = 0.5;
+		double ComplexityFactor = 0;
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {				
 			if (wi.getType().getName().matches("SubSysReq")) {
 				wi = (AggregationNode)wi;
@@ -193,7 +193,7 @@ public class SimulationContextBuilder {
 		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
 			if (wi1.getType().getName().matches("SubSysReq")) {	
 				for (WorkItemEntity wi2 : wi1.getImpactsWIs()) {
-					if (wi2.getType().getName().matches("SubSysReq")) {
+					if (wi2.isAggregationNode) {
 						double likelihood = wi1.getImpactsLikelihood().get(wi2);
 						double risk = wi1.getImpactsRisk().get(wi2);
 						for (WorkItemEntity wi1s: ((AggregationNode)wi1).getSubtasks()) {
@@ -202,7 +202,7 @@ public class SimulationContextBuilder {
 								WorkItemEntity wi2s = ((AggregationNode)wi2).getSubtasks().get(t);
 								wi1s.getImpactsWIs().add(wi2s);
 								wi1s.getImpactsLikelihood().put(wi2s, 0.5);
-								wi1s.getImpactsRisk().put(wi2s, Math.min(1,risk));
+								wi1s.getImpactsRisk().put(wi2s, risk);
 								//System.out.println("Impacts DSM: from "+wi1s.getName()+" to "+wi2s.getName());
 							}
 						}

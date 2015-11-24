@@ -250,13 +250,14 @@ public class Visualization {
 	}
 	public void commentWI(WorkItemEntity wi) {
 		Comments comments = new Comments();
-		comments.addComment("\n\n\nID:"+Integer.toString(wi.getId()));
+		//comments.addComment("\n\n\nID:"+Integer.toString(wi.getId()));
 		comments.addComment("type:"+this.SoS.myWorkItemTypes.get(wi.typeId).getName());
 		if (!wi.isEnded) {
-			comments.addComment("progress:"+Integer.toString((int)(wi.getProgress()*100))+"%");
-			comments.addComment("Value:"+new DecimalFormat("##.#").format(wi.Value));
+			//comments.addComment("Value:"+new DecimalFormat("##.#").format(wi.Value));
 			comments.addComment("currentValue:"+new DecimalFormat("##.#").format(wi.currentValue));
-			if (!wi.isAggregationNode) {
+			comments.addComment("progress:"+Integer.toString((int)(wi.getProgress()*100))+"%");		
+			if (!wi.isAggregationNode) {				
+				comments.addComment("efficiency:"+Integer.toString((int)(wi.getServiceEfficiency()*100))+"%");
 				comments.addComment(SoS.myServices.get(wi.serviceId).getName()+" x"+(int)wi.efforts);
 				if (wi.getReworkCount()>0) {
 					comments.addComment("rework: "+Integer.toString(wi.getReworkCount()));

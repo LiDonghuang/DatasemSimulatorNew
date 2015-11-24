@@ -12,6 +12,10 @@ import java.util.LinkedList;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.util.SimUtilities;
 import serviceProviders.ServiceProviderAgent;
+import workItems.AggregationNode;
+import workItems.AnalysisActivity;
+import workItems.DevTask;
+import workItems.ResolutionActivity;
 import workItems.Task;
 import workItems.WorkItemEntity;
 import xtext.objectsModel.Mechanism;
@@ -21,6 +25,9 @@ public class WISelectionRule {
 	
 	protected String ruleValue;	
 	
+	public WISelectionRule() {
+		ruleValue = "FIFO";
+	}
 	public void implementWISelectionRule(Mechanism m) {
 		this.ruleValue = m.getValue();
 	}
@@ -87,75 +94,31 @@ public class WISelectionRule {
 		//
 		else {return requestedQ;}
 	}
-	/*
-	public WorkItemEntity applyRule2(ServiceProviderAgent SP, LinkedList<WorkItemEntity> queue) {
-		// First-In-First-Out
-		if (this.name.matches("FIFO")){
-			this.selectedWI = queue.getFirst();
-			//System.out.println(SP.getName()+" Applied FIFO");
-			}
-		// Last-In-First-Out
-		else if (this.name.matches("LIFO")){
-			this.selectedWI = queue.getLast();
-			//System.out.println(SP.getName()+" Applied LIFO");
-			}
-		// Neutral Random Selection
-		else if (this.name.matches("Neutral")){
-			this.selectedWI = queue.get(RandomHelper.nextIntFromTo(0, queue.size()-1));
-			//System.out.println(SP.getName()+" Applied Neutral");
-			}
-		// Largest "Base Value" First
-		else if (this.name.matches("ValueBased")){
-			ArrayList<WorkItemEntity> candidates= new ArrayList<WorkItemEntity>(queue);
-			SimUtilities.shuffle(candidates, RandomHelper.getUniform()); 
-			//Shuffle Candidates Sequence
-			WorkItemEntity selected = candidates.remove(0);
-			while (candidates.size()>0) {
-				if (candidates.get(0).getBvalue() > selected.getBvalue()){
-					selected = candidates.get(0);
-				}
-				candidates.remove(0);
-			}
-			this.selectedWI = selected;
-			//System.out.println(SP.getName()+" Applied ValueBased");
-			//System.out.println("Base Value:" + selected.getBvalue());
+
+	public double calculateRPW(WorkItemEntity wi) {
+		double rpw = 0;
+		double suc = wi.getSuccessors().size();
+		double obj = 0;
+		double imp = 0;
+		double deco = 0;
+		double susp = 0;
+
+		for (WorkItemEntity impactsTarget: wi.getImpactsWIs()) {
+			double likelihood = wi.getImpactsLikelihood().get(impactsTarget);
+			double risk = wi.getImpactsRisk().get(impactsTarget);
+			imp += likelihood*risk*5;
 		}
-		// Earliest Due Date First
-		else if (this.name.matches("EDD")){
-			ArrayList<WorkItemEntity> candidates= new ArrayList<WorkItemEntity>(queue);
-			SimUtilities.shuffle(candidates, RandomHelper.getUniform()); 
-			//Shuffle Candidates Sequence
-			WorkItemEntity selected = candidates.remove(0);
-			while (candidates.size()>0) {
-				if (candidates.get(0).getDueDate() < selected.getDueDate()){
-					selected = candidates.get(0);
-				}
-				candidates.remove(0);
-			}
-			this.selectedWI = selected;
-			//System.out.println(SP.getName()+" Applied EDD");
-			//System.out.println("Duedate:" + selected.getDueDate());
-			}
-		// 	Smallest Processing Time First
-		else if (this.name.matches("SPT")){
-			ArrayList<WorkItemEntity> candidates= new ArrayList<WorkItemEntity>(queue);
-			SimUtilities.shuffle(candidates, RandomHelper.getUniform()); 
-			//Shuffle Candidates Sequence
-			WorkItemEntity selected = candidates.remove(0);
-			while (candidates.size()>0) {
-				if (candidates.get(0).estimatedEfforts 
-						< selected.estimatedEfforts){
-					selected = candidates.get(0);
-				}
-				candidates.remove(0);
-			}
-			this.selectedWI = selected;
-			//System.out.println(SP.getName()+" Applied SPT");
-			//System.out.println("Estimated Efforts:" + selected.estimatedEfforts);
-			}
-		return this.selectedWI;			
-	}	
-	*/
+		if (wi.isAnalysisActivity) {
+			AggregationNode AnalysisObject = (AggregationNode) ((AnalysisActivity)wi).AnalysisObject;
+			deco = (calculateRPW(AnalysisObject)+AnalysisObject.hierarchy) * (3-AnalysisObject.hierarchy);
+		}
+		if (wi.isResolutionActivity) {
+			DevTask ResolutionObject = ((ResolutionActivity)wi).ResolutionObject;
+			susp = calculateRPW(ResolutionObject);
+		}
+		rpw = suc + obj + imp + deco + susp;
+		return rpw;
+	}
 	
 	class LargerPerceivedValue implements Comparator<WorkItemEntity> {
 		@Override
@@ -188,10 +151,10 @@ public class WISelectionRule {
 	class LargerRPW implements Comparator<WorkItemEntity> {
 		@Override
 		public int compare(WorkItemEntity w1, WorkItemEntity w2) {
-			if (w1.calculateRPW()<w2.calculateRPW()) {
+			if (calculateRPW(w1)<calculateRPW(w2)) {
 				return 1;
 			}
-			else if (w1.calculateRPW()==w2.calculateRPW()) {
+			else if (calculateRPW(w1)==calculateRPW(w2)) {
 				return 0;
 			}
 			else {

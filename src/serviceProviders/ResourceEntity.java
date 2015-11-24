@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import workItems.Task;
 import workItems.WorkItemEntity;
 import xtext.objectsModel.Asset;
+import xtext.objectsModel.Skill;
 import xtext.objectsModel.impl.AssetImpl;
 
 public class ResourceEntity extends AssetImpl{
@@ -12,7 +13,7 @@ public class ResourceEntity extends AssetImpl{
 	public int WIPLimit = 1;
 	
 	public boolean busy = false;
-	protected LinkedList<WorkItemEntity> activeQ = new LinkedList<WorkItemEntity>();
+	private LinkedList<WorkItemEntity> wip  = new LinkedList<WorkItemEntity>();
 	
 	public ResourceEntity(Asset myResource) {
 		this.myResource = myResource;
@@ -20,16 +21,25 @@ public class ResourceEntity extends AssetImpl{
 		this.name = myResource.getName();
 		this.skillSet = myResource.getSkillSet();
 	}
-	
+	public double getEfficiency(int sId) {
+		double e = 0;
+		for (Skill sk:this.skillSet) {
+			if (sk.getService().getId()==sId) {
+				e = sk.getEfficiency();
+				break;
+			}
+		}
+		return e;
+	}
 	public void allocateTo(Task t) {
 	    t.allocateResource(this);
-		this.activeQ.add(t);
+		this.getWip() .add(t);
 		this.setBusy();
 	}
 	public void withdrawFrom(Task t) {
 		t.withdrawResource(this);
-		this.activeQ.remove(t);
-		if (this.activeQ.size()==0) {
+		this.getWip().remove(t);
+		if (this.getWip().size()==0) {
 			this.setIdle();
 		}
 	}
@@ -41,5 +51,19 @@ public class ResourceEntity extends AssetImpl{
 	}
 	public Boolean isBusy () {
 		return this.busy;
+	}
+	public Boolean isAvailable () {
+		if (this.getWip().size() < this.WIPLimit) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public LinkedList<WorkItemEntity> getWip() {
+		return wip;
+	}
+	public void setWip(LinkedList<WorkItemEntity> wip) {
+		this.wip = wip;
 	}
 }

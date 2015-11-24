@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import contractNetProtocol.ContractNetProtocol;
+import serviceProviders.ResourceEntity;
 import serviceProviders.ServiceProviderAgent;
 import workItems.Task;
 import workItems.WorkItemEntity;
@@ -22,6 +23,9 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 	protected ResourceAllocationRule myAllocationRule;
 	
 	public AgentStrategy(GovernanceStrategy myGovernanceStrategy) {
+		mySelectionRule = new WISelectionRule();
+		myAssignmentRule = new WIAssignmentRule();
+		myAllocationRule = new ResourceAllocationRule();
 		this.implementAgentStrategy(myGovernanceStrategy);
 	}
 	
@@ -39,9 +43,9 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 			this.implementPullStrategy(myGovernanceStrategy);
 			this.isPush = true;
 		}
-		else {
-			throw new RuntimeException(myGovernanceStrategy.getType()+" is not a Valid Strategy Type!");
-		}
+//		else {
+//			throw new RuntimeException(myGovernanceStrategy.getType()+" is not a Valid Strategy Type!");
+//		}
 	}
 
 	public void implementPullStrategy(GovernanceStrategy myGovernanceStrategy) {
@@ -57,11 +61,9 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 			
 		}
 		else if (m.getName().matches("Selection")) {			
-			mySelectionRule = new WISelectionRule();
 			mySelectionRule.implementWISelectionRule(m);
 		}
 		else if (m.getName().matches("Assignment")) {
-			myAssignmentRule = new WIAssignmentRule();
 			myAssignmentRule.implementWIAssignmentRule(m);
 		}
 		else if (m.getName().matches("Allocation")) {
@@ -79,5 +81,8 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 	}
 	public HashMap<WorkItemEntity, ServiceProviderAgent> applyAgentSelection(ServiceProviderAgent me, LinkedList<WorkItemEntity> WIs, LinkedList<ServiceProviderAgent> SPs) {
 		return this.myAssignmentRule.applyRule(me, WIs, SPs);
+	}
+	public HashMap<Task, ResourceEntity> applyResourceAllocation(ServiceProviderAgent me, LinkedList<Task> WIs) {
+		return this.myAllocationRule.applyRule(me, WIs);
 	}
 }

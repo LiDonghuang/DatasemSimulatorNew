@@ -17,7 +17,7 @@ public class DatasemSimulatorModel implements ContextBuilder<Object>{
 	public Context<Object> build(Context<Object> context) {
 		File folder = new File("SimulationOutputs");
 		clearFolder(folder);
-		//context.setId("DatasemSimulator");
+
 		contextbuilder.ContextImplementation(context);
 		Parameters p = RunEnvironment.getInstance().getParameters();
 		int numReplications = (Integer)p.getValue("NumReplications");

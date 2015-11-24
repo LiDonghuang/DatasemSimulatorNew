@@ -15,27 +15,17 @@ public class AggregationNode extends WorkItemEntity{
 	private ProcessModel processModel;
 	public int currentProcessStage;
 	public int currentAnalysisStage;
-	public int totalAnalysisStage;
+	public int totalAnalysisStages;
 	
 	public AggregationNode(WorkItem wi) {
 		super(wi);
 		this.isAggregationNode = true;		
+		this.totalAnalysisStages = wi.getRequiredAnalysis().size();
 		if (wi.getRequiredAnalysis().size()>0) {
 			this.serviceId = wi.getRequiredAnalysis().get(0).getServiceType().getId();
 			this.efforts = wi.getRequiredAnalysis().get(0).getEfforts();
-		}
-		else {
-			this.serviceId = wi.getRequiredServices().get(0).getServiceType().getId();
-			this.efforts = wi.getRequiredServices().get(0).getEfforts();
-		}
-		this.totalAnalysisStage = wi.getRequiredAnalysis().size();
+		}		
 	}
-	
-//	public void advanceProgress() {
-//	}
-//	
-//	public void triggerChanges() {
-//	}
 
 	public void updateCompletionStatus() {
 		if (this.isAggregationNode && !this.isCompleted) {
@@ -132,7 +122,7 @@ public class AggregationNode extends WorkItemEntity{
 	}
 	public double calculateExtendedServiceCapacity(ServiceProviderAgent sp) {
 		double sEfficiency = 0;
-		sEfficiency = sp.ExtendedServiceCapacity.get(SoS.myServices.get(this.serviceId));
+		sEfficiency += sp.ExtendedServiceCapacity.get(SoS.myServices.get(this.serviceId));
 		return sEfficiency;
 	}
 	public double calculateServiceCapacity(ServiceProviderAgent sp) {

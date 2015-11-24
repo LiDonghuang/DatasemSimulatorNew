@@ -25,6 +25,9 @@ public class WIAssignmentRule {
 	private WorkItemEntity currentWI;
 	private Service currentService;
 	
+	public WIAssignmentRule() {
+		ruleValue = "Neutral";
+	}
 	public void implementWIAssignmentRule(Mechanism m) {
 		this.ruleValue = m.getValue();
 	}
