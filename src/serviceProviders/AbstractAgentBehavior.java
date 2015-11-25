@@ -37,7 +37,7 @@ public class AbstractAgentBehavior {
 	public void setAgent(ServiceProviderAgent agent) {
 		this.agent = agent;
 		this.BacklogLimit = 10;
-		this.WIPLimit = 5;
+		this.WIPLimit = 10;
 	}
 	public void addStep(int key,String state) {
 		this.StepsMap.put(key, state);
@@ -157,6 +157,8 @@ public class AbstractAgentBehavior {
 			selectedSP.tempQ.clear();
 			//selectedSP.checkRequestedQ();
 		}
+		agent.getRequestedQ().addAll(agent.getAssignmentQ());
+		agent.getAssignmentQ().clear();
 	}
 
 	public void SelectWIsToStart() {
@@ -253,7 +255,7 @@ public class AbstractAgentBehavior {
 	}
 
 	public String acceptanceDecision(WorkItemEntity requestedWI) {
-		String decision = "Decline";		
+		String decision;		
 		if (requestedWI.isAggregationNode) {
 			if (((AggregationNode)requestedWI).totalAnalysisStages==0) {
 				decision = "Accept";

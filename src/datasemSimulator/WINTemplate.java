@@ -1,5 +1,7 @@
 package datasemSimulator;
 
+import repast.simphony.random.RandomHelper;
+import repast.simphony.util.SimUtilities;
 import workItems.AggregationNode;
 import workItems.DevTask;
 import workItems.WorkItemEntity;
@@ -7,7 +9,7 @@ import xtext.objectsModel.RequiredService;
 
 public class WINTemplate {
 	public static void generateSubtasks(WorkItemEntity wi) {
-		double ComplexityFactor = 0;
+		double ComplexityFactor = 0.5;
 		wi = (AggregationNode)wi;
 		int c = 0;
 		for (RequiredService reqSev : wi.getRequiredServices()) {
@@ -32,6 +34,7 @@ public class WINTemplate {
 			}
 		}
 		// Complexity
+		SimUtilities.shuffle(((AggregationNode)wi).getSubtasks(), RandomHelper.getUniform()); 
 		for (WorkItemEntity wis: ((AggregationNode)wi).getSubtasks()) {
 			boolean loop = true;
 			int loopcount = 0;

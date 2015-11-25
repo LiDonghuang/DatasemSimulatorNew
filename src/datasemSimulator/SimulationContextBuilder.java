@@ -127,13 +127,13 @@ public class SimulationContextBuilder {
 		
 		// Auto Decompose
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {				
-			if (wi.isAggregationNode && wi.getSbTasks().size()==0) {
-					WINTemplate.generateSubtasks(wi);
-				}	
+			if (wi.isAggregationNode && wi.myWorkItem.getSbTasks().size()==0) {
+				WINTemplate.generateSubtasks(wi);
+			}	
 		}
 		// Derive Impacts DSM
 		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
-			if (wi1.isAggregationNode && wi1.getSbTasks().size()==0) {	
+			if (wi1.isAggregationNode && wi1.myWorkItem.getSbTasks().size()==0) {	
 				WINTemplate.generateImpacts(wi1);
 			}
 		}

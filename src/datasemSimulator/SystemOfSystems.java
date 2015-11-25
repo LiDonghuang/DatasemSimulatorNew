@@ -95,11 +95,13 @@ public class SystemOfSystems {
 	public void step() {
 		ISchedule schedule = RunEnvironment.getInstance().getCurrentSchedule();
 		this.timeNow = (int)schedule.getTickCount();
+		CheckEndRunCondition();
+		
 		for (WorkItemEntity wi:this.arrivedList.values()) {
 			wi.setPreviousProgress(wi.getProgress());
 		}		
 		ReleaseWIs();
-		CheckEndRunCondition();
+		
 	}
 	public void CheckEndRunCondition() {
 		for (WorkItemEntity task:this.endedList){
