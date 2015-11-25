@@ -327,21 +327,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		int load = this.requestedQ.size()+this.activeQ.size()+this.backlogQ.size();
 		return load;
 	}
-	public double estimateWorkLoad() {
-		double load = 0;
-		
-		LinkedList<WorkItemEntity> scope = new LinkedList<WorkItemEntity>();	
-		scope.addAll(this.activeQ);
-		scope.addAll(this.backlogQ);
-		scope.addAll(this.tempQ);
-		
-		for (WorkItemEntity wi:scope) {
-			double efforts = wi.efforts;
-			load += efforts;
-		}
-		
-		return load;
-	}
 	public double getActiveWorkload() {
 		return this.ActiveWorkload;
 	}

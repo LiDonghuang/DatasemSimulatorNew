@@ -1,5 +1,7 @@
 package processModels;
 
+import javax.swing.JOptionPane;
+
 import org.apache.commons.math3.stat.StatUtils;
 
 import workItems.AggregationNode;
@@ -21,7 +23,8 @@ public class ValueFunction extends MechanismImpl {
 			this.type = mechanism.getValue();
 		}
 		else {
-			throw new RuntimeException("Mechanism "+mechanism.getName()+" is not a Value Function!");
+			String msg = "Mechanism "+mechanism.getName()+" is not a Value Function!" + "\n click OK to use default settings(Neutral)";
+			JOptionPane.showMessageDialog(null,msg);
 		}
 	}
 	public String getAttributeValue(String attName) {

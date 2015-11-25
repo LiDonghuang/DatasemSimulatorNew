@@ -6,11 +6,26 @@ public class DevTask extends Task {
 	public double risk = 0;
 	public double learningFactor = 0;
 	
-	public DevTask(WorkItemEntity wi) {
-		super(wi);
+	public DevTask(WorkItemEntity entity) {
+		super(entity);
 		this.isDevTask = true;
-		this.serviceId = wi.getRequiredServices().get(0).getServiceType().getId();
-		this.efforts = wi.getRequiredServices().get(0).getEfforts();
+		this.myWorkItem = entity;
+		this.id = entity.getId();
+		this.name = entity.getName();
+		this.myType = entity.getType();
+		this.typeId = entity.getType().getId();
+		this.hierarchy = entity.getType().getHierarchy();
+		this.initialValue = entity.Value;
+		this.Value = initialValue;
+		this.currentValue = this.initialValue;
+		this.isAggregationNode = entity.isIsAggregationNode();
+		this.hasPredecessors = entity.isHasPredecessors();
+		this.arrivalTime = entity.arrivalTime;
+		this.dueDate = entity.dueDate;
+		this.fullName = this.fullName();
+		
+		this.serviceId = entity.getRequiredServices().get(0).getServiceType().getId();
+		this.efforts = entity.getRequiredServices().get(0).getEfforts();
 	}
 	public DevTask(AggregationNode upperTask, int id, String name, int serviceId, double efforts) {
 		super(upperTask);

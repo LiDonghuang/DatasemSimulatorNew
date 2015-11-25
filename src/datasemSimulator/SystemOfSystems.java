@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import kanbanBoard.KanbanBoard;
 
 import org.apache.commons.math3.stat.StatUtils;
@@ -55,7 +57,7 @@ public class SystemOfSystems {
 	
 	// Summary
 	private HashMap<Service,Double> serviceEfforts = new HashMap<Service,Double>();
-	private HashMap<Service,Double> serviceCapabilities = new HashMap<Service,Double>();
+	private HashMap<Service,Double> serviceCapacities = new HashMap<Service,Double>();
 	// Time Series Records
 	private List<Double> recordAgentsResourceUtilization_cov = new ArrayList<Double>();	
 	// End Run Statistics
@@ -100,7 +102,8 @@ public class SystemOfSystems {
 	}
 	public void CheckEndRunCondition() {
 		for (WorkItemEntity task:this.endedList){
-			task.removeFromContext();
+			//this.context.remove(task);
+			this.arrivedList.remove(task);
 		}
 		this.endedList.clear();
 		//System.out.println("\n ============== TIME NOW: "+timeNow+" ============== ");
@@ -111,8 +114,13 @@ public class SystemOfSystems {
 			this.EndRunAgentsStatistics();
 			System.out.println("\n----------------------------------------------------");
 		}
+//		else {
+//			for (WorkItemEntity wi:initialList.values()) {
+//				System.out.println("left:"+wi.fullName);
+//			}
+//		}
 	}
-	@ScheduledMethod(start=1,interval=1,priority=0)
+	@ScheduledMethod(start=1,interval=1,priority=10)
 	public void RecordData() {
 		double[] AgentsResourceUtilization = new double[this.myServiceProviderAgents.size()];
 		double AgentsResourceUtilization_mean = 0;
@@ -152,7 +160,7 @@ public class SystemOfSystems {
 		System.out.println("\n");
 		for (Service service:this.myServices.values()) {
 			this.serviceEfforts.put(service, 0.0);
-			this.serviceCapabilities.put(service, 0.0);
+			this.serviceCapacities.put(service, 0.0);
 		}
 		for (WorkItemEntity wi:this.myWorkItemEntities.values()) {
 			System.out.println("\nWorkItemEntity:"+wi.fullName+":");
@@ -194,9 +202,9 @@ public class SystemOfSystems {
 				System.out.println("  SkillSet:");
 				for (Skill sk:r.getSkillSet()) {
 					Service service = sk.getService();
-					double sCapabilities = serviceCapabilities.get(service);
+					double sCapabilities = serviceCapacities.get(service);
 					sCapabilities += sk.getEfficiency(); 
-					serviceCapabilities.put(service,sCapabilities);
+					serviceCapacities.put(service,sCapabilities);
 					System.out.println("  "+service.getName()+"(serviceId:"+service.getId()+") efficiency: "+sk.getEfficiency());
 				}
 			}
@@ -208,7 +216,12 @@ public class SystemOfSystems {
 		System.out.println("\n\nService Summary:");
 		for (Service service:this.myServices.values()) {
 			System.out.println(service.getName()+" total efforts: "+serviceEfforts.get(service));
-			System.out.println(service.getName()+" total capabilities: "+serviceCapabilities.get(service));
+			System.out.println(service.getName()+" total capabilities: "+serviceCapacities.get(service));
+			if (serviceEfforts.get(service)>0 && serviceCapacities.get(service)<=0) {
+				String msg = "ERROR: No Resource providing Service Type: "+service.getName()+"\nplease revise your Scenario";
+				JOptionPane.showMessageDialog(null,msg);
+				throw new RuntimeException(msg);
+			}
 		}
 		System.out.println("\n\n");
 	}
@@ -234,11 +247,12 @@ public class SystemOfSystems {
 	}
 	public void EndRunIndicators() {
 		this.EndTime = this.timeNow-1;
-		String observewiType = "DevTask";
-		int observewiTypeId = this.getWorkItemTypeId(observewiType);
+//		String observewiType = "DevTask";
+//		int observewiTypeId = this.getWorkItemTypeId(observewiType);
 		int wi_count = 0;
 		for (WorkItemEntity wi : arrivedList.values()) {
-			if (wi.typeId==observewiTypeId) {
+//			if (wi.typeId==observewiTypeId) {
+			if (wi.isDevTask) {
 				wi_count++;				
 			}
 		}
@@ -248,7 +262,8 @@ public class SystemOfSystems {
 		double[] CycleTimeToEffortsRatio = new double[wi_count];		
 		int i = 0;
 		for (WorkItemEntity wi : arrivedList.values()) {		
-			if (wi.typeId==observewiTypeId) {
+//			if (wi.typeId==observewiTypeId) {
+			if (wi.isDevTask) {
 				TaskReworkCount[i] = wi.getReworkCount();
 				ChangePropagationCount[i] = wi.getChangePropagationByCount();
 				CycleTimeToEffortsRatio[i] = wi.getCycleTimeToEffortsRatio();

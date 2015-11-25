@@ -85,36 +85,58 @@ public class SimulationContextBuilder {
 				}
 			}
 		}
-		double DiscountFactor = 0.5;
+		double trustFactor = 0.5;
 		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
 			for (Service service: mySoS.myServices.values()) {
 				double exCapacity = sp.ServiceCapacity.get(service);
 				for (ServiceProviderAgent outsource : sp.assignWITo) {
-					exCapacity += outsource.ServiceCapacity.get(service) * DiscountFactor;
+					exCapacity += outsource.ServiceCapacity.get(service) * trustFactor;
 				}
 				sp.ExtendedServiceCapacity.put(service, exCapacity);
 			}
 		}
 		
-		// Process Model
-		ProcessModel CEProcessModel = new ProcessModel("Capability\nEngineering");
-		CEProcessModel.addStage(1,"Objectives\nTranslating");
-		CEProcessModel.addStage(2,"Systems\nRelationships");
-		CEProcessModel.addStage(3,"Performance\nAssesement");
-		CEProcessModel.addStage(4,"Architecturing");
-		CEProcessModel.addStage(5,"Requirements\nSolutions");
-		CEProcessModel.addStage(6,"Upgrades\nOrchestration");
-		//
-		ProcessModel WaterfallModel = new ProcessModel("Waterfall\nModel");
-		WaterfallModel.addStage(1,"Analysis");
-		WaterfallModel.addStage(2,"Design");
-		WaterfallModel.addStage(3,"Implementation");
-		WaterfallModel.addStage(4,"Verification");
-		WaterfallModel.addStage(5,"Maintenance");
-		//
-		ProcessModel MyProcess = new ProcessModel("My\nProcess");
-		MyProcess.addStage(1,"Analysis");
-		MyProcess.addStage(2,"Development");
+//		// Process Model
+//		ProcessModel CEProcessModel = new ProcessModel("Capability\nEngineering");
+//		CEProcessModel.addStage(1,"Objectives\nTranslating");
+//		CEProcessModel.addStage(2,"Systems\nRelationships");
+//		CEProcessModel.addStage(3,"Performance\nAssesement");
+//		CEProcessModel.addStage(4,"Architecturing");
+//		CEProcessModel.addStage(5,"Requirements\nSolutions");
+//		CEProcessModel.addStage(6,"Upgrades\nOrchestration");
+//		//
+//		ProcessModel WaterfallModel = new ProcessModel("Waterfall\nModel");
+//		WaterfallModel.addStage(1,"Analysis");
+//		WaterfallModel.addStage(2,"Design");
+//		WaterfallModel.addStage(3,"Implementation");
+//		WaterfallModel.addStage(4,"Verification");
+//		WaterfallModel.addStage(5,"Maintenance");
+//		//
+//		ProcessModel MyProcess = new ProcessModel("My\nProcess");
+//		MyProcess.addStage(1,"Analysis");
+//		MyProcess.addStage(2,"Development");
+//		
+
+//		
+//		// Process Model
+//		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {	
+//			if (wi.isAggregationNode) {
+//				((AggregationNode)wi).setProcessModel(MyProcess);
+//			}
+//		}
+		
+		// Auto Decompose
+		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {				
+			if (wi.isAggregationNode && wi.getSbTasks().size()==0) {
+					WINTemplate.generateSubtasks(wi);
+				}	
+		}
+		// Derive Impacts DSM
+		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
+			if (wi1.isAggregationNode && wi1.getSbTasks().size()==0) {	
+				WINTemplate.generateImpacts(wi1);
+			}
+		}
 		
 		// ValueFunction
 		Mechanism valueMechanism1 = ObjectsModelFactory.eINSTANCE.createMechanism();
@@ -128,92 +150,16 @@ public class SimulationContextBuilder {
 		Mechanism valueMechanism2 = ObjectsModelFactory.eINSTANCE.createMechanism();
 		valueMechanism2.setName("ValueFunction");valueMechanism2.setValue("Fiat");
 		
+		mySoS.myValueFunction = new ValueFunction(valueMechanism1);	
 		
-		// Process Model
-		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {	
-			String typeName = wi.getType().getName();
-			if (wi.isAggregationNode) {
-				((AggregationNode)wi).setProcessModel(MyProcess);
+		// Initial Assignment
+		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {		
+			if ((wi.arrivalTime>0 )) {						
+				wi.SoS.initialList.put(wi.getId(), wi);
 			}
-		}
-		
-		// Auto Decompose
-		double ComplexityFactor = 0;
-		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {				
-			if (wi.getType().getName().matches("SubSysReq")) {
-				wi = (AggregationNode)wi;
-				int c = 0;
-				for (RequiredService reqSev : wi.getRequiredServices()) {
-					double totalEfforts = reqSev.getEfforts();
-					double interval_max = 20;
-					double interval_min = 5;
-					int serviceId = reqSev.getServiceType().getId();
-					while (totalEfforts>0) {
-						c++;
-						String name = wi.getName()+"."+c;	
-						double efforts = interval_min+Math.random()*(interval_max-interval_min);
-						efforts = Math.min(efforts, totalEfforts);
-						totalEfforts -= efforts;
-						if (totalEfforts<=interval_min) {
-							efforts+=totalEfforts;
-							totalEfforts=0;
-						}
-						int currentId = mySoS.getWICount();
-						int st_id = currentId+1;
-						mySoS.increaseWICount();						
-						new DevTask((AggregationNode)wi, st_id, name, serviceId, efforts);
-					}
-				}
-				// Complexity
-				for (WorkItemEntity wis: ((AggregationNode)wi).getSubtasks()) {
-					boolean loop = true;
-					int loopcount = 0;
-					if (Math.random()<ComplexityFactor) {
-						while (loop) {
-							loopcount ++;
-							int t =(int) ( Math.random()* ((AggregationNode)wi).getSubtasks().size() );
-							WorkItemEntity pred = ((AggregationNode)wi).getSubtasks().get(t);
-							if ( (pred.getId()<wis.getId()) && (!pred.getPredecessors().contains(wis)) ) {
-								wis.addPredecessorTask(pred);
-								//System.out.println("Add Predecessor: "+pred.getName()+" to "+wi1s.getName());
-								loop = false;
-							}
-							else if (loopcount >= 3) {
-								loop = false;
-							}
-						}
-					}
-				}
-			}		
 		}	
-				
-
-				
-		// Derive Impacts DSM
-		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
-			if (wi1.getType().getName().matches("SubSysReq")) {	
-				for (WorkItemEntity wi2 : wi1.getImpactsWIs()) {
-					if (wi2.isAggregationNode) {
-						double likelihood = wi1.getImpactsLikelihood().get(wi2);
-						double risk = wi1.getImpactsRisk().get(wi2);
-						for (WorkItemEntity wi1s: ((AggregationNode)wi1).getSubtasks()) {
-							if (Math.random()<(likelihood*2)) {
-								int t =(int) ( Math.random()* ((AggregationNode)wi2).getSubtasks().size() );
-								WorkItemEntity wi2s = ((AggregationNode)wi2).getSubtasks().get(t);
-								wi1s.getImpactsWIs().add(wi2s);
-								wi1s.getImpactsLikelihood().put(wi2s, 0.5);
-								wi1s.getImpactsRisk().put(wi2s, risk);
-								//System.out.println("Impacts DSM: from "+wi1s.getName()+" to "+wi2s.getName());
-							}
-						}
-					}
-				}	
-			}
-		}
-		// End DSM
-				
-		// Experiment and Visualization
-		mySoS.myValueFunction = new ValueFunction(valueMechanism1);		
+		mySoS.coordinator = mySoS.myServiceProviderAgents.get(1);
+		// Experiment and Visualization		
 		int numReplications = (Integer)parameters.getValue("NumReplications");
 		Visualization = (String)parameters.getValue("Visualization");
 		if (Visualization.matches("on") && (numReplications==1)) {
@@ -247,13 +193,7 @@ public class SimulationContextBuilder {
 				mySoS.OrgComplexity = 3;
 				mySoS.WINComplexity = 3;
 				mySoS.WINSize = 2;
-			}
-			// Initial Assignment
-			for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {
-				if ((wi.myWorkItem.getArrivalTime()>0 )) {						
-					wi.SoS.initialList.put(wi.getId(), wi);
-				}
-			}
+			}			
 			new Visualization(context,mySoS);
 			KanbanBoard myKanbanBoard = new KanbanBoard(mySoS);
 			mySoS.myKanbanBoard = myKanbanBoard;
@@ -505,7 +445,12 @@ public class SimulationContextBuilder {
 				int att_value = Integer.parseInt(e1.getAttribute("value")); 
 				myWorkItem.setArrivalTime(att_value);
 			}
+			else if (att_name.matches("DueDate")) {				
+				int att_value = Integer.parseInt(e1.getAttribute("value")); 
+				myWorkItem.setDueDate(att_value);
+			}
 		}
+		//System.out.println(myWorkItem.getName()+" value:"+myWorkItem.getValue()+" arr:"+myWorkItem.getArrivalTime()+" due:"+myWorkItem.getDueDate());
 		myWorkItems.put(id, myWorkItem);
 	}
 	public void xmlBuildServiceProviderTopology(Element e) {
@@ -634,10 +579,8 @@ public class SimulationContextBuilder {
 			for (ServiceProvider sp2: sp.getOutsourceFrom()) {
 				agent.borrowResourceFrom.add(mySoS.myServiceProviderAgents.get(sp2.getId()));
 			}
-			if (sp.getType().getHierarchy()==0) {
-				mySoS.coordinator = agent;
-			}
 		}				
+		
 		for (WorkItem wi: myWorkItems.values()) {
 			int id = wi.getId();
 			WorkItemEntity entity;
@@ -648,6 +591,7 @@ public class SimulationContextBuilder {
 				entity = new Task(wi);
 				entity = new DevTask(entity);
 			}
+			//System.out.println(entity.getName()+" value:"+entity.Value+" arr:"+entity.arrivalTime+" due:"+entity.dueDate);
 			entity.SoS = mySoS;
 			entity.maxMaturityLevels = TaskMaturityLevels;
 			entity.uncertainty = TaskUncertainty;

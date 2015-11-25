@@ -1,13 +1,11 @@
 package governanceModels;
 
-import datasemSimulator.*;
-
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Comparator;
 import java.util.LinkedList;
+
+import javax.swing.JOptionPane;
 
 import repast.simphony.random.RandomHelper;
 import repast.simphony.util.SimUtilities;
@@ -19,70 +17,83 @@ import workItems.ResolutionActivity;
 import workItems.Task;
 import workItems.WorkItemEntity;
 import xtext.objectsModel.Mechanism;
-import xtext.objectsModel.WorkItem;
+import xtext.objectsModel.MechanismAttribute;
 
 public class WISelectionRule {
-	
 	protected String ruleValue;	
+	protected HashMap<String,Double>parameters;
 	
 	public WISelectionRule() {
-		ruleValue = "FIFO";
+		ruleValue = "Neutral";
 	}
 	public void implementWISelectionRule(Mechanism m) {
-		this.ruleValue = m.getValue();
+		String value = m.getValue();
+		switch (value) {
+		case "FIFO": 
+			ruleValue = value;
+			break;
+		case "LIFO": 
+			ruleValue = value;
+			break;
+		case "RPW": 
+			ruleValue = value;
+			parameters = new HashMap<String,Double>();
+			for (MechanismAttribute a : m.getAttributes()) {
+				addAttribute(a);
+			}
+			break;	
+		case "PerceivedValue": 
+			ruleValue = value;
+			break;
+		case "EDD": 
+			ruleValue = value;
+			break;
+		case "SPT": 
+			ruleValue = value;
+			break;
+		case "Neutral":break;
+		default: 
+			String msg = m.getName()+" is not a valid Prioritization RuleValue!" + "\n click OK to use default settings(Neutral)";
+			JOptionPane.showMessageDialog(null,msg);			
+			break;
+		}
 	}
-	
+	public void addAttribute(MechanismAttribute a) {
+		parameters.put(a.getAttribute(), Double.parseDouble(a.getValue()));
+		//System.out.println(a.getAttribute()+"="+Double.parseDouble(a.getValue()));
+	}
+	public double getAttribute(String s) {
+		if (!parameters.containsKey(s)) {
+			System.out.println(parameters);
+		}	
+		return parameters.get(s);
+	}
 	public LinkedList<Task> applyRule(ServiceProviderAgent SP, LinkedList<Task> requestedQ) {
-		//
 		if (!requestedQ.isEmpty()) {
 			LinkedList<Task> queue = requestedQ;
 			SimUtilities.shuffle(queue, RandomHelper.getUniform()); 
 			//System.out.println("\n"+SP.getName()+" Applies "+this.ruleValue+" Prioritization Rule on "+queue.size()+" WIs");
-			//
+
 			if (this.ruleValue.matches("Neutral")) {
 				//SimUtilities.shuffle(queue, RandomHelper.getUniform());
 			}
 			else if (this.ruleValue.matches("PerceivedValue")){			
 				Collections.sort(queue, new LargerPerceivedValue());	
-//				for (int i=0;i<queue.size();i++) {
-//					WorkItemEntity wItem = queue.get(i);
-//					System.out.println("No."+i+": "+wItem.getName()+"(PerceivedValue:"+wItem.getPerceivedValue()+")");
-//				}
 			}		
 			else if (this.ruleValue.equals("RPW")) {
 				Collections.sort(queue, new LargerRPW());
-//				for (int i=0;i<queue.size();i++) {
-//					WorkItemEntity wItem = queue.get(i);
-//					System.out.println(wItem.fullName+"(RPW:"+wItem.calculateRPW()+") ");
-//				}
 			}
 			else if (this.ruleValue.equals("FIFO")) {
 				Collections.sort(queue, new SmallerAssignedTime());
-//				for (int i=0;i<queue.size();i++) {
-//					WorkItemEntity wItem = queue.get(i);
-//					System.out.println(wItem.fullName+"(AssignedTime:"+wItem.assignedTime+") ");
-//				}
 			}
 			else if (this.ruleValue.matches("LIFO")) {
 				Collections.sort(queue, new LargerAssignedTime());
-//				for (int i=0;i<queue.size();i++) {
-//					WorkItemEntity wItem = queue.get(i);
-//					System.out.println("No."+i+": "+wItem.getName()+"(AssignedTime:"+wItem.assignedTime+")");
-//				}
 			}
 			else if (this.ruleValue.matches("EDD")) {
 				Collections.sort(queue, new SmallerDueDate());
-//				for (int i=0;i<queue.size();i++) {
-//					WorkItemEntity wItem = queue.get(i);
-//					System.out.println("No."+i+": "+wItem.getName()+"(DueDate:"+wItem.getDueDate()+")");
-//				}
 			}
 			else if (this.ruleValue.matches("SPT")) {
 				Collections.sort(queue, new SmallerEstimatedEfforts());
-//				for (int i=0;i<queue.size();i++) {
-//					WorkItemEntity wItem = queue.get(i);
-//					System.out.println("No."+i+": "+wItem.getName()+"(EstimatedEfforts:"+wItem.estimatedEfforts+")");
-//				}
 			}
 			else {
 				System.out.println("Invalid WI_Prioritization RuleValue: "+this.ruleValue) ;
@@ -97,7 +108,7 @@ public class WISelectionRule {
 
 	public double calculateRPW(WorkItemEntity wi) {
 		double rpw = 0;
-		double suc = wi.getSuccessors().size();
+		double suc = wi.getSuccessors().size() *this.getAttribute("weightPrecedency");
 		double obj = 0;
 		double imp = 0;
 		double deco = 0;
@@ -106,11 +117,11 @@ public class WISelectionRule {
 		for (WorkItemEntity impactsTarget: wi.getImpactsWIs()) {
 			double likelihood = wi.getImpactsLikelihood().get(impactsTarget);
 			double risk = wi.getImpactsRisk().get(impactsTarget);
-			imp += likelihood*risk*5;
+			imp += likelihood*risk* this.getAttribute("weightImpact");
 		}
 		if (wi.isAnalysisActivity) {
 			AggregationNode AnalysisObject = (AggregationNode) ((AnalysisActivity)wi).AnalysisObject;
-			deco = (calculateRPW(AnalysisObject)+AnalysisObject.hierarchy) * (3-AnalysisObject.hierarchy);
+			deco = (calculateRPW(AnalysisObject)+AnalysisObject.hierarchy) * AnalysisObject.hierarchy *this.getAttribute("weightHierarchy");
 		}
 		if (wi.isResolutionActivity) {
 			DevTask ResolutionObject = ((ResolutionActivity)wi).ResolutionObject;
@@ -123,7 +134,7 @@ public class WISelectionRule {
 	class LargerPerceivedValue implements Comparator<WorkItemEntity> {
 		@Override
 		public int compare(WorkItemEntity w1, WorkItemEntity w2) {
-			if (w1.getPerceivedValue()<w2.getPerceivedValue()) {
+			if (w1.currentValue <w2.currentValue) {
 				return 1;
 			}
 			else if (w1.getPerceivedValue()==w2.getPerceivedValue()) {
@@ -218,6 +229,7 @@ public class WISelectionRule {
 			}
 		}
 	}
+
 	
 }
 

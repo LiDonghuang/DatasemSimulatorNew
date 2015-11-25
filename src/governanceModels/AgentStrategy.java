@@ -3,6 +3,8 @@ package governanceModels;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import contractNetProtocol.ContractNetProtocol;
 import serviceProviders.ResourceEntity;
 import serviceProviders.ServiceProviderAgent;
@@ -23,6 +25,7 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 	protected ResourceAllocationRule myAllocationRule;
 	
 	public AgentStrategy(GovernanceStrategy myGovernanceStrategy) {
+		myAcceptanceRule = new WIAcceptanceRule();
 		mySelectionRule = new WISelectionRule();
 		myAssignmentRule = new WIAssignmentRule();
 		myAllocationRule = new ResourceAllocationRule();
@@ -43,9 +46,10 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 			this.implementPullStrategy(myGovernanceStrategy);
 			this.isPush = true;
 		}
-//		else {
-//			throw new RuntimeException(myGovernanceStrategy.getType()+" is not a Valid Strategy Type!");
-//		}
+		else {
+			String msg = myGovernanceStrategy.getType()+" is not a valid Strategy Type!"+"\nclick OK to use default Governance Strategy";
+			JOptionPane.showMessageDialog(null,msg);
+		}
 	}
 
 	public void implementPullStrategy(GovernanceStrategy myGovernanceStrategy) {
@@ -54,26 +58,24 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 		}
 	}
 	public void implementMechanism(Mechanism m) {
-		if (m.getName().matches("ValueFunction")) {
-			
+		if (m.getName().matches("Acceptance")) {
+			myAcceptanceRule.implementWIAcceptanceRule(m);
 		}
-		else if (m.getName().matches("Acceptance")) {
-			
-		}
-		else if (m.getName().matches("Selection")) {			
+		else if (m.getName().matches("Prioritization") || m.getName().matches("Selection")) {			
 			mySelectionRule.implementWISelectionRule(m);
 		}
 		else if (m.getName().matches("Assignment")) {
 			myAssignmentRule.implementWIAssignmentRule(m);
 		}
 		else if (m.getName().matches("Allocation")) {
-			
+			myAllocationRule.implementWIAllocationRule(m);
 		}
-		else if (m.getName().matches("Outsourcing")) {
-			
-		}
+//		else if (m.getName().matches("Outsourcing")) {
+//			
+//		}
 		else {
-			System.out.println("Invalid Mechanism Name!");
+			String msg = m.getName()+" is not a valid Mechanism Name!" + "\n click OK to use default settings";
+			JOptionPane.showMessageDialog(null,msg);
 		}		
 	}
 	public LinkedList<Task> applyWorkPrioritization(ServiceProviderAgent sp,LinkedList<Task> queue) {		

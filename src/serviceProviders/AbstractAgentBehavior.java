@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import datasemSimulator.AbstractClass;
 import repast.simphony.random.RandomHelper;
 import workItems.AggregationNode;
@@ -35,7 +37,7 @@ public class AbstractAgentBehavior {
 	public void setAgent(ServiceProviderAgent agent) {
 		this.agent = agent;
 		this.BacklogLimit = 10;
-		this.WIPLimit = 10;
+		this.WIPLimit = 5;
 	}
 	public void addStep(int key,String state) {
 		this.StepsMap.put(key, state);
@@ -96,10 +98,6 @@ public class AbstractAgentBehavior {
 		
 	}
 	public void CheckRequestedQ() {
-		//requestedQ = agent.myStrategy.applyWorkPrioritization(requestedQ);
-		//for (WorkItemEntity requestedWI:agent.getRequestedQ()) {
-			//myValueManagement.manageValue(this, requestedWI);
-		//}
 		// ------------ 1. Select WIs to Accept
 		while (!agent.getRequestedQ().isEmpty()) {
 			// =========== Apply WI Acceptance Rule ====================
@@ -117,25 +115,29 @@ public class AbstractAgentBehavior {
 			}
 			else if (decision.matches("RequestHelp")) {
 				if (agent.getId()==agent.SoS.coordinator.getId()) {
-					System.out.println(agent.getName()+" handles"+wi.fullName);
+					//System.out.println(agent.getName()+" handles"+wi.fullName);
 					agent.getAssignmentQ().add(wi);
 				}
 				else {
-					System.out.println(agent.getName()+" requests help from "+agent.SoS.coordinator.getName()+" on"+wi.fullName);
+					//System.out.println(agent.getName()+" requests help from "+agent.SoS.coordinator.getName()+" on"+wi.fullName);
 					agent.SoS.coordinator.getRequestedQ().add(wi);
 				}
 			}
 			else if (decision.matches("Decline")) {
-				System.out.println(agent.getName()+" declines"+wi.fullName+"from "+wi.getRequester().getName());
+				//System.out.println(agent.getName()+" declines"+wi.fullName+"from "+wi.getRequester().getName());
 				if (wi.getRequester().getId()==agent.getId()) {
-					throw new RuntimeException("ERROR: "+agent.getName()+" declines"+wi.fullName+" which is requested by itself!");
+					String msg = "ERROR: "+agent.getName()+" declines"+wi.fullName+" which is requested by itself!";
+					JOptionPane.showMessageDialog(null,msg);
+					throw new RuntimeException(msg);
 				}
 				else {
 					wi.getRequester().getRequestedQ().add(wi);
 				}
 			}
 			else {
-				throw new RuntimeException("ERROR: "+" invalid decision --"+decision+"--!");
+				String msg = "ERROR: "+" invalid decision --"+decision+"--!";
+				JOptionPane.showMessageDialog(null,msg);
+				throw new RuntimeException(msg);
 			}
 			agent.getRequestedQ().remove(wi);
 		}
@@ -178,7 +180,7 @@ public class AbstractAgentBehavior {
 			ResourceEntity selectedR = schedule.get(wi);
 			selectedR.allocateTo(wi);
 			wi.setStarted();
-			agent.getActiveQ().add((Task)wi);
+			agent.getActiveQ().add(wi);
 			agent.getBacklogQ().remove(wi);
 		}
 	}

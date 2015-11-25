@@ -276,7 +276,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	public void setCompleted() {
 		this.isCompleted=true;		
 		this.completionTime=this.SoS.timeNow;
-		System.out.println("\nCompletion @TIME:"+this.SoS.timeNow+this.fullName+"is Completed");
+		//System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is Completed");
 		this.updateUpperTasksCompletion();
 	}
 	public void setEnded() {
@@ -301,12 +301,11 @@ public class WorkItemEntity extends WorkItemImpl {
 			this.removeFromContext();
 			this.SoS.arrivedList.remove(this.getId());
 		}
-		else if (this.hierarchy==this.SoS.WINLevels-1) {
+		else if (this.SoS.initialList.containsKey(this.getId())) {
 			this.SoS.initialList.remove(this.getId());
 			this.SoS.endedList.add(this);
-			System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
+			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"is Ended."+" StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.ReworkCount);
 			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.currentValue+" stakeholder value");
-			//System.out.println("\nEND WI @TIME:"+this.SoS.timeNow+this.fullName+"(efforts:"+this.efforts+") is Ended. Delivered "+this.currentValue+" Value\n StartTime:"+this.startTime+" CompletionTime:"+this.completionTime+" CycleTime:"+this.cycleTime+" LeadTime:"+this.leadTime+" ReworkCount:"+this.getReworkCount());
 		}
 		else {		
 			this.SoS.endedList.add(this);		

@@ -33,7 +33,7 @@ public class ResourceEntity extends AssetImpl{
 	}
 	public void allocateTo(Task t) {
 	    t.allocateResource(this);
-		this.getWip() .add(t);
+		this.getWip().add(t);
 		this.setBusy();
 	}
 	public void withdrawFrom(Task t) {
