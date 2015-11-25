@@ -85,6 +85,7 @@ public class SystemOfSystems {
 	public double ReworkRisk;
 	public double ROR;
 	public double LearningFactor;
+	public int MultiTasking;
 	
 	public SystemOfSystems(Context<Object> context) {
 		this.context = context;

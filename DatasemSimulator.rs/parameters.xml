@@ -48,7 +48,13 @@
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
-				<parameter name="LearningFactor" displayName="7) Learning Factor (0-1)" type="double" 
+				<parameter name="MultiTasking" displayName="7) Max Multi-Tasking (1-5)" type="int" 
+						defaultValue="1" 
+						isReadOnly="false" 
+						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+									
+		/>		
+				<parameter name="LearningFactor" displayName="8) Learning Factor (0-1)" type="double" 
 						defaultValue="0.2" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
@@ -61,7 +67,7 @@
 									
 		/>
 				<parameter name="TaskMaturityLevels" displayName="3) Task Maturity Levels (>=1)" type="int" 
-						defaultValue="1" 
+						defaultValue="5" 
 						isReadOnly="false" 
 						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
 									

@@ -542,12 +542,14 @@ public class SimulationContextBuilder {
 		double ReworkRisk = (Double)mySoS.parameters.getValue("ReworkRisk");
 		double ChangePropagationFactor = (Double)mySoS.parameters.getValue("ChangePropagationFactor");
 		double ROR = (Double)mySoS.parameters.getValue("ROR");
+		int MultiTasking = (Integer)mySoS.parameters.getValue("MultiTasking");
 		double LearningFactor = (Double)mySoS.parameters.getValue("LearningFactor");
 		double VolatilityLevel = ((double)(Integer)mySoS.parameters.getValue("Volatility"))/2;
 		
 		mySoS.TaskMaturityLevels = TaskMaturityLevels;
 		mySoS.TaskUncertainty = TaskUncertainty*(VolatilityLevel);
 		mySoS.ReworkRisk = ReworkRisk*(VolatilityLevel);
+		mySoS.MultiTasking = MultiTasking;
 		mySoS.LearningFactor = LearningFactor;
 		mySoS.ROR = ROR;
 		

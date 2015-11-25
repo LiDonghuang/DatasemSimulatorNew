@@ -2,9 +2,7 @@ package workItems;
 
 public class DevTask extends Task {
 	public int maxMaturityLevels = 5;
-	public double uncertainty = 0;
-	public double risk = 0;
-	public double learningFactor = 0;
+	public double uncertainty = 1;
 	
 	public DevTask(WorkItemEntity entity) {
 		super(entity);
@@ -39,7 +37,6 @@ public class DevTask extends Task {
 		this.hierarchy = this.myType.getHierarchy();		
 		this.serviceId = serviceId;
 		this.efforts = efforts;
-		this.maxMaturityLevels = (Integer)this.SoS.parameters.getValue("TaskMaturityLevels");
 		this.fullName = this.fullName();
 	}
 	
@@ -47,15 +44,21 @@ public class DevTask extends Task {
 		int incMaturityLevels = getCurrentMaturityLevel()- getPreviousMaturityLevel();	
 		setPreviousMaturityLevel(getPreviousMaturityLevel() + incMaturityLevels);
 		//if (incMaturityLevels>0) {System.out.println("@TIME:"+SoS.timeNow+this.fullName+"increased Maturity Level by "+incMaturityLevels+" to "+getCurrentMaturityLevel());}
-		for (int i=0; i< incMaturityLevels; i++) {				
-			if (Math.random()<=SoS.ReworkRisk) {
+		for (int i=0; i< incMaturityLevels; i++) {
+			// Rework
+			if (Math.random()<=SoS.ReworkRisk*this.uncertainty) {
 				double reduction = 1/((double)SoS.TaskMaturityLevels);
 				this.rework(reduction);	
+				this.uncertainty*=(1-SoS.LearningFactor);
 			}
-			this.changePropagation();
-			if (Math.random()<=SoS.TaskUncertainty) {
+			// Call for Resolution
+			if (Math.random()<=SoS.TaskUncertainty*this.uncertainty) {
 				this.suspendForResolution();
+				this.uncertainty*=(1-SoS.LearningFactor);
 			}
+			// Change Propagation
+			this.changePropagation();
+			
 		}
 	}
 	public void suspendForResolution() {

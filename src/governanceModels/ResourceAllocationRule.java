@@ -56,7 +56,7 @@ public class ResourceAllocationRule {
 			
 		for (ResourceEntity r: me.myResourceEntities) {
 			scheduledResourceCount.put(r, 0);
-			if (scheduledResourceCount.get(r)>=r.WIPLimit) {
+			if (scheduledResourceCount.get(r)>me.SoS.MultiTasking) {
 				scheduleLimit.put(r, true);
 			}	
 			else {
@@ -84,7 +84,7 @@ public class ResourceAllocationRule {
 					schedule.put(task, selectedR);
 					//System.out.println("Scheduled "+selectedR.getName()+" to serve"+task.fullName);
 					scheduledResourceCount.put(selectedR, scheduledResourceCount.get(selectedR)+1);
-					if (scheduledResourceCount.get(selectedR)>=selectedR.WIPLimit) {
+					if (scheduledResourceCount.get(selectedR)>=me.SoS.MultiTasking) {
 						//System.out.println(selectedR.getName()+" WIPLimit="+selectedR.WIPLimit+" reached");
 						scheduleLimit.put(selectedR, true);				
 					}

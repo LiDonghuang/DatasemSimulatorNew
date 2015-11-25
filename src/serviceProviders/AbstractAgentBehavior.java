@@ -300,7 +300,12 @@ public class AbstractAgentBehavior {
 			if (requestedWI.getRequester().getId() == agent.getId()) {
 				double capacity = ((Task)requestedWI).calculateServiceCapacity(agent);
 				if (capacity>0) {
-					decision = "Accept";
+					if (agent.getBacklogQ().size()>=this.BacklogLimit) {
+						decision = "Outsource";
+					}
+					else {
+						decision = "Accept";
+					}
 					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
 				}
 				else {
