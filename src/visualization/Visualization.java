@@ -226,21 +226,46 @@ public class Visualization {
 			
 			count=1;
 			for (WorkItemEntity task:agent.getActiveQ()){
-				grid2D.moveTo(task, agent.icon.location[0]+count+2,agent.icon.location[1]-1);
-				for (ResourceEntity resource:task.getAllocatedResources()) {
-					netAllocation.addEdge(task,resource);
+				if (count>10) {
+					grid2D.moveTo(task, 0,0);
 				}
-				count++;
+				else {
+					grid2D.moveTo(task, agent.icon.location[0]+count+2,agent.icon.location[1]-1);
+					for (ResourceEntity resource:task.getAllocatedResources()) {
+						netAllocation.addEdge(task,resource);
+					}
+					count++;
+				}								
 			}
 			count=1;
 			for (WorkItemEntity task:agent.getBacklogQ()){
-				grid2D.moveTo(task, agent.icon.location[0]+count+2,agent.icon.location[1]-2);
-				count++;
+				if (count>10) {
+					grid2D.moveTo(task, 0,0);
+				}
+				else {
+					grid2D.moveTo(task, agent.icon.location[0]+count+2,agent.icon.location[1]-2);
+					count++;
+				}				
 			}
 			count=1;
 			for (WorkItemEntity wi:agent.getComplexQ()){
-				grid2D.moveTo(wi, agent.icon.location[0]+count+2,agent.icon.location[1]-3);
-				count++;
+				if (count>10) {
+					grid2D.moveTo(wi, 0,0);
+				}
+				else {
+					grid2D.moveTo(wi, agent.icon.location[0]+count+2,agent.icon.location[1]-3);
+					count++;
+				}				
+			}
+			count=1;
+			for (WorkItemEntity wi:agent.getRequestedQ()){
+				if (count>10) {
+					grid2D.moveTo(wi, 0,0);
+				}
+				else {
+					grid2D.moveTo(wi, agent.icon.location[0]+count+2,agent.icon.location[1]-4);
+					count++;
+				}			
 			}
 			count=1;
 			for (WorkItemEntity wi:agent.getCompleteQ()){
@@ -316,24 +341,24 @@ public class Visualization {
 		grid2D.moveTo(comments, sp.icon.location[0]-2,sp.icon.location[1]);
 		
 		Comments comments1 = new Comments();
-		comments1.addComment("ActiveQ: "+sp.getActiveQ().size());
+		comments1.addComment("In Progress: "+sp.getActiveQ().size());
 		this.commentsList.add(comments1);
 		this.context.add(comments1);
 		grid2D.moveTo(comments1, sp.icon.location[0]+1,sp.icon.location[1]-1);	
 		Comments comments2 = new Comments();
-		comments2.addComment("BacklogQ: "+sp.getBacklogQ().size());
+		comments2.addComment("Accepted: "+sp.getBacklogQ().size());
 		this.commentsList.add(comments2);
 		this.context.add(comments2);
 		grid2D.moveTo(comments2, sp.icon.location[0]+1,sp.icon.location[1]-2);	
 		Comments comments3 = new Comments();
-		comments3.addComment("ComplexQ: "+sp.getComplexQ().size());
+		comments3.addComment("Aggregation Nodes: "+sp.getComplexQ().size());
 		this.commentsList.add(comments3);
 		this.context.add(comments3);
 		grid2D.moveTo(comments3, sp.icon.location[0]+1,sp.icon.location[1]-3);
-//		Comments comments4 = new Comments();
-//		comments4.addComment("Requested: "+sp.getRequestedQ().size());
-//		this.commentsList.add(comments4);
-//		this.context.add(comments4);
-//		grid2D.moveTo(comments4, sp.icon.location[0]+1,sp.icon.location[1]-4);
+		Comments comments4 = new Comments();
+		comments4.addComment("Requested: "+sp.getRequestedQ().size());
+		this.commentsList.add(comments4);
+		this.context.add(comments4);
+		grid2D.moveTo(comments4, sp.icon.location[0]+1,sp.icon.location[1]-4);
 	}
 }

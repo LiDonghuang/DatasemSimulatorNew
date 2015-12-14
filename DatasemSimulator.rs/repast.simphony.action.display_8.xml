@@ -1,9 +1,17 @@
 <repast.simphony.visualization.engine.CartesianDisplayDescriptor>
-  <name>WIN Display</name>
+  <name>Organization Display</name>
   <type>2D</type>
   <styles>
     <entry>
+      <string>serviceProviders.ResourceEntity</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
       <string>visualization.Comments</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>serviceProviders.ServiceProviderAgent</string>
       <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
@@ -13,24 +21,40 @@
   </styles>
   <editedStyles>
     <entry>
+      <string>serviceProviders.ResourceEntity</string>
+      <string>serviceProviders.ResourceEntity.style_1.xml</string>
+    </entry>
+    <entry>
       <string>visualization.Comments</string>
-      <string>visualization.Comments.style_0.xml</string>
+      <string>visualization.Comments.style_1.xml</string>
+    </entry>
+    <entry>
+      <string>serviceProviders.ServiceProviderAgent</string>
+      <string>serviceProviders.ServiceProviderAgent.style_1.xml</string>
     </entry>
     <entry>
       <string>workItems.WorkItemEntity</string>
-      <string>workItems.WorkItemEntity.style_4.xml</string>
+      <string>workItems.WorkItemEntity.style_2.xml</string>
     </entry>
   </editedStyles>
   <netStyles>
     <entry>
-      <string>WI_Hierarchy</string>
+      <string>Org_Hierarchy</string>
+      <string>repast.simphony.visualization.editedStyle.EditedEdgeStyle2D</string>
+    </entry>
+    <entry>
+      <string>Allocation</string>
       <string>repast.simphony.visualization.editedStyle.EditedEdgeStyle2D</string>
     </entry>
   </netStyles>
   <editedNetStyles>
     <entry>
-      <string>WI_Hierarchy</string>
-      <string>WI_Hierarchy.style_0.xml</string>
+      <string>Org_Hierarchy</string>
+      <string>Org_Hierarchy.style_0.xml</string>
+    </entry>
+    <entry>
+      <string>Allocation</string>
+      <string>Allocation.style_0.xml</string>
     </entry>
   </editedNetStyles>
   <frequency>ON_MOVE</frequency>
@@ -44,12 +68,20 @@
     <hashCode>-429344607</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
-  <layoutProjection>WINGrid</layoutProjection>
+  <layoutProjection>2DGrid</layoutProjection>
   <layoutInterval>0</layoutInterval>
   <layerOrder>
     <entry>
+      <string>serviceProviders.ResourceEntity</string>
+      <int>3</int>
+    </entry>
+    <entry>
       <string>visualization.Comments</string>
       <int>0</int>
+    </entry>
+    <entry>
+      <string>serviceProviders.ServiceProviderAgent</string>
+      <int>2</int>
     </entry>
     <entry>
       <string>workItems.WorkItemEntity</string>
@@ -58,12 +90,17 @@
   </layerOrder>
   <projections>
     <repast.simphony.scenario.data.ProjectionData>
-      <id>WINGrid</id>
+      <id>2DGrid</id>
       <attributes/>
       <type>grid</type>
     </repast.simphony.scenario.data.ProjectionData>
     <repast.simphony.scenario.data.ProjectionData>
-      <id>WI_Hierarchy</id>
+      <id>Allocation</id>
+      <attributes/>
+      <type>network</type>
+    </repast.simphony.scenario.data.ProjectionData>
+    <repast.simphony.scenario.data.ProjectionData>
+      <id>Org_Hierarchy</id>
       <attributes/>
       <type>network</type>
     </repast.simphony.scenario.data.ProjectionData>
@@ -73,14 +110,14 @@
   </visualizationProperties>
   <projectionDescriptors>
     <entry>
-      <string>WI_Hierarchy</string>
+      <string>Org_Hierarchy</string>
       <repast.simphony.visualization.engine.DefaultProjectionDescriptor>
         <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[2]"/>
         <props/>
       </repast.simphony.visualization.engine.DefaultProjectionDescriptor>
     </entry>
     <entry>
-      <string>WINGrid</string>
+      <string>2DGrid</string>
       <repast.simphony.visualization.grid.GridProjectionDescriptor>
         <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData"/>
         <props>
@@ -103,6 +140,13 @@
           </entry>
         </props>
       </repast.simphony.visualization.grid.GridProjectionDescriptor>
+    </entry>
+    <entry>
+      <string>Allocation</string>
+      <repast.simphony.visualization.engine.DefaultProjectionDescriptor>
+        <proj reference="../../../../projections/repast.simphony.scenario.data.ProjectionData[2]"/>
+        <props/>
+      </repast.simphony.visualization.engine.DefaultProjectionDescriptor>
     </entry>
   </projectionDescriptors>
   <props/>

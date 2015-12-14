@@ -11,20 +11,17 @@ import xtext.objectsModel.WorkItem;
 
 public class AggregationNode extends WorkItemEntity{
 	private LinkedList<WorkItemEntity> subtasks = new LinkedList<WorkItemEntity>();
+	private LinkedList<AnalysisActivity> analysisTasks = new LinkedList<AnalysisActivity>();
 	public boolean hasProcessModel = false;
 	private ProcessModel processModel;
 	public int currentProcessStage;
 	public int currentAnalysisStage;
-	public int totalAnalysisStages;
+	public int totalAnalysisStages=1;
 	
 	public AggregationNode(WorkItem wi) {
 		super(wi);
 		this.isAggregationNode = true;		
-		this.totalAnalysisStages = wi.getRequiredAnalysis().size();
-		if (wi.getRequiredAnalysis().size()>0) {
-			this.serviceId = wi.getRequiredAnalysis().get(0).getServiceType().getId();
-			this.efforts = wi.getRequiredAnalysis().get(0).getEfforts();
-		}		
+		this.totalAnalysisStages = wi.getRequiredAnalysis().size();	
 	}
 
 	public void updateCompletionStatus() {

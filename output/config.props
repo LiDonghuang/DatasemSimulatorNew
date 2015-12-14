@@ -1,9 +1,9 @@
-model.archive = C:/Users/dzl0023/git/DatasemSimulatorNew/output/complete_model.jar
+model.archive = C:/Users/Donbghuang Li/git/DatasemSimulatorNew/output/complete_model.jar
 batch.params.file = scenario.rs/batch_params.xml
-ssh.key_dir = C:/Users/dzl0023/.ssh
+ssh.key_dir = C:/Users/Donbghuang Li/.ssh
 poll.frequency = 60.0
-model.output = C:/Users/dzl0023/git/DatasemSimulatorNew/output
+model.output = C:/Users/Donbghuang Li/git/DatasemSimulatorNew/output
 
 vm.arguments = -Xmx512M
 local.0.instances = 1
-local.0.working_directory = C:/TEMP/
+local.0.working_directory = C:/Users/DONBGH~1/AppData/Local/Temp/

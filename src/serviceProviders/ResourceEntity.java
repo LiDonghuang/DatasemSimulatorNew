@@ -13,7 +13,8 @@ public class ResourceEntity extends AssetImpl{
 	public int WIPLimit = 1;
 	
 	public boolean busy = false;
-	private LinkedList<WorkItemEntity> wip  = new LinkedList<WorkItemEntity>();
+	private LinkedList<Task> wip  = new LinkedList<Task>();
+	public LinkedList<Task> tempQ = new LinkedList<Task>();
 	
 	public ResourceEntity(Asset myResource) {
 		this.myResource = myResource;
@@ -60,10 +61,10 @@ public class ResourceEntity extends AssetImpl{
 			return false;
 		}
 	}
-	public LinkedList<WorkItemEntity> getWip() {
+	public LinkedList<Task> getWip() {
 		return wip;
 	}
-	public void setWip(LinkedList<WorkItemEntity> wip) {
+	public void setWip(LinkedList<Task> wip) {
 		this.wip = wip;
 	}
 }

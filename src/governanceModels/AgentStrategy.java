@@ -47,7 +47,7 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 			this.isPush = true;
 		}
 		else {
-			String msg = myGovernanceStrategy.getType()+" is not a valid Strategy Type!"+"\nclick OK to use default Governance Strategy";
+			String msg = myGovernanceStrategy.getType()+" is not a valid Strategy Type!"+"\nclick OK to use default Governance Strategy(push)";
 			JOptionPane.showMessageDialog(null,msg);
 		}
 	}
@@ -81,10 +81,14 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 	public LinkedList<Task> applyWorkPrioritization(ServiceProviderAgent sp,LinkedList<Task> queue) {		
 		return this.mySelectionRule.applyRule(sp, queue);		
 	}
-	public HashMap<WorkItemEntity, ServiceProviderAgent> applyAgentSelection(ServiceProviderAgent me, LinkedList<WorkItemEntity> WIs, LinkedList<ServiceProviderAgent> SPs) {
+	public HashMap<Task, ServiceProviderAgent> applyAgentSelection(ServiceProviderAgent me, LinkedList<Task> WIs, LinkedList<ServiceProviderAgent> SPs) {
 		return this.myAssignmentRule.applyRule(me, WIs, SPs);
 	}
 	public HashMap<Task, ResourceEntity> applyResourceAllocation(ServiceProviderAgent me, LinkedList<Task> WIs) {
 		return this.myAllocationRule.applyRule(me, WIs);
+	}
+	public void applyWorkAcceptance(ServiceProviderAgent me) {
+		me.myStrategy.myAcceptanceRule.applyRule(me);
+		return;
 	}
 }

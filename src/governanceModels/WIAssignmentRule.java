@@ -53,29 +53,23 @@ public class WIAssignmentRule {
 	public double getAttribute(String s) {
 		return parameters.get(s);
 	}
-	public HashMap<WorkItemEntity,ServiceProviderAgent> applyRule(ServiceProviderAgent me, LinkedList<WorkItemEntity> WIs, LinkedList<ServiceProviderAgent> SPs) {
-		HashMap<WorkItemEntity,ServiceProviderAgent> schedule = new HashMap<WorkItemEntity,ServiceProviderAgent>(); 
+	public HashMap<Task, ServiceProviderAgent> applyRule(ServiceProviderAgent me, LinkedList<Task> WIs, LinkedList<ServiceProviderAgent> SPs) {
+		HashMap<Task,ServiceProviderAgent> schedule = new HashMap<Task,ServiceProviderAgent>(); 
 		if (!SPs.isEmpty()) {
 			LinkedList<ServiceProviderAgent> list = new LinkedList<ServiceProviderAgent>();
 			HashMap<ServiceProviderAgent,Boolean> scheduleLimit = new HashMap<ServiceProviderAgent,Boolean>(); 			
 			//LinkedList<AggregationNode> aggrList = new LinkedList<AggregationNode>();
 			LinkedList<Task> taskList = new LinkedList<Task>();
 			for (int i=0;i<WIs.size();i++) {
-				WorkItemEntity wi = WIs.get(i);
-				if (!wi.isAggregationNode) {
-					taskList.add((Task)wi);
-					WIs.remove(wi);
-					i--;
+				Task wi = WIs.get(i);
+				if (wi.precedencyCleared()) {
+					taskList.add(wi);
 				}
 			}
 			me.myStrategy.applyWorkPrioritization(me, taskList);
-			for (WorkItemEntity wi:taskList) {
-//				if (wi.precedencyCleared()) {
-//					WIs.add(wi);
-//				}	
-				WIs.add(wi);
-			}
+
 			for (ServiceProviderAgent sp:SPs) {
+				sp.tempQ.clear();
 				list.add(sp);
 				scheduleLimit.put(sp, false);
 				if (sp.getBacklogQ().size()>=sp.myBehavior.BacklogLimit) {
@@ -87,7 +81,7 @@ public class WIAssignmentRule {
 			}
 			
 			if (this.ruleValue.matches("Neutral")) {
-				for (WorkItemEntity wi:WIs) {
+				for (Task wi:taskList) {
 					this.currentWI = wi;
 					this.currentService = me.SoS.myServices.get(currentWI.serviceId);
 					LinkedList<ServiceProviderAgent> candidates = me.findServiceProviders(wi, list);
@@ -112,7 +106,7 @@ public class WIAssignmentRule {
 				} 
 			}
 			else if (this.ruleValue.matches("LeastLoad")){		
-				for (WorkItemEntity wi:WIs) {
+				for (Task wi:taskList) {
 					this.currentWI = wi;
 					this.currentService = me.SoS.myServices.get(currentWI.serviceId);
 					LinkedList<ServiceProviderAgent> candidates = me.findServiceProviders(wi, list);
@@ -137,7 +131,7 @@ public class WIAssignmentRule {
 				}
 			}
 			else if (this.ruleValue.matches("ExtendedCapacity")) {
-				for (WorkItemEntity wi:WIs) {
+				for (Task wi:taskList) {
 					this.currentWI = wi;
 					this.currentService = me.SoS.myServices.get(currentWI.serviceId);
 					LinkedList<ServiceProviderAgent> candidates = me.findServiceProviders(wi, list);
@@ -171,11 +165,11 @@ public class WIAssignmentRule {
 	}
 	public double estimateWorkLoad(ServiceProviderAgent sp) {
 		double load = 0;	
-		LinkedList<WorkItemEntity> scope = new LinkedList<WorkItemEntity>();	
+		LinkedList<Task> scope = new LinkedList<Task>();	
 		scope.addAll(sp.getActiveQ());
 		scope.addAll(sp.getBacklogQ());
 		scope.addAll(sp.tempQ);	
-		for (WorkItemEntity wi:scope) {
+		for (Task wi:scope) {
 			double efforts = wi.efforts;
 			load += efforts;
 		}		
@@ -198,11 +192,13 @@ public class WIAssignmentRule {
 	class ExtendedCapacity implements Comparator<ServiceProviderAgent> {
 		@Override
 		public int compare(ServiceProviderAgent s1, ServiceProviderAgent s2) {
-			if (s1.ExtendedServiceCapacity.get(currentService)<s2.ExtendedServiceCapacity.get(currentService)) {
+			double extCapacity1 = s1.ServiceCapacity.get(currentService)+s1.ExtendedServiceCapacity.get(currentService);
+			double extCapacity2 = s2.ServiceCapacity.get(currentService)+s2.ExtendedServiceCapacity.get(currentService);
+			if (extCapacity1<extCapacity2) {
 				return 1;
 			}
-			else if (s1.ExtendedServiceCapacity.get(currentService)==s2.ExtendedServiceCapacity.get(currentService)) {
-				return 0;
+			else if (extCapacity1==extCapacity2) {
+				return 1;
 			}
 			else {
 				return -1;

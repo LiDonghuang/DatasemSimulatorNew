@@ -10,8 +10,7 @@ import java.util.HashMap;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.util.FastMath;
 
-import contractNetProtocol.ContractorBehavior;
-import contractNetProtocol.ManagerBehavior;
+import contractNetProtocol.CNPBehavior;
 import datasemSimulator.SystemOfSystems;
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.util.ContextUtils;
@@ -44,17 +43,16 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	public LinkedList<ServiceProviderAgent> assignWITo = new LinkedList<ServiceProviderAgent>();
 	public LinkedList<ServiceProviderAgent> borrowResourceFrom = new LinkedList<ServiceProviderAgent>();		
 	private LinkedList<WorkItemEntity> requestedQ = new LinkedList<WorkItemEntity>();
-	private LinkedList<WorkItemEntity> assignmentQ = new LinkedList<WorkItemEntity>();	
+	private LinkedList<Task> assignmentQ = new LinkedList<Task>();	
 	private LinkedList<Task> backlogQ = new LinkedList<Task>();
 	private LinkedList<Task> activeQ = new LinkedList<Task>();
 	private LinkedList<AggregationNode> complexQ = new LinkedList<AggregationNode>();
 	private LinkedList<WorkItemEntity> completeQ = new LinkedList<WorkItemEntity>();
-	public LinkedList<WorkItemEntity> tempQ = new LinkedList<WorkItemEntity>();
+	public LinkedList<Task> tempQ = new LinkedList<Task>();
 	public HashMap<Service,Double> ServiceCapacity = new HashMap<Service,Double>();
 	public HashMap<Service,Double> ExtendedServiceCapacity = new HashMap<Service,Double>();
 	
-	private static final int BASE_PRIORITY_1 = 200;	
-	
+	private static final int BASE_PRIORITY = 200;		
 	// Visualization
 	public Icon icon = new Icon();
 	// Dynamic Attributes
@@ -85,12 +83,10 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		this.hierarchy = ServiceProvider.getType().getHierarchy();
 		this.myStrategy = new AgentStrategy(ServiceProvider.getGovernanceStrategy());
 		if (myStrategy.isCNP) {
-			if (this.type.getName().matches("DevTeam")) {
-				this.myBehavior = new ContractorBehavior();
-			}
-			else {
-				this.myBehavior = new ManagerBehavior();
-			}
+			this.myBehavior = new CNPBehavior();
+		}
+		else if (myStrategy.isPull){
+			this.myBehavior = new CNPBehavior();
 		}
 		else {
 			this.myBehavior = new AbstractAgentBehavior();
@@ -98,42 +94,54 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		this.myBehavior.setAgent(this);
 	}
 	
-	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-1)
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-1)
 	public void step_1() {
 		myBehavior.GoToStep(1);
 	}
-	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-2)
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-2)
 	public void step_2() {
 		myBehavior.GoToStep(2);
 	}
-	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-3)
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-3)
 	public void step_3() {
 		myBehavior.GoToStep(3);
 	}
-	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-4)	
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-4)	
 	public void step_4() {
 		myBehavior.GoToStep(4);
 	}
-	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-5)	
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-5)	
 	public void step_5() {
 		myBehavior.GoToStep(5);
 	}
-	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-6)	
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-6)	
 	public void step_6() {
 		myBehavior.GoToStep(6);
 	}
-	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-7)	
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-7)	
 	public void step_7() {
 		myBehavior.GoToStep(7);
 	}
-	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-8)	
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-8)	
 	public void step_8() {
 		myBehavior.GoToStep(8);
 	}
-	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY_1-9)	
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-9)	
 	public void step_9() {
 		myBehavior.GoToStep(9);
 	}
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-10)	
+	public void step_10() {
+		myBehavior.GoToStep(10);
+	}
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-11)	
+	public void step_11() {
+		myBehavior.GoToStep(11);
+	}
+	@ScheduledMethod(start=1,interval=1,shuffle=false,priority=BASE_PRIORITY-12)	
+	public void step_12() {
+		myBehavior.GoToStep(12);
+	}	
 	
 	
 
@@ -141,14 +149,15 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	public void analyzeAggregationNode(AggregationNode aggrNode) {
 		if (aggrNode.totalAnalysisStages>0) {
 			AnalysisActivity analysisActivity = new AnalysisActivity(aggrNode);
+			analysisActivity.setRequester(aggrNode.getRequester());
 			//
 			@SuppressWarnings("unchecked")
 			Context<Object> context = ContextUtils.getContext(this);	
 			context.add(analysisActivity);
 			//
 			SoS.arrivedList.put(analysisActivity.getId(), analysisActivity);
-			this.backlogQ.add(analysisActivity);
-			analysisActivity.setAssigned();
+			this.requestedQ.add(analysisActivity);
+			//analysisActivity.setAssigned();
 			//System.out.println("\nANALYSIS AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" start analyzing"+aggrNode.fullName);
 		}
 		else {
@@ -176,20 +185,24 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		//myValueManagement.manageValue(this, newWI);
 	}		
 	public void acceptWI(WorkItemEntity requestedWI) {
-		if (!requestedWI.isAggregationNode) {
-			requestedWI.setAssigned(); 
-			requestedWI.setAssignedAgent(this);
-			//System.out.println("\nACCEPTED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Accepted WI:"+requestedWI.fullName);
-			this.backlogQ.add((Task)requestedWI);		
-			//this.requestedQ.remove(requestedWI);
+		requestedWI.setAssigned(); 
+		requestedWI.setAssignedAgent(this);
+		//System.out.println("\nACCEPTED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Accepted WI:"+requestedWI.fullName);
+		this.backlogQ.add((Task)requestedWI);		
+		//this.requestedQ.remove(requestedWI);
+		if (requestedWI.isAnalysisActivity) {
+			AggregationNode target = ((AnalysisActivity)requestedWI).AnalysisObject;
+			target.getAssignedAgent().complexQ.remove(target);
+			target.setAssignedAgent(this);
+			this.complexQ.add(target);
 		}
-		else {
-			requestedWI.setAssigned(); 
-			//System.out.println("\nACCEPTED AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" Accepted AggregationNode:"+requestedWI.fullName);
-			this.analyzeAggregationNode((AggregationNode)requestedWI);
-			this.complexQ.add((AggregationNode)requestedWI);								
-			//this.requestedQ.remove(requestedWI);
-		}
+//		else {
+//			requestedWI.setAssigned(); 
+//			//System.out.println("\nACCEPTED AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" Accepted AggregationNode:"+requestedWI.fullName);
+//			this.analyzeAggregationNode((AggregationNode)requestedWI);
+//			this.complexQ.add((AggregationNode)requestedWI);								
+//			//this.requestedQ.remove(requestedWI);
+//		}
 	}
 	public void releaseSubtasks (AggregationNode aggr) {
 		//
@@ -234,7 +247,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		Service reqService = SoS.myServices.get(wItem.serviceId);
 		LinkedList<ServiceProviderAgent> candidates = new LinkedList<ServiceProviderAgent>();
 		for (ServiceProviderAgent tAgent: list) {
-			double sCapacity = tAgent.ExtendedServiceCapacity.get(reqService);
+			double sCapacity = tAgent.ServiceCapacity.get(reqService)+tAgent.ExtendedServiceCapacity.get(reqService);
 			if (sCapacity > 0) {
 				candidates.add(tAgent);
 				//System.out.println(" candidate for "+this.name+" to Assign "+wItem.getName()+" :"+tAgent.name);								
@@ -320,7 +333,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	public LinkedList<AggregationNode> getComplexQ()	{
 		return this.complexQ;
 	}
-	public LinkedList<WorkItemEntity> getAssignmentQ()	{
+	public LinkedList<Task> getAssignmentQ()	{
 		return this.assignmentQ;
 	}
 	public int getTotalWICount() {

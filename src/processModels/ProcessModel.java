@@ -24,28 +24,28 @@ public class ProcessModel {
 		else if (!aggr.isStarted) {
 			aggr.setCurrentProcessStage(0);
 		}
-		else {
-			if (aggr.getProgress()==0) {
-				aggr.setCurrentProcessStage(1);
-			}
-			else {
-				double x = aggr.getProgress();
-				x = Math.pow(x, 0.7);
-				x = x*(maxStages-2);
-				x = Math.floor(x)+1;
-				if (x >= maxStages-2) {
-					if (aggr.isCompleted) {
-						aggr.setCurrentProcessStage(-1);
-					}
-					else {
-						aggr.setCurrentProcessStage(maxStages-2);
-					}
-				}
-				else {
-					aggr.setCurrentProcessStage((int)x);
-				}	
-			}
-		}
+//		else {
+//			if (aggr.getProgress()==0) {
+//				aggr.setCurrentProcessStage(1);
+//			}
+//			else {
+//				double x = aggr.getProgress();
+//				x = Math.pow(x, 0.7);
+//				x = x*(maxStages-2);
+//				x = Math.floor(x)+1;
+//				if (x >= maxStages-2) {
+//					if (aggr.isCompleted) {
+//						aggr.setCurrentProcessStage(-1);
+//					}
+//					else {
+//						aggr.setCurrentProcessStage(maxStages-2);
+//					}
+//				}
+//				else {
+//					aggr.setCurrentProcessStage((int)x);
+//				}	
+//			}
+//		}
 	}
 	public void transition(AggregationNode aggr) {
 		

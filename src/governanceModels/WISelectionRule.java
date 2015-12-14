@@ -108,7 +108,7 @@ public class WISelectionRule {
 
 	public double calculateRPW(WorkItemEntity wi) {
 		double rpw = 0;
-		double suc = wi.getSuccessors().size() *this.getAttribute("weightPrecedency");
+		double suc = wi.getSuccessors().size() *this.getAttribute("WeightPrecedency");
 		double obj = 0;
 		double imp = 0;
 		double deco = 0;
@@ -117,11 +117,11 @@ public class WISelectionRule {
 		for (WorkItemEntity impactsTarget: wi.getImpactsWIs()) {
 			double likelihood = wi.getImpactsLikelihood().get(impactsTarget);
 			double risk = wi.getImpactsRisk().get(impactsTarget);
-			imp += likelihood*risk* this.getAttribute("weightImpact");
+			imp += likelihood*risk* this.getAttribute("WeightImpact");
 		}
 		if (wi.isAnalysisActivity) {
 			AggregationNode AnalysisObject = (AggregationNode) ((AnalysisActivity)wi).AnalysisObject;
-			deco = (calculateRPW(AnalysisObject)+AnalysisObject.hierarchy) * AnalysisObject.hierarchy *this.getAttribute("weightHierarchy");
+			deco = (calculateRPW(AnalysisObject)+AnalysisObject.hierarchy) * AnalysisObject.hierarchy *this.getAttribute("WeightHierarchy");
 		}
 		if (wi.isResolutionActivity) {
 			DevTask ResolutionObject = ((ResolutionActivity)wi).ResolutionObject;

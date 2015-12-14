@@ -85,12 +85,11 @@ public class SimulationContextBuilder {
 				}
 			}
 		}
-		double trustFactor = 0.5;
 		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
 			for (Service service: mySoS.myServices.values()) {
-				double exCapacity = sp.ServiceCapacity.get(service);
+				double exCapacity = 0;
 				for (ServiceProviderAgent outsource : sp.assignWITo) {
-					exCapacity += outsource.ServiceCapacity.get(service) * trustFactor;
+					exCapacity += outsource.ServiceCapacity.get(service);
 				}
 				sp.ExtendedServiceCapacity.put(service, exCapacity);
 			}
@@ -542,14 +541,14 @@ public class SimulationContextBuilder {
 		double ReworkRisk = (Double)mySoS.parameters.getValue("ReworkRisk");
 		double ChangePropagationFactor = (Double)mySoS.parameters.getValue("ChangePropagationFactor");
 		double ROR = (Double)mySoS.parameters.getValue("ROR");
-		int MultiTasking = (Integer)mySoS.parameters.getValue("MultiTasking");
+		double MultiTaskingPenalty = (Double)mySoS.parameters.getValue("MultiTaskingPenalty");
 		double LearningFactor = (Double)mySoS.parameters.getValue("LearningFactor");
 		double VolatilityLevel = ((double)(Integer)mySoS.parameters.getValue("Volatility"))/2;
 		
 		mySoS.TaskMaturityLevels = TaskMaturityLevels;
 		mySoS.TaskUncertainty = TaskUncertainty*(VolatilityLevel);
 		mySoS.ReworkRisk = ReworkRisk*(VolatilityLevel);
-		mySoS.MultiTasking = MultiTasking;
+		mySoS.MultiTaskingPenalty = MultiTaskingPenalty;
 		mySoS.LearningFactor = LearningFactor;
 		mySoS.ROR = ROR;
 		

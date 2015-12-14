@@ -55,8 +55,9 @@ public class ResourceAllocationRule {
 		HashMap<ResourceEntity,Boolean> scheduleLimit = new HashMap<ResourceEntity,Boolean>(); 		
 			
 		for (ResourceEntity r: me.myResourceEntities) {
+			r.tempQ.clear();
 			scheduledResourceCount.put(r, 0);
-			if (scheduledResourceCount.get(r)>me.SoS.MultiTasking) {
+			if (r.getWip().size() > me.myBehavior.MultiTasking) {				
 				scheduleLimit.put(r, true);
 			}	
 			else {
@@ -84,7 +85,8 @@ public class ResourceAllocationRule {
 					schedule.put(task, selectedR);
 					//System.out.println("Scheduled "+selectedR.getName()+" to serve"+task.fullName);
 					scheduledResourceCount.put(selectedR, scheduledResourceCount.get(selectedR)+1);
-					if (scheduledResourceCount.get(selectedR)>=me.SoS.MultiTasking) {
+					selectedR.tempQ.add(task);
+					if (selectedR.getWip().size()+selectedR.tempQ.size()>=me.myBehavior.MultiTasking) {
 						//System.out.println(selectedR.getName()+" WIPLimit="+selectedR.WIPLimit+" reached");
 						scheduleLimit.put(selectedR, true);				
 					}
@@ -111,7 +113,8 @@ public class ResourceAllocationRule {
 					schedule.put(task, selectedR);
 					//System.out.println("Scheduled "+selectedR.getName()+" to serve"+task.fullName);
 					scheduledResourceCount.put(selectedR, scheduledResourceCount.get(selectedR)+1);
-					if (scheduledResourceCount.get(selectedR)>=selectedR.WIPLimit) {
+					selectedR.tempQ.add(task);
+					if (selectedR.getWip().size()+selectedR.tempQ.size()>=me.myBehavior.MultiTasking) {
 						//System.out.println(selectedR.getName()+" WIPLimit="+selectedR.WIPLimit+" reached");
 						scheduleLimit.put(selectedR, true);				
 					}
@@ -126,14 +129,30 @@ public class ResourceAllocationRule {
 		return schedule;
 	}
 	
-	
+	public double estimateResourceEfficiency(ResourceEntity r) {
+		int serviceId = currentService.getId();
+		int totalTasks = r.getWip().size() + r.tempQ.size()+ 1;
+		double myEfficiency = 0;
+		//double multi_penalty = currentTask.SoS.MultiTaskingPenalty;		
+		int totalResources = 1;
+		double coop_discount = 1.0/Math.pow((double)totalResources, 0.5);
+		double efficiency = r.getEfficiency(serviceId);	
+		double multi_discount = 1.0/Math.pow((double)totalTasks, 0.33) /((double)(totalTasks));
+		//System.out.println(share_discount+" "+multi_discount);
+		double finalAdd = efficiency*coop_discount*multi_discount;
+		myEfficiency += Math.max(0, finalAdd);
+		//System.out.println(r.getName()+" efficiency:"+myEfficiency);
+		return myEfficiency;
+	}
 	class MostEfficient implements Comparator<ResourceEntity> {
-		@Override
+		@Override		
 		public int compare(ResourceEntity r1, ResourceEntity r2) {
-			if ( r1.getEfficiency(currentService.getId())<r2.getEfficiency(currentService.getId()) ) {
+			double efficiency1 = estimateResourceEfficiency(r1);
+			double efficiency2 = estimateResourceEfficiency(r2);
+			if (efficiency1 < efficiency2) {
 				return 1;
 			}
-			else if ( r1.getEfficiency(currentService.getId())==r2.getEfficiency(currentService.getId()) ) {
+			else if (efficiency1 == efficiency2) {
 				return 0;
 			}
 			else {

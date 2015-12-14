@@ -11,8 +11,7 @@ import xtext.objectsModel.impl.GovernanceStrategyImpl;
 
 public class ContractNetProtocol extends GovernanceStrategyImpl {
 	public LinkedList<ServiceProviderAgent> myAgents = new LinkedList<ServiceProviderAgent>();
-	public ContractorBehavior myContractorBehavior;
-	public ManagerBehavior myManagerBehavior;
+	public CNPBehavior myManagerBehavior;
 	
 	public ContractNetProtocol(GovernanceStrategy strategy) {
 		this.implementCNP(strategy);

@@ -1,46 +1,38 @@
-<ExperimentModel experimentId="0" name="AerospaceAndDefenceProjects" description="Aerospace and Defence Projects Model Builder.">
-<Indicator name="Total_Value"></Indicator>
-<Indicator name="Active_WorkLoad"></Indicator>
+<ExperimentModel experimentId="0" name="AerospaceAndDefenceProjects" description="">
+
 <ServiceProviderTypes>
-<ServiceProviderType spTypeId="1" hierarchy="2" name="SETeam" description="System Engineering Team"></ServiceProviderType>
-<ServiceProviderType spTypeId="2" hierarchy="1" name="DomainTeam" description="Domain Team"></ServiceProviderType>
-<ServiceProviderType spTypeId="3" hierarchy="0" name="DevTeam" description="Product Team"></ServiceProviderType>
-<ServiceProviderType spTypeId="4" hierarchy="0" name="CntrTeam" description="Outsourced Contractor"></ServiceProviderType>
+<ServiceProviderType spTypeId="1" hierarchy="2" name="SETeam"></ServiceProviderType>
+<ServiceProviderType spTypeId="2" hierarchy="1" name="DomainTeam"></ServiceProviderType>
+<ServiceProviderType spTypeId="3" hierarchy="0" name="DevTeam"></ServiceProviderType>
+<ServiceProviderType spTypeId="4" hierarchy="0" name="CntrTeam"></ServiceProviderType>
 </ServiceProviderTypes>
 <WorkItemTypes>
-<WorkItemType wiTypeId="1" hierarchy="3" name="SoSCap" description="System-of-Systems Capability"></WorkItemType>
-<WorkItemType wiTypeId="2" hierarchy="2" name="SysFuncCap" description="System Functional Capability"></WorkItemType>
-<WorkItemType wiTypeId="3" hierarchy="2" name="SysOperCap" description="System Operational Capability"></WorkItemType>
-<WorkItemType wiTypeId="4" hierarchy="1" name="SubSysReq" description="Subsystem Requirement"></WorkItemType>
-<WorkItemType wiTypeId="5" hierarchy="0" name="DevTask" description="General Development Task"></WorkItemType>
-<WorkItemType wiTypeId="6" hierarchy="0" name="Analysis" description="Decomposition Analysis"></WorkItemType>
-<WorkItemType wiTypeId="7" hierarchy="0" name="Resolution" description="Bottleneck Resolution"></WorkItemType>
+<WorkItemType wiTypeId="1" hierarchy="3" name="SoSCap"></WorkItemType>
+<WorkItemType wiTypeId="2" hierarchy="2" name="SysFuncCap"></WorkItemType>
+<WorkItemType wiTypeId="3" hierarchy="2" name="SysOperCap"></WorkItemType>
+<WorkItemType wiTypeId="4" hierarchy="1" name="SubSysReq"></WorkItemType>
+<WorkItemType wiTypeId="5" hierarchy="0" name="DevTask"></WorkItemType>
+<WorkItemType wiTypeId="6" hierarchy="0" name="Analysis"></WorkItemType>
+<WorkItemType wiTypeId="7" hierarchy="0" name="Resolution"></WorkItemType>
 </WorkItemTypes>
 <Services>
-<Service serviceId="1" name="SoSE" description="System-of-Systems Engineering"></Service>
-<Service serviceId="2" name="SE_Elec" description="System Engineering: Electrical Domain"></Service>
-<Service serviceId="3" name="SE_Aero" description="System Engineering: Aerospace Domain"></Service>
-<Service serviceId="4" name="SE_Power" description="System Engineering: Power Domain"></Service>
-<Service serviceId="5" name="SE_Infra" description="System Engineering: Infrastructrue Domain"></Service>
-<Service serviceId="6" name="SE_WD" description="System Engineering: Weapons and Defense Domain"></Service>
-<Service serviceId="7" name="SE_SW" description="System Engineering: Software Domain"></Service>
-<Service serviceId="8" name="Eng_Elec" description="Engineering: Electrical"></Service>
-<Service serviceId="9" name="Eng_Mech" description="Engineering: Mechanical"></Service>
-<Service serviceId="10" name="Eng_Aero" description="Engineering: Aerospace"></Service>
-<Service serviceId="11" name="Eng_Ctrl" description="Engineering Control"></Service>
-<Service serviceId="12" name="IT_IS" description="IT: Information System"></Service>
-<Service serviceId="13" name="IT_SW" description="IT: Software"></Service>
-<Service serviceId="14" name="IT_DB" description="IT: Database"></Service>
-<Service serviceId="15" name="IT_SS" description="IT: Security and Safty"></Service>
-<Service serviceId="16" name="Testing" description="Integration Testing"></Service>
+<Service serviceId="1" name="SoSE"></Service>
+<Service serviceId="2" name="SE_Elec"></Service>
+<Service serviceId="3" name="SE_Aero"></Service>
+<Service serviceId="4" name="SE_Power"></Service>
+<Service serviceId="5" name="SE_Infra"></Service>
+<Service serviceId="6" name="SE_WD"></Service>
+<Service serviceId="7" name="SE_SW"></Service>
+<Service serviceId="8" name="Eng_Elec"></Service>
+<Service serviceId="9" name="Eng_Mech"></Service>
+<Service serviceId="10" name="Eng_Aero"></Service>
+<Service serviceId="11" name="Eng_Ctrl"></Service>
+<Service serviceId="12" name="IT_IS"></Service>
+<Service serviceId="13" name="IT_SW"></Service>
+<Service serviceId="14" name="IT_DB"></Service>
+<Service serviceId="15" name="IT_SS"></Service>
+<Service serviceId="16" name="Testing"></Service>
 </Services>
-<ClassOfServices>
-<ClassOfService cosId="1" name="Standard" description="Standard or Normal" isDisruptive="false"></ClassOfService>
-<ClassOfService cosId="2" name="Important" description="Important" isDisruptive="false"></ClassOfService>
-<ClassOfService cosId="3" name="DateCertain" description="No value After Due Date" isDisruptive="false"></ClassOfService>
-<ClassOfService cosId="4" name="Expediate" description="Expediated or Emergent" isDisruptive="true"></ClassOfService>
-<ClassOfService cosId="5" name="Background" description="Background" isDisruptive="false"></ClassOfService>
-</ClassOfServices>
 
 	<Runs>
 	<Run runId="1" description="AerospaceDefence" numberOfReplications="100" numberOfSteps="10000">
@@ -58,22 +50,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="1" name="S_SysEng.1" description="">
@@ -101,22 +96,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="4" name="SysEng.1" description="">
@@ -143,22 +141,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="7" name="SysEng.1" description="">
@@ -185,22 +186,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="10" name="SysEng.1" description="">
@@ -228,22 +232,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="13" name="SysEng.1" description="">
@@ -271,22 +278,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="16" name="SysEng.1" description="">
@@ -314,22 +324,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="19" name="SysEng.1" description="">
@@ -364,22 +377,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="24" name="Elec_Eng.1" description="">
@@ -419,22 +435,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="30" name="Elec_Eng.1" description="">
@@ -474,22 +493,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="36" name="Elec_Eng.1" description="">
@@ -524,22 +546,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="41" name="Elec_Eng.1" description="">
@@ -574,22 +599,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="46" name="Elec_Eng.1" description="">
@@ -624,22 +652,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="51" name="IT_Mng.1" description="">
@@ -702,22 +733,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="58" name="IT_Mng.1" description="">
@@ -764,22 +798,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="63" name="IT_Mng.1" description="">
@@ -826,22 +863,25 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
+		
 		<GovernanceStrategy type="pull">
 		<Mechanisms>
 		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="backlogLimit" value="12"></Attribute> 
+		<Attribute name="BacklogLimit" value="5"></Attribute> 
+		<Attribute name="WIPLimit" value="6"></Attribute> 
+		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="weightPrecedency" value="1"></Attribute> 
-		<Attribute name="weightImpact" value="5"></Attribute> 
-		<Attribute name="weightHierarchy" value="3"></Attribute> 
+		<Attribute name="WeightPrecedency" value="1"></Attribute> 
+		<Attribute name="WeightImpact" value="5"></Attribute> 
+		<Attribute name="WeightHierarchy" value="3"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="trustFactor" value="0.5"></Attribute> 
+		<Attribute name="TrustFactor" value="0.5"></Attribute> 
 		</Mechanism>
 		<Mechanism name="Allocation" value="MostEfficient">
 		</Mechanism>
-		</Mechanisms>
+		</Mechanisms>								
 		</GovernanceStrategy>	
 		<Resources>
 		<Resource resourceId="68" name="Tester.1" description="">
@@ -864,22 +904,10 @@
 		</ServiceProviders>
 		</OrganizationalModel>
 		<WorkItemNetworkModel>		
-		<WorkSources>
-		<WorkSource name="Stakeholder1" description="Stakeholder 1">
-		<AssignWITo>
-		<serviceProviderId>1</serviceProviderId>
-		</AssignWITo>
-		</WorkSource>
-		<WorkSource name="Stakeholder2" description="Stakeholder 2">
-		<AssignWITo>
-		<serviceProviderId>1</serviceProviderId>
-		</AssignWITo>
-		</WorkSource>
-		</WorkSources>	
 		<WorkItems>
 		<WorkItem wiId="1" name="PX49" typeId="1" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 			<GovernanceAttributes>
-			<GovernanceAttribute name="Value" value="4500.0"></GovernanceAttribute>
+			<GovernanceAttribute name="Value" value="4000.0"></GovernanceAttribute>
 			<GovernanceAttribute name="ArrivalTime" value="1"></GovernanceAttribute>
 			<GovernanceAttribute name="DueDate" value="601"></GovernanceAttribute>
 			</GovernanceAttributes>
@@ -898,7 +926,7 @@
 		</WorkItem>
 		<WorkItem wiId="2" name="AOCWS" typeId="1" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 			<GovernanceAttributes>
-			<GovernanceAttribute name="Value" value="3000.0"></GovernanceAttribute>
+			<GovernanceAttribute name="Value" value="6000.0"></GovernanceAttribute>
 			<GovernanceAttribute name="ArrivalTime" value="201"></GovernanceAttribute>
 			<GovernanceAttribute name="DueDate" value="801"></GovernanceAttribute>
 			</GovernanceAttributes>
@@ -915,7 +943,6 @@
 		</WorkItem>
 		<WorkItem wiId="3" name="ESys" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 			<GovernanceAttributes>
-			<GovernanceAttribute name="Value" value="1500.0"></GovernanceAttribute>
 			</GovernanceAttributes>
 			<Subtasks>
 			<workItemId>9</workItemId>
@@ -934,7 +961,6 @@
 		</WorkItem>
 		<WorkItem wiId="4" name="ASys" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 			<GovernanceAttributes>
-			<GovernanceAttribute name="Value" value="2700.0"></GovernanceAttribute>
 			</GovernanceAttributes>
 			<Subtasks>
 			<workItemId>12</workItemId>
@@ -954,7 +980,6 @@
 		</WorkItem>
 		<WorkItem wiId="5" name="PSys" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 			<GovernanceAttributes>
-			<GovernanceAttribute name="Value" value="1200.0"></GovernanceAttribute>
 			</GovernanceAttributes>
 			<Subtasks>
 			<workItemId>14</workItemId>
@@ -973,7 +998,6 @@
 		</WorkItem>
 		<WorkItem wiId="6" name="Infra" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 			<GovernanceAttributes>
-			<GovernanceAttribute name="Value" value="900.0"></GovernanceAttribute>
 			</GovernanceAttributes>
 			<Subtasks>
 			<workItemId>16</workItemId>
@@ -1009,7 +1033,6 @@
 		</WorkItem>
 		<WorkItem wiId="8" name="SI" typeId="2" isAggregationNode="true" hasPredecessors="true" hasImpacts="false">
 			<GovernanceAttributes>
-			<GovernanceAttribute name="Value" value="900.0"></GovernanceAttribute>
 			</GovernanceAttributes>
 			<Predecessors>
 			<workItemId>3</workItemId>

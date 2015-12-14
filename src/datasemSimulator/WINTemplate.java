@@ -14,7 +14,7 @@ public class WINTemplate {
 		int c = 0;
 		for (RequiredService reqSev : wi.getRequiredServices()) {
 			double totalEfforts = reqSev.getEfforts();
-			double interval_max = 20;
+			double interval_max = 15;
 			double interval_min = 5;
 			int serviceId = reqSev.getServiceType().getId();
 			while (totalEfforts>0) {

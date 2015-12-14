@@ -21,7 +21,8 @@ public class Task extends WorkItemEntity{
 	}
 	public double calculateExtendedServiceCapacity(ServiceProviderAgent sp) {
 		double sEfficiency = 0;
-		sEfficiency = sp.ExtendedServiceCapacity.get(SoS.myServices.get(this.serviceId));
+		sEfficiency = sp.ExtendedServiceCapacity.get(SoS.myServices.get(this.serviceId))
+				+ sp.ServiceCapacity.get(SoS.myServices.get(this.serviceId));
 		return sEfficiency;
 	}
 	public double calculateServiceCapacity(ServiceProviderAgent sp) {
@@ -35,12 +36,12 @@ public class Task extends WorkItemEntity{
 		double coop_discount = 1.0/Math.pow((double)totalResources, 0.5);		
 		for (ResourceEntity r : this.getAllocatedResources()) {
 			double efficiency = r.getEfficiency(serviceId);
-			int totalTasks = r.getWip().size();
+			int totalTasks = r.getWip().size() + r.tempQ.size();
 			double multi_discount = 1.0/Math.pow((double)totalTasks, 0.33) /((double)(r.getWip().size()));
 			//System.out.println(share_discount+" "+multi_discount);
 			double finalAdd = efficiency*coop_discount*multi_discount;
 			myEfficiency += Math.max(0, finalAdd);
-		}	
+		}
 		return myEfficiency;
 	}
 	public void advanceProgress() {

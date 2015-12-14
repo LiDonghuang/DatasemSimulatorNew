@@ -48,12 +48,12 @@
 						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
 		/>
-				<parameter name="MultiTasking" displayName="7) Max Multi-Tasking (1-5)" type="int" 
-						defaultValue="1" 
+				<parameter name="MultiTaskingPenalty" displayName="7) Multi-Tasking Penalty (0-1)" type="double" 
+						defaultValue="0.33" 
 						isReadOnly="false" 
-						converter="repast.simphony.parameter.StringConverterFactory$IntConverter"
+						converter="repast.simphony.parameter.StringConverterFactory$DoubleConverter"
 									
-		/>		
+		/>	
 				<parameter name="LearningFactor" displayName="8) Learning Factor (0-1)" type="double" 
 						defaultValue="0.2" 
 						isReadOnly="false" 
