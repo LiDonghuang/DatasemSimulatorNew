@@ -129,8 +129,7 @@ public class Visualization {
 						wItem.icon.location[1] = 20+hierarchy*10;	
 						//System.out.println(wItem.getName()+" "+wItem.icon.location[0]+" "+wItem.icon.location[1]);
 						gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
-						wItem.icon.isPlaced = true;
-						
+						wItem.icon.isPlaced = true;					
 						if (wItem.isAggregationNode) {
 							int s1=0;int s2=0;
 							if (wItem.hierarchy==1) {
@@ -153,8 +152,10 @@ public class Visualization {
 							}
 							for (int i=0;i<((AggregationNode)wItem).getSubtasks().size();i++) {			
 								WorkItemEntity wItemsTask = ((AggregationNode)wItem).getSubtasks().get(i);
-								if (wItemsTask.getUppertasks().contains(wItem)) {
-									netWI_Hierarchy.addEdge(wItem,wItemsTask);
+								if (!wItemsTask.isEnded) {
+									if (wItemsTask.getUppertasks().contains(wItem)) {
+										netWI_Hierarchy.addEdge(wItem,wItemsTask);
+									}
 								}
 							}
 						}
@@ -174,6 +175,9 @@ public class Visualization {
 					gridWIN.moveTo(wItem, wItem.icon.location[0], wItem.icon.location[1]);
 					netWI_Hierarchy.addEdge(wItem,wItem1);					
 				}
+			}
+			else {
+				gridWIN.moveTo(wItem, 0, 0);
 			}
 		}
 		// Coloring

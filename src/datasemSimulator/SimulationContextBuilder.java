@@ -12,6 +12,7 @@ import visualization.Visualization;
 import workItems.AggregationNode;
 import workItems.DevTask;
 import workItems.Task;
+import workItems.AutoGenerateWIN;
 import workItems.WorkItemEntity;
 import xtext.objectsModel.Asset;
 import xtext.objectsModel.GovernanceStrategy;
@@ -125,32 +126,39 @@ public class SimulationContextBuilder {
 //		}
 		
 		// Auto Decompose
-		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {				
-			if (wi.isAggregationNode && wi.myWorkItem.getSbTasks().size()==0) {
-				WINTemplate.generateSubtasks(wi);
-			}	
+		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {		
+			WorkItemType myType = mySoS.myWorkItemTypes.get(wi.typeId);
+			for (Mechanism m: myType.getMechanisms()) {
+				if (m.getName().matches("AutoGenerateWIN")) {
+					((AggregationNode)wi).myAutoGenerateWIN = new AutoGenerateWIN(m);
+					AutoGenerateWIN.generateSubtasks(wi);
+				}
+				else if (m.getName().matches("ValueFunction")) {
+					wi.myValueFunction = new ValueFunction(m);
+				}
+			}
 		}
 		// Derive Impacts DSM
 		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
 			if (wi1.isAggregationNode && wi1.myWorkItem.getSbTasks().size()==0) {	
-				WINTemplate.generateImpacts(wi1);
+				AutoGenerateWIN.generateImpacts(wi1);
 			}
 		}
 		
-		// ValueFunction
-		Mechanism valueMechanism1 = ObjectsModelFactory.eINSTANCE.createMechanism();
-		valueMechanism1.setName("ValueFunction");valueMechanism1.setValue("Derived");
-		MechanismAttribute att1 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-		att1.setAttribute("HierarchyFactor");att1.setValue("0.7");
-		MechanismAttribute att2 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-		att2.setAttribute("PrecedencyFactor");att2.setValue("0.2");
-		valueMechanism1.getAttributes().add(att1);valueMechanism1.getAttributes().add(att2);
-		//
-		Mechanism valueMechanism2 = ObjectsModelFactory.eINSTANCE.createMechanism();
-		valueMechanism2.setName("ValueFunction");valueMechanism2.setValue("Fiat");
-		
-		mySoS.myValueFunction = new ValueFunction(valueMechanism1);	
-		
+//		// ValueFunction
+//		Mechanism valueMechanism1 = ObjectsModelFactory.eINSTANCE.createMechanism();
+//		valueMechanism1.setName("ValueFunction");valueMechanism1.setValue("Derived");
+//		MechanismAttribute att1 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
+//		att1.setAttribute("HierarchyFactor");att1.setValue("0.5");
+//		MechanismAttribute att2 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
+//		att2.setAttribute("PrecedencyFactor");att2.setValue("0.5");
+//		valueMechanism1.getAttributes().add(att1);valueMechanism1.getAttributes().add(att2);
+//		//
+//		Mechanism valueMechanism2 = ObjectsModelFactory.eINSTANCE.createMechanism();
+//		valueMechanism2.setName("ValueFunction");valueMechanism2.setValue("Fiat");
+//		
+//		mySoS.myValueFunction = new ValueFunction(valueMechanism1);	
+//		
 		// Initial Assignment
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {		
 			if ((wi.arrivalTime>0 )) {						
@@ -308,7 +316,33 @@ public class SimulationContextBuilder {
 		myWorkItemType.setId(id);
 		myWorkItemType.setName(name);
 		myWorkItemType.setHierarchy(hierarchy);
-		myWorkItemTypes.put(id, myWorkItemType); 
+		Node mechanisms_node = e.getElementsByTagName("Mechanisms").item(0);
+		Element mechanisms_element = (Element)mechanisms_node;
+		NodeList mechanism_nodeList = mechanisms_element.getElementsByTagName("Mechanism");
+		for (int i=0;i<mechanism_nodeList.getLength();i++) {
+			// Mechanism
+			Mechanism myMechanism = ObjectsModelFactory.eINSTANCE.createMechanism();
+			Node mechanism_node = mechanism_nodeList.item(i);
+			Element mechanism_element = (Element)mechanism_node;
+			String mechanism_name = mechanism_element.getAttribute("name");
+			String mechanism_value = mechanism_element.getAttribute("value");	
+			myMechanism.setName(mechanism_name);
+			myMechanism.setValue(mechanism_value);
+			NodeList attribute_nodeList = mechanism_element.getElementsByTagName("Attribute");
+			for (int i1=0;i1<attribute_nodeList.getLength();i1++) {
+				// Mechanism Attribute
+				MechanismAttribute myAttribute = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
+				Node attribute_node = attribute_nodeList.item(i1);
+				Element attribute_element = (Element)attribute_node;
+				String attribute_name = attribute_element.getAttribute("name");//System.out.println(attribute_name);
+				String attribute_value = attribute_element.getAttribute("value");//System.out.println(attribute_value);
+				myAttribute.setAttribute(attribute_name);
+				myAttribute.setValue(attribute_value);
+				myMechanism.getAttributes().add(myAttribute);
+				myWorkItemType.getMechanisms().add(myMechanism);
+			}		
+		}
+		myWorkItemTypes.put(id, myWorkItemType);
 	}
 	public void xmlCreateServiceProvider(Element e) {
 		ServiceProvider myServiceProvider = ObjectsModelFactory.eINSTANCE.createServiceProvider();

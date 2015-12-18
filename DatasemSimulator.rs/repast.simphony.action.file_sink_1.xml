@@ -1,0 +1,15 @@
+<repast.simphony.data2.engine.FileSinkDescriptor>
+  <name>Runtime File Sink</name>
+  <dataSet>SOS Data Set</dataSet>
+  <delimiter>,</delimiter>
+  <format>TABULAR</format>
+  <sourceIds class="linked-hash-set">
+    <string>tick</string>
+    <string>ValueDelivered</string>
+    <string>NPV</string>
+    <string>AgentsResourceUtilization_cov</string>
+    <string>AgentsResourceUtilization_mean</string>
+  </sourceIds>
+  <fileName>SimulationOutputs/Runtime.txt</fileName>
+  <addTimeStamp>false</addTimeStamp>
+</repast.simphony.data2.engine.FileSinkDescriptor>

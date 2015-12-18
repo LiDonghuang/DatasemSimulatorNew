@@ -52,6 +52,7 @@ public class WorkItemEntity extends WorkItemImpl {
 	public int maxMaturityLevels = 1;
 	public double uncertainty = 0;
 	public double risk = 0;
+	public ValueFunction myValueFunction = new ValueFunction();
 	// Visualization
 	public Icon icon = new Icon();	
 	// Dynamic Attributes
@@ -185,13 +186,13 @@ public class WorkItemEntity extends WorkItemImpl {
 				//System.out.println(this.fullName+"uppertask"+upperTask.fullName+"not cleared");
 				break;
 			}
-			else if (upperTask.isActivated && upperTask.isCompleted) {
-				cleared = upperTask.uppertasksCleared();
-				if (!cleared) {
-					break;
-				}
-			}
-		}	
+//			else if (upperTask.isActivated && upperTask.isCompleted) {
+//				cleared = upperTask.uppertasksCleared();
+//				if (!cleared) {
+//					break;
+//				}
+//			}
+		}
 		return cleared;
 	}
 

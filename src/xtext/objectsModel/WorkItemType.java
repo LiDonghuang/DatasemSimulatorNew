@@ -2,6 +2,8 @@
  */
 package xtext.objectsModel;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link xtext.objectsModel.WorkItemType#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItemType#getDescription <em>Description</em>}</li>
  *   <li>{@link xtext.objectsModel.WorkItemType#getHierarchy <em>Hierarchy</em>}</li>
+ *   <li>{@link xtext.objectsModel.WorkItemType#getMechanisms <em>Mechanisms</em>}</li>
  * </ul>
  * </p>
  *
@@ -128,5 +131,21 @@ public interface WorkItemType extends EObject
    * @generated
    */
   void setHierarchy(int value);
+
+  /**
+   * Returns the value of the '<em><b>Mechanisms</b></em>' containment reference list.
+   * The list contents are of type {@link xtext.objectsModel.Mechanism}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Mechanisms</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Mechanisms</em>' containment reference list.
+   * @see xtext.objectsModel.ObjectsModelPackage#getWorkItemType_Mechanisms()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Mechanism> getMechanisms();
 
 } // WorkItemType

@@ -12,6 +12,7 @@ import xtext.objectsModel.WorkItem;
 public class AggregationNode extends WorkItemEntity{
 	private LinkedList<WorkItemEntity> subtasks = new LinkedList<WorkItemEntity>();
 	private LinkedList<AnalysisActivity> analysisTasks = new LinkedList<AnalysisActivity>();
+	public AutoGenerateWIN myAutoGenerateWIN = new AutoGenerateWIN();
 	public boolean hasProcessModel = false;
 	private ProcessModel processModel;
 	public int currentProcessStage;

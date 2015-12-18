@@ -22,7 +22,6 @@ public class AbstractAgentBehavior {
 	public int WIPLimit = Integer.MAX_VALUE;
 	public int BacklogLimit = Integer.MAX_VALUE;
 	public int MultiTasking = 1;
-	public int Cadence = 10;
 	private int clock;
 	private boolean sprintNow;
 	
@@ -93,7 +92,7 @@ public class AbstractAgentBehavior {
 	public void CheckRequestedQ() {
 		clock++;
 		setSprintNow(false);
-		if (clock==Cadence || agent.getRequestedQ().isEmpty()
+		if (clock==agent.myStrategy.Cadence || agent.getRequestedQ().isEmpty()
 				|| (agent.getBacklogQ().isEmpty()&&agent.getActiveQ().isEmpty())) {
 			clock=0;
 			setSprintNow(true);
@@ -121,37 +120,47 @@ public class AbstractAgentBehavior {
 		agent.myStrategy.applyWorkPrioritization(agent, requestedTasks);
 		while (!requestedTasks.isEmpty()) {
 			// =========== Apply WI Acceptance Rule ====================
-			Task wi = requestedTasks.getFirst();
+			Task task = requestedTasks.getFirst();
 			// =========== Service Efficiency Algorithm ==============
-			String decision = this.acceptanceDecision(wi);
-			//System.out.println("\n"+agent.getName()+" on"+wi.fullName+"requested by "+wi.getRequester().getName()+"("+wi.SoS.myServices.get(wi.serviceId).getName()+"x"+wi.efforts+") Decision: "+decision);
+			String decision = this.acceptanceDecision(task);
+			//System.out.println("\n"+agent.getName()+" on"+task.fullName+"requested by "+task.getRequester().getName()+"("+task.SoS.myServices.get(task.serviceId).getName()+"x"+task.efforts+") Decision: "+decision);
 			if (decision.matches("Accept")) {			
 				//System.out.println(agent.getName()+" accepts"+wi.fullName);
-				agent.acceptWI(wi);
+				task.currentDecision = 1;
+				agent.acceptWI(task);
 			}
 			else if (decision.matches("Outsource")) {
 				//System.out.println(agent.getName()+" decides to outsource"+wi.fullName);
-				agent.getAssignmentQ().add(wi);
+				task.currentDecision = 2;
+				agent.getAssignmentQ().add(task);
 			}
 			else if (decision.matches("RequestHelp")) {
 				if (agent.getId()==agent.SoS.coordinator.getId()) {
 					//System.out.println(agent.getName()+" handles"+wi.fullName);
-					agent.getAssignmentQ().add(wi);
+					task.currentDecision = 2;
+					agent.getAssignmentQ().add(task);
 				}
 				else {
 					//System.out.println(agent.getName()+" requests help from "+agent.SoS.coordinator.getName()+" on"+wi.fullName);
-					agent.SoS.coordinator.getRequestedQ().add(wi);
+					task.currentDecision = 3;
+					agent.requestService(task, agent.SoS.coordinator);
+					if (task.isAnalysisActivity) {
+						AggregationNode aggr = ((AnalysisActivity)task).AnalysisObject;
+						agent.SoS.coordinator.getComplexQ().add(aggr);
+						agent.getComplexQ().remove(aggr);
+					}
 				}
 			}
 			else if (decision.matches("Decline")) {
 				//System.out.println(agent.getName()+" declines"+wi.fullName+"from "+wi.getRequester().getName());
-				if (wi.getRequester().getId()==agent.getId()) {
-					String msg = "ERROR: "+agent.getName()+" declines"+wi.fullName+" which is requested by itself!";
+				if (task.getRequester().getId()==agent.getId()) {
+					String msg = "ERROR: "+agent.getName()+" declines"+task.fullName+" which is requested by itself!";
 					JOptionPane.showMessageDialog(null,msg);
 					throw new RuntimeException(msg);
 				}
 				else {
-					wi.getRequester().getRequestedQ().add(wi);
+					task.currentDecision = 4;
+					task.getRequester().getRequestedQ().add(task);
 				}
 			}
 			else {
@@ -159,8 +168,8 @@ public class AbstractAgentBehavior {
 				JOptionPane.showMessageDialog(null,msg);
 				throw new RuntimeException(msg);
 			}
-			requestedTasks.remove(wi);
-			agent.getRequestedQ().remove(wi);
+			requestedTasks.remove(task);
+			agent.getRequestedQ().remove(task);
 		}
 	}
 
@@ -281,7 +290,6 @@ public class AbstractAgentBehavior {
 			double capacity = requestedWI.calculateServiceCapacity(agent);	
 			if (capacity>0) {
 				decision = "Accept";
-				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
 			}
 			else {
 				double exCapacity = requestedWI.calculateExtendedServiceCapacity(agent);	
@@ -347,12 +355,13 @@ public class AbstractAgentBehavior {
 				AggregationNode analysisObject = (AggregationNode)((AnalysisActivity)WI).AnalysisObject;		
 				analysisObject.currentAnalysisStage ++;
 				//System.out.println(analysisObject.currentAnalysisStage+" "+analysisObject.totalAnalysisStage);
-				if (analysisObject.currentAnalysisStage == analysisObject.totalAnalysisStages) {
-					agent.SoS.myValueFunction.developValue(analysisObject);
-					agent.releaseSubtasks(analysisObject);					
+				if (analysisObject.currentAnalysisStage == analysisObject.totalAnalysisStages) {				
+					agent.releaseSubtasks(analysisObject);			
+					analysisObject.myValueFunction.developValue(analysisObject);
 				}
 				else {
 					agent.releaseSubtasks(analysisObject);
+					analysisObject.myValueFunction.developValue(analysisObject);
 					analysisObject.serviceId = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getServiceType().getId();
 					analysisObject.efforts = analysisObject.myWorkItem.getRequiredAnalysis().get(analysisObject.currentAnalysisStage).getEfforts();
 					agent.getRequestedQ().add(analysisObject);

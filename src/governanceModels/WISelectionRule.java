@@ -35,16 +35,14 @@ public class WISelectionRule {
 		case "LIFO": 
 			ruleValue = value;
 			break;
-		case "RPW": 
+		//case "RPW": 
+		case "ValueBased":
 			ruleValue = value;
 			parameters = new HashMap<String,Double>();
 			for (MechanismAttribute a : m.getAttributes()) {
 				addAttribute(a);
 			}
 			break;	
-		case "PerceivedValue": 
-			ruleValue = value;
-			break;
 		case "EDD": 
 			ruleValue = value;
 			break;
@@ -53,7 +51,7 @@ public class WISelectionRule {
 			break;
 		case "Neutral":break;
 		default: 
-			String msg = m.getName()+" is not a valid Prioritization RuleValue!" + "\n click OK to use default settings(Neutral)";
+			String msg = value+" is not a valid Prioritization RuleValue!" + "\n click OK to use default settings(Neutral)";
 			JOptionPane.showMessageDialog(null,msg);			
 			break;
 		}
@@ -77,12 +75,9 @@ public class WISelectionRule {
 			if (this.ruleValue.matches("Neutral")) {
 				//SimUtilities.shuffle(queue, RandomHelper.getUniform());
 			}
-			else if (this.ruleValue.matches("PerceivedValue")){			
+			else if (this.ruleValue.matches("ValueBased")){			
 				Collections.sort(queue, new LargerPerceivedValue());	
 			}		
-			else if (this.ruleValue.equals("RPW")) {
-				Collections.sort(queue, new LargerRPW());
-			}
 			else if (this.ruleValue.equals("FIFO")) {
 				Collections.sort(queue, new SmallerAssignedTime());
 			}
@@ -106,44 +101,38 @@ public class WISelectionRule {
 		else {return requestedQ;}
 	}
 
-	public double calculateRPW(WorkItemEntity wi) {
-		double rpw = 0;
-		double suc = wi.getSuccessors().size() *this.getAttribute("WeightPrecedency");
-		double obj = 0;
+	public double calculatePerceivedValue(WorkItemEntity wi) {
+		double pValue = 0;
+		double suc = 0;
 		double imp = 0;
 		double deco = 0;
 		double susp = 0;
-
+		double progress = wi.getProgress();
+		double realValue = 0;
+		
+		for (WorkItemEntity successor: wi.getSuccessors()) {
+			imp += successor.Value * this.getAttribute("WeightPrecedency");
+		}
 		for (WorkItemEntity impactsTarget: wi.getImpactsWIs()) {
 			double likelihood = wi.getImpactsLikelihood().get(impactsTarget);
 			double risk = wi.getImpactsRisk().get(impactsTarget);
-			imp += likelihood*risk* this.getAttribute("WeightImpact");
+			imp += likelihood*risk* impactsTarget.Value*this.getAttribute("WeightImpact");
 		}
 		if (wi.isAnalysisActivity) {
 			AggregationNode AnalysisObject = (AggregationNode) ((AnalysisActivity)wi).AnalysisObject;
-			deco = (calculateRPW(AnalysisObject)+AnalysisObject.hierarchy) * AnalysisObject.hierarchy *this.getAttribute("WeightHierarchy");
+			deco = AnalysisObject.Value*this.getAttribute("WeightHierarchy");
+			double f = (1-(((double)AnalysisObject.currentAnalysisStage+1)/(double)AnalysisObject.totalAnalysisStages));
+			deco = deco*f;
 		}
-		if (wi.isResolutionActivity) {
+		else if (wi.isResolutionActivity) {
 			DevTask ResolutionObject = ((ResolutionActivity)wi).ResolutionObject;
-			susp = calculateRPW(ResolutionObject);
+			susp = calculatePerceivedValue(ResolutionObject);
 		}
-		rpw = suc + obj + imp + deco + susp;
-		return rpw;
-	}
-	
-	class LargerPerceivedValue implements Comparator<WorkItemEntity> {
-		@Override
-		public int compare(WorkItemEntity w1, WorkItemEntity w2) {
-			if (w1.currentValue <w2.currentValue) {
-				return 1;
-			}
-			else if (w1.getPerceivedValue()==w2.getPerceivedValue()) {
-				return 0;
-			}
-			else {
-				return -1;
-			}
+		else {
+			realValue = wi.Value;
 		}
+		pValue = (suc+deco+imp+susp+realValue)*((progress+1)*this.getAttribute("WeightCompleteness"));
+		return pValue;
 	}
 	class LargerAssignedTime implements Comparator<WorkItemEntity> {
 		@Override
@@ -159,13 +148,13 @@ public class WISelectionRule {
 			}
 		}
 	}
-	class LargerRPW implements Comparator<WorkItemEntity> {
+	class LargerPerceivedValue implements Comparator<WorkItemEntity> {
 		@Override
 		public int compare(WorkItemEntity w1, WorkItemEntity w2) {
-			if (calculateRPW(w1)<calculateRPW(w2)) {
+			if (calculatePerceivedValue(w1)<calculatePerceivedValue(w2)) {
 				return 1;
 			}
-			else if (calculateRPW(w1)==calculateRPW(w2)) {
+			else if (calculatePerceivedValue(w1)==calculatePerceivedValue(w2)) {
 				return 0;
 			}
 			else {

@@ -7,13 +7,55 @@
 <ServiceProviderType spTypeId="4" hierarchy="0" name="CntrTeam"></ServiceProviderType>
 </ServiceProviderTypes>
 <WorkItemTypes>
-<WorkItemType wiTypeId="1" hierarchy="3" name="SoSCap"></WorkItemType>
-<WorkItemType wiTypeId="2" hierarchy="2" name="SysFuncCap"></WorkItemType>
-<WorkItemType wiTypeId="3" hierarchy="2" name="SysOperCap"></WorkItemType>
-<WorkItemType wiTypeId="4" hierarchy="1" name="SubSysReq"></WorkItemType>
-<WorkItemType wiTypeId="5" hierarchy="0" name="DevTask"></WorkItemType>
-<WorkItemType wiTypeId="6" hierarchy="0" name="Analysis"></WorkItemType>
-<WorkItemType wiTypeId="7" hierarchy="0" name="Resolution"></WorkItemType>
+<WorkItemType wiTypeId="1" hierarchy="3" name="SoSCap">
+<Mechanisms>
+<Mechanism name="ValueFunction" value="Derive">
+<Attribute name="HierarchyFactor" value="0.2"></Attribute> 
+<Attribute name="DependencyFactor" value="0"></Attribute> 
+</Mechanism>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="2" hierarchy="2" name="SysFuncCap">
+<Mechanisms>
+<Mechanism name="ValueFunction" value="Derive">
+<Attribute name="HierarchyFactor" value="0.2"></Attribute> 
+<Attribute name="DependencyFactor" value="0.5"></Attribute> 
+</Mechanism>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="3" hierarchy="2" name="SysOperCap">
+<Mechanisms>
+<Mechanism name="ValueFunction" value="Derive">
+<Attribute name="HierarchyFactor" value="0.2"></Attribute> 
+<Attribute name="DependencyFactor" value="0.5"></Attribute> 
+</Mechanism>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="4" hierarchy="1" name="SubSysReq">
+<Mechanisms>
+<Mechanism name="ValueFunction" value="Derive">
+<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
+<Attribute name="DependencyFactor" value="0.5"></Attribute> 
+</Mechanism>
+<Mechanism name="AutoGenerateWIN" value="True">
+<Attribute name="MinTaskSize" value="5"></Attribute> 
+<Attribute name="MaxTaskSize" value="15"></Attribute> 
+<Attribute name="Complexity" value="0.5"></Attribute> 
+</Mechanism>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="5" hierarchy="0" name="DevTask">
+<Mechanisms>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="6" hierarchy="0" name="Analysis">
+<Mechanisms>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="7" hierarchy="0" name="Resolution">
+<Mechanisms>
+</Mechanisms>
+</WorkItemType>
 </WorkItemTypes>
 <Services>
 <Service serviceId="1" name="SoSE"></Service>
@@ -50,26 +92,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="1" name="S_SysEng.1" description="">
 		<SkillSet>
@@ -96,26 +133,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="4" name="SysEng.1" description="">
 		<SkillSet>
@@ -141,26 +173,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="7" name="SysEng.1" description="">
 		<SkillSet>
@@ -186,26 +213,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="10" name="SysEng.1" description="">
 		<SkillSet>
@@ -232,26 +254,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="13" name="SysEng.1" description="">
 		<SkillSet>
@@ -278,26 +295,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="16" name="SysEng.1" description="">
 		<SkillSet>
@@ -324,26 +336,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="19" name="SysEng.1" description="">
 		<SkillSet>
@@ -377,26 +384,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="24" name="Elec_Eng.1" description="">
 		<SkillSet>
@@ -435,26 +437,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="30" name="Elec_Eng.1" description="">
 		<SkillSet>
@@ -493,26 +490,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="36" name="Elec_Eng.1" description="">
 		<SkillSet>
@@ -546,26 +538,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="41" name="Elec_Eng.1" description="">
 		<SkillSet>
@@ -599,26 +586,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="46" name="Elec_Eng.1" description="">
 		<SkillSet>
@@ -652,26 +634,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="51" name="IT_Mng.1" description="">
 		<SkillSet>
@@ -733,26 +710,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="58" name="IT_Mng.1" description="">
 		<SkillSet>
@@ -798,26 +770,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="63" name="IT_Mng.1" description="">
 		<SkillSet>
@@ -863,26 +830,21 @@
 		</AssignWITo>
 		<BorrowResourceFrom>
 		</BorrowResourceFrom>
-		
-		<GovernanceStrategy type="pull">
+		<GovernanceStrategy type="push">			
 		<Mechanisms>
-		<Mechanism name="Acceptance" value="Limited">
-		<Attribute name="BacklogLimit" value="5"></Attribute> 
-		<Attribute name="WIPLimit" value="6"></Attribute> 
-		<Attribute name="MaxMultiTasking" value="1"></Attribute> 
+		<Mechanism name="Cadence" value="10">
 		</Mechanism>
-		<Mechanism name="Prioritization" value="RPW">
-		<Attribute name="WeightPrecedency" value="1"></Attribute> 
-		<Attribute name="WeightImpact" value="5"></Attribute> 
-		<Attribute name="WeightHierarchy" value="3"></Attribute> 
+		<Mechanism name="Acceptance" value="Unlimited">
 		</Mechanism>
-		<Mechanism name="Assignment" value="ExtendedCapacity">
-		<Attribute name="TrustFactor" value="0.5"></Attribute> 
+		<Mechanism name="Prioritization" value="FIFO">
 		</Mechanism>
-		<Mechanism name="Allocation" value="MostEfficient">
+		<Mechanism name="Assignment" value="LeastLoad">
 		</Mechanism>
-		</Mechanisms>								
-		</GovernanceStrategy>	
+		<Mechanism name="Allocation" value="Neutral">
+		</Mechanism>
+		</Mechanisms>				
+		</GovernanceStrategy>		
+		
 		<Resources>
 		<Resource resourceId="68" name="Tester.1" description="">
 		<SkillSet>
@@ -1014,7 +976,6 @@
 		</WorkItem>
 		<WorkItem wiId="7" name="WDSys" typeId="2" isAggregationNode="true" hasPredecessors="true" hasImpacts="false">
 			<GovernanceAttributes>
-			<GovernanceAttribute name="Value" value="300.0"></GovernanceAttribute>
 			</GovernanceAttributes>
 			<Predecessors>
 			<workItemId>6</workItemId>

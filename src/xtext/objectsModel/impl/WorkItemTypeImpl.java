@@ -2,13 +2,23 @@
  */
 package xtext.objectsModel.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import xtext.objectsModel.Mechanism;
 import xtext.objectsModel.ObjectsModelPackage;
 import xtext.objectsModel.WorkItemType;
 
@@ -23,6 +33,7 @@ import xtext.objectsModel.WorkItemType;
  *   <li>{@link xtext.objectsModel.impl.WorkItemTypeImpl#getId <em>Id</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemTypeImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link xtext.objectsModel.impl.WorkItemTypeImpl#getHierarchy <em>Hierarchy</em>}</li>
+ *   <li>{@link xtext.objectsModel.impl.WorkItemTypeImpl#getMechanisms <em>Mechanisms</em>}</li>
  * </ul>
  * </p>
  *
@@ -109,6 +120,16 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
    * @ordered
    */
   protected int hierarchy = HIERARCHY_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getMechanisms() <em>Mechanisms</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMechanisms()
+   * @generated
+   * @ordered
+   */
+  protected EList<Mechanism> mechanisms;
 
   /**
    * <!-- begin-user-doc -->
@@ -228,6 +249,36 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Mechanism> getMechanisms()
+  {
+    if (mechanisms == null)
+    {
+      mechanisms = new EObjectContainmentEList<Mechanism>(Mechanism.class, this, ObjectsModelPackage.WORK_ITEM_TYPE__MECHANISMS);
+    }
+    return mechanisms;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case ObjectsModelPackage.WORK_ITEM_TYPE__MECHANISMS:
+        return ((InternalEList<?>)getMechanisms()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -241,6 +292,8 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
         return getDescription();
       case ObjectsModelPackage.WORK_ITEM_TYPE__HIERARCHY:
         return getHierarchy();
+      case ObjectsModelPackage.WORK_ITEM_TYPE__MECHANISMS:
+        return getMechanisms();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -250,6 +303,7 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -266,6 +320,10 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
         return;
       case ObjectsModelPackage.WORK_ITEM_TYPE__HIERARCHY:
         setHierarchy((Integer)newValue);
+        return;
+      case ObjectsModelPackage.WORK_ITEM_TYPE__MECHANISMS:
+        getMechanisms().clear();
+        getMechanisms().addAll((Collection<? extends Mechanism>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -293,6 +351,9 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
       case ObjectsModelPackage.WORK_ITEM_TYPE__HIERARCHY:
         setHierarchy(HIERARCHY_EDEFAULT);
         return;
+      case ObjectsModelPackage.WORK_ITEM_TYPE__MECHANISMS:
+        getMechanisms().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -315,6 +376,8 @@ public class WorkItemTypeImpl extends MinimalEObjectImpl.Container implements Wo
         return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
       case ObjectsModelPackage.WORK_ITEM_TYPE__HIERARCHY:
         return hierarchy != HIERARCHY_EDEFAULT;
+      case ObjectsModelPackage.WORK_ITEM_TYPE__MECHANISMS:
+        return mechanisms != null && !mechanisms.isEmpty();
     }
     return super.eIsSet(featureID);
   }

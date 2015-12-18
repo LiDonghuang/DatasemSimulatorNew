@@ -7,6 +7,7 @@ import xtext.objectsModel.WorkItem;
 
 public class Task extends WorkItemEntity{
 	protected boolean isAggregationNode = false;
+	public int currentDecision; //1=Accept,2=Outsource,3=RequestHelp,4=Decline
 	
 	public Task(WorkItem wi) {
 		super(wi);

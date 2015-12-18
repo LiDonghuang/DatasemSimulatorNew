@@ -692,6 +692,16 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getWorkItemType_Mechanisms()
+  {
+    return (EReference)workItemTypeEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getWorkItem()
   {
     return workItemEClass;
@@ -1026,6 +1036,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     createEAttribute(workItemTypeEClass, WORK_ITEM_TYPE__ID);
     createEAttribute(workItemTypeEClass, WORK_ITEM_TYPE__DESCRIPTION);
     createEAttribute(workItemTypeEClass, WORK_ITEM_TYPE__HIERARCHY);
+    createEReference(workItemTypeEClass, WORK_ITEM_TYPE__MECHANISMS);
 
     workItemEClass = createEClass(WORK_ITEM);
     createEAttribute(workItemEClass, WORK_ITEM__NAME);
@@ -1146,6 +1157,7 @@ public class ObjectsModelPackageImpl extends EPackageImpl implements ObjectsMode
     initEAttribute(getWorkItemType_Id(), ecorePackage.getEInt(), "id", null, 0, 1, WorkItemType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItemType_Description(), ecorePackage.getEString(), "description", null, 0, 1, WorkItemType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getWorkItemType_Hierarchy(), ecorePackage.getEInt(), "hierarchy", null, 0, 1, WorkItemType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWorkItemType_Mechanisms(), this.getMechanism(), null, "Mechanisms", null, 0, -1, WorkItemType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(workItemEClass, WorkItem.class, "WorkItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getWorkItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, WorkItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

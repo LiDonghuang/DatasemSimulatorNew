@@ -598,13 +598,22 @@ public interface ObjectsModelPackage extends EPackage
   int WORK_ITEM_TYPE__HIERARCHY = 3;
 
   /**
+   * The feature id for the '<em><b>Mechanisms</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WORK_ITEM_TYPE__MECHANISMS = 4;
+
+  /**
    * The number of structural features of the '<em>Work Item Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WORK_ITEM_TYPE_FEATURE_COUNT = 4;
+  int WORK_ITEM_TYPE_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link xtext.objectsModel.impl.WorkItemImpl <em>Work Item</em>}' class.
@@ -1403,6 +1412,17 @@ public interface ObjectsModelPackage extends EPackage
   EAttribute getWorkItemType_Hierarchy();
 
   /**
+   * Returns the meta object for the containment reference list '{@link xtext.objectsModel.WorkItemType#getMechanisms <em>Mechanisms</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Mechanisms</em>'.
+   * @see xtext.objectsModel.WorkItemType#getMechanisms()
+   * @see #getWorkItemType()
+   * @generated
+   */
+  EReference getWorkItemType_Mechanisms();
+
+  /**
    * Returns the meta object for class '{@link xtext.objectsModel.WorkItem <em>Work Item</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2116,6 +2136,14 @@ public interface ObjectsModelPackage extends EPackage
      * @generated
      */
     EAttribute WORK_ITEM_TYPE__HIERARCHY = eINSTANCE.getWorkItemType_Hierarchy();
+
+    /**
+     * The meta object literal for the '<em><b>Mechanisms</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WORK_ITEM_TYPE__MECHANISMS = eINSTANCE.getWorkItemType_Mechanisms();
 
     /**
      * The meta object literal for the '{@link xtext.objectsModel.impl.WorkItemImpl <em>Work Item</em>}' class.

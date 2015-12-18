@@ -82,11 +82,9 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		this.typeId = ServiceProvider.getType().getId();
 		this.hierarchy = ServiceProvider.getType().getHierarchy();
 		this.myStrategy = new AgentStrategy(ServiceProvider.getGovernanceStrategy());
-		if (myStrategy.isCNP) {
+		if (myStrategy.isPull){
 			this.myBehavior = new CNPBehavior();
-		}
-		else if (myStrategy.isPull){
-			this.myBehavior = new CNPBehavior();
+			//this.myBehavior = new AbstractAgentBehavior();
 		}
 		else {
 			this.myBehavior = new AbstractAgentBehavior();
@@ -196,13 +194,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			target.setAssignedAgent(this);
 			this.complexQ.add(target);
 		}
-//		else {
-//			requestedWI.setAssigned(); 
-//			//System.out.println("\nACCEPTED AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" Accepted AggregationNode:"+requestedWI.fullName);
-//			this.analyzeAggregationNode((AggregationNode)requestedWI);
-//			this.complexQ.add((AggregationNode)requestedWI);								
-//			//this.requestedQ.remove(requestedWI);
-//		}
 	}
 	public void releaseSubtasks (AggregationNode aggr) {
 		//

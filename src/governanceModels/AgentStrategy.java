@@ -19,6 +19,7 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 	public boolean isPush=false;
 	public boolean isCNP=false;
 	
+	public int Cadence =1;
 	protected WISelectionRule mySelectionRule;
 	protected WIAcceptanceRule myAcceptanceRule;
 	protected WIAssignmentRule myAssignmentRule;
@@ -58,7 +59,10 @@ public class AgentStrategy extends GovernanceStrategyImpl {
 		}
 	}
 	public void implementMechanism(Mechanism m) {
-		if (m.getName().matches("Acceptance")) {
+		if (m.getName().matches("Cadence")) {
+			this.Cadence = Integer.valueOf(m.getValue());
+		}
+		else if (m.getName().matches("Acceptance")) {
 			myAcceptanceRule.implementWIAcceptanceRule(m);
 		}
 		else if (m.getName().matches("Prioritization") || m.getName().matches("Selection")) {			

@@ -27,6 +27,8 @@ public class ValueFunction extends MechanismImpl {
 			JOptionPane.showMessageDialog(null,msg);
 		}
 	}
+	public ValueFunction() {
+	}
 	public String getAttributeValue(String attName) {
 		String value = "";
 		Boolean found = false;
@@ -45,7 +47,7 @@ public class ValueFunction extends MechanismImpl {
 	
 	public void developValue(WorkItemEntity wi) {
 		// Derived Hierarchy
-		if (this.type.matches("Derived")) {
+		if (this.type.matches("Derive")) {
 			algorithmDerivedValue(wi);
 		}
 		else if (this.type.matches("Fiat")) {
@@ -57,8 +59,8 @@ public class ValueFunction extends MechanismImpl {
 			double baseValue = wi.Value;
 			//if (wi.getId()==31){System.out.println("base "+baseValue);}
 			double hierarchyFactor = Double.parseDouble(getAttributeValue("HierarchyFactor"));
-			double precedencyFactor = Double.parseDouble(getAttributeValue("PrecedencyFactor"));
-			
+			double dependencyFactor = Double.parseDouble(getAttributeValue("DependencyFactor"));
+			//System.out.println(wi.getName()+" "+hierarchyFactor+" "+dependencyFactor);
 			double[] weights = new double[((AggregationNode)wi).getSubtasks().size()];
 			for (int i=0; i<((AggregationNode)wi).getSubtasks().size();i++){	
 				WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);
@@ -66,21 +68,20 @@ public class ValueFunction extends MechanismImpl {
 				for (WorkItemEntity successor:subtask.getSuccessors()) {
 					if (!(successor.isAnalysisActivity||successor.isResolutionActivity)) {
 						if (((AggregationNode)wi).getSubtasks().contains(successor)) {
-							weights[i] += precedencyFactor;
+							weights[i] += dependencyFactor;
 						}
 					}
 				}
+				//weights[i] = 0.5*weights[i] + Math.random()*weights[i];
 			}
 			double totalWeights = StatUtils.sum(weights);
 			for (int i=0; i<((AggregationNode)wi).getSubtasks().size();i++){
 				WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);		
 				double incSValue = (weights[i]/totalWeights)*baseValue*(1-hierarchyFactor);
 				double previousSValue = subtask.Value;
-				//if (subtask.getId()==31){System.out.println("prev "+previousValue+" inc "+increase);}
 				subtask.Value += incSValue;	
 				subtask.currentValue += incSValue;			
 				wi.currentValue -= incSValue;
-				//if (wi.getId()==31){System.out.println("base "+baseValue+"decrease "+increase);}
 				if (subtask.isAggregationNode) {			
 					if (subtask.isEnded) {
 						subtask.SoS.deliverValue(incSValue);
