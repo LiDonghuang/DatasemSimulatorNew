@@ -78,6 +78,10 @@ public class ValueFunction extends MechanismImpl {
 			for (int i=0; i<((AggregationNode)wi).getSubtasks().size();i++){
 				WorkItemEntity subtask = ((AggregationNode)wi).getSubtasks().get(i);		
 				double incSValue = (weights[i]/totalWeights)*baseValue*(1-hierarchyFactor);
+				//
+				incSValue = Math.max(0, incSValue);
+				incSValue = Math.min(wi.currentValue, incSValue);
+				//
 				double previousSValue = subtask.Value;
 				subtask.Value += incSValue;	
 				subtask.currentValue += incSValue;			

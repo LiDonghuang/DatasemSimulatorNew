@@ -73,7 +73,7 @@ public class Visualization {
 		netWI_Hierarchy = new NetworkBuilder<Object>("WI_Hierarchy", context, true).buildNetwork();
 		netAllocation = new NetworkBuilder<Object>("Allocation", context, true).buildNetwork();
 		
-		width = 10;
+		width = 6;
 		height = 20;
 		gridKanban = gridFactory.createGrid("KanbanGrid", context, 
 				new GridBuilderParameters<Object>(new WrapAroundBorders(), 
@@ -263,13 +263,14 @@ public class Visualization {
 			}
 			count=1;
 			for (WorkItemEntity wi:agent.getRequestedQ()){
-				if (count>10) {
-					grid2D.moveTo(wi, 0,0);
-				}
-				else {
-					grid2D.moveTo(wi, agent.icon.location[0]+count+2,agent.icon.location[1]-4);
-					count++;
-				}			
+//				if (count>10) {
+//					grid2D.moveTo(wi, 0,0);
+//				}
+//				else {
+//					grid2D.moveTo(wi, agent.icon.location[0]+count+2,agent.icon.location[1]-4);
+//					count++;
+//				}			
+				grid2D.moveTo(wi, 0,0);
 			}
 			count=1;
 			for (WorkItemEntity wi:agent.getCompleteQ()){

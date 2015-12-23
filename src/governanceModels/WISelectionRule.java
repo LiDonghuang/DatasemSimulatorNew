@@ -111,7 +111,7 @@ public class WISelectionRule {
 		double realValue = 0;
 		
 		for (WorkItemEntity successor: wi.getSuccessors()) {
-			imp += successor.Value * this.getAttribute("WeightPrecedency");
+			imp += successor.currentValue * this.getAttribute("WeightPrecedency");
 		}
 		for (WorkItemEntity impactsTarget: wi.getImpactsWIs()) {
 			double likelihood = wi.getImpactsLikelihood().get(impactsTarget);
@@ -120,7 +120,7 @@ public class WISelectionRule {
 		}
 		if (wi.isAnalysisActivity) {
 			AggregationNode AnalysisObject = (AggregationNode) ((AnalysisActivity)wi).AnalysisObject;
-			deco = AnalysisObject.Value*this.getAttribute("WeightHierarchy");
+			deco = AnalysisObject.currentValue*this.getAttribute("WeightHierarchy");
 			double f = (1-(((double)AnalysisObject.currentAnalysisStage+1)/(double)AnalysisObject.totalAnalysisStages));
 			deco = deco*f;
 		}
@@ -129,7 +129,7 @@ public class WISelectionRule {
 			susp = calculatePerceivedValue(ResolutionObject);
 		}
 		else {
-			realValue = wi.Value;
+			realValue = wi.currentValue;
 		}
 		pValue = (suc+deco+imp+susp+realValue)*((progress+1)*this.getAttribute("WeightCompleteness"));
 		return pValue;

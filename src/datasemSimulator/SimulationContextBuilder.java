@@ -50,6 +50,7 @@ public class SimulationContextBuilder {
 	public HashMap<Integer, ServiceProviderType> myServiceProviderTypes = new HashMap<Integer, ServiceProviderType>();
 	public HashMap<Integer, WorkItemType> myWorkItemTypes = new HashMap<Integer, WorkItemType>();
 	public HashMap<Integer, Service> myServices = new HashMap<Integer, Service>();
+	public HashMap<String, String> myExperimentParameters = new HashMap<String, String>();
 	public Parameters parameters;
 	public String Visualization;
 	
@@ -254,6 +255,15 @@ public class SimulationContextBuilder {
 				xmlCreateService(e);
 			}
 			//
+			Node experimentParametersNode = scenario.getElementsByTagName("ExperimentParameters").item(0);
+			Element experimentParametersElement = (Element)experimentParametersNode;
+			NodeList experimentParameterList = experimentParametersElement.getElementsByTagName("ExperimentParameter");
+			for (int i=0;i<experimentParameterList.getLength();i++) {
+				Node n = experimentParameterList.item(i);
+				Element e = (Element)n;
+				xmlImplementExperimentParameter(e);
+			}
+			//
 			Node serviceProvidersNode = scenario.getElementsByTagName("ServiceProviders").item(0);
 			Element serviceProvidersElement = (Element)serviceProvidersNode;
 			NodeList serviceProviderList = serviceProvidersElement.getElementsByTagName("ServiceProvider");
@@ -298,6 +308,12 @@ public class SimulationContextBuilder {
 		myService.setName(name);
 		myServices.put(id, myService); 
 	}	
+	public void xmlImplementExperimentParameter(Element e) {
+		String name = e.getAttribute("name");
+		String value = e.getAttribute("value");
+		System.out.println(name+"= "+value);
+		this.myExperimentParameters.put(name,value);
+	}
 	public void xmlCreateServiceProviderType(Element e) {
 		int id = Integer.parseInt(e.getAttribute("spTypeId"));
 		String name = e.getAttribute("name");
@@ -578,6 +594,15 @@ public class SimulationContextBuilder {
 		double MultiTaskingPenalty = (Double)mySoS.parameters.getValue("MultiTaskingPenalty");
 		double LearningFactor = (Double)mySoS.parameters.getValue("LearningFactor");
 		double VolatilityLevel = ((double)(Integer)mySoS.parameters.getValue("Volatility"))/2;
+		
+		TaskMaturityLevels = Integer.valueOf((this.myExperimentParameters.get("TaskMaturityLevels")));
+		TaskUncertainty = Double.valueOf((this.myExperimentParameters.get("TaskUncertainty")));
+		ReworkRisk = Double.valueOf((this.myExperimentParameters.get("ReworkRisk")));
+		ChangePropagationFactor = Double.valueOf((this.myExperimentParameters.get("ChangePropagationFactor")));
+		ROR = Double.valueOf((this.myExperimentParameters.get("RateOfReturn")));
+		MultiTaskingPenalty = Double.valueOf((this.myExperimentParameters.get("MultiTaskingPenalty")));
+		LearningFactor = Double.valueOf((this.myExperimentParameters.get("LearningFactor")));
+		//VolatilityLevel = Double.valueOf((this.myExperimentParameters.get("Volatility"))) /2;
 		
 		mySoS.TaskMaturityLevels = TaskMaturityLevels;
 		mySoS.TaskUncertainty = TaskUncertainty*(VolatilityLevel);

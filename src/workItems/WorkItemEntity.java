@@ -287,6 +287,7 @@ public class WorkItemEntity extends WorkItemImpl {
 		else {
 			this.SoS.deliverValue(this.currentValue);
 			this.hasDelivered = true;
+			//System.out.println("\nDELIVERY @TIME:"+this.SoS.timeNow+this.fullName+", delivered "+this.currentValue+" stakeholder value");
 		}
 		this.isEnded=true;
 		this.endTime = this.SoS.timeNow;
