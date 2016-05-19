@@ -73,7 +73,7 @@ public class Visualization {
 		netWI_Hierarchy = new NetworkBuilder<Object>("WI_Hierarchy", context, true).buildNetwork();
 		netAllocation = new NetworkBuilder<Object>("Allocation", context, true).buildNetwork();
 		
-		width = 6;
+		width = 7;
 		height = 20;
 		gridKanban = gridFactory.createGrid("KanbanGrid", context, 
 				new GridBuilderParameters<Object>(new WrapAroundBorders(), 

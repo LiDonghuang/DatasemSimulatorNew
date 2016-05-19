@@ -181,7 +181,7 @@ public class AbstractAgentBehavior {
 			ServiceProviderAgent selectedSP = schedule.get(wi);
 			agent.requestService(wi, selectedSP);
 			agent.getAssignmentQ().remove(wi);
-			//System.out.println(agent.getName()+" assigned"+wi.fullName+"to "+selectedSP.getName());			
+			System.out.println(agent.getName()+" assigned"+wi.fullName+"to "+selectedSP.getName());			
 			agent.NowRequested.add(selectedSP);
 			//selectedSP.checkRequestedQ();
 		}

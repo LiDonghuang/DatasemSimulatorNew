@@ -42,6 +42,7 @@ public class CNPBehavior extends AbstractAgentBehavior{
 
 	public void GoToStep(int n) {
 		if (StepsMap.containsKey(n)) {
+			//System.out.println(agent.getName()+" step code: "+n+" step "+StepsMap.get(n));
 			switch(StepsMap.get(n)) {		
 			case "CheckRequestedQ": CheckRequestedQ(); break;		
 			case "TasksAnnouncement": TasksAnnouncement(); break;
@@ -74,7 +75,7 @@ public class CNPBehavior extends AbstractAgentBehavior{
 	public void Bidding() {
 		int count = 0;	
 		int space = Math.max(0, 2*(this.BacklogLimit-agent.getBacklogQ().size()));
-		if (this.isSprintNow()) {		
+		if (this.isSprintNow()) {
 			for (int i=0;i<this.receivedPurposalCalls.size();i++) {
 				PurposalCall receivedCall = this.receivedPurposalCalls.get(i);
 				if (receivedCall.isEnded) {
@@ -176,7 +177,7 @@ public class CNPBehavior extends AbstractAgentBehavior{
 		this.myJiaFangContracts.add(newContract);
 		((CNPBehavior)contractor.myBehavior).myYiFangContracts.add(newContract);
 		this.agent.NowRequested.add(contractor);
-		//System.out.println("\nContract Built on:");
+		System.out.println("\nContract Built\nManager:"+agent.getName()+", Contractor:"+contractor.getName()+", on:");
 		for (Task task : tasks) {
 			if (task.calculateServiceCapacity(contractor)>0) {				
 				contractor.acceptWI(task);
@@ -184,7 +185,7 @@ public class CNPBehavior extends AbstractAgentBehavior{
 			else if (task.calculateExtendedServiceCapacity(contractor)>0){
 				((CNPBehavior)(contractor.myBehavior)).callForPurposal(task, contractor.assignWITo);
 			}
-			//System.out.println(task.fullName);
+			System.out.println(task.fullName);
 			for (int i=0;i<this.myPurposalCalls.size();i++) {
 				PurposalCall p = this.myPurposalCalls.get(i);
 				if (task.getId()==p.target.getId()) {
@@ -194,7 +195,6 @@ public class CNPBehavior extends AbstractAgentBehavior{
 				}
 			}	
 		}
-		//System.out.println(" Manager:"+agent.getName()+" Contractor:"+contractor.getName());
 	}
 	public void cancelContract(Contract contract) {
 		LinkedList<Task> tasks = contract.tasks;

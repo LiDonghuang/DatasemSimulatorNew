@@ -273,11 +273,12 @@ public class WorkItemEntity extends WorkItemImpl {
 	public void setStarted() {	
 		this.isStarted= true;
 		this.startTime = this.SoS.timeNow;
+		System.out.println("\nSTART @TIME:"+this.SoS.timeNow+this.fullName+"is Started");
 	}
 	public void setCompleted() {
 		this.isCompleted=true;		
 		this.completionTime=this.SoS.timeNow;
-		//System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is Completed");
+		System.out.println("\nCOMPLETION @TIME:"+this.SoS.timeNow+this.fullName+"is Completed");
 		this.updateUpperTasksCompletion();
 	}
 	public void setEnded() {

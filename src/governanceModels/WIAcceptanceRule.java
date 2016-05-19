@@ -32,8 +32,8 @@ public class WIAcceptanceRule {
 			SP.myBehavior.MultiTasking = (int) this.getAttribute("MaxMultiTasking");
 		}
 		else {
-			SP.myBehavior.BacklogLimit = Integer.MAX_VALUE;
-			SP.myBehavior.WIPLimit = Integer.MAX_VALUE;
+			SP.myBehavior.BacklogLimit = 1000;
+			SP.myBehavior.WIPLimit = 1000;
 			SP.myBehavior.MultiTasking = 1;
 		}
 		return;

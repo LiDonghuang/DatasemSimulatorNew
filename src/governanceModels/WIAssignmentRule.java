@@ -54,6 +54,7 @@ public class WIAssignmentRule {
 		return parameters.get(s);
 	}
 	public HashMap<Task, ServiceProviderAgent> applyRule(ServiceProviderAgent me, LinkedList<Task> WIs, LinkedList<ServiceProviderAgent> SPs) {
+		System.out.println(me.getName()+" applies assignment rule:"+ruleValue);
 		HashMap<Task,ServiceProviderAgent> schedule = new HashMap<Task,ServiceProviderAgent>(); 
 		if (!SPs.isEmpty()) {
 			LinkedList<ServiceProviderAgent> list = new LinkedList<ServiceProviderAgent>();

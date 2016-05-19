@@ -70,8 +70,7 @@ public class WISelectionRule {
 		if (!requestedQ.isEmpty()) {
 			LinkedList<Task> queue = requestedQ;
 			SimUtilities.shuffle(queue, RandomHelper.getUniform()); 
-			//System.out.println("\n"+SP.getName()+" Applies "+this.ruleValue+" Prioritization Rule on "+queue.size()+" WIs");
-
+			//System.out.println("\nRULE @TIME:"+SP.SoS.timeNow+" "+SP.getName()+" Applies "+this.ruleValue+" Prioritization Rule on "+queue.size()+" WIs:");
 			if (this.ruleValue.matches("Neutral")) {
 				//SimUtilities.shuffle(queue, RandomHelper.getUniform());
 			}
@@ -95,8 +94,11 @@ public class WISelectionRule {
 				System.out.println("ERROR!");
 				System.exit(0);
 			}
-			//
+//			for (WorkItemEntity wi : queue) {
+//				System.out.println(wi.getName()+" perceived value:"+wi.getPerceivedValue());
+//			}
 			return queue;}
+
 		//
 		else {return requestedQ;}
 	}
@@ -108,7 +110,7 @@ public class WISelectionRule {
 		double deco = 0;
 		double susp = 0;
 		double progress = wi.getProgress();
-		double realValue = 0;
+		double realValue = wi.currentValue;
 		
 		for (WorkItemEntity successor: wi.getSuccessors()) {
 			imp += successor.currentValue * this.getAttribute("WeightPrecedency");
@@ -121,7 +123,7 @@ public class WISelectionRule {
 		if (wi.isAnalysisActivity) {
 			AggregationNode AnalysisObject = (AggregationNode) ((AnalysisActivity)wi).AnalysisObject;
 			deco = AnalysisObject.currentValue*this.getAttribute("WeightHierarchy");
-			double f = (1-(((double)AnalysisObject.currentAnalysisStage+1)/(double)AnalysisObject.totalAnalysisStages));
+			double f = (1-(((double)AnalysisObject.currentAnalysisStage)/(double)AnalysisObject.totalAnalysisStages));
 			deco = deco*f;
 		}
 		else if (wi.isResolutionActivity) {
@@ -131,7 +133,8 @@ public class WISelectionRule {
 		else {
 			realValue = wi.currentValue;
 		}
-		pValue = (suc+deco+imp+susp+realValue)*((progress+1)*this.getAttribute("WeightCompleteness"));
+		pValue = (suc+deco+imp+susp+realValue)*(1+progress*this.getAttribute("WeightCompleteness"));
+		wi.setPerceivedValue(pValue);
 		return pValue;
 	}
 	class LargerAssignedTime implements Comparator<WorkItemEntity> {

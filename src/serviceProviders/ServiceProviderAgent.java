@@ -179,7 +179,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		requestToSP.requestedQ.add(newWI);		
 		newWI.setRequester(this);
 		//newWI.triggerCausalities();
-		//System.out.println("\nREQUEST SERVICE @TIME:"+SoS.timeNow+" Agent "+this.name+" Requested "+requestToSP.name+" to serve"+newWI.fullName);
+		System.out.println("\nREQUEST SERVICE @TIME:"+SoS.timeNow+" Agent "+this.name+" Requested "+requestToSP.name+" to serve"+newWI.fullName);
 		//myValueManagement.manageValue(this, newWI);
 	}		
 	public void acceptWI(WorkItemEntity requestedWI) {
@@ -253,7 +253,7 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			if (sResource.isAvailable() && sResource.getEfficiency(wItem_reqService_id)>0) {				
 				serviceResourceCandidates.add(sResource);
 			}
-		}	
+		}
 		return serviceResourceCandidates;
 	}
 	
