@@ -12,7 +12,6 @@ import visualization.Visualization;
 import workItems.AggregationNode;
 import workItems.DevTask;
 import workItems.Task;
-import workItems.AutoGenerateWIN;
 import workItems.WorkItemEntity;
 import xtext.objectsModel.Asset;
 import xtext.objectsModel.GovernanceStrategy;
@@ -96,70 +95,7 @@ public class SimulationContextBuilder {
 				sp.ExtendedServiceCapacity.put(service, exCapacity);
 			}
 		}
-		
-//		// Process Model
-//		ProcessModel CEProcessModel = new ProcessModel("Capability\nEngineering");
-//		CEProcessModel.addStage(1,"Objectives\nTranslating");
-//		CEProcessModel.addStage(2,"Systems\nRelationships");
-//		CEProcessModel.addStage(3,"Performance\nAssesement");
-//		CEProcessModel.addStage(4,"Architecturing");
-//		CEProcessModel.addStage(5,"Requirements\nSolutions");
-//		CEProcessModel.addStage(6,"Upgrades\nOrchestration");
-//		//
-//		ProcessModel WaterfallModel = new ProcessModel("Waterfall\nModel");
-//		WaterfallModel.addStage(1,"Analysis");
-//		WaterfallModel.addStage(2,"Design");
-//		WaterfallModel.addStage(3,"Implementation");
-//		WaterfallModel.addStage(4,"Verification");
-//		WaterfallModel.addStage(5,"Maintenance");
-//		//
-//		ProcessModel MyProcess = new ProcessModel("My\nProcess");
-//		MyProcess.addStage(1,"Analysis");
-//		MyProcess.addStage(2,"Development");
-//		
-
-//		
-//		// Process Model
-//		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {	
-//			if (wi.isAggregationNode) {
-//				((AggregationNode)wi).setProcessModel(MyProcess);
-//			}
-//		}
-		
-		// Auto Decompose
-		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {		
-			WorkItemType myType = mySoS.myWorkItemTypes.get(wi.typeId);
-			for (Mechanism m: myType.getMechanisms()) {
-				if (m.getName().matches("AutoGenerateWIN")) {
-					((AggregationNode)wi).myAutoGenerateWIN = new AutoGenerateWIN(m);
-					AutoGenerateWIN.generateSubtasks(wi);
-				}
-				else if (m.getName().matches("ValueFunction")) {
-					wi.myValueFunction = new ValueFunction(m);
-				}
-			}
-		}
-		// Derive Impacts DSM
-		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
-			if (wi1.isAggregationNode && wi1.myWorkItem.getSbTasks().size()==0) {	
-				AutoGenerateWIN.generateImpacts(wi1);
-			}
-		}
-		
-//		// ValueFunction
-//		Mechanism valueMechanism1 = ObjectsModelFactory.eINSTANCE.createMechanism();
-//		valueMechanism1.setName("ValueFunction");valueMechanism1.setValue("Derived");
-//		MechanismAttribute att1 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-//		att1.setAttribute("HierarchyFactor");att1.setValue("0.5");
-//		MechanismAttribute att2 = ObjectsModelFactory.eINSTANCE.createMechanismAttribute();
-//		att2.setAttribute("PrecedencyFactor");att2.setValue("0.5");
-//		valueMechanism1.getAttributes().add(att1);valueMechanism1.getAttributes().add(att2);
-//		//
-//		Mechanism valueMechanism2 = ObjectsModelFactory.eINSTANCE.createMechanism();
-//		valueMechanism2.setName("ValueFunction");valueMechanism2.setValue("Fiat");
-//		
-//		mySoS.myValueFunction = new ValueFunction(valueMechanism1);	
-//		
+	
 		// Initial Assignment
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {		
 			if ((wi.arrivalTime>0 )) {						
