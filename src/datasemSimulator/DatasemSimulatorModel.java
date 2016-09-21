@@ -21,12 +21,12 @@ public class DatasemSimulatorModel implements ContextBuilder<Object>{
 	public Context<Object> build(Context<Object> context) {
 		File folder = new File("SimulationOutputs");
 		clearFolder(folder);
-
+		
 		contextbuilder.ContextImplementation(context);
 		Parameters p = RunEnvironment.getInstance().getParameters();
 		int numReplications = (Integer)p.getValue("NumReplications");
 		System.out.println("\nREPLICATION #"+numReplications+"\n");
-
+		
 		return context;
 	}
 	

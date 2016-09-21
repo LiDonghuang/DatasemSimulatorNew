@@ -2,20 +2,10 @@ package contractNetProtocol;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import datasemSimulator.AbstractClass;
-import repast.simphony.engine.schedule.ScheduledMethod;
-import repast.simphony.random.RandomHelper;
-import repast.simphony.util.ContextUtils;
-import repast.simphony.context.Context;
 import serviceProviders.AbstractAgentBehavior;
 import serviceProviders.ServiceProviderAgent;
-import workItems.AggregationNode;
-import workItems.AnalysisActivity;
-import workItems.DevTask;
 import workItems.Task;
 import workItems.WorkItemEntity;
-import xtext.objectsModel.ServiceProvider;
-
 
 public class CNPBehavior extends AbstractAgentBehavior{
 	public LinkedList<PurposalCall> myPurposalCalls = new LinkedList<PurposalCall>();

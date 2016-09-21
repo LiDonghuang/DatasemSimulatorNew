@@ -1,13 +1,9 @@
 package serviceProviders;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
-
-import datasemSimulator.AbstractClass;
-import repast.simphony.random.RandomHelper;
 import workItems.AggregationNode;
 import workItems.AnalysisActivity;
 import workItems.ResolutionActivity;

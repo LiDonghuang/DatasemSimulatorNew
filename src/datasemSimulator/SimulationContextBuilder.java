@@ -1,3 +1,7 @@
+/*
+This script reads XML model information from /SimulationScenarios/ExperimentModel.xml, create instances accordingly 
+and implement them to the context, and set simulation parameters
+ */
 package datasemSimulator;
 
 import java.io.File;
@@ -43,6 +47,7 @@ import processModels.ValueFunction;
 
 public class SimulationContextBuilder {
 	public String ModelBuilder;
+	// void HashMaps which would be filled by instances (with IDs) created from ExperimentModel.xml file
 	public HashMap<Integer, ServiceProvider> myServiceProviders = new HashMap<Integer, ServiceProvider>();
 	public HashMap<Integer, WorkItem> myWorkItems = new HashMap<Integer, WorkItem>();
 	public HashMap<Integer, Asset> myResources = new HashMap<Integer, Asset>();	
@@ -50,7 +55,9 @@ public class SimulationContextBuilder {
 	public HashMap<Integer, WorkItemType> myWorkItemTypes = new HashMap<Integer, WorkItemType>();
 	public HashMap<Integer, Service> myServices = new HashMap<Integer, Service>();
 	public HashMap<String, String> myExperimentParameters = new HashMap<String, String>();
+	// Simulation Parameters
 	public Parameters parameters;
+	// Turn on/off animation
 	public String Visualization;
 	
 	public SimulationContextBuilder(File scenarioXmlFile) {
@@ -59,6 +66,10 @@ public class SimulationContextBuilder {
 		System.out.println(this.myServiceProviders.size()+" SPs");
 		System.out.println(this.myResources.size()+" Resources");
 	}
+	
+	// F- Context Implementation
+	// This function works after XML is read and model instances are created.
+	// It add the created instances to the context, and initialize the context to be ready for simulation
 	public void ContextImplementation(Context<Object> context) {
 		parameters = RunEnvironment.getInstance().getParameters();
 		SystemOfSystems mySoS = BuildSoS(context);	
@@ -71,7 +82,11 @@ public class SimulationContextBuilder {
 				context.add(r);
 			}
 		}
-		// Extended Service Capacities
+		
+		// P- Extended Service Capacities
+		// This part calculates the Sum of skill levels of resources of all Service Providers which a Service Provider can DIRECTLY assign work to,
+		// plus the skill levels of resources of the current Service Provider, prior to start of simulation
+		// This is an important concept used in SP behaviors to evaluate the "actual" capacity of an SP
 		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
 			for (Service service:this.myServices.values()) {
 				sp.ServiceCapacity.put(service, 0.0);
@@ -95,15 +110,21 @@ public class SimulationContextBuilder {
 				sp.ExtendedServiceCapacity.put(service, exCapacity);
 			}
 		}
-	
-		// Initial Assignment
+		// P- end Extended Service Capacities
+		
+		// P- !! Initial Assignment
+		// The initial work items are assigned to the FIRST SP described in the model
 		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {		
 			if ((wi.arrivalTime>0 )) {						
 				wi.SoS.initialList.put(wi.getId(), wi);
 			}
 		}	
 		mySoS.coordinator = mySoS.myServiceProviderAgents.get(1);
-		// Experiment and Visualization		
+		// P- end Initial Assignment
+		
+		// P- Experiment and Visualization	
+		// This part handles the window size and object locations in animation
+		// according to size and complexity of the model
 		int numReplications = (Integer)parameters.getValue("NumReplications");
 		Visualization = (String)parameters.getValue("Visualization");
 		if (Visualization.matches("on") && (numReplications==1)) {
@@ -145,11 +166,14 @@ public class SimulationContextBuilder {
 			System.out.println("OrgLevels="+mySoS.OrgLevels);
 			System.out.println("WINLevels="+mySoS.WINLevels);			
 			mySoS.printSoSInformation();		
-		}	
+		}
+		// P- end Experiment and Visualization	
 	}
+	// F- end Context Implementation
 
 	
-	
+	// F - Read XML File
+	// Read the XML Model document and build instances by calling various "xmlBuild..." functions
 	public void ReadXMLFile(File scenarioXmlFile) {
 		System.out.println("\nstart parsing scenario.xml...\n");
 		try {
@@ -236,6 +260,8 @@ public class SimulationContextBuilder {
 			}
 		System.out.println("\nscenario parsing completed\n");
 	}	
+	// end F - Read XML File
+	
 	public void xmlCreateService(Element e) {
 		int id = Integer.parseInt(e.getAttribute("serviceId"));
 		String name = e.getAttribute("name");
@@ -516,12 +542,13 @@ public class SimulationContextBuilder {
 			}
 		}
 	}
-	public SystemOfSystems BuildSoS(Context<Object> context) {
-		
+	
+	// F - Build SoS
+	// Creat an SoS(System-of-System) instance and add all instances created to it
+	// Read Simulation Parameters
+	public SystemOfSystems BuildSoS(Context<Object> context) {		
 		SystemOfSystems mySoS = new SystemOfSystems(context);
-
-		mySoS.parameters = this.parameters;
-		
+		mySoS.parameters = this.parameters;		
 		int TaskMaturityLevels = (Integer)mySoS.parameters.getValue("TaskMaturityLevels");
 		double TaskUncertainty = (Double)mySoS.parameters.getValue("TaskUncertainty");
 		double ReworkRisk = (Double)mySoS.parameters.getValue("ReworkRisk");
@@ -550,8 +577,7 @@ public class SimulationContextBuilder {
 		mySoS.myServices = this.myServices;
 		mySoS.myServiceProviderTypes = this.myServiceProviderTypes;		
 		mySoS.myWorkItemTypes = this.myWorkItemTypes;
-		
-		
+			
 		for (Asset r: myResources.values()) {
 			int id = r.getId();
 			ResourceEntity res = new ResourceEntity(r);
@@ -587,12 +613,10 @@ public class SimulationContextBuilder {
 				entity = new Task(wi);
 				entity = new DevTask(entity);
 			}
-			//System.out.println(entity.getName()+" value:"+entity.Value+" arr:"+entity.arrivalTime+" due:"+entity.dueDate);
 			entity.SoS = mySoS;
 			entity.maxMaturityLevels = TaskMaturityLevels;
 			entity.uncertainty = TaskUncertainty;
 			entity.risk = ReworkRisk;
-			//System.out.println(TaskMaturityLevels);System.out.println(TaskUncertainty);System.out.println(ReworkRisk);
 			mySoS.myWorkItemEntities.put(id, entity);
 			mySoS.increaseWICount();
 		}
@@ -625,4 +649,5 @@ public class SimulationContextBuilder {
 		}
 		return mySoS;
 	}
+	// end F - Build SoS
 }
