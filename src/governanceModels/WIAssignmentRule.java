@@ -53,21 +53,24 @@ public class WIAssignmentRule {
 	public double getAttribute(String s) {
 		return parameters.get(s);
 	}
-	public HashMap<Task, ServiceProviderAgent> applyRule(ServiceProviderAgent me, LinkedList<Task> WIs, LinkedList<ServiceProviderAgent> SPs) {
-		System.out.println(me.getName()+" applies assignment rule:"+ruleValue);
+	
+	// this "applyRule" function moves a given set of Tasks to a given set of candidate SPs, 
+	// according to configuration of one given assigner.
+	// the function returns a "schedule" which indicates resulting mapping between Tasks and SPs
+	public HashMap<Task, ServiceProviderAgent> applyRule(ServiceProviderAgent assigner, LinkedList<Task> tasks, LinkedList<ServiceProviderAgent> SPs) {
+		//System.out.println(me.getName()+" applies assignment rule:"+ruleValue);
 		HashMap<Task,ServiceProviderAgent> schedule = new HashMap<Task,ServiceProviderAgent>(); 
 		if (!SPs.isEmpty()) {
 			LinkedList<ServiceProviderAgent> list = new LinkedList<ServiceProviderAgent>();
-			HashMap<ServiceProviderAgent,Boolean> scheduleLimit = new HashMap<ServiceProviderAgent,Boolean>(); 			
-			//LinkedList<AggregationNode> aggrList = new LinkedList<AggregationNode>();
+			HashMap<ServiceProviderAgent,Boolean> scheduleLimit = new HashMap<ServiceProviderAgent,Boolean>();
 			LinkedList<Task> taskList = new LinkedList<Task>();
-			for (int i=0;i<WIs.size();i++) {
-				Task wi = WIs.get(i);
+			for (int i=0;i<tasks.size();i++) {
+				Task wi = tasks.get(i);
 				if (wi.precedencyCleared()) {
 					taskList.add(wi);
 				}
 			}
-			me.myStrategy.applyWorkPrioritization(me, taskList);
+			assigner.myStrategy.applyWorkPrioritization(assigner, taskList);
 
 			for (ServiceProviderAgent sp:SPs) {
 				sp.tempQ.clear();
@@ -84,8 +87,8 @@ public class WIAssignmentRule {
 			if (this.ruleValue.matches("Neutral")) {
 				for (Task wi:taskList) {
 					this.currentWI = wi;
-					this.currentService = me.SoS.myServices.get(currentWI.serviceId);
-					LinkedList<ServiceProviderAgent> candidates = me.findServiceProviders(wi, list);
+					this.currentService = assigner.SoS.myServices.get(currentWI.serviceId);
+					LinkedList<ServiceProviderAgent> candidates = assigner.findServiceProviders(wi, list);
 					for (int i=0;i<candidates.size();i++) {
 						ServiceProviderAgent sp = candidates.get(i);
 						if (scheduleLimit.get(sp)) {
@@ -109,8 +112,8 @@ public class WIAssignmentRule {
 			else if (this.ruleValue.matches("LeastLoad")){		
 				for (Task wi:taskList) {
 					this.currentWI = wi;
-					this.currentService = me.SoS.myServices.get(currentWI.serviceId);
-					LinkedList<ServiceProviderAgent> candidates = me.findServiceProviders(wi, list);
+					this.currentService = assigner.SoS.myServices.get(currentWI.serviceId);
+					LinkedList<ServiceProviderAgent> candidates = assigner.findServiceProviders(wi, list);
 					for (int i=0;i<candidates.size();i++) {
 						ServiceProviderAgent sp = candidates.get(i);
 						if (scheduleLimit.get(sp)) {
@@ -134,8 +137,8 @@ public class WIAssignmentRule {
 			else if (this.ruleValue.matches("ExtendedCapacity")) {
 				for (Task wi:taskList) {
 					this.currentWI = wi;
-					this.currentService = me.SoS.myServices.get(currentWI.serviceId);
-					LinkedList<ServiceProviderAgent> candidates = me.findServiceProviders(wi, list);
+					this.currentService = assigner.SoS.myServices.get(currentWI.serviceId);
+					LinkedList<ServiceProviderAgent> candidates = assigner.findServiceProviders(wi, list);
 					for (int i=0;i<candidates.size();i++) {
 						ServiceProviderAgent sp = candidates.get(i);
 						if (scheduleLimit.get(sp)) {
@@ -164,8 +167,11 @@ public class WIAssignmentRule {
 		}
 		return schedule;
 	}
+	
+	// This function sums up the nominal workload of a SP, taking into account 1) the current in-progress tasks, 
+	// 2) tasks in backlog, and 3) tasks that are planed to be assigned. Aggr nodes are not counted
 	public double estimateWorkLoad(ServiceProviderAgent sp) {
-		double load = 0;	
+		double load = 0;
 		LinkedList<Task> scope = new LinkedList<Task>();	
 		scope.addAll(sp.getActiveQ());
 		scope.addAll(sp.getBacklogQ());

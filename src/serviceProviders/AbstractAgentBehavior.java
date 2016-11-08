@@ -13,7 +13,6 @@ import workItems.WorkItemEntity;
 
 public class AbstractAgentBehavior {	
 	public HashMap<Integer,String> StepsMap;
-	public HashMap<Integer,String> ActionsMap;
 	public ServiceProviderAgent agent;		
 	public int WIPLimit = Integer.MAX_VALUE;
 	public int BacklogLimit = Integer.MAX_VALUE;
@@ -88,8 +87,9 @@ public class AbstractAgentBehavior {
 	public void CheckRequestedQ() {
 		clock++;
 		setSprintNow(false);
-		if (clock==agent.myStrategy.Cadence || agent.getRequestedQ().isEmpty()
-				|| (agent.getBacklogQ().isEmpty()&&agent.getActiveQ().isEmpty())) {
+		if (clock==agent.myStrategy.Cadence 
+			|| agent.getRequestedQ().isEmpty()
+			|| (agent.getBacklogQ().isEmpty() && agent.getActiveQ().isEmpty())) {	
 			clock=0;
 			setSprintNow(true);
 		}
@@ -160,7 +160,7 @@ public class AbstractAgentBehavior {
 				}
 			}
 			else {
-				String msg = "ERROR: "+" invalid decision --"+decision+"--!";
+				String msg = "ERROR: "+" invalid decision -"+decision+"-!";
 				JOptionPane.showMessageDialog(null,msg);
 				throw new RuntimeException(msg);
 			}
@@ -181,6 +181,7 @@ public class AbstractAgentBehavior {
 			agent.NowRequested.add(selectedSP);
 			//selectedSP.checkRequestedQ();
 		}
+		// return unassigned WIs back to Requested Q
 		agent.getRequestedQ().addAll(agent.getAssignmentQ());
 		agent.getAssignmentQ().clear();
 		agent.NowRequested.clear();
@@ -387,9 +388,6 @@ public class AbstractAgentBehavior {
 	}
 	public void addStep(int key,String state) {
 		this.StepsMap.put(key, state);
-	}
-	public void addAction(int key,String action) {
-		this.ActionsMap.put(key, action);
 	}
 	public boolean isSprintNow() {
 		return sprintNow;

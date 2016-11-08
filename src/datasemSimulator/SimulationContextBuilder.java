@@ -104,12 +104,13 @@ public class SimulationContextBuilder {
 		for (ServiceProviderAgent sp: mySoS.myServiceProviderAgents.values()) {
 			for (Service service: mySoS.myServices.values()) {
 				double exCapacity = 0;
-				for (ServiceProviderAgent outsource : sp.assignWITo) {
-					exCapacity += outsource.ServiceCapacity.get(service);
+				for (ServiceProviderAgent assignToSP : sp.assignWITo) {
+					exCapacity += assignToSP.ServiceCapacity.get(service);
 				}
 				sp.ExtendedServiceCapacity.put(service, exCapacity);
 			}
 		}
+		// note that: only direct AssignTo relations are counted in the calculation
 		// P- end Extended Service Capacities
 		
 		// P- !! Initial Assignment
@@ -337,13 +338,6 @@ public class SimulationContextBuilder {
 		String stgType = stg_element.getAttribute("type");
 		GovernanceStrategy myGovernanceStrategy = ObjectsModelFactory.eINSTANCE.createGovernanceStrategy(); 		
 		myGovernanceStrategy.setType(stgType);
-		//System.out.println(myServiceProvider.getName()+" strategy:"+myGovernanceStrategy.getType());
-		if (stgType.matches("cnp")) {
-			
-		}
-		else if (stgType.matches("pull")) {
-			
-		}
 		Node mechanisms_node = e.getElementsByTagName("Mechanisms").item(0);
 		Element mechanisms_element = (Element)mechanisms_node;
 		NodeList mechanism_nodeList = mechanisms_element.getElementsByTagName("Mechanism");
