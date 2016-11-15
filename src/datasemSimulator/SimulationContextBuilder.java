@@ -592,9 +592,6 @@ public class SimulationContextBuilder {
 			for (ServiceProvider sp1: sp.getAssignTo()) {
 				agent.assignWITo.add(mySoS.myServiceProviderAgents.get(sp1.getId()));
 			}
-			for (ServiceProvider sp2: sp.getOutsourceFrom()) {
-				agent.borrowResourceFrom.add(mySoS.myServiceProviderAgents.get(sp2.getId()));
-			}
 		}				
 		
 		for (WorkItem wi: myWorkItems.values()) {

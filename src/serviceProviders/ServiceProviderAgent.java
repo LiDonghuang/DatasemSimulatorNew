@@ -41,7 +41,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	public AgentStrategy myStrategy;
 	public LinkedList<ResourceEntity> myResourceEntities = new LinkedList<ResourceEntity>();
 	public LinkedList<ServiceProviderAgent> assignWITo = new LinkedList<ServiceProviderAgent>();
-	public LinkedList<ServiceProviderAgent> borrowResourceFrom = new LinkedList<ServiceProviderAgent>();		
 	private LinkedList<WorkItemEntity> requestedQ = new LinkedList<WorkItemEntity>();
 	private LinkedList<Task> assignmentQ = new LinkedList<Task>();	
 	private LinkedList<Task> backlogQ = new LinkedList<Task>();

@@ -65,9 +65,9 @@ public class WIAssignmentRule {
 			HashMap<ServiceProviderAgent,Boolean> scheduleLimit = new HashMap<ServiceProviderAgent,Boolean>();
 			LinkedList<Task> taskList = new LinkedList<Task>();
 			for (int i=0;i<tasks.size();i++) {
-				Task wi = tasks.get(i);
-				if (wi.precedencyCleared()) {
-					taskList.add(wi);
+				Task task = tasks.get(i);
+				if (task.precedencyCleared()) {
+					taskList.add(task);
 				}
 			}
 			assigner.myStrategy.applyWorkPrioritization(assigner, taskList);
@@ -84,7 +84,8 @@ public class WIAssignmentRule {
 				}
 			}
 			
-			if (this.ruleValue.matches("Neutral")) {
+			if (this.ruleValue.matches("Neutral")||this.ruleValue.matches("LeastLoad")
+					||this.ruleValue.matches("ExtendedCapacity")) {
 				for (Task wi:taskList) {
 					this.currentWI = wi;
 					this.currentService = assigner.SoS.myServices.get(currentWI.serviceId);
@@ -97,7 +98,14 @@ public class WIAssignmentRule {
 						}
 					}
 					if (!candidates.isEmpty()) {
-						SimUtilities.shuffle(candidates, RandomHelper.getUniform()); 
+						switch(this.ruleValue){
+							case "Neutral": SimUtilities.shuffle(candidates, RandomHelper.getUniform());
+							break;
+							case "LeastLoad": Collections.sort(candidates, new LessPredictedLoad());
+							break;
+							case "ExtendedCapacity": Collections.sort(candidates, new ExtendedCapacity());
+							break;
+						}
 						ServiceProviderAgent selectedSP = candidates.getFirst();
 						schedule.put(wi, selectedSP);
 						selectedSP.tempQ.add(wi);
@@ -108,56 +116,6 @@ public class WIAssignmentRule {
 						}
 					}	
 				} 
-			}
-			else if (this.ruleValue.matches("LeastLoad")){		
-				for (Task wi:taskList) {
-					this.currentWI = wi;
-					this.currentService = assigner.SoS.myServices.get(currentWI.serviceId);
-					LinkedList<ServiceProviderAgent> candidates = assigner.findServiceProviders(wi, list);
-					for (int i=0;i<candidates.size();i++) {
-						ServiceProviderAgent sp = candidates.get(i);
-						if (scheduleLimit.get(sp)) {
-							candidates.remove(sp);
-							i--;
-						}
-					}
-					if (!candidates.isEmpty()) {
-						Collections.sort(candidates, new LessPredictedLoad());
-						ServiceProviderAgent selectedSP = candidates.getFirst();
-						schedule.put(wi, selectedSP);
-						selectedSP.tempQ.add(wi);
-						if (selectedSP.getBacklogQ().size()>=selectedSP.myBehavior.BacklogLimit 
-								|| selectedSP.getActiveQ().size()>=selectedSP.myBehavior.WIPLimit) {
-							//System.out.println(selectedR.getName()+" WIPLimit="+selectedR.WIPLimit+" reached");
-							scheduleLimit.put(selectedSP, true);				
-						}
-					}	
-				}
-			}
-			else if (this.ruleValue.matches("ExtendedCapacity")) {
-				for (Task wi:taskList) {
-					this.currentWI = wi;
-					this.currentService = assigner.SoS.myServices.get(currentWI.serviceId);
-					LinkedList<ServiceProviderAgent> candidates = assigner.findServiceProviders(wi, list);
-					for (int i=0;i<candidates.size();i++) {
-						ServiceProviderAgent sp = candidates.get(i);
-						if (scheduleLimit.get(sp)) {
-							candidates.remove(sp);
-							i--;
-						}
-					}
-					if (!candidates.isEmpty()) {
-						Collections.sort(candidates, new ExtendedCapacity());
-						ServiceProviderAgent selectedSP = candidates.getFirst();
-						schedule.put(wi, selectedSP);
-						selectedSP.tempQ.add(wi);
-						if (selectedSP.getBacklogQ().size()>=selectedSP.myBehavior.BacklogLimit 
-								|| selectedSP.getActiveQ().size()>=selectedSP.myBehavior.WIPLimit) {
-							//System.out.println(selectedR.getName()+" WIPLimit="+selectedR.WIPLimit+" reached");
-							scheduleLimit.put(selectedSP, true);				
-						}
-					}	
-				}			
 			}
 			else {
 				System.out.println("Invalid SP_Selection RuleValue: "+this.ruleValue) ;

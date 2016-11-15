@@ -60,15 +60,11 @@
 	<Mechanism name="Cadence" value="1">
 	</Mechanism>
 	<Mechanism name="Acceptance" value="Limited">
-	<Attribute name="BacklogLimit" value="100"></Attribute>
-	<Attribute name="WIPLimit" value="100"></Attribute>
+	<Attribute name="BacklogLimit" value="1"></Attribute>
+	<Attribute name="WIPLimit" value="1"></Attribute>
 	<Attribute name="MaxMultiTasking" value="1"></Attribute>
 	</Mechanism>
-	<Mechanism name="Prioritization" value="ValueBased">
-	<Attribute name="WeightCompleteness" value="0"></Attribute>
-	<Attribute name="WeightPrecedency" value="0"></Attribute>
-	<Attribute name="WeightImpact" value="0"></Attribute>
-	<Attribute name="WeightHierarchy" value="1"></Attribute>
+	<Mechanism name="Prioritization" value="FIFO">
 	</Mechanism>
 	<Mechanism name="Assignment" value="Neutral">
 	</Mechanism>
@@ -95,15 +91,11 @@
 	<Mechanism name="Cadence" value="1">
 	</Mechanism>
 	<Mechanism name="Acceptance" value="Limited">
-	<Attribute name="BacklogLimit" value="100"></Attribute>
-	<Attribute name="WIPLimit" value="100"></Attribute>
+	<Attribute name="BacklogLimit" value="1"></Attribute>
+	<Attribute name="WIPLimit" value="1"></Attribute>
 	<Attribute name="MaxMultiTasking" value="1"></Attribute>
 	</Mechanism>
-	<Mechanism name="Prioritization" value="ValueBased">
-	<Attribute name="WeightCompleteness" value="0"></Attribute>
-	<Attribute name="WeightPrecedency" value="0"></Attribute>
-	<Attribute name="WeightImpact" value="0"></Attribute>
-	<Attribute name="WeightHierarchy" value="1"></Attribute>
+	<Mechanism name="Prioritization" value="FIFO">
 	</Mechanism>
 	<Mechanism name="Assignment" value="Neutral">
 	</Mechanism>

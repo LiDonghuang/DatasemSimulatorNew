@@ -17,7 +17,7 @@ public class AbstractAgentBehavior {
 	public int WIPLimit = Integer.MAX_VALUE;
 	public int BacklogLimit = Integer.MAX_VALUE;
 	public int MultiTasking = 1;
-	private int clock;
+	private int tick;
 	private boolean sprintNow;
 	
 	public AbstractAgentBehavior() {
@@ -48,64 +48,33 @@ public class AbstractAgentBehavior {
 			}
 		}
 	}
-//	public void DoAction(int n, AbstractClass Object) {
-//		switch(ActionsMap.get(n)) {
-//			case "requestAssistance": 
-//				if(Object.getClass().equals("WorkItemEntity")){
-//					DevTask devTask = (DevTask)ObjectToWorkItemEntity(Object);
-//					agent.requestAssistance(devTask);
-//				}
-//			case "acceptanceDecision": 
-//				if(Object.getClass().equals("WorkItemEntity")){
-//					WorkItemEntity wi = ObjectToWorkItemEntity(Object);
-//					this.acceptanceDecision((Task)wi);
-//				}
-//			case "analyzeAggregationNode": Action(Object);
-//			case "requestService": Action(Object);
-//			case "acceptWI": Action(Object);
-//			case "releaseSubtasks": Action(Object);
-//		}
-//	}
-//	public boolean CheckCondition(String condition) {	
-//		return false;
-//	}
-//
-//	public void DoAction(int n) {
-//		switch(ActionsMap.get(n)) {
-//		}
-//	}
-//	public WorkItemEntity ObjectToWorkItemEntity(AbstractClass Object) {
-//		WorkItemEntity wi = agent.SoS.myWorkItemEntities.get(0);
-//		return wi;
-//	}
-//	public void Action() {
-//		
-//	}
-//	public void Action(AbstractClass Object) {
-//		
-//	}
+
+
 	public void CheckRequestedQ() {
-		clock++;
+		tick++;
 		setSprintNow(false);
-		if (clock==agent.myStrategy.Cadence 
+		if (tick==agent.myStrategy.Cadence 
 			|| agent.getRequestedQ().isEmpty()
 			|| (agent.getBacklogQ().isEmpty() && agent.getActiveQ().isEmpty())) {	
-			clock=0;
+			tick=0;
 			setSprintNow(true);
 		}
-		// ------------ 1. Select WIs to Accept
 		LinkedList<Task> requestedTasks = new LinkedList<Task>();
+		// split requested WIs into Aggregation(Complex) WIs and Tasks
 		for (int i=0;i<agent.getRequestedQ().size();i++) {
 			WorkItemEntity wi = agent.getRequestedQ().get(i);
 			if (isSprintNow() || agent.getId()==wi.getRequester().getId()) {
+				// Aggregation WIs
 				if (wi.isAggregationNode) {
 					wi.setAssigned();
 					wi.setAssignedAgent(agent);
 					agent.getComplexQ().add((AggregationNode)wi);
-					agent.analyzeAggregationNode((AggregationNode)wi);
+					agent.analyzeAggregationNode((AggregationNode)wi); 
+					//create initial Analysis Activity
 					agent.getRequestedQ().remove(wi);
 					i--;
 				}
+				// Tasks
 				else {
 					requestedTasks.add((Task)wi);
 					agent.getRequestedQ().remove(wi);
@@ -115,9 +84,7 @@ public class AbstractAgentBehavior {
 		}
 		agent.myStrategy.applyWorkPrioritization(agent, requestedTasks);
 		while (!requestedTasks.isEmpty()) {
-			// =========== Apply WI Acceptance Rule ====================
 			Task task = requestedTasks.getFirst();
-			// =========== Service Efficiency Algorithm ==============
 			String decision = this.acceptanceDecision(task);
 			//System.out.println("\n"+agent.getName()+" on"+task.fullName+"requested by "+task.getRequester().getName()+"("+task.SoS.myServices.get(task.serviceId).getName()+"x"+task.efforts+") Decision: "+decision);
 			if (decision.matches("Accept")) {			
@@ -268,9 +235,7 @@ public class AbstractAgentBehavior {
 				}				
 				i--;
 			}
-			//else {
 			else if (wi.uppertasksCleared()) {
-				//System.out.println("\nDISBURSE @TIME:"+SoS.timeNow+" Agent "+this.name+" disbursed"+completedWI.fullName);
 				wi.setEnded();	
 				agent.getCompleteQ().remove(wi);					
 				i--;			
@@ -281,15 +246,16 @@ public class AbstractAgentBehavior {
 		agent.statusSummary();
 	}
 
-	public String acceptanceDecision(Task requestedWI) {
+	public String acceptanceDecision(Task task) {
 		String decision;		
-		if (requestedWI.isResolutionActivity) {
-			double capacity = requestedWI.calculateServiceCapacity(agent);	
+		double capacity = task.calculateServiceCapacity(agent);	
+		double exCapacity = task.calculateExtendedServiceCapacity(agent);	
+		// case: task is to Resolve problem of another DevTask
+		if (task.isResolutionActivity) {
 			if (capacity>0) {
 				decision = "Accept";
 			}
 			else {
-				double exCapacity = requestedWI.calculateExtendedServiceCapacity(agent);	
 				if (exCapacity>0) {
 					decision = "Outsource";
 				}
@@ -299,8 +265,9 @@ public class AbstractAgentBehavior {
 			}
 		}
 		else {
-			if (requestedWI.getRequester().getId() == agent.getId()) {
-				double capacity = requestedWI.calculateServiceCapacity(agent);
+			// case: task is originated by the current SP, e.g. a newly released SubTask,
+			// so it can NOT be Declined
+			if (task.getRequester().getId() == agent.getId()) {
 				if (capacity>0) {
 					if (agent.getBacklogQ().size()>=this.BacklogLimit) {
 						decision = "Outsource";
@@ -308,10 +275,8 @@ public class AbstractAgentBehavior {
 					else {
 						decision = "Accept";
 					}
-					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
 				}
 				else {
-					double exCapacity = requestedWI.calculateExtendedServiceCapacity(agent);	
 					if (exCapacity>0) {
 						decision = "Outsource";
 					}
@@ -320,21 +285,21 @@ public class AbstractAgentBehavior {
 					}
 				}
 			}
+			// case: SP's Backlog Limit is reached
 			else if (agent.getBacklogQ().size()>=this.BacklogLimit) {
-				decision = "Decline";
-				//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to BacklogLimit");		
-			}
+				decision = "Decline";	
+			}			
 			else {
-				double capacity = requestedWI.calculateServiceCapacity(agent);
+				// case: SP is capable to process
 				if (capacity>0) {
 					decision = "Accept";
-					//System.out.println("\nDELINED WI @TIME:"+SoS.timeNow+" Agent "+this.name+" Declined WI:"+requestedWI.fullName+"due to Inability");
 				}
-				else {
-					double exCapacity = requestedWI.calculateExtendedServiceCapacity(agent);	
+				else {	
+					// case: SP is not capable, but can resort to connected SPs
 					if (exCapacity>0) {
 						decision = "Outsource";
 					}
+					// case: can neither process nor resort
 					else {
 						decision = "Decline";
 					}
