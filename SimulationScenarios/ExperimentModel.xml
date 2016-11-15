@@ -1,113 +1,968 @@
-<ExperimentModel experimentId="0" name="ExampleBuilder" description="">
+<ExperimentModel experimentId="0" name="AerospaceAndDefenceProjects" description="">
 <ServiceProviderTypes>
-<ServiceProviderType spTypeId="1" hierarchy="1" name="SE_Team"></ServiceProviderType>
-<ServiceProviderType spTypeId="2" hierarchy="0" name="PD_Team"></ServiceProviderType>
+<ServiceProviderType spTypeId="1" hierarchy="2" name="SETeam"></ServiceProviderType>
+<ServiceProviderType spTypeId="2" hierarchy="1" name="DomainTeam"></ServiceProviderType>
+<ServiceProviderType spTypeId="3" hierarchy="0" name="DevTeam"></ServiceProviderType>
+<ServiceProviderType spTypeId="4" hierarchy="0" name="CntrTeam"></ServiceProviderType>
 </ServiceProviderTypes>
 <WorkItemTypes>
-<WorkItemType wiTypeId="1" hierarchy="3" name="Capability">
+<WorkItemType wiTypeId="1" hierarchy="3" name="SoSCap">
+<Mechanisms>
+<Mechanism name="ValueFunction" value="Derive">
+<Attribute name="HierarchyFactor" value="0.2"></Attribute> 
+<Attribute name="DependencyFactor" value="0.2"></Attribute> 
+</Mechanism>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="2" hierarchy="2" name="SysFuncCap">
+<Mechanisms>
+<Mechanism name="ValueFunction" value="Derive">
+<Attribute name="HierarchyFactor" value="0.2"></Attribute> 
+<Attribute name="DependencyFactor" value="0.5"></Attribute> 
+</Mechanism>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="3" hierarchy="2" name="SysOperCap">
+<Mechanisms>
+<Mechanism name="ValueFunction" value="Derive">
+<Attribute name="HierarchyFactor" value="0.2"></Attribute> 
+<Attribute name="DependencyFactor" value="0.5"></Attribute> 
+</Mechanism>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="4" hierarchy="1" name="SubSysReq">
+<Mechanisms>
+<Mechanism name="ValueFunction" value="Derive">
+<Attribute name="HierarchyFactor" value="0.5"></Attribute> 
+<Attribute name="DependencyFactor" value="0.5"></Attribute> 
+</Mechanism>
+<Mechanism name="AutoGenerateWIN" value="True">
+<Attribute name="MinTaskSize" value="5"></Attribute> 
+<Attribute name="MaxTaskSize" value="15"></Attribute> 
+<Attribute name="Complexity" value="0.5"></Attribute> 
+</Mechanism>
+</Mechanisms>
+</WorkItemType>
+<WorkItemType wiTypeId="5" hierarchy="0" name="DevTask">
 <Mechanisms>
 </Mechanisms>
 </WorkItemType>
-<WorkItemType wiTypeId="2" hierarchy="2" name="CReq">
+<WorkItemType wiTypeId="6" hierarchy="0" name="Analysis">
 <Mechanisms>
 </Mechanisms>
 </WorkItemType>
-<WorkItemType wiTypeId="3" hierarchy="1" name="PReq">
-<Mechanisms>
-</Mechanisms>
-</WorkItemType>
-<WorkItemType wiTypeId="4" hierarchy="0" name="DevTask">
-<Mechanisms>
-</Mechanisms>
-</WorkItemType>
-<WorkItemType wiTypeId="5" hierarchy="0" name="Analysis">
-<Mechanisms>
-</Mechanisms>
-</WorkItemType>
-<WorkItemType wiTypeId="6" hierarchy="0" name="Resolution">
+<WorkItemType wiTypeId="7" hierarchy="0" name="Resolution">
 <Mechanisms>
 </Mechanisms>
 </WorkItemType>
 </WorkItemTypes>
 <Services>
-<Service serviceId="1" name="CR_Dev"></Service>
-<Service serviceId="2" name="PR_Dev"></Service>
-<Service serviceId="3" name="PR_Ana"></Service>
-<Service serviceId="4" name="Task_Dev"></Service>
+<Service serviceId="1" name="SoSE"></Service>
+<Service serviceId="2" name="SE_Elec"></Service>
+<Service serviceId="3" name="SE_Aero"></Service>
+<Service serviceId="4" name="SE_Power"></Service>
+<Service serviceId="5" name="SE_Infra"></Service>
+<Service serviceId="6" name="SE_WD"></Service>
+<Service serviceId="7" name="SE_SW"></Service>
+<Service serviceId="8" name="Eng_Elec"></Service>
+<Service serviceId="9" name="Eng_Mech"></Service>
+<Service serviceId="10" name="Eng_Aero"></Service>
+<Service serviceId="11" name="Eng_Ctrl"></Service>
+<Service serviceId="12" name="IT_IS"></Service>
+<Service serviceId="13" name="IT_SW"></Service>
+<Service serviceId="14" name="IT_DB"></Service>
+<Service serviceId="15" name="IT_SS"></Service>
+<Service serviceId="16" name="Testing"></Service>
 </Services>
 <Runs>
-<Run runId="1" description="ExampleModel">
+<Run runId="1" description="AerospaceDefence">
 	<ExperimentParameters>
-	<ExperimentParameter name="NumReplications" value="100"></ExperimentParameter>
-	<ExperimentParameter name="TaskMaturityLevels" value="1"></ExperimentParameter>
-	<ExperimentParameter name="TaskUncertainty" value="0"></ExperimentParameter>
-	<ExperimentParameter name="ChangePropagationFactor" value="1.0"></ExperimentParameter>
-	<ExperimentParameter name="ReworkRisk" value="0"></ExperimentParameter>
+	<ExperimentParameter name="NumReplications" value="1"></ExperimentParameter>
+	<ExperimentParameter name="TaskMaturityLevels" value="5"></ExperimentParameter>
+	<ExperimentParameter name="TaskUncertainty" value="0.2"></ExperimentParameter>
+	<ExperimentParameter name="ChangePropagationFactor" value="1"></ExperimentParameter>
+	<ExperimentParameter name="ReworkRisk" value="0.2"></ExperimentParameter>
 	<ExperimentParameter name="LearningFactor" value="0"></ExperimentParameter>
-	<ExperimentParameter name="MultiTaskingPenalty" value="1"></ExperimentParameter>
-	<ExperimentParameter name="RateOfReturn" value="0"></ExperimentParameter>
+	<ExperimentParameter name="MultiTaskingPenalty" value="0"></ExperimentParameter>
+	<ExperimentParameter name="RateOfReturn" value="0.0"></ExperimentParameter>
 	</ExperimentParameters>
 	<OrganizationalModel>
 	<ServiceProviders>
-	<ServiceProvider serviceProviderId="1" name="SET01" typeId="1" description="">
+	<ServiceProvider serviceProviderId="1" name="LeadTeam" typeId="1" description="">
 	<AssignWITo>
 	<serviceProviderId>2</serviceProviderId>
+	<serviceProviderId>3</serviceProviderId>
+	<serviceProviderId>4</serviceProviderId>
+	<serviceProviderId>5</serviceProviderId>
+	<serviceProviderId>6</serviceProviderId>
+	<serviceProviderId>7</serviceProviderId>
+	<serviceProviderId>16</serviceProviderId>
 	</AssignWITo>
 	<BorrowResourceFrom>
 	</BorrowResourceFrom>
-	<GovernanceStrategy type="push">
+	<GovernanceStrategy type="pull">
 	<Mechanisms>
-	<Mechanism name="Cadence" value="1">
+	<Mechanism name="Cadence" value="10">
 	</Mechanism>
 	<Mechanism name="Acceptance" value="Limited">
-	<Attribute name="BacklogLimit" value="1"></Attribute>
-	<Attribute name="WIPLimit" value="1"></Attribute>
+	<Attribute name="BacklogLimit" value="3"></Attribute>
+	<Attribute name="WIPLimit" value="3"></Attribute>
 	<Attribute name="MaxMultiTasking" value="1"></Attribute>
 	</Mechanism>
-	<Mechanism name="Prioritization" value="FIFO">
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
 	</Mechanism>
-	<Mechanism name="Assignment" value="Neutral">
+	<Mechanism name="Assignment" value="ExtendedCapacity">
 	</Mechanism>
-	<Mechanism name="Allocation" value="Neutral">
+	<Mechanism name="Allocation" value="MostEfficient">
 	</Mechanism>
 	</Mechanisms>
 	</GovernanceStrategy>
 	<Resources>
-	<Resource resourceId="1" name="SysEng.1" description="">
+	<Resource resourceId="1" name="S_SysEng.1" description="">
 	<SkillSet>
-	<Skill serviceId="1" name="CR_Dev" efficiency="1.0"></Skill>
-	<Skill serviceId="2" name="PR_Dev" efficiency="1.0"></Skill>
+	<Skill serviceId="1" name="SoSE" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="2" name="S_SysEng.2" description="">
+	<SkillSet>
+	<Skill serviceId="1" name="SoSE" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="3" name="S_SysEng.3" description="">
+	<SkillSet>
+	<Skill serviceId="1" name="SoSE" efficiency="1.0"></Skill>
 	</SkillSet>	
 	</Resource>	
 	</Resources>
 	</ServiceProvider> 
-	<ServiceProvider serviceProviderId="2" name="PDT01" typeId="2" description="">
+	<ServiceProvider serviceProviderId="2" name="SE_Elec" typeId="2" description="">
 	<AssignWITo>
+	<serviceProviderId>8</serviceProviderId>
+	<serviceProviderId>9</serviceProviderId>
+	<serviceProviderId>10</serviceProviderId>
 	</AssignWITo>
 	<BorrowResourceFrom>
 	</BorrowResourceFrom>
-	<GovernanceStrategy type="push">
+	<GovernanceStrategy type="pull">
 	<Mechanisms>
-	<Mechanism name="Cadence" value="1">
+	<Mechanism name="Cadence" value="10">
 	</Mechanism>
 	<Mechanism name="Acceptance" value="Limited">
-	<Attribute name="BacklogLimit" value="1"></Attribute>
-	<Attribute name="WIPLimit" value="1"></Attribute>
+	<Attribute name="BacklogLimit" value="3"></Attribute>
+	<Attribute name="WIPLimit" value="3"></Attribute>
 	<Attribute name="MaxMultiTasking" value="1"></Attribute>
 	</Mechanism>
-	<Mechanism name="Prioritization" value="FIFO">
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
 	</Mechanism>
-	<Mechanism name="Assignment" value="Neutral">
+	<Mechanism name="Assignment" value="ExtendedCapacity">
 	</Mechanism>
-	<Mechanism name="Allocation" value="Neutral">
+	<Mechanism name="Allocation" value="MostEfficient">
 	</Mechanism>
 	</Mechanisms>
 	</GovernanceStrategy>
 	<Resources>
-	<Resource resourceId="2" name="DevSpec.1" description="">
+	<Resource resourceId="4" name="SysEng.1" description="">
 	<SkillSet>
-	<Skill serviceId="3" name="PR_Ana" efficiency="1.0"></Skill>
-	<Skill serviceId="4" name="Task_Dev" efficiency="1.0"></Skill>
+	<Skill serviceId="2" name="SE_Elec" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="5" name="SysEng.2" description="">
+	<SkillSet>
+	<Skill serviceId="2" name="SE_Elec" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="6" name="SysEng.3" description="">
+	<SkillSet>
+	<Skill serviceId="2" name="SE_Elec" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="3" name="SE_Aero" typeId="2" description="">
+	<AssignWITo>
+	<serviceProviderId>9</serviceProviderId>
+	<serviceProviderId>11</serviceProviderId>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="3"></Attribute>
+	<Attribute name="WIPLimit" value="3"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="7" name="SysEng.1" description="">
+	<SkillSet>
+	<Skill serviceId="3" name="SE_Aero" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="8" name="SysEng.2" description="">
+	<SkillSet>
+	<Skill serviceId="3" name="SE_Aero" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="9" name="SysEng.3" description="">
+	<SkillSet>
+	<Skill serviceId="3" name="SE_Aero" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="4" name="SE_Power" typeId="2" description="">
+	<AssignWITo>
+	<serviceProviderId>8</serviceProviderId>
+	<serviceProviderId>10</serviceProviderId>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="3"></Attribute>
+	<Attribute name="WIPLimit" value="3"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="10" name="SysEng.1" description="">
+	<SkillSet>
+	<Skill serviceId="4" name="SE_Power" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="11" name="SysEng.2" description="">
+	<SkillSet>
+	<Skill serviceId="4" name="SE_Power" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="12" name="SysEng.3" description="">
+	<SkillSet>
+	<Skill serviceId="4" name="SE_Power" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="5" name="SE_Infra" typeId="2" description="">
+	<AssignWITo>
+	<serviceProviderId>8</serviceProviderId>
+	<serviceProviderId>11</serviceProviderId>
+	<serviceProviderId>12</serviceProviderId>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="3"></Attribute>
+	<Attribute name="WIPLimit" value="3"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="13" name="SysEng.1" description="">
+	<SkillSet>
+	<Skill serviceId="5" name="SE_Infra" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="14" name="SysEng.2" description="">
+	<SkillSet>
+	<Skill serviceId="5" name="SE_Infra" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="15" name="SysEng.3" description="">
+	<SkillSet>
+	<Skill serviceId="5" name="SE_Infra" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="6" name="SE_WD" typeId="2" description="">
+	<AssignWITo>
+	<serviceProviderId>9</serviceProviderId>
+	<serviceProviderId>10</serviceProviderId>
+	<serviceProviderId>12</serviceProviderId>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="3"></Attribute>
+	<Attribute name="WIPLimit" value="3"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="16" name="SysEng.1" description="">
+	<SkillSet>
+	<Skill serviceId="6" name="SE_WD" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="17" name="SysEng.2" description="">
+	<SkillSet>
+	<Skill serviceId="6" name="SE_WD" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="18" name="SysEng.3" description="">
+	<SkillSet>
+	<Skill serviceId="6" name="SE_WD" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="7" name="SE_SW" typeId="2" description="">
+	<AssignWITo>
+	<serviceProviderId>13</serviceProviderId>
+	<serviceProviderId>14</serviceProviderId>
+	<serviceProviderId>15</serviceProviderId>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="5"></Attribute>
+	<Attribute name="WIPLimit" value="5"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="19" name="SysEng.1" description="">
+	<SkillSet>
+	<Skill serviceId="7" name="SE_SW" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="20" name="SysEng.2" description="">
+	<SkillSet>
+	<Skill serviceId="7" name="SE_SW" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="21" name="SysEng.3" description="">
+	<SkillSet>
+	<Skill serviceId="7" name="SE_SW" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="22" name="SysEng.4" description="">
+	<SkillSet>
+	<Skill serviceId="7" name="SE_SW" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="23" name="SysEng.5" description="">
+	<SkillSet>
+	<Skill serviceId="7" name="SE_SW" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="8" name="Contractor_1" typeId="4" description="">
+	<AssignWITo>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="6"></Attribute>
+	<Attribute name="WIPLimit" value="6"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="24" name="Elec_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="8" name="Eng_Elec" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="25" name="Elec_Eng.2" description="">
+	<SkillSet>
+	<Skill serviceId="8" name="Eng_Elec" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="26" name="Mech_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="9" name="Eng_Mech" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="27" name="Mech_Eng.2" description="">
+	<SkillSet>
+	<Skill serviceId="9" name="Eng_Mech" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="28" name="Aero_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="10" name="Eng_Aero" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="29" name="Ctrl_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="11" name="Eng_Ctrl" efficiency="0.8"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="9" name="Contractor_2" typeId="4" description="">
+	<AssignWITo>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="6"></Attribute>
+	<Attribute name="WIPLimit" value="6"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="30" name="Elec_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="8" name="Eng_Elec" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="31" name="Mech_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="9" name="Eng_Mech" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="32" name="Mech_Eng.2" description="">
+	<SkillSet>
+	<Skill serviceId="9" name="Eng_Mech" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="33" name="Mech_Eng.3" description="">
+	<SkillSet>
+	<Skill serviceId="9" name="Eng_Mech" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="34" name="Aero_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="10" name="Eng_Aero" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="35" name="Ctrl_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="11" name="Eng_Ctrl" efficiency="0.8"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="10" name="Contractor_3" typeId="4" description="">
+	<AssignWITo>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="5"></Attribute>
+	<Attribute name="WIPLimit" value="5"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="36" name="Elec_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="8" name="Eng_Elec" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="37" name="Mech_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="9" name="Eng_Mech" efficiency="0.8"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="38" name="Aero_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="10" name="Eng_Aero" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="39" name="Aero_Eng.2" description="">
+	<SkillSet>
+	<Skill serviceId="10" name="Eng_Aero" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="40" name="Ctrl_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="11" name="Eng_Ctrl" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="11" name="Contractor_4" typeId="4" description="">
+	<AssignWITo>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="5"></Attribute>
+	<Attribute name="WIPLimit" value="5"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="41" name="Elec_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="8" name="Eng_Elec" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="42" name="Mech_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="9" name="Eng_Mech" efficiency="0.8"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="43" name="Aero_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="10" name="Eng_Aero" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="44" name="Ctrl_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="11" name="Eng_Ctrl" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="45" name="Ctrl_Eng.2" description="">
+	<SkillSet>
+	<Skill serviceId="11" name="Eng_Ctrl" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="12" name="Contractor_5" typeId="4" description="">
+	<AssignWITo>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="6"></Attribute>
+	<Attribute name="WIPLimit" value="6"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="46" name="Elec_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="8" name="Eng_Elec" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="47" name="Mech_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="9" name="Eng_Mech" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="48" name="Mech_Eng.2" description="">
+	<SkillSet>
+	<Skill serviceId="9" name="Eng_Mech" efficiency="1.2"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="49" name="Aero_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="10" name="Eng_Aero" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="50" name="Ctrl_Eng.1" description="">
+	<SkillSet>
+	<Skill serviceId="11" name="Eng_Ctrl" efficiency="0.8"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="13" name="IT_Team_1" typeId="3" description="">
+	<AssignWITo>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="7"></Attribute>
+	<Attribute name="WIPLimit" value="7"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="51" name="IT_Mng.1" description="">
+	<SkillSet>
+	<Skill serviceId="7" name="SE_SW" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="52" name="IT_Dev.1" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.0"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.0"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="53" name="IT_Dev.2" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.0"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.0"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="54" name="IT_Dev.3" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.0"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.0"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="55" name="IT_Dev.4" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.0"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.0"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="56" name="IT_Dev.5" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.0"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.0"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="57" name="IT_Dev.6" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.0"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.0"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="14" name="IT_Team_2" typeId="3" description="">
+	<AssignWITo>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="5"></Attribute>
+	<Attribute name="WIPLimit" value="5"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="58" name="IT_Mng.1" description="">
+	<SkillSet>
+	<Skill serviceId="7" name="SE_SW" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="59" name="IT_Dev.1" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.2"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="0.8"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.2"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="60" name="IT_Dev.2" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.2"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="0.8"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.2"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="61" name="IT_Dev.3" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.2"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="0.8"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.2"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="62" name="IT_Dev.4" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.2"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="0.8"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="1.2"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="15" name="IT_Team_3" typeId="3" description="">
+	<AssignWITo>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="5"></Attribute>
+	<Attribute name="WIPLimit" value="5"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="63" name="IT_Mng.1" description="">
+	<SkillSet>
+	<Skill serviceId="7" name="SE_SW" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="64" name="IT_Dev.1" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.2"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="0.8"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="0.8"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="65" name="IT_Dev.2" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.2"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="0.8"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="0.8"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="66" name="IT_Dev.3" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.2"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="0.8"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="0.8"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="67" name="IT_Dev.4" description="">
+	<SkillSet>
+	<Skill serviceId="12" name="IT_IS" efficiency="1.0"></Skill>
+	<Skill serviceId="13" name="IT_SW" efficiency="1.2"></Skill>
+	<Skill serviceId="14" name="IT_DB" efficiency="0.8"></Skill>
+	<Skill serviceId="15" name="IT_SS" efficiency="0.8"></Skill>
+	</SkillSet>	
+	</Resource>	
+	</Resources>
+	</ServiceProvider> 
+	<ServiceProvider serviceProviderId="16" name="TestingBase" typeId="2" description="">
+	<AssignWITo>
+	</AssignWITo>
+	<BorrowResourceFrom>
+	</BorrowResourceFrom>
+	<GovernanceStrategy type="pull">
+	<Mechanisms>
+	<Mechanism name="Cadence" value="10">
+	</Mechanism>
+	<Mechanism name="Acceptance" value="Limited">
+	<Attribute name="BacklogLimit" value="3"></Attribute>
+	<Attribute name="WIPLimit" value="3"></Attribute>
+	<Attribute name="MaxMultiTasking" value="1"></Attribute>
+	</Mechanism>
+	<Mechanism name="Prioritization" value="ValueBased">
+	<Attribute name="WeightCompleteness" value="1"></Attribute>
+	<Attribute name="WeightPrecedency" value="1"></Attribute>
+	<Attribute name="WeightImpact" value="5"></Attribute>
+	<Attribute name="WeightHierarchy" value="3"></Attribute>
+	</Mechanism>
+	<Mechanism name="Assignment" value="ExtendedCapacity">
+	</Mechanism>
+	<Mechanism name="Allocation" value="MostEfficient">
+	</Mechanism>
+	</Mechanisms>
+	</GovernanceStrategy>
+	<Resources>
+	<Resource resourceId="68" name="Tester.1" description="">
+	<SkillSet>
+	<Skill serviceId="16" name="Testing" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="69" name="Tester.2" description="">
+	<SkillSet>
+	<Skill serviceId="16" name="Testing" efficiency="1.0"></Skill>
+	</SkillSet>	
+	</Resource>	
+	<Resource resourceId="70" name="Tester.3" description="">
+	<SkillSet>
+	<Skill serviceId="16" name="Testing" efficiency="1.0"></Skill>
 	</SkillSet>	
 	</Resource>	
 	</Resources>
@@ -116,255 +971,736 @@
 	</OrganizationalModel>
 	<WorkItemNetworkModel>		
 	<WorkItems>
-	<WorkItem wiId="1" name="C1" typeId="1" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+	<WorkItem wiId="1" name="PX49" typeId="1" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="100.0"></GovernanceAttribute>
+		<GovernanceAttribute name="Value" value="4000.0"></GovernanceAttribute>
 		<GovernanceAttribute name="ArrivalTime" value="1"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<Subtasks>
-		<workItemId>2</workItemId>
-		<workItemId>4</workItemId>
-		</Subtasks>
-		<RequiredAnalysis>
-		<RequiredService serviceId="1" efforts="5.0"></RequiredService>
-		</RequiredAnalysis>
-		<RequiredServices>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="2" name="R1" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="30.0"></GovernanceAttribute>
+		<GovernanceAttribute name="DueDate" value="601"></GovernanceAttribute>
 		</GovernanceAttributes>
 		<Subtasks>
 		<workItemId>3</workItemId>
+		<workItemId>4</workItemId>
+		<workItemId>5</workItemId>
+		<workItemId>6</workItemId>
+		<workItemId>7</workItemId>
 		</Subtasks>
 		<RequiredAnalysis>
-		<RequiredService serviceId="2" efforts="5.0"></RequiredService>
+		<RequiredService serviceId="1" efforts="30.0"></RequiredService>
 		</RequiredAnalysis>
 		<RequiredServices>
 		</RequiredServices>
 	</WorkItem>
-	<WorkItem wiId="3" name="PR1" typeId="3" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+	<WorkItem wiId="2" name="AOCWS" typeId="1" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="30.0"></GovernanceAttribute>
+		<GovernanceAttribute name="Value" value="6000.0"></GovernanceAttribute>
+		<GovernanceAttribute name="ArrivalTime" value="201"></GovernanceAttribute>
+		<GovernanceAttribute name="DueDate" value="801"></GovernanceAttribute>
 		</GovernanceAttributes>
 		<Subtasks>
 		<workItemId>6</workItemId>
 		<workItemId>7</workItemId>
 		<workItemId>8</workItemId>
+		</Subtasks>
+		<RequiredAnalysis>
+		<RequiredService serviceId="1" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="3" name="ESys" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
 		<workItemId>9</workItemId>
 		<workItemId>10</workItemId>
 		<workItemId>11</workItemId>
-		<workItemId>12</workItemId>
 		<workItemId>13</workItemId>
-		<workItemId>14</workItemId>
-		<workItemId>15</workItemId>
+		<workItemId>16</workItemId>
+		<workItemId>17</workItemId>
 		</Subtasks>
 		<RequiredAnalysis>
-		<RequiredService serviceId="3" efforts="5.0"></RequiredService>
+		<RequiredService serviceId="2" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="1" efforts="30.0"></RequiredService>
 		</RequiredAnalysis>
 		<RequiredServices>
 		</RequiredServices>
 	</WorkItem>
-	<WorkItem wiId="4" name="R2" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+	<WorkItem wiId="4" name="ASys" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="20.0"></GovernanceAttribute>
 		</GovernanceAttributes>
 		<Subtasks>
-		<workItemId>5</workItemId>
+		<workItemId>12</workItemId>
+		<workItemId>16</workItemId>
+		<workItemId>21</workItemId>
+		<workItemId>18</workItemId>
+		<workItemId>22</workItemId>
+		<workItemId>20</workItemId>
+		<workItemId>23</workItemId>
 		</Subtasks>
 		<RequiredAnalysis>
-		<RequiredService serviceId="2" efforts="5.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="1" efforts="30.0"></RequiredService>
 		</RequiredAnalysis>
 		<RequiredServices>
 		</RequiredServices>
 	</WorkItem>
-	<WorkItem wiId="5" name="PR2" typeId="3" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+	<WorkItem wiId="5" name="PSys" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
 		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="20.0"></GovernanceAttribute>
+		</GovernanceAttributes>
+		<Subtasks>
+		<workItemId>14</workItemId>
+		<workItemId>15</workItemId>
+		<workItemId>24</workItemId>
+		<workItemId>25</workItemId>
+		<workItemId>19</workItemId>
+		<workItemId>26</workItemId>
+		</Subtasks>
+		<RequiredAnalysis>
+		<RequiredService serviceId="4" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="1" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="6" name="Infra" typeId="2" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+		<GovernanceAttributes>
 		</GovernanceAttributes>
 		<Subtasks>
 		<workItemId>16</workItemId>
-		<workItemId>17</workItemId>
-		<workItemId>18</workItemId>
-		<workItemId>19</workItemId>
-		<workItemId>20</workItemId>
+		<workItemId>26</workItemId>
+		<workItemId>28</workItemId>
+		<workItemId>30</workItemId>
 		</Subtasks>
 		<RequiredAnalysis>
-		<RequiredService serviceId="3" efforts="5.0"></RequiredService>
+		<RequiredService serviceId="5" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="1" efforts="30.0"></RequiredService>
 		</RequiredAnalysis>
 		<RequiredServices>
 		</RequiredServices>
 	</WorkItem>
-	<WorkItem wiId="6" name="T1" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
+	<WorkItem wiId="7" name="WDSys" typeId="2" isAggregationNode="true" hasPredecessors="true" hasImpacts="false">
 		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="1.0"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="1.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="7" name="T2" typeId="4" isAggregationNode="false" hasPredecessors="true" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="2.0"></GovernanceAttribute>
 		</GovernanceAttributes>
 		<Predecessors>
 		<workItemId>6</workItemId>
 		</Predecessors>
+		<Subtasks>
+		<workItemId>27</workItemId>
+		<workItemId>29</workItemId>
+		<workItemId>31</workItemId>
+		</Subtasks>
 		<RequiredAnalysis>
+		<RequiredService serviceId="6" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="1" efforts="30.0"></RequiredService>
 		</RequiredAnalysis>
 		<RequiredServices>
-		<RequiredService serviceId="4" efforts="2.0"></RequiredService>
 		</RequiredServices>
 	</WorkItem>
-	<WorkItem wiId="8" name="T3" typeId="4" isAggregationNode="false" hasPredecessors="true" hasImpacts="false">
+	<WorkItem wiId="8" name="SI" typeId="2" isAggregationNode="true" hasPredecessors="true" hasImpacts="false">
 		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="3.0"></GovernanceAttribute>
 		</GovernanceAttributes>
 		<Predecessors>
-		<workItemId>7</workItemId>
+		<workItemId>3</workItemId>
+		<workItemId>4</workItemId>
+		<workItemId>5</workItemId>
 		</Predecessors>
+		<Subtasks>
+		<workItemId>31</workItemId>
+		<workItemId>32</workItemId>
+		<workItemId>33</workItemId>
+		</Subtasks>
 		<RequiredAnalysis>
+		<RequiredService serviceId="7" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="1" efforts="30.0"></RequiredService>
 		</RequiredAnalysis>
 		<RequiredServices>
-		<RequiredService serviceId="4" efforts="3.0"></RequiredService>
 		</RequiredServices>
 	</WorkItem>
-	<WorkItem wiId="9" name="T4" typeId="4" isAggregationNode="false" hasPredecessors="true" hasImpacts="false">
+	<WorkItem wiId="9" name="R1" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
 		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="4.0"></GovernanceAttribute>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="11" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="14" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="15" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="16" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="20" likelihood="0.2" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="10" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="8" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="20.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="40.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="10" name="R2" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="9" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="11" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="22" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="24" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="20" likelihood="0.5" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="8" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="14" efforts="15.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="11" name="R3" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="9" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="17" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="19" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="22" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="14" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="18" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="20" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="23" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="15" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="27" likelihood="0.5" risk="0.4"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="10" efforts="70.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="20.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="8" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="20.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="12" name="R4" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="10" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="21" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="22" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="23" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="25" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="9" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="11" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="13" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="15" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="16" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="17" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="20" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="19" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="27" likelihood="0.5" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="15.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="10" efforts="70.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="50.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="13" name="R5" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="14" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="9" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="12" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="18" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="19" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="20" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="21" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="22" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="27" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="10" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="11" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="15" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="17" likelihood="0.7" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="8" efforts="60.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="14" name="R6" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="15" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="4" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="8" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="10" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="9" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="40.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="15" name="R7" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="14" likelihood="0.7" risk="0.2"></Impact>
+		<Impact workItemId="22" likelihood="0.2" risk="0.4"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="4" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="9" efforts="100.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="80.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="30.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="16" name="R8" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="9" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="19" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="20" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="21" likelihood="0.2" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="3" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="4" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="10" efforts="25.0"></RequiredService>
+		<RequiredService serviceId="9" efforts="25.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="20.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="17" name="R9" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="15" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="19" likelihood="0.2" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="9" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="8" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="20.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="18" name="R10" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="11" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="14" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="15" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="21" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="23" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="24" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="25" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="27" likelihood="0.2" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="8" efforts="40.0"></RequiredService>
+		<RequiredService serviceId="10" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="45.0"></RequiredService>
+		<RequiredService serviceId="14" efforts="80.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="60.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="19" name="R11" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="14" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="20" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="15" likelihood="0.7" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="4" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="9" efforts="20.0"></RequiredService>
+		<RequiredService serviceId="8" efforts="20.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="40.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="20" name="R12" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="15.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="9" efforts="50.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="21" name="R13" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="12" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="20" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="25" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="27" likelihood="0.2" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="9" efforts="65.0"></RequiredService>
+		<RequiredService serviceId="8" efforts="20.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="40.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="22" name="R14" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="23" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="25" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="15" likelihood="0.5" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="3" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="9" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="10" efforts="35.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="23" name="R15" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="22" likelihood="0.2" risk="0.6"></Impact>
+		<Impact workItemId="24" likelihood="0.2" risk="0.6"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="3" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="9" efforts="55.0"></RequiredService>
+		<RequiredService serviceId="10" efforts="45.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="40.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="24" name="R16" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="22" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="23" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="27" likelihood="0.2" risk="0.6"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="3" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="9" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="10" efforts="60.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="50.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="25" name="R17" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="23" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="22" likelihood="0.2" risk="0.4"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="3" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="9" efforts="75.0"></RequiredService>
+		<RequiredService serviceId="10" efforts="25.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="20.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="26" name="R18" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="18" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="21" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="24" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="25" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="15" likelihood="0.5" risk="0.2"></Impact>
+		<Impact workItemId="27" likelihood="0.2" risk="0.6"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="8" efforts="65.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="9" efforts="75.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="40.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="27" name="R19" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="15" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="16" likelihood="0.2" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="8" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="9" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="85.0"></RequiredService>
+		<RequiredService serviceId="14" efforts="90.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="100.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="100.0"></RequiredService>
+		<RequiredService serviceId="10" efforts="25.0"></RequiredService>
+		<RequiredService serviceId="11" efforts="20.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="28" name="R20" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="16" likelihood="0.3" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.3" risk="0.2"></Impact>
+		<Impact workItemId="29" likelihood="0.3" risk="0.2"></Impact>
+		<Impact workItemId="30" likelihood="0.3" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="7" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="5" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="8" efforts="20.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="60.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="60.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="75.0"></RequiredService>
+		<RequiredService serviceId="14" efforts="40.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="29" name="R21" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<RequiredAnalysis>
+		<RequiredService serviceId="7" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="5" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="6" efforts="60.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="16" efforts="100.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="30" name="R22" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="31" likelihood="0.2" risk="0.2"></Impact>
+		<Impact workItemId="32" likelihood="0.2" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="5" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="8" efforts="20.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="40.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="65.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="85.0"></RequiredService>
+		<RequiredService serviceId="14" efforts="55.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="31" name="R23" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="false">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<RequiredAnalysis>
+		<RequiredService serviceId="7" efforts="30.0"></RequiredService>
+		<RequiredService serviceId="5" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="15" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="14" efforts="75.0"></RequiredService>
+		<RequiredService serviceId="16" efforts="40.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="32" name="R24" typeId="4" isAggregationNode="true" hasPredecessors="false" hasImpacts="true">
+		<GovernanceAttributes>
+		</GovernanceAttributes>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="20" likelihood="0.4" risk="0.2"></Impact>
+		<Impact workItemId="21" likelihood="0.4" risk="0.2"></Impact>
+		<Impact workItemId="22" likelihood="0.4" risk="0.2"></Impact>
+		<Impact workItemId="23" likelihood="0.4" risk="0.2"></Impact>
+		<Impact workItemId="24" likelihood="0.4" risk="0.2"></Impact>
+		</Impacts>
+		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="3" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="10.0"></RequiredService>
+		<RequiredService serviceId="6" efforts="30.0"></RequiredService>
+		</RequiredAnalysis>
+		<RequiredServices>
+		<RequiredService serviceId="16" efforts="100.0"></RequiredService>
+		</RequiredServices>
+	</WorkItem>
+	<WorkItem wiId="33" name="R25" typeId="4" isAggregationNode="true" hasPredecessors="true" hasImpacts="true">
+		<GovernanceAttributes>
 		</GovernanceAttributes>
 		<Predecessors>
-		<workItemId>7</workItemId>
+		<workItemId>32</workItemId>
 		</Predecessors>
+		<Subtasks>
+		</Subtasks>
+		<Impacts>
+		<Impact workItemId="25" likelihood="0.4" risk="0.2"></Impact>
+		<Impact workItemId="26" likelihood="0.4" risk="0.2"></Impact>
+		<Impact workItemId="27" likelihood="0.4" risk="0.2"></Impact>
+		<Impact workItemId="28" likelihood="0.4" risk="0.2"></Impact>
+		<Impact workItemId="29" likelihood="0.4" risk="0.2"></Impact>
+		</Impacts>
 		<RequiredAnalysis>
+		<RequiredService serviceId="2" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="7" efforts="15.0"></RequiredService>
+		<RequiredService serviceId="6" efforts="30.0"></RequiredService>
 		</RequiredAnalysis>
 		<RequiredServices>
-		<RequiredService serviceId="4" efforts="4.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="10" name="T5" typeId="4" isAggregationNode="false" hasPredecessors="true" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="5.0"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<Predecessors>
-		<workItemId>9</workItemId>
-		</Predecessors>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="5.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="11" name="T6" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="6.0"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="6.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="12" name="T7" typeId="4" isAggregationNode="false" hasPredecessors="true" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="7.0"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<Predecessors>
-		<workItemId>11</workItemId>
-		</Predecessors>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="7.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="13" name="T8" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="8.0"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="8.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="14" name="T9" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="9.0"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="9.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="15" name="T10" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="10.0"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="10.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="16" name="T21" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="1.1"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="1.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="17" name="T22" typeId="4" isAggregationNode="false" hasPredecessors="true" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="2.1"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<Predecessors>
-		<workItemId>16</workItemId>
-		</Predecessors>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="2.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="18" name="T23" typeId="4" isAggregationNode="false" hasPredecessors="true" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="3.1"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<Predecessors>
-		<workItemId>17</workItemId>
-		</Predecessors>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="3.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="19" name="T24" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="4.1"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="4.0"></RequiredService>
-		</RequiredServices>
-	</WorkItem>
-	<WorkItem wiId="20" name="T25" typeId="4" isAggregationNode="false" hasPredecessors="false" hasImpacts="false">
-		<GovernanceAttributes>
-		<GovernanceAttribute name="Value" value="5.1"></GovernanceAttribute>
-		</GovernanceAttributes>
-		<RequiredAnalysis>
-		</RequiredAnalysis>
-		<RequiredServices>
-		<RequiredService serviceId="4" efforts="5.0"></RequiredService>
+		<RequiredService serviceId="8" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="15" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="12" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="13" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="14" efforts="50.0"></RequiredService>
+		<RequiredService serviceId="16" efforts="60.0"></RequiredService>
 		</RequiredServices>
 	</WorkItem>
 	</WorkItems>

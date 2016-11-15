@@ -34,7 +34,6 @@ public class AbstractAgentBehavior {
 	}
 	public void GoToStep(int n) {
 		if (StepsMap.containsKey(n)) {
-			//System.out.println(agent.getName()+" step code: "+n+" step "+StepsMap.get(n));
 			switch(StepsMap.get(n)) {		
 				case "CheckRequestedQ": CheckRequestedQ(); break;
 				case "MakeAssignments": MakeAssignments(); break;
@@ -53,9 +52,14 @@ public class AbstractAgentBehavior {
 	public void CheckRequestedQ() {
 		tick++;
 		setSprintNow(false);
+		// "Sprint": to check and handle requested WIs when one of the following is true:
 		if (tick==agent.myStrategy.Cadence 
-			|| agent.getRequestedQ().isEmpty()
-			|| (agent.getBacklogQ().isEmpty() && agent.getActiveQ().isEmpty())) {	
+			// 1. sprint time
+			|| agent.getRequestedQ().isEmpty() 
+			// 2. no work is currently requested
+			|| (agent.getBacklogQ().isEmpty() && agent.getActiveQ().isEmpty()))  
+			// 3. no work is under processing or to be processed
+		{	
 			tick=0;
 			setSprintNow(true);
 		}
@@ -69,12 +73,11 @@ public class AbstractAgentBehavior {
 					wi.setAssigned();
 					wi.setAssignedAgent(agent);
 					agent.getComplexQ().add((AggregationNode)wi);
-					agent.analyzeAggregationNode((AggregationNode)wi); 
-					//create initial Analysis Activity
+					agent.analyzeAggregationNode((AggregationNode)wi); //create initial Analysis Activity					
 					agent.getRequestedQ().remove(wi);
 					i--;
 				}
-				// Tasks
+				// Tasks, to be further handled
 				else {
 					requestedTasks.add((Task)wi);
 					agent.getRequestedQ().remove(wi);
@@ -82,29 +85,29 @@ public class AbstractAgentBehavior {
 				}
 			}
 		}
+		// SP needs to handle ALL requested tasks all the time
 		agent.myStrategy.applyWorkPrioritization(agent, requestedTasks);
 		while (!requestedTasks.isEmpty()) {
 			Task task = requestedTasks.getFirst();
 			String decision = this.acceptanceDecision(task);
-			//System.out.println("\n"+agent.getName()+" on"+task.fullName+"requested by "+task.getRequester().getName()+"("+task.SoS.myServices.get(task.serviceId).getName()+"x"+task.efforts+") Decision: "+decision);
+			System.out.println("\n"+agent.getName()+" on"+task.fullName+"requested by "+task.getRequester().getName()+"("+task.SoS.myServices.get(task.serviceId).getName()+"x"+task.efforts+") Decision: "+decision);
 			if (decision.matches("Accept")) {			
-				//System.out.println(agent.getName()+" accepts"+wi.fullName);
 				task.currentDecision = 1;
 				agent.acceptWI(task);
 			}
 			else if (decision.matches("Outsource")) {
-				//System.out.println(agent.getName()+" decides to outsource"+wi.fullName);
 				task.currentDecision = 2;
 				agent.getAssignmentQ().add(task);
 			}
 			else if (decision.matches("RequestHelp")) {
 				if (agent.getId()==agent.SoS.coordinator.getId()) {
-					//System.out.println(agent.getName()+" handles"+wi.fullName);
 					task.currentDecision = 2;
 					agent.getAssignmentQ().add(task);
+//					String msg = "ERROR: "+"coordinator "+agent.getName()+" requests help for"+task.fullName;
+//					JOptionPane.showMessageDialog(null,msg);
+//					throw new RuntimeException(msg);
 				}
 				else {
-					//System.out.println(agent.getName()+" requests help from "+agent.SoS.coordinator.getName()+" on"+wi.fullName);
 					task.currentDecision = 3;
 					agent.requestService(task, agent.SoS.coordinator);
 					if (task.isAnalysisActivity) {
@@ -115,7 +118,6 @@ public class AbstractAgentBehavior {
 				}
 			}
 			else if (decision.matches("Decline")) {
-				//System.out.println(agent.getName()+" declines"+wi.fullName+"from "+wi.getRequester().getName());
 				if (task.getRequester().getId()==agent.getId()) {
 					String msg = "ERROR: "+agent.getName()+" declines"+task.fullName+" which is requested by itself!";
 					JOptionPane.showMessageDialog(null,msg);
@@ -143,8 +145,7 @@ public class AbstractAgentBehavior {
 		for (WorkItemEntity wi: schedule.keySet()) {
 			ServiceProviderAgent selectedSP = schedule.get(wi);
 			agent.requestService(wi, selectedSP);
-			agent.getAssignmentQ().remove(wi);
-			System.out.println(agent.getName()+" assigned"+wi.fullName+"to "+selectedSP.getName());			
+			agent.getAssignmentQ().remove(wi);		
 			agent.NowRequested.add(selectedSP);
 			//selectedSP.checkRequestedQ();
 		}
@@ -153,6 +154,7 @@ public class AbstractAgentBehavior {
 		agent.getAssignmentQ().clear();
 		agent.NowRequested.clear();
 	}
+	
 	public void SelectWIsToStart() {
 		LinkedList<Task> readyQ = new LinkedList<Task>();
 		readyQ.addAll(agent.getBacklogQ());
@@ -162,11 +164,9 @@ public class AbstractAgentBehavior {
 			if (!wi.precedencyCleared()) {
 				readyQ.remove(wi);
 				i--;
-				//System.out.println(agent.getName()+": Cannot Start"+wi.fullName+"due to Precedency");
 			}
 			else if (this.taskCompletionHandling(wi)) {
 				readyQ.remove(wi);
-				//System.out.println(agent.getName()+": found"+wi.fullName+"already Completed");
 				i--;
 			}
 		}
@@ -222,9 +222,7 @@ public class AbstractAgentBehavior {
 	public void DisburseWIs() {			
 		for (int i=0;i<agent.getCompleteQ().size();i++) {
 			WorkItemEntity wi=agent.getCompleteQ().get(i);				
-			//System.out.println("\nDISBURSE @TIME:"+agent.SoS.timeNow+" Agent "+agent.getName()+" try to disburse"+wi.fullName+"...");
 			if (wi.getProgress() <= 0.9999) {
-				//System.out.println("Progress Not Satisfied");
 				wi.isCompleted = false;
 				agent.getCompleteQ().remove(wi);	
 				if (wi.isAggregationNode) {
@@ -250,7 +248,7 @@ public class AbstractAgentBehavior {
 		String decision;		
 		double capacity = task.calculateServiceCapacity(agent);	
 		double exCapacity = task.calculateExtendedServiceCapacity(agent);	
-		// case: task is to Resolve problem of another DevTask
+		// case 1: task is to Resolve problem of another DevTask
 		if (task.isResolutionActivity) {
 			if (capacity>0) {
 				decision = "Accept";
@@ -260,35 +258,44 @@ public class AbstractAgentBehavior {
 					decision = "Outsource";
 				}
 				else {
-					decision = "RequestHelp";
+					decision = "RequestHelp"; // resort to SoS coordinator
 				}
 			}
 		}
 		else {
-			// case: task is originated by the current SP, e.g. a newly released SubTask,
+			// case 2: task is originated by the current SP, e.g. a newly released SubTask,
 			// so it can NOT be Declined
 			if (task.getRequester().getId() == agent.getId()) {
+				// case 2.1: SP is capable
 				if (capacity>0) {
-					if (agent.getBacklogQ().size()>=this.BacklogLimit) {
+					if ((agent.getBacklogQ().size()>=this.BacklogLimit)&&(exCapacity>0)) {
 						decision = "Outsource";
 					}
 					else {
 						decision = "Accept";
 					}
 				}
+				// case 2.2: SP is not capable
 				else {
 					if (exCapacity>0) {
 						decision = "Outsource";
 					}
 					else {
-						decision = "RequestHelp";
+						decision = "RequestHelp"; // resort to SoS coordinator
 					}
 				}
 			}
-			// case: SP's Backlog Limit is reached
+			// case 3: task is requested by another SP
+			// case 3.1: SP's Backlog is full
 			else if (agent.getBacklogQ().size()>=this.BacklogLimit) {
-				decision = "Decline";	
-			}			
+				if (exCapacity>0) {
+					decision = "Outsource";
+				}
+				else {
+					decision = "Decline";	
+				}
+			}
+			// case 3.2: SP's Backlog is Not full
 			else {
 				// case: SP is capable to process
 				if (capacity>0) {

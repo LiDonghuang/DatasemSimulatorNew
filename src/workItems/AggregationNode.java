@@ -17,6 +17,7 @@ public class AggregationNode extends WorkItemEntity{
 	public int currentProcessStage;
 	public int currentAnalysisStage;
 	public int totalAnalysisStages=1;
+	public AutoGenerateWIN myAutoGenerateWIN = new AutoGenerateWIN();
 	
 	public AggregationNode(WorkItem wi) {
 		super(wi);

@@ -302,3 +302,24 @@ java.lang.NumberFormatException: null
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:147)
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:139)
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:97)
+FATAL [Thread-8] 2016-11-15 23:35:57,432 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (72.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.reflect.InvocationTargetException
+	at serviceProviders.ServiceProviderAgent$$FastClassByCGLIB$$afa52ce0.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.RuntimeException: ERROR: coordinator LeadTeam requests help for DevTask[Hierarchy:0]R2.10(id:56) 
+	at serviceProviders.AbstractAgentBehavior.CheckRequestedQ(AbstractAgentBehavior.java:106)
+	at contractNetProtocol.CNPBehavior.GoToStep(CNPBehavior.java:37)
+	at serviceProviders.ServiceProviderAgent.step_1(ServiceProviderAgent.java:96)
+	... 10 more

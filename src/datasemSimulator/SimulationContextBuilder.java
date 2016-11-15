@@ -14,6 +14,7 @@ import serviceProviders.ResourceEntity;
 import serviceProviders.ServiceProviderAgent;
 import visualization.Visualization;
 import workItems.AggregationNode;
+import workItems.AutoGenerateWIN;
 import workItems.DevTask;
 import workItems.Task;
 import workItems.WorkItemEntity;
@@ -112,6 +113,29 @@ public class SimulationContextBuilder {
 		}
 		// note that: only direct AssignTo relations are counted in the calculation
 		// P- end Extended Service Capacities
+		
+		
+
+		// Auto Decompose
+		for (WorkItemEntity wi:mySoS.myWorkItemEntities.values()) {		
+			WorkItemType myType = mySoS.myWorkItemTypes.get(wi.typeId);
+			for (Mechanism m: myType.getMechanisms()) {
+				if (m.getName().matches("AutoGenerateWIN")) {
+					((AggregationNode)wi).myAutoGenerateWIN = new AutoGenerateWIN(m);
+					AutoGenerateWIN.generateSubtasks(wi);
+				}
+				else if (m.getName().matches("ValueFunction")) {
+					wi.myValueFunction = new ValueFunction(m);
+				}
+			}
+		}
+		// Derive Impacts DSM
+		for (WorkItemEntity wi1:mySoS.myWorkItemEntities.values()) {
+			if (wi1.isAggregationNode && wi1.myWorkItem.getSbTasks().size()==0) {	
+				AutoGenerateWIN.generateImpacts(wi1);
+			}
+		}
+		
 		
 		// P- !! Initial Assignment
 		// The initial work items are assigned to the FIRST SP described in the model

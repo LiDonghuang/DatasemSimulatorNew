@@ -108,7 +108,7 @@ public class SystemOfSystems {
 			this.arrivedList.remove(task);
 		}
 		this.endedList.clear();
-		//System.out.println("\n ============== TIME NOW: "+timeNow+" ============== ");
+		System.out.println("\n ============== TIME NOW: "+timeNow+" ============== ");
 		if (this.initialList.size()==0){
 			RunEnvironment.getInstance().endRun();
 			System.out.println("\nSIMULATION ENDED: All WIs Completed\n");

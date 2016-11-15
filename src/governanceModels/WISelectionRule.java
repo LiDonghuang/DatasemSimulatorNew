@@ -69,10 +69,10 @@ public class WISelectionRule {
 	public LinkedList<Task> applyRule(ServiceProviderAgent SP, LinkedList<Task> requestedQ) {
 		if (!requestedQ.isEmpty()) {
 			LinkedList<Task> queue = requestedQ;
-			SimUtilities.shuffle(queue, RandomHelper.getUniform()); 
+			//SimUtilities.shuffle(queue, RandomHelper.getUniform()); 
 			//System.out.println("\nRULE @TIME:"+SP.SoS.timeNow+" "+SP.getName()+" Applies "+this.ruleValue+" Prioritization Rule on "+queue.size()+" WIs:");
 			if (this.ruleValue.matches("Neutral")) {
-				//SimUtilities.shuffle(queue, RandomHelper.getUniform());
+				SimUtilities.shuffle(queue, RandomHelper.getUniform());
 			}
 			else if (this.ruleValue.matches("ValueBased")){			
 				Collections.sort(queue, new LargerPerceivedValue());	
@@ -137,6 +137,7 @@ public class WISelectionRule {
 		wi.setPerceivedValue(pValue);
 		return pValue;
 	}
+	
 	class LargerAssignedTime implements Comparator<WorkItemEntity> {
 		@Override
 		public int compare(WorkItemEntity w1, WorkItemEntity w2) {
