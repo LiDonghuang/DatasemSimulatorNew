@@ -5,7 +5,12 @@ import serviceProviders.ServiceProviderAgent;
 import xtext.objectsModel.Skill;
 import xtext.objectsModel.WorkItem;
 
+// To Gohkan: 
+// This file inherits from WorkItemEntity.java. 
+// This file is also the parent class for: DevTask/AnalysisActivity/ResolutionActivity
+
 public class Task extends WorkItemEntity{
+	//This is used for connecting DSL with simulation model
 	protected boolean isAggregationNode = false;
 	public int currentDecision; //1=Accept,2=Outsource,3=RequestHelp,4=Decline
 	
