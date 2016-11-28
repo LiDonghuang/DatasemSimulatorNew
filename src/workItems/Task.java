@@ -10,6 +10,10 @@ import xtext.objectsModel.WorkItem;
 // This file is also the parent class for: DevTask/AnalysisActivity/ResolutionActivity
 
 public class Task extends WorkItemEntity{
+	//This is used for connecting DSL with simulation model
+	// To Gohkan:
+	// Not really: WorkItemEntity.java is directly connected to WorkItemImpl.java (which is generated from the "Simple" DSL)
+	
 	protected boolean isAggregationNode = false;
 	public int currentDecision; //1=Accept,2=Outsource,3=RequestHelp,4=Decline
 	
