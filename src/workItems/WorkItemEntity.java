@@ -29,6 +29,9 @@ public class WorkItemEntity extends WorkItemImpl {
 	public SystemOfSystems SoS;
 	// Static Attributes
 	public WorkItem myWorkItem;
+	//This is my comment (Gokhan)
+	//This is my second comment
+	
 	public String fullName;
 	public WorkItemType myType;
 	public int typeId;
