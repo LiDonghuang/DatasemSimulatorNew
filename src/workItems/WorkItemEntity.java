@@ -30,9 +30,6 @@ public class WorkItemEntity extends WorkItemImpl {
 	// Static Attributes
 	public WorkItem myWorkItem;
 	//This is my comment (Gokhan)
-	//This is my second comment
-	//This is my third comment
-	//
 	public String fullName;
 	public WorkItemType myType;
 	public int typeId;
