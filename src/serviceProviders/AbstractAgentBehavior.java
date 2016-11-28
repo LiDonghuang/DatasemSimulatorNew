@@ -90,7 +90,10 @@ public class AbstractAgentBehavior {
 		while (!requestedTasks.isEmpty()) {
 			Task task = requestedTasks.getFirst();
 			String decision = this.acceptanceDecision(task);
-			System.out.println("\n"+agent.getName()+" on"+task.fullName+"requested by "+task.getRequester().getName()+"("+task.SoS.myServices.get(task.serviceId).getName()+"x"+task.efforts+") Decision: "+decision);
+			System.out.println("\n"+agent.getName()+" on "+task.fullName+"requested by "+task.getRequester().getName()+"("+task.SoS.myServices.get(task.serviceId).getName()+"x"+task.efforts+") Decision: "+decision);
+			if (task.precedencyCleared()) {
+				System.out.println(task.getName()+" has uncleared predecessor in queue: "+this.predsInMyQ(task));
+			}			
 			if (decision.matches("Accept")) {			
 				task.currentDecision = 1;
 				agent.acceptWI(task);
@@ -316,12 +319,22 @@ public class AbstractAgentBehavior {
 		return decision;
 	}	
 	
-	public boolean taskCompletionHandling(Task WI) {
+	public boolean predsInMyQ(Task task) {
+		boolean inQ = true;
+		for (WorkItemEntity pred: task.getPredecessors()) {
+			if (!this.agent.getActiveQ().contains(pred) && !this.agent.getBacklogQ().contains(pred)) {
+				inQ = false;
+			}
+		}
+		return inQ;
+	}
+	
+	public boolean taskCompletionHandling(Task task) {
 		boolean completion = false;
-		if ( (WI.getProgress()>0.9999) && (!WI.isSuspended) ){			
-			if (WI.isAnalysisActivity) {
+		if ( (task.getProgress()>0.9999) && (!task.isSuspended) ){			
+			if (task.isAnalysisActivity) {
 				//System.out.println("\nCOMPLETED ANALYSIS @TIME:"+SoS.timeNow+" Agent "+this.name+" completed analyzing"+WI.AnalysisObject.fullName);
-				AggregationNode analysisObject = (AggregationNode)((AnalysisActivity)WI).AnalysisObject;		
+				AggregationNode analysisObject = (AggregationNode)((AnalysisActivity)task).AnalysisObject;		
 				analysisObject.currentAnalysisStage ++;
 				//System.out.println(analysisObject.currentAnalysisStage+" "+analysisObject.totalAnalysisStage);
 				if (analysisObject.currentAnalysisStage == analysisObject.totalAnalysisStages) {				
@@ -337,19 +350,19 @@ public class AbstractAgentBehavior {
 					agent.getComplexQ().remove(analysisObject);
 				}
 			}
-			else if (WI.isResolutionActivity) {
-				Task suspendedTask = (Task) ((ResolutionActivity)WI).ResolutionObject;
+			else if (task.isResolutionActivity) {
+				Task suspendedTask = (Task) ((ResolutionActivity)task).ResolutionObject;
 				suspendedTask.isSuspended = false;
-				suspendedTask.getPredecessors().remove(WI);
+				suspendedTask.getPredecessors().remove(task);
 				taskCompletionHandling(suspendedTask);
 				//System.out.println("\nSUSPENSION CLEARED @TIME:"+agent.SoS.timeNow+suspendedTask.fullName);
 			}
-			agent.getBacklogQ().remove(WI);
-			agent.getActiveQ().remove(WI);
-			agent.getCompleteQ().add(WI);
+			agent.getBacklogQ().remove(task);
+			agent.getActiveQ().remove(task);
+			agent.getCompleteQ().add(task);
 			completion = true;
-			WI.setCompleted();
-			WI.withdrawAllResources();
+			task.setCompleted();
+			task.withdrawAllResources();
 		}
 		return completion;
 	}	

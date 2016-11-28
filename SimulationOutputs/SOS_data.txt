@@ -1,2 +1,2 @@
 "tick","EndTime","CountTasks","TaskReworkCount_total","TaskReworkCount_mean","TaskReworkCount_stdev","ChangePropagationCount_total","ChangePropagationCount_mean","ChangePropagationCount_stdev","CycleTimeToEffortsRatio_mean","CycleTimeToEffortsRatio_stdev"
-586.0,585,414,300.0,0.7246376811594194,1.1774810965845648,188.0,0.45410628019323734,1.0329065449331822,0.8098014048045086,0.19878382684059154
+38.0,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

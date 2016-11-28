@@ -2,7 +2,9 @@ package workItems;
 
 public class DevTask extends Task {
 	public int maxMaturityLevels = 5;
-	public double uncertainty = 1;
+	// discrete milestones to trigger rework/resolution/propagation
+	public double uncertainty = 1; 
+	// uncertainty of this single task: may decrease due to rework/resolution/propagation
 	
 	public DevTask(WorkItemEntity entity) {
 		super(entity);
