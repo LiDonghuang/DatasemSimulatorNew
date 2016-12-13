@@ -56,9 +56,8 @@ public class WIAssignmentRule {
 	
 	// this "applyRule" function moves a given set of Tasks to a given set of candidate SPs, 
 	// according to configuration of one given assigner.
-	// the function returns a "schedule" which indicates resulting mapping between Tasks and SPs
+	// the function returns a "schedule" which indicates resulting mapping between Tasks and SPs		
 	public HashMap<Task, ServiceProviderAgent> applyRule(ServiceProviderAgent assigner, LinkedList<Task> tasks, LinkedList<ServiceProviderAgent> SPs) {
-		//System.out.println(me.getName()+" applies assignment rule:"+ruleValue);
 		HashMap<Task,ServiceProviderAgent> schedule = new HashMap<Task,ServiceProviderAgent>(); 
 		if (!SPs.isEmpty()) {
 			LinkedList<ServiceProviderAgent> list = new LinkedList<ServiceProviderAgent>();
@@ -66,7 +65,8 @@ public class WIAssignmentRule {
 			LinkedList<Task> taskList = new LinkedList<Task>();
 			for (int i=0;i<tasks.size();i++) {
 				Task task = tasks.get(i);
-				if (task.precedencyCleared()) {
+				// Li 2016-12-13 Question: How to properly assign tasks with unsolved precedence constraints?
+				if (task.precedencyCleared()) {					
 					taskList.add(task);
 				}
 			}
@@ -127,7 +127,7 @@ public class WIAssignmentRule {
 	}
 	
 	// This function sums up the nominal workload of a SP, taking into account 1) the current in-progress tasks, 
-	// 2) tasks in backlog, and 3) tasks that are planed to be assigned. Aggr nodes are not counted
+	// 2) tasks in backlog, and 3) tasks that are planed to be assigned. Aggregation nodes are not counted
 	public double estimateWorkLoad(ServiceProviderAgent sp) {
 		double load = 0;
 		LinkedList<Task> scope = new LinkedList<Task>();	

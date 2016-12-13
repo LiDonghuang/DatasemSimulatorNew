@@ -90,11 +90,16 @@ public class AbstractAgentBehavior {
 		while (!requestedTasks.isEmpty()) {
 			Task task = requestedTasks.getFirst();
 			String decision = this.acceptanceDecision(task);
-			System.out.println("\n"+agent.getName()+" on "+task.fullName+"requested by "+task.getRequester().getName()+"("+task.SoS.myServices.get(task.serviceId).getName()+"x"+task.efforts+") Decision: "+decision);
-			if (task.precedencyCleared()) {
-				System.out.println(task.getName()+" has uncleared predecessor in queue: "+this.predsInMyQ(task));
-			}			
-			if (decision.matches("Accept")) {			
+			System.out.println(agent.getName()+" on"+task.fullName+"requested by "+task.getRequester().getName()+"("+task.SoS.myServices.get(task.serviceId).getName()+"x"+task.efforts+") Decision: "+decision);
+			if (!task.precedencyCleared()) {
+				if (this.predsInMyQ(task)) {
+					System.out.println(this.agent.getName()+": All of task "+task.getName()+"'s uncleared predecessors are in queue");
+				}
+				else {
+					System.out.println(this.agent.getName()+": some of task "+task.getName()+"'s uncleared predecessors are not in queue!");
+				}
+			}
+			if (decision.matches("Accept")) {	
 				task.currentDecision = 1;
 				agent.acceptWI(task);
 			}
@@ -106,9 +111,6 @@ public class AbstractAgentBehavior {
 				if (agent.getId()==agent.SoS.coordinator.getId()) {
 					task.currentDecision = 2;
 					agent.getAssignmentQ().add(task);
-//					String msg = "ERROR: "+"coordinator "+agent.getName()+" requests help for"+task.fullName;
-//					JOptionPane.showMessageDialog(null,msg);
-//					throw new RuntimeException(msg);
 				}
 				else {
 					task.currentDecision = 3;
@@ -143,8 +145,8 @@ public class AbstractAgentBehavior {
 
 	public void MakeAssignments() {
 		LinkedList<ServiceProviderAgent> candidates = agent.assignWITo;
-		HashMap<Task,ServiceProviderAgent> schedule = 
-				agent.myStrategy.applyAgentSelection(agent, agent.getAssignmentQ(), candidates);
+		// create schedule which is a HashMap consists of WI-SP mappings
+		HashMap<Task,ServiceProviderAgent> schedule = agent.myStrategy.applyAgentSelection(agent, agent.getAssignmentQ(), candidates);
 		for (WorkItemEntity wi: schedule.keySet()) {
 			ServiceProviderAgent selectedSP = schedule.get(wi);
 			agent.requestService(wi, selectedSP);
@@ -154,8 +156,7 @@ public class AbstractAgentBehavior {
 		}
 		// return unassigned WIs back to Requested Q
 		agent.getRequestedQ().addAll(agent.getAssignmentQ());
-		agent.getAssignmentQ().clear();
-		agent.NowRequested.clear();
+		agent.getAssignmentQ().clear();		
 	}
 	
 	public void SelectWIsToStart() {
@@ -243,7 +244,8 @@ public class AbstractAgentBehavior {
 			}
 		}
 	}
-	public void EndState() {					
+	public void EndState() {	
+		agent.NowRequested.clear();
 		agent.statusSummary();
 	}
 
@@ -318,7 +320,7 @@ public class AbstractAgentBehavior {
 		}
 		return decision;
 	}	
-	
+	// checks if all uncleared preds of a specific task is in this SP's queues
 	public boolean predsInMyQ(Task task) {
 		boolean inQ = true;
 		for (WorkItemEntity pred: task.getPredecessors()) {

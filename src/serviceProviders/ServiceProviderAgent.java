@@ -55,7 +55,8 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 	// Visualization
 	public Icon icon = new Icon();
 	// Dynamic Attributes
-	public LinkedList<ServiceProviderAgent> NowRequested = new LinkedList<ServiceProviderAgent>();
+	public LinkedList<ServiceProviderAgent> NowRequested = new LinkedList<ServiceProviderAgent>();	
+	// Flagging a set of agents that this agent attempts to assign WIs to during the current tick
 	private double TotalWorkload;
 	private double ActiveWorkload;
 	private double ResourceUtilization;
@@ -155,7 +156,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 			SoS.arrivedList.put(analysisActivity.getId(), analysisActivity);
 			this.requestedQ.add(analysisActivity);
 			//analysisActivity.setAssigned();
-			//System.out.println("\nANALYSIS AGGREGATION NODE @TIME:"+SoS.timeNow+" Agent "+this.name+" start analyzing"+aggrNode.fullName);
 		}
 		else {
 			releaseSubtasks(aggrNode);
@@ -255,8 +255,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		}
 		return serviceResourceCandidates;
 	}
-	
-	
 	public boolean hasIdleResources() {
 		boolean hasIdleResources = false;
 		for (int r=0;r<this.getMyResourceEntities().size();r++) {
@@ -268,7 +266,6 @@ public class ServiceProviderAgent extends ServiceProviderImpl {
 		}
 		return hasIdleResources;
 	}		
-	
 	public void statusSummary() {
 		this.calculateWorkload();
 		this.calculateResourceUtilization();

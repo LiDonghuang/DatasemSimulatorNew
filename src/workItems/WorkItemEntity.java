@@ -145,20 +145,7 @@ public class WorkItemEntity extends WorkItemImpl {
 				}
 			}
 		}	
-	}	
-//	public void addUpperTask(AggregationNode upperTask) {
-//		if (!this.getUppertasks().contains(upperTask)){
-//			this.getUppertasks().add(upperTask);
-//			upperTask.addSubTask(this);
-//		}
-//	}
-//	
-//	public void removeUpperTask(AggregationNode upperTask) {
-//		if (this.getUppertasks().contains(upperTask)) {
-//			this.getUppertasks().remove(upperTask);
-//			upperTask.removeSubTask(this);
-//		}
-//	}	
+	}		
 	public int countIncompletedPredecessors() {
 		int count = 0;
 		for (WorkItemEntity predecessor:this.getPredecessors()) {

@@ -1,9 +1,4 @@
-/contractNetProtocol/
 /datasemSimulator/
-/governanceModels/
-/kanbanBoard/
-/processModels/
-/serviceProviders/
-/visualization/
 /workItems/
-/xtext/
+/serviceProviders/
+/governanceModels/
